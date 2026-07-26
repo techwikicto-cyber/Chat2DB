@@ -1,7 +1,14 @@
 import { isDevelopment } from './env';
 
+// Webpack replaces this with the runtime public path, which differs per build:
+// '/' in dev, './' in the desktop package, '/static/front/' on the web server.
+declare const __webpack_public_path__: string;
+
 const MONOCHROME_ICONFONT_SCRIPT_ID = 'chat2db-monochrome-iconfont';
-const MONOCHROME_ICONFONT_SCRIPT = 'iconfont/iconfont.js';
+// Must be resolved against the public path, not the page URL. As a bare
+// relative path it resolved against the current route - so the web build asked
+// for /iconfont/iconfont.js, got a 404, and rendered no monochrome icons at all.
+const MONOCHROME_ICONFONT_SCRIPT = `${__webpack_public_path__}iconfont/iconfont.js`;
 const COLOR_ICONFONT_SCRIPT_ID = 'chat2db-color-iconfont';
 const COLOR_ICONFONT_SCRIPT = '//at.alicdn.com/t/c/font_4551262_fnn84ra2j4v.js';
 

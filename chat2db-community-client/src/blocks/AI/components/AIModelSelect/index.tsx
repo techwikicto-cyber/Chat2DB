@@ -99,6 +99,11 @@ const AIModelSelect = ({
       // and the entry overlaps its neighbours and spills out of the popup.
       // Rendering in normal flow lets each row size itself.
       virtual={false}
+      // The picker sits inside the chat input's toolbar, which clips its
+      // overflow. Rendering the popup into the body takes it out of that
+      // stacking/clipping context so it can never be cut off or drawn over the
+      // controls beside it.
+      getPopupContainer={() => document.body}
       className={styles.modelSelect}
       popupClassName={styles.popupSelect}
       variant="borderless"

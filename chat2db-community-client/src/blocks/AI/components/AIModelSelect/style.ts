@@ -24,6 +24,11 @@ export const useStyles = createStyles(({ css, token }) => {
         max-width: 150px;
         color: ${token.colorText};
         font-weight: 500;
+        /* The closed control is a single 24px line. Clip whatever is rendered
+           into it so a multi-line label cannot spill over the toolbar. */
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       & .ant-select-selection-placeholder {
@@ -93,6 +98,12 @@ export const useStyles = createStyles(({ css, token }) => {
       font-size: 11px;
       line-height: 16px;
       white-space: normal;
+      /* Hard ceiling of two lines. Without it the hint keeps wrapping and drags
+         the row taller than whatever container it lands in. */
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     `,
     customModelArrow: css`
       flex: 0 0 auto;
