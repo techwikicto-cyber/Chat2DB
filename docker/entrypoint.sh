@@ -26,6 +26,21 @@ DEFAULT_KEY_FILE="${DATA_DIR}/config/encryption.key"
 
 mkdir -p "${DATA_DIR}"
 
+# Drop empty key variables before the JVM sees them.
+#
+# The server reads these with System.getenv() and treats any non-null result as
+# the answer - and getenv returns "" for a variable that is set but empty, not
+# null. So an empty value does not mean "unset", it means "the key is the empty
+# string", and the server fails on it instead of falling through to the key
+# file. Compose assigns an empty string whenever the variable is absent from
+# .env, which makes this the default path rather than an edge case.
+if [ -z "${CHAT2DB_COMMUNITY_ENCRYPTION_KEY:-}" ]; then
+  unset CHAT2DB_COMMUNITY_ENCRYPTION_KEY
+fi
+if [ -z "${CHAT2DB_COMMUNITY_ENCRYPTION_KEY_FILE:-}" ]; then
+  unset CHAT2DB_COMMUNITY_ENCRYPTION_KEY_FILE
+fi
+
 generate_key_file() {
   local key_file="$1"
   local key_dir

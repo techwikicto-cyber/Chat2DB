@@ -36,11 +36,15 @@ services:
     restart: unless-stopped
     ports:
       - "${CHAT2DB_BIND_ADDRESS:-127.0.0.1}:${CHAT2DB_PORT:-10825}:10825"
+    # List form throughout: an entry with no "=" passes the variable through only
+    # when it is actually set on the host. The mapping form `KEY: ${KEY:-}` would
+    # instead define it as an empty string, and the server treats an empty value
+    # as a real (and invalid) key rather than as "not configured".
     environment:
-      # Supply your own key to pin it explicitly; otherwise one is generated at
+      - JAVA_OPTS=${CHAT2DB_JAVA_OPTS:--Xmx2g}
+      # Set this to pin your own key; otherwise one is generated at
       # /root/.chat2db-community/config/encryption.key inside the volume below.
-      CHAT2DB_COMMUNITY_ENCRYPTION_KEY: ${CHAT2DB_COMMUNITY_ENCRYPTION_KEY:-}
-      JAVA_OPTS: ${CHAT2DB_JAVA_OPTS:--Xmx2g}
+      - CHAT2DB_COMMUNITY_ENCRYPTION_KEY
     volumes:
       # Holds saved connections, query history and the encryption key.
       - chat2db-community-data:/root/.chat2db-community
