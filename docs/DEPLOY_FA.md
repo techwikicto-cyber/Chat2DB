@@ -57,22 +57,32 @@ docker compose -f docker/docker-compose.yml logs -f
 این پروژه به‌صورت پیش‌فرض از مخزن `registry.npmmirror.com` (آینه‌ی چینی npm) استفاده می‌کند.
 اگر شبکه‌ی شما به این آدرس دسترسی ندارد، ساخت در مرحله‌ی `yarn install` متوقف می‌شود.
 
-راه‌حل — مخزن رسمی npm را جایگزین کنید:
+راه‌حل — یک مخزن دیگر را جایگزین کنید. ساده‌ترین راه، ساخت فایل `.env` کنار
+`docker-compose.yml` است:
+
+```env
+CHAT2DB_NPM_REGISTRY=https://mirror-npm.runflare.com/
+```
+
+مقادیر شناخته‌شده:
+
+| مخزن | آدرس |
+|---|---|
+| رسمی npm | `https://registry.npmjs.org/` |
+| آینه‌ی ایران (Runflare) | `https://mirror-npm.runflare.com/` |
+| آینه‌ی چین (پیش‌فرض) | `https://registry.npmmirror.com/` |
+
+یا مستقیماً هنگام ساخت:
 
 ```bash
 docker build \
-  --build-arg NPM_REGISTRY=https://registry.npmjs.org/ \
+  --build-arg NPM_REGISTRY=https://mirror-npm.runflare.com/ \
   -f docker/Dockerfile \
   -t chat2db-fa:latest \
   .
 ```
 
-یا در فایل `docker/docker-compose.yml` این خط را از حالت کامنت خارج کنید:
-
-```yaml
-        NPM_REGISTRY: https://registry.npmjs.org/
-```
-
+نبودِ اسلش پایانی مشکلی ایجاد نمی‌کند و به‌طور خودکار اضافه می‌شود.
 این کار هیچ فایلی را در مخزن تغییر نمی‌دهد و فقط روی همان ساخت اثر می‌گذارد.
 
 ---

@@ -23,20 +23,26 @@ ARG APP_VERSION=5.3.0
 
 WORKDIR /build
 
+# The lockfile's tarball URLs end in a slash ("…npmmirror.com/uuid/-/…"), so a
+# registry passed without one would splice into "…runflare.comuuid/-/…".
+# Normalise to exactly one trailing slash before substituting.
+COPY docker/set-npm-registry.sh /usr/local/bin/set-npm-registry
+RUN chmod +x /usr/local/bin/set-npm-registry
+
 COPY chat2db-community-client/package.json chat2db-community-client/yarn.lock chat2db-community-client/.npmrc ./
-RUN if [ -n "$NPM_REGISTRY" ]; then \
-      printf 'registry=%s\n' "$NPM_REGISTRY" > .npmrc && \
-      sed -i "s#https://registry.npmmirror.com/#${NPM_REGISTRY}#g" yarn.lock; \
-    fi && \
+RUN set-npm-registry "$NPM_REGISTRY" && \
     yarn install --frozen-lockfile --network-timeout 600000
 
 COPY chat2db-community-client/ ./
 # The COPY above restores the tracked .npmrc and yarn.lock, so reapply the
 # override before any command that may still touch the registry.
-RUN if [ -n "$NPM_REGISTRY" ]; then \
-      printf 'registry=%s\n' "$NPM_REGISTRY" > .npmrc && \
-      sed -i "s#https://registry.npmmirror.com/#${NPM_REGISTRY}#g" yarn.lock; \
-    fi && \
+#
+# `umi setup` generates src/.umi/, which tsconfig.json extends. It normally runs
+# as yarn's postinstall hook, but that fired above when only package.json and
+# yarn.lock existed - too early to generate anything. Run it here, now that the
+# sources are in place, or the prebuild tests fail on the missing tsconfig.
+RUN set-npm-registry "$NPM_REGISTRY" && \
+    yarn umi setup && \
     UMI_PublicPath=/static/front/ yarn run build:web:community --app_version="${APP_VERSION}"
 
 # ---------------------------------------------------------------------------
