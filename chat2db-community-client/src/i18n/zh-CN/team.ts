@@ -126,7 +126,7 @@ export default {
   'team.createOrJoin.title': '创建或加入团队',
   'team.create.title': '创建新团队',
   'team.create.title.desc': '创建一个新的团队，邀请小伙伴一起办公',
-  'team.create.title.desc2': '填写真实信息，与企业同事在Chat2DB开启高效协作',
+  'team.create.title.desc2': '填写真实信息，与企业同事在Bina Platform开启高效协作',
   'team.createSuccess.title': '团队创建成功',
   'team.createSuccess.title2': '恭喜你，团队创建成功',
   'team.createSuccess.title.desc': '快复制以下链接，邀请小伙伴们一起愉快的办公吧',
@@ -137,7 +137,7 @@ export default {
   'team.join.title.desc': '马上加入，体验一起办公的畅快',
   'team.join.title.desc2': '输入个人信息，申请以成员的身份加入团队',
   'team.joinSuccess.title': '团队申请已发送',
-  'team.joinSuccess.title2': 'Chat2DB的团队申请已发送',
+  'team.joinSuccess.title2': 'Bina Platform的团队申请已发送',
   'team.joinSuccess.title.desc': '请耐心等待管理员审批',
 
   'team.create.form.title': '团队名称',
@@ -167,7 +167,7 @@ export default {
   // 邀请
   'team.invite.title.subtitle1': '超过100万开发者正在使用的AI数据开发和分析平台',
   'team.invite.title.subtitle2': '让数据管理变得更简单、更高效、更有趣😎',
-  'team.invite.question': '什么是Chat2DB？',
+  'team.invite.question': '什么是Bina Platform？',
   'team.invite.init.content1': '{1} 正在 {2} 上',
   'team.invite.init.content2': '邀请你加入 {1} , 一起协同办公',
   'team.invite.init.next': '下一步',

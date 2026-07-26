@@ -3,6 +3,7 @@ import { memo } from 'react';
 import { useStyles } from './style';
 import { Dropdown, type MenuProps } from 'antd';
 import { refreshPage } from '@/utils';
+import { PRODUCT_NAME } from '@/constants/branding';
 import { history } from 'umi';
 import { Platform } from '@/constants/os';
 import jcefApi from '@/jcef';
@@ -122,10 +123,10 @@ const AppBar = memo<AppBarProps>(({ className }) => {
       <div className={styles.logoContainer}>
         {window.navigator.os_type !== Platform.Mac ? (
           <Dropdown destroyPopupOnHide menu={{ items }} trigger={['click']} className={styles.dropdown}>
-            <div className={styles.appName}>Chat2DB</div>
+            <div className={styles.appName}>{PRODUCT_NAME}</div>
           </Dropdown>
         ) : (
-          <div className={styles.appName}>Chat2DB</div>
+          <div className={styles.appName}>{PRODUCT_NAME}</div>
         )}
       </div>
       {/* {window.navigator.os_type !== Platform.Mac && (

@@ -65,7 +65,7 @@ export default {
   'chat.sheetSwitchLastNext.last': '이전',
   'chat.sheetSwitchLastNext.next': '[{1}]의 헤더 계속 입력',
   'chat.excelPreview.title': 'Excel 미리 보기',
-  'chat.ai.common.think': 'Chat2DB는 실수할 수 있습니다. 중요한 정보는 확인해 주세요',
+  'chat.ai.common.think': 'Bina Platform는 실수할 수 있습니다. 중요한 정보는 확인해 주세요',
   'chat.ai.common.analyzingText': '분석 중...',
   'chat.ai.common.analyzedText': '분석 완료',
   'chat.ai.common.analyzingText.dashboard': '대시보드 분석 중...',

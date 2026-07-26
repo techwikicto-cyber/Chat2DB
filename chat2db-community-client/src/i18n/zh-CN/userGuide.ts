@@ -21,7 +21,7 @@ export default {
   'userguide.vipStatus.offlineTrialExpired': '试用已过期',
 
   // 首次登录
-  'userguide.firstLogin.title': '👋 嗨~ 欢迎来到 Chat2DB',
+  'userguide.firstLogin.title': '👋 嗨~ 欢迎来到 Bina Platform',
   'userguide.firstLogin.subTitle': '恭喜获得了 30 天试用资格',
   'userguide.firstLogin.highlightSubTitle': '30 天试用',
   'userguide.firstLogin.dividingLine': '试用期间，你将可以享受以下功能',
@@ -36,7 +36,7 @@ export default {
   'userguide.firstLogin.feature5.title': '24*7 的技术支持',
   'userguide.firstLogin.feature5.subtitle': '为你及时的解决问题和技术协助',
   'userguide.firstLogin.primaryButton.title': '开始体验 30 天免费 Pro 版',
-  'userguide.firstLogin.secondaryButton.title': '如何使用 Chat2DB？',
+  'userguide.firstLogin.secondaryButton.title': '如何使用 Bina Platform？',
 
   // 已订阅
   'userguide.subscribed.title': '🎉 感谢你的支持',
@@ -75,7 +75,7 @@ export default {
   'userguide.expired.secondaryButton.title': '了解更多使用教程',
 
   // 离线版试用
-  'userguide.offlineTrial.title': '欢迎使用Chat2DB离线版',
+  'userguide.offlineTrial.title': '欢迎使用Bina Platform离线版',
   'userguide.offlineTrial.subTitle': '再也无需担心数据安全问题',
   'userguide.offlineTrial.highlightSubTitle': '离线版',
   'userguide.offlineTrial.dividingLine': '你将可以享受以下功能',

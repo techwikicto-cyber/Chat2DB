@@ -52,5 +52,5 @@ export default {
   'invite.status.waitWithdraw': '待提现',
 
   'invite.share.text':
-    '推荐一款超好用的AI数据库管理工具Chat2DB，支持22种数据库，包括国产的达梦、OpenGuass、OceanBase、TiDB等，还有非关系型MongoDB、Redis等，快来试试吧！\n\n🔥 官网：https://chat2db-ai.com/\n🔥 邀请码：{1}\n\n邀请码介绍：https://docs.chat2db-ai.com/docs/settings/invite\n ',
+    '推荐一款超好用的AI数据库管理工具Bina Platform，支持22种数据库，包括国产的达梦、OpenGuass、OceanBase、TiDB等，还有非关系型MongoDB、Redis等，快来试试吧！\n\n🔥 官网：https://chat2db-ai.com/\n🔥 邀请码：{1}\n\n邀请码介绍：https://docs.chat2db-ai.com/docs/settings/invite\n ',
 };

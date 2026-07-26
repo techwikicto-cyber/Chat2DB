@@ -6,7 +6,7 @@ export default {
   'license.deviceCertificate': 'Please enter device certificate',
   'license.getDeviceCertificate': 'Get device certificate',
   'license.offlineCertificateInstruction':
-    'If you are completely offline, you can get the device certificate through the following steps: Go to Chat2DB official website (https://chat2db-ai.com/) → Login and click avatar → Device Certificate',
+    'If you are completely offline, you can get the device certificate through the following steps: Go to Bina Platform official website (https://chat2db-ai.com/) → Login and click avatar → Device Certificate',
   'license.offlineActivationAIWarning':
     'Once the offline certificate is generated, it cannot be revoked and the device cannot be modified!',
   'license.offlineAIWarning': 'Devices activated offline will not be able to use AI features',
@@ -17,7 +17,7 @@ export default {
     'Fill in the corresponding information, and the system will automatically generate a device certificate for you,',
   'license.certificateWarning': 'Once generated, it cannot be modified',
   'license.licenseTooltip':
-    'Currently only Chat2DB Local Permanent version orders need to generate device certificates to activate devices, other orders can be activated without device certificates',
+    'Currently only Bina Platform Local Permanent version orders need to generate device certificates to activate devices, other orders can be activated without device certificates',
   'license.selectOrder': 'Please select your order',
   'license.deviceNameLabel': 'Device Name',
   'license.deviceNameTooltip': 'Add a device name note',
@@ -38,7 +38,7 @@ export default {
   'license.copyButton': 'Copy Device Certificate',
   'license.offlineUsageNotes': 'Offline Usage Notes',
   'license.viewActivationProcess': 'Click to view offline activation process',
-  'license.permanentVersion': 'Chat2DB Local Lifetime Version',
+  'license.permanentVersion': 'Bina Platform Local Lifetime Version',
   'license.offlineActivationIntro': 'If you are not familiar with the offline activation process,',
   'license.deviceLimit': 'License device binding limit reached',
   'license.licenseNotSupported': 'AI is not supported for offline activation',

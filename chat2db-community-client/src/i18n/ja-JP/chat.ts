@@ -65,7 +65,7 @@ export default {
   'chat.sheetSwitchLastNext.last': '前へ',
   'chat.sheetSwitchLastNext.next': '【{1}】のヘッダーの入力を続ける',
   'chat.excelPreview.title': 'Excelプレビュー',
-  'chat.ai.common.think': 'Chat2DBは間違いを犯す可能性があります。重要な情報を確認することを検討してください',
+  'chat.ai.common.think': 'Bina Platformは間違いを犯す可能性があります。重要な情報を確認することを検討してください',
   'chat.ai.common.analyzingText': 'コード生成中...',
   'chat.ai.common.analyzedText': 'コード生成完了',
   'chat.ai.common.analyzingText.dashboard': 'ダッシュボード生成中...',

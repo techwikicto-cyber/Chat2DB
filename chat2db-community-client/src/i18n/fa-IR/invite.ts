@@ -52,5 +52,5 @@ export default {
   'invite.status.waitWithdraw': 'در انتظار برداشت',
 
   'invite.share.text':
-    'یک ابزار بسیار کاربردی مدیریت پایگاه‌داده با هوش مصنوعی به شما پیشنهاد می‌کنم: Chat2DB، با پشتیبانی از ۲۲ نوع پایگاه‌داده، شامل برندهای بومی مانند Dameng، OpenGuass، OceanBase و TiDB و همچنین پایگاه‌داده‌های غیررابطه‌ای مانند MongoDB و Redis. حتماً امتحان کنید! \n\n🔥 وب‌سایت رسمی: https://chat2db-ai.com/\n🔥 کد دعوت: {1}\n\nمعرفی کد دعوت: https://docs.chat2db-ai.com/docs/settings/invite\n',
+    'یک ابزار بسیار کاربردی مدیریت پایگاه‌داده با هوش مصنوعی به شما پیشنهاد می‌کنم: پلتفرم بینا، با پشتیبانی از ۲۲ نوع پایگاه‌داده، شامل برندهای بومی مانند Dameng، OpenGuass، OceanBase و TiDB و همچنین پایگاه‌داده‌های غیررابطه‌ای مانند MongoDB و Redis. حتماً امتحان کنید! \n\n🔥 وب‌سایت رسمی: https://chat2db-ai.com/\n🔥 کد دعوت: {1}\n\nمعرفی کد دعوت: https://docs.chat2db-ai.com/docs/settings/invite\n',
 };

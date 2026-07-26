@@ -127,7 +127,7 @@ export default {
   'team.create.title': 'Crear un equipo nuevo',
   'team.create.title.desc': 'Cree un equipo nuevo e invite a sus compañeros a colaborar',
   'team.create.title.desc2':
-    'Proporcione información precisa para colaborar de forma eficiente con sus compañeros en Chat2DB',
+    'Proporcione información precisa para colaborar de forma eficiente con sus compañeros en Bina Platform',
   'team.createSuccess.title': 'Equipo creado correctamente',
   'team.createSuccess.title2': 'El equipo se ha creado correctamente',
   'team.createSuccess.title.desc': 'Copie el enlace siguiente para invitar a sus compañeros a unirse y trabajar juntos',
@@ -137,7 +137,7 @@ export default {
   'team.join.title.desc': 'Únase ahora y disfrute del trabajo en equipo',
   'team.join.title.desc2': 'Introduzca su información personal para solicitar la incorporación como miembro',
   'team.joinSuccess.title': 'Solicitud de equipo enviada',
-  'team.joinSuccess.title2': 'Solicitud de equipo de Chat2DB enviada',
+  'team.joinSuccess.title2': 'Solicitud de equipo de Bina Platform enviada',
   'team.joinSuccess.title.desc': 'Espere a que el administrador la apruebe',
 
   'team.create.form.title': 'Nombre del equipo',
@@ -165,7 +165,7 @@ export default {
 
   'team.invite.title.subtitle1': 'Una plataforma de desarrollo y análisis de datos con IA utilizada por más de un millón de desarrolladores',
   'team.invite.title.subtitle2': 'Una gestión de datos más sencilla, eficiente y entretenida 😎',
-  'team.invite.question': '¿Qué es Chat2DB?',
+  'team.invite.question': '¿Qué es Bina Platform?',
   'team.invite.init.content1': '{1} utiliza {2}',
   'team.invite.init.content2': 'le invita a unirse a {1}; haga clic en el botón siguiente para incorporarse',
   'team.invite.init.next': 'Siguiente',

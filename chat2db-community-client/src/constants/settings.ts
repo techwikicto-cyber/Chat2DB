@@ -1,6 +1,5 @@
 import { AIType } from '@/typings/ai';
 import { GlobalAISettings, GlobalBaseSettings, GlobalAppConfig, DataTableSettings } from '@/typings/settings';
-import { getUserComputerLanguage } from '@/utils';
 import { DEFAULT_RESULT_PAGE_SIZE } from './pagination';
 
 export enum LangType {
@@ -32,8 +31,11 @@ export enum UpdatedStatus {
 }
 
 export const DEFAULT_BASE_SETTINGS: GlobalBaseSettings = {
-  appearance: 'dark',
-  language: getUserComputerLanguage(),
+  appearance: 'light',
+  // Persian is the product language, not a guess from the browser. Detecting it
+  // would hand an English UI to anyone whose browser reports en-US, which is
+  // most of them. Users who want English can still pick it in Settings.
+  language: LangType.FA_IR,
   customFont: '',
   customFontSize: 13,
   defaultPageSize: DEFAULT_RESULT_PAGE_SIZE,

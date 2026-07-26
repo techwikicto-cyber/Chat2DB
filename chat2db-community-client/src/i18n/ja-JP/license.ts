@@ -6,7 +6,7 @@ export default {
   'license.deviceCertificate': 'デバイス証明書を入力してください',
   'license.getDeviceCertificate': 'デバイス証明書を取得する',
   'license.offlineCertificateInstruction':
-    'インターネットに完全に接続されていない場合、以下の手順でデバイス証明書を取得できます：Chat2DB公式サイト（https://chat2db-ai.com/）にアクセス→ログイン後、アバターをクリック→デバイス証明書',
+    'インターネットに完全に接続されていない場合、以下の手順でデバイス証明書を取得できます：Bina Platform公式サイト（https://chat2db-ai.com/）にアクセス→ログイン後、アバターをクリック→デバイス証明書',
   'license.offlineActivationAIWarning': 'デバイス証明書の生成後は取り消しできず、デバイスを変更することもできません！',
   'license.offlineAIWarning': 'オフラインでアクティベートされたデバイスではAI機能を使用できません',
 
@@ -15,7 +15,7 @@ export default {
   'license.certificateDescription': '必要な情報を入力すると、システムが自動的にデバイス証明書を生成します。',
   'license.certificateWarning': '一度生成すると、変更することはできません',
   'license.licenseTooltip':
-    '現在、Chat2DB Local永久版のみデバイスをアクティベートするためのデバイス証明書が必要です。他の注文はデバイス証明書なしでアクティベートできます',
+    '現在、Bina Platform Local永久版のみデバイスをアクティベートするためのデバイス証明書が必要です。他の注文はデバイス証明書なしでアクティベートできます',
   'license.selectOrder': '注文を選択してください',
   'license.deviceNameLabel': 'デバイス名',
   'license.deviceNameTooltip': 'デバイス名のメモ',
@@ -35,7 +35,7 @@ export default {
   'license.copyButton': 'デバイス証明書をコピー',
   'license.offlineUsageNotes': 'オフライン使用に関する注意事項',
   'license.viewActivationProcess': 'オフラインアクティベーションプロセスを表示',
-  'license.permanentVersion': 'Chat2DB Local永久版',
+  'license.permanentVersion': 'Bina Platform Local永久版',
   'license.offlineActivationIntro': 'オフラインアクティベーションプロセスについて不明な点がある場合、',
   'license.deviceLimit': 'ライセンスのデバイスバインド制限に達しました',
   'license.licenseNotSupported': 'オフラインアクティベーションではAIはサポートされていません',

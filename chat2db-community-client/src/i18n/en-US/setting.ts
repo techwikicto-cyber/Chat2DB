@@ -49,19 +49,19 @@ export default {
   'setting.text.mcpTokenResetConfirm': 'Reset MCP token now?',
   'setting.text.mcpTokenResetSuccess': 'MCP token has been reset.',
   'setting.title.networkProxy': 'Network Proxy',
-  'setting.text.networkProxyDescribe': 'Set the application proxy used by Chat2DB to access external networks.',
+  'setting.text.networkProxyDescribe': 'Set the application proxy used by Bina Platform to access external networks.',
   'setting.networkProxy.mode': 'Proxy mode',
   'setting.networkProxy.noProxy': 'Direct',
   'setting.networkProxy.systemProxy': 'Follow system',
   'setting.networkProxy.manualProxy': 'Custom proxy',
   'setting.networkProxy.modeTip':
-    'Direct, Follow system, and Custom proxy only decide whether Chat2DB uses an application proxy. Real VPN and network routing are still controlled by the operating system.',
+    'Direct, Follow system, and Custom proxy only decide whether Bina Platform uses an application proxy. Real VPN and network routing are still controlled by the operating system.',
   'setting.networkProxy.noProxyTip':
-    'Use this when the current network can reach the target service directly, or when you do not want Chat2DB to use any application proxy.',
+    'Use this when the current network can reach the target service directly, or when you do not want Bina Platform to use any application proxy.',
   'setting.networkProxy.systemProxyTip':
-    'Use this when your system settings, Clash, Surge, or corporate proxy client is already configured and you want Chat2DB to follow it.',
+    'Use this when your system settings, Clash, Surge, or corporate proxy client is already configured and you want Bina Platform to follow it.',
   'setting.networkProxy.manualProxyTip':
-    'Use this when you want to set a proxy host and port only for Chat2DB, or when system proxy is unavailable but you know the proxy server address.',
+    'Use this when you want to set a proxy host and port only for Bina Platform, or when system proxy is unavailable but you know the proxy server address.',
   'setting.networkProxy.type': 'Proxy type',
   'setting.networkProxy.host': 'Host name',
   'setting.networkProxy.port': 'Port',
@@ -93,7 +93,7 @@ export default {
   'setting.label.customAiUrl': 'User-defined interface Url',
   'setting.placeholder.httpsProxy': 'Not required. Set HTTP proxy {1} when requesting OPENAI interface.',
   'setting.placeholder.apiKey': 'OpenAI official website to view the APIKEY',
-  'setting.placeholder.chat2dbApiKey': 'Use the APIKEY provided by Chat2DB',
+  'setting.placeholder.chat2dbApiKey': 'Use the APIKEY provided by Bina Platform',
   'setting.placeholder.customUrl': 'URL of the REST interface of the AI',
   'setting.placeholder.apiHost': 'This parameter is mandatory. The default value is https://api.openai.com/',
   'setting.message.urlTestError': 'The interface test failed. Procedure',
@@ -218,7 +218,7 @@ export default {
   'setting.nav.editorFontSize': 'Editor Font Size',
   'setting.nav.editorFontSizeDescribe': 'Set the font size of the editor',
   'setting.apiKeys.describe':
-    'Chat2DB Pro provides AI services through APIs. For detailed usage, please refer to the documentation. {1} Do not expose your API key to other clients or code.',
+    'Bina Platform Pro provides AI services through APIs. For detailed usage, please refer to the documentation. {1} Do not expose your API key to other clients or code.',
   'setting.apiKeys.CreateApiKey': 'Create API key',
   'setting.apiKeys.addApiDoc': '《API call method》',
   'setting.apiKeys.CreateSuccess': 'Create success',

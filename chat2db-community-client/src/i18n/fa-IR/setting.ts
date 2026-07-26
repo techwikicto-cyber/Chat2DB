@@ -50,19 +50,19 @@ export default {
   'setting.text.mcpTokenResetSuccess': 'توکن MCP بازنشانی شد.',
   'setting.title.networkProxy': 'پروکسی شبکه',
   'setting.text.networkProxyDescribe':
-    'تنظیم پروکسی برنامه که Chat2DB برای دسترسی به شبکه‌های بیرونی استفاده می‌کند.',
+    'تنظیم پروکسی برنامه که پلتفرم بینا برای دسترسی به شبکه‌های بیرونی استفاده می‌کند.',
   'setting.networkProxy.mode': 'حالت پروکسی',
   'setting.networkProxy.noProxy': 'مستقیم',
   'setting.networkProxy.systemProxy': 'مطابق سیستم',
   'setting.networkProxy.manualProxy': 'پروکسی سفارشی',
   'setting.networkProxy.modeTip':
-    'حالت‌های مستقیم، مطابق سیستم و پروکسی سفارشی فقط تعیین می‌کنند که Chat2DB از پروکسی برنامه استفاده کند یا نه. VPN واقعی و مسیریابی شبکه همچنان توسط سیستم‌عامل کنترل می‌شود.',
+    'حالت‌های مستقیم، مطابق سیستم و پروکسی سفارشی فقط تعیین می‌کنند که پلتفرم بینا از پروکسی برنامه استفاده کند یا نه. VPN واقعی و مسیریابی شبکه همچنان توسط سیستم‌عامل کنترل می‌شود.',
   'setting.networkProxy.noProxyTip':
-    'وقتی شبکه فعلی می‌تواند مستقیماً به سرویس مقصد برسد، یا وقتی نمی‌خواهید Chat2DB از هیچ پروکسی برنامه‌ای استفاده کند، این گزینه را انتخاب کنید.',
+    'وقتی شبکه فعلی می‌تواند مستقیماً به سرویس مقصد برسد، یا وقتی نمی‌خواهید پلتفرم بینا از هیچ پروکسی برنامه‌ای استفاده کند، این گزینه را انتخاب کنید.',
   'setting.networkProxy.systemProxyTip':
-    'وقتی تنظیمات سیستم، Clash، Surge یا کلاینت پروکسی سازمانی از قبل پیکربندی شده و می‌خواهید Chat2DB از آن پیروی کند، این گزینه را انتخاب کنید.',
+    'وقتی تنظیمات سیستم، Clash، Surge یا کلاینت پروکسی سازمانی از قبل پیکربندی شده و می‌خواهید پلتفرم بینا از آن پیروی کند، این گزینه را انتخاب کنید.',
   'setting.networkProxy.manualProxyTip':
-    'وقتی می‌خواهید فقط برای Chat2DB میزبان و پورت پروکسی تعیین کنید، یا وقتی پروکسی سیستم در دسترس نیست ولی آدرس سرور پروکسی را می‌دانید، این گزینه را انتخاب کنید.',
+    'وقتی می‌خواهید فقط برای پلتفرم بینا میزبان و پورت پروکسی تعیین کنید، یا وقتی پروکسی سیستم در دسترس نیست ولی آدرس سرور پروکسی را می‌دانید، این گزینه را انتخاب کنید.',
   'setting.networkProxy.type': 'نوع پروکسی',
   'setting.networkProxy.host': 'نام میزبان',
   'setting.networkProxy.port': 'پورت',
@@ -95,7 +95,7 @@ export default {
   'setting.label.customAiUrl': 'نشانی رابط تعریف‌شده توسط کاربر',
   'setting.placeholder.httpsProxy': 'الزامی نیست. هنگام درخواست به رابط OPENAI، پروکسی HTTP {1} را تنظیم کنید.',
   'setting.placeholder.apiKey': 'برای مشاهده APIKEY به وب‌سایت رسمی OpenAI مراجعه کنید',
-  'setting.placeholder.chat2dbApiKey': 'از APIKEY ارائه‌شده توسط Chat2DB استفاده کنید',
+  'setting.placeholder.chat2dbApiKey': 'از APIKEY ارائه‌شده توسط پلتفرم بینا استفاده کنید',
   'setting.placeholder.customUrl': 'نشانی رابط REST هوش مصنوعی',
   'setting.placeholder.apiHost': 'این پارامتر الزامی است. مقدار پیش‌فرض https://api.openai.com/ است',
   'setting.message.urlTestError': 'آزمایش رابط ناموفق بود.',
@@ -220,7 +220,7 @@ export default {
   'setting.nav.editorFontSize': 'اندازه فونت ویرایشگر',
   'setting.nav.editorFontSizeDescribe': 'تنظیم اندازه فونت ویرایشگر',
   'setting.apiKeys.describe':
-    'Chat2DB Pro سرویس‌های هوش مصنوعی را از طریق API ارائه می‌دهد. برای جزئیات استفاده، لطفاً به مستندات مراجعه کنید. {1} کلید API خود را در اختیار کلاینت‌ها یا کدهای دیگر قرار ندهید.',
+    'پلتفرم بینا Pro سرویس‌های هوش مصنوعی را از طریق API ارائه می‌دهد. برای جزئیات استفاده، لطفاً به مستندات مراجعه کنید. {1} کلید API خود را در اختیار کلاینت‌ها یا کدهای دیگر قرار ندهید.',
   'setting.apiKeys.CreateApiKey': 'ساخت کلید API',
   'setting.apiKeys.addApiDoc': '«روش فراخوانی API»',
   'setting.apiKeys.CreateSuccess': 'با موفقیت ساخته شد',

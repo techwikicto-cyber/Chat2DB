@@ -6,7 +6,7 @@ export default {
   'license.deviceCertificate': 'لطفاً گواهی دستگاه را وارد کنید',
   'license.getDeviceCertificate': 'دریافت گواهی دستگاه',
   'license.offlineCertificateInstruction':
-    'اگر کاملاً آفلاین هستید، می‌توانید گواهی دستگاه را از این مسیر بگیرید: وب‌سایت رسمی Chat2DB (https://chat2db-ai.com/) ← ورود و کلیک روی تصویر پروفایل ← گواهی دستگاه',
+    'اگر کاملاً آفلاین هستید، می‌توانید گواهی دستگاه را از این مسیر بگیرید: وب‌سایت رسمی پلتفرم بینا (https://chat2db-ai.com/) ← ورود و کلیک روی تصویر پروفایل ← گواهی دستگاه',
   'license.offlineActivationAIWarning':
     'پس از ساخت گواهی آفلاین، امکان ابطال آن یا تغییر دستگاه وجود ندارد!',
   'license.offlineAIWarning': 'دستگاه‌هایی که آفلاین فعال شوند نمی‌توانند از قابلیت‌های هوش مصنوعی استفاده کنند',
@@ -16,7 +16,7 @@ export default {
   'license.certificateDescription': 'اطلاعات مربوطه را پر کنید تا سامانه به‌طور خودکار گواهی دستگاه را برای شما بسازد،',
   'license.certificateWarning': 'پس از ساخته‌شدن، قابل تغییر نیست',
   'license.licenseTooltip':
-    'در حال حاضر فقط سفارش‌های نسخه دائمی محلی Chat2DB برای فعال‌سازی دستگاه به گواهی دستگاه نیاز دارند؛ سایر سفارش‌ها بدون گواهی دستگاه فعال می‌شوند',
+    'در حال حاضر فقط سفارش‌های نسخه دائمی محلی پلتفرم بینا برای فعال‌سازی دستگاه به گواهی دستگاه نیاز دارند؛ سایر سفارش‌ها بدون گواهی دستگاه فعال می‌شوند',
   'license.selectOrder': 'لطفاً سفارش خود را انتخاب کنید',
   'license.deviceNameLabel': 'نام دستگاه',
   'license.deviceNameTooltip': 'یک یادداشت به‌عنوان نام دستگاه اضافه کنید',
@@ -36,7 +36,7 @@ export default {
   'license.copyButton': 'کپی گواهی دستگاه',
   'license.offlineUsageNotes': 'نکات استفاده آفلاین',
   'license.viewActivationProcess': 'برای مشاهده فرایند فعال‌سازی آفلاین کلیک کنید',
-  'license.permanentVersion': 'نسخه محلی مادام‌العمر Chat2DB',
+  'license.permanentVersion': 'نسخه محلی مادام‌العمر پلتفرم بینا',
   'license.offlineActivationIntro': 'اگر با فرایند فعال‌سازی آفلاین آشنا نیستید،',
   'license.deviceLimit': 'سقف اتصال دستگاه به این مجوز پر شده است',
   'license.licenseNotSupported': 'هوش مصنوعی در فعال‌سازی آفلاین پشتیبانی نمی‌شود',

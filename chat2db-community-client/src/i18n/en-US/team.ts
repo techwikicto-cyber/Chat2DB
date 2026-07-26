@@ -127,7 +127,7 @@ export default {
   'team.create.title': 'Create a New Team',
   'team.create.title.desc': 'Create a new team and invite your colleagues to collaborate',
   'team.create.title.desc2':
-    'Provide accurate information to start efficient collaboration with your company colleagues on Chat2DB',
+    'Provide accurate information to start efficient collaboration with your company colleagues on Bina Platform',
   'team.createSuccess.title': 'Team Created Successfully',
   'team.createSuccess.title2': 'Congratulations, the team was created successfully',
   'team.createSuccess.title.desc': 'Copy the link below to invite your colleagues to join and work together happily',
@@ -137,7 +137,7 @@ export default {
   'team.join.title.desc': 'Join now and experience the joy of working together',
   'team.join.title.desc2': 'Enter your personal information to apply to join the team as a member',
   'team.joinSuccess.title': 'Team Application Sent',
-  'team.joinSuccess.title2': 'Chat2DB Team Application Sent',
+  'team.joinSuccess.title2': 'Bina Platform Team Application Sent',
   'team.joinSuccess.title.desc': 'Please wait patiently for the administrator to approve',
 
   'team.create.form.title': 'Team Name',
@@ -165,7 +165,7 @@ export default {
 
   'team.invite.title.subtitle1': 'An AI data development and analysis platform used by over 1 million developers',
   'team.invite.title.subtitle2': 'Making data management simpler, more efficient, and more fun 😎',
-  'team.invite.question': 'What is Chat2DB?',
+  'team.invite.question': 'What is Bina Platform?',
   'team.invite.init.content1': '{1} is using {2}',
   'team.invite.init.content2': 'invites you to join the {1} , please click the button below to join',
   'team.invite.init.next': 'Next',

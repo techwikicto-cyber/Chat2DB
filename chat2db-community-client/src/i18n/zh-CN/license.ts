@@ -6,7 +6,7 @@ export default {
   'license.deviceCertificate': '请填写设备证书',
   'license.getDeviceCertificate': '前去获取设备证书',
   'license.offlineCertificateInstruction':
-    '如果你目前完全断网，可以通过以下方式获取设备证书：进入Chat2DB官网（https://chat2db-ai.com/）→登录后点击头像→设备证书',
+    '如果你目前完全断网，可以通过以下方式获取设备证书：进入Bina Platform官网（https://chat2db-ai.com/）→登录后点击头像→设备证书',
 
   'license.offlineActivationAIWarning': '离线证书生成之后无法撤回且不可以修改设备！',
   'license.offlineAIWarning': '离线激活的设备，将无法使用 AI 功能',
@@ -16,7 +16,7 @@ export default {
   'license.certificateDescription': '需要填写对应的信息，系统将为你自动生成设备证书，',
   'license.certificateWarning': '一旦生成，将无法修改',
   'license.licenseTooltip':
-    '目前只有Chat2DB Local 永久版订单需要生成设备证书来激活设备，其他订单无需设备证书，即可激活',
+    '目前只有Bina Platform Local 永久版订单需要生成设备证书来激活设备，其他订单无需设备证书，即可激活',
   'license.selectOrder': '请选择你的订单',
   'license.deviceNameLabel': '设备名称',
   'license.deviceNameTooltip': '备注一个设备名称',
@@ -36,7 +36,7 @@ export default {
   'license.copyButton': '复制设备证书',
   'license.offlineUsageNotes': '离线使用须知',
   'license.viewActivationProcess': '点击查看离线激活流程',
-  'license.permanentVersion': 'Chat2DB Local 永久版',
+  'license.permanentVersion': 'Bina Platform Local 永久版',
   'license.offlineActivationIntro': '如果你对离线激活流程不了解，',
   'license.deviceLimit': '许可证绑定设备数已达到上限',
   'license.licenseNotSupported': '离线激活不支持AI',

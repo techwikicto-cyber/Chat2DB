@@ -37,11 +37,15 @@ export const useStyles = createStyles(({ css, token }) => {
     `,
     popupSelect: css`
       min-width: 260px !important;
+      max-width: 320px !important;
       padding: 6px !important;
 
       & .ant-select-item {
         font-size: 12px !important;
         min-height: 0px !important;
+        /* Let the two-line custom-model entry set its own height instead of
+           being clipped to the uniform option height. */
+        height: auto !important;
         padding: 4px 8px !important;
       }
     `,

@@ -93,6 +93,12 @@ const AIModelSelect = ({
   return (
     <Select
       popupMatchSelectWidth={false}
+      // The custom-model entry is two stacked lines plus a wrapping hint, so it
+      // is far taller than the uniform row height rc-virtual-list assumes. With
+      // virtual scrolling on, the list positions rows against that wrong height
+      // and the entry overlaps its neighbours and spills out of the popup.
+      // Rendering in normal flow lets each row size itself.
+      virtual={false}
       className={styles.modelSelect}
       popupClassName={styles.popupSelect}
       variant="borderless"

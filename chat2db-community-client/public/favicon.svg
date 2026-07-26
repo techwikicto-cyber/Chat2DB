@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!--
+    Product mark: the Persian letter "ب" (the initial of بینا) on the terracotta
+    accent from src/constants/palette.ts. Served locally so the tab icon works
+    on an air-gapped server; the previous favicon was fetched from an external
+    CDN and carried the upstream brand.
+  -->
+  <rect width="64" height="64" rx="14" fill="#c2603d"/>
+  <g fill="none" stroke="#faf9f5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 26c0 8.5 4.6 13 16 13s16-4.5 16-13" stroke-width="5"/>
+  </g>
+  <circle cx="32" cy="48" r="3" fill="#faf9f5"/>
+</svg>

@@ -1,4 +1,5 @@
 import { AppConfig } from '@/typings/appConfig';
+import { PRODUCT_NAME } from '@/constants/branding';
 
 export const APP_URL_CONFIG_OVERSEAS = {
   WEBSITE_URL: `https://chat2db.ai`,
@@ -70,9 +71,11 @@ export const appConfigMap: {
     displayName: 'Chat2DB Local Test',
   },
   'chat2db-community': {
+    // `name` keys the on-disk data directory and build artefacts, so it stays
+    // on the upstream value; only displayName is user-visible.
     name: 'chat2db-community',
-    capitalName: 'Chat2DB-Community',
-    displayName: 'Chat2DB Community',
+    capitalName: 'Bina-Platform',
+    displayName: PRODUCT_NAME,
   },
   'chat2db-community-test': {
     name: 'chat2db-community-test',

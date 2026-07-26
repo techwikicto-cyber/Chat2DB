@@ -50,19 +50,19 @@ export default {
   'setting.text.mcpTokenResetSuccess': 'MCPトークンをリセットしました。',
   'setting.title.networkProxy': 'ネットワークプロキシ',
   'setting.text.networkProxyDescribe':
-    'Chat2DB が外部ネットワークへアクセスするときに使うアプリケーションプロキシを設定します。',
+    'Bina Platform が外部ネットワークへアクセスするときに使うアプリケーションプロキシを設定します。',
   'setting.networkProxy.mode': 'プロキシモード',
   'setting.networkProxy.noProxy': '直接接続',
   'setting.networkProxy.systemProxy': 'システムに従う',
   'setting.networkProxy.manualProxy': 'カスタムプロキシ',
   'setting.networkProxy.modeTip':
-    '直接接続、システムに従う、カスタムプロキシは Chat2DB がアプリケーションプロキシを使うかどうかだけを決めます。実際の VPN とネットワーク経路は OS 側で制御されます。',
+    '直接接続、システムに従う、カスタムプロキシは Bina Platform がアプリケーションプロキシを使うかどうかだけを決めます。実際の VPN とネットワーク経路は OS 側で制御されます。',
   'setting.networkProxy.noProxyTip':
-    '現在のネットワークから対象サービスへ直接アクセスできる場合、または Chat2DB にアプリプロキシを使わせたくない場合に使います。',
+    '現在のネットワークから対象サービスへ直接アクセスできる場合、または Bina Platform にアプリプロキシを使わせたくない場合に使います。',
   'setting.networkProxy.systemProxyTip':
-    'OS 設定、Clash、Surge、社内プロキシクライアントなどで既にプロキシを設定していて、Chat2DB にそれを使わせたい場合に使います。',
+    'OS 設定、Clash、Surge、社内プロキシクライアントなどで既にプロキシを設定していて、Bina Platform にそれを使わせたい場合に使います。',
   'setting.networkProxy.manualProxyTip':
-    'Chat2DB だけにプロキシホストとポートを指定したい場合、またはシステムプロキシは使えないがプロキシサーバーのアドレスが分かっている場合に使います。',
+    'Bina Platform だけにプロキシホストとポートを指定したい場合、またはシステムプロキシは使えないがプロキシサーバーのアドレスが分かっている場合に使います。',
   'setting.networkProxy.type': 'プロキシタイプ',
   'setting.networkProxy.host': 'ホスト名',
   'setting.networkProxy.port': 'ポート',
@@ -95,7 +95,7 @@ export default {
   'setting.placeholder.httpsProxy':
     '必要ではありません。OPENAIインターフェースをリクエストするときにHTTPプロキシ{1}を設定します。',
   'setting.placeholder.apiKey': 'OpenAI公式ウェブサイトでAPIKEYを見る',
-  'setting.placeholder.chat2dbApiKey': 'Chat2DBから提供されたAPIKEYを使用する',
+  'setting.placeholder.chat2dbApiKey': 'Bina Platformから提供されたAPIKEYを使用する',
   'setting.placeholder.customUrl': 'AIのRESTインターフェースのURL',
   'setting.placeholder.apiHost': 'このパラメータは必須です。デフォルト値はhttps://api.openai.com/です',
   'setting.message.urlTestError': 'インターフェーステストに失敗しました。手順',
@@ -186,7 +186,7 @@ export default {
   'setting.nav.editorFontSize': 'エディタのフォントサイズ',
   'setting.nav.editorFontSizeDescribe': 'SQLエディタ内のフォントサイズを設定します',
   'setting.apiKeys.describe':
-    'Chat2DB Proは、APIを使用してAIサービスを提供します。詳細な使用方法については、ドキュメントを参照してください。{1} APIキーを他のクライアントやコードに公開しないでください。',
+    'Bina Platform Proは、APIを使用してAIサービスを提供します。詳細な使用方法については、ドキュメントを参照してください。{1} APIキーを他のクライアントやコードに公開しないでください。',
   'setting.apiKeys.CreateApiKey': 'APIキーを追加',
   'setting.apiKeys.addApiDoc': '《API呼び出し方法》',
   'setting.apiKeys.CreateSuccess': 'APIキーが作成されました',

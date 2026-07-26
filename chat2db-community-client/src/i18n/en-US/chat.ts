@@ -65,7 +65,7 @@ export default {
   'chat.sheetSwitchLastNext.last': 'Last',
   'chat.sheetSwitchLastNext.next': 'Continue to fill in the header of [{1}]',
   'chat.excelPreview.title': 'Excel Preview',
-  'chat.ai.common.think': 'Chat2DB can make mistakes. Consider checking important information',
+  'chat.ai.common.think': 'Bina Platform can make mistakes. Consider checking important information',
   'chat.ai.common.analyzingText': 'Analyzing...',
   'chat.ai.common.analyzedText': 'Analyzed',
   'chat.ai.common.analyzingText.dashboard': 'Analyzing Dashboard...',

@@ -52,5 +52,5 @@ export default {
   'invite.status.waitWithdraw': 'Pending Withdrawal',
 
   'invite.share.text':
-    'Recommend a super easy-to-use AI database management tool, Chat2DB, supporting 22 types of databases, including national brands such as Dameng, OpenGuass, OceanBase, TiDB, as well as non-relational databases such as MongoDB and Redis. Come and try it out! \n\n🔥 Official website: https://chat2db-ai.com/\n🔥 Invitation code: {1}\n\nInvitation code introduction: https://docs.chat2db-ai.com/docs/settings/invite\n',
+    'Recommend a super easy-to-use AI database management tool, Bina Platform, supporting 22 types of databases, including national brands such as Dameng, OpenGuass, OceanBase, TiDB, as well as non-relational databases such as MongoDB and Redis. Come and try it out! \n\n🔥 Official website: https://chat2db-ai.com/\n🔥 Invitation code: {1}\n\nInvitation code introduction: https://docs.chat2db-ai.com/docs/settings/invite\n',
 };

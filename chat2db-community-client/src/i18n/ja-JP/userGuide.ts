@@ -20,7 +20,7 @@ export default {
   'userguide.vipStatus.activate': 'アクティベート',
   'userguide.vipStatus.offlineTrialExpired': '試用期間が終了しました',
 
-  'userguide.firstLogin.title': '👋 こんにちは〜 Chat2DBへようこそ',
+  'userguide.firstLogin.title': '👋 こんにちは〜 Bina Platformへようこそ',
   'userguide.firstLogin.subTitle': '30日間のトライアルをお楽しみください',
   'userguide.firstLogin.highlightSubTitle': '30日間のトライアル',
   'userguide.firstLogin.dividingLine': 'トライアル期間中、以下の機能をお楽しみいただけます',
@@ -35,7 +35,7 @@ export default {
   'userguide.firstLogin.feature5.title': '24*7の技術サポート',
   'userguide.firstLogin.feature5.subtitle': '迅速な問題解決と技術支援',
   'userguide.firstLogin.primaryButton.title': '30日間の無料Pro体験を始める',
-  'userguide.firstLogin.secondaryButton.title': 'Chat2DBの使い方は？',
+  'userguide.firstLogin.secondaryButton.title': 'Bina Platformの使い方は？',
 
   'userguide.subscribed.title': '🎉 ご支援いただきありがとうございます',
   'userguide.subscribed.subTitle': 'あなたのアカウントはProにアップグレードされました',
@@ -71,7 +71,7 @@ export default {
   'userguide.expired.primaryButton.title': '支払いに進む',
   'userguide.expired.secondaryButton.title': '使い方のチュートリアルをもっと知る',
 
-  'userguide.offlineTrial.title': 'Chat2DBオフライン版をご利用ありがとうございます',
+  'userguide.offlineTrial.title': 'Bina Platformオフライン版をご利用ありがとうございます',
   'userguide.offlineTrial.subTitle': 'データセキュリティの問題を心配する必要がありません',
   'userguide.offlineTrial.highlightSubTitle': 'オフライン版',
   'userguide.offlineTrial.dividingLine': '以下の機能をお楽しみいただけます',

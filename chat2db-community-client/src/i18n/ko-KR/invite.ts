@@ -52,5 +52,5 @@ export default {
   'invite.status.waitWithdraw': '출금 대기',
 
   'invite.share.text':
-    '매우 편리한 AI 데이터베이스 관리 도구 Chat2DB를 추천합니다. Dameng, OpenGuass, OceanBase, TiDB를 비롯한 22종의 데이터베이스와 MongoDB, Redis 등의 비관계형 데이터베이스를 지원합니다. 지금 사용해 보세요! \n\n🔥 공식 웹사이트: https://chat2db-ai.com/\n🔥 초대 코드: {1}\n\n초대 코드 안내: https://docs.chat2db-ai.com/docs/settings/invite\n',
+    '매우 편리한 AI 데이터베이스 관리 도구 Bina Platform를 추천합니다. Dameng, OpenGuass, OceanBase, TiDB를 비롯한 22종의 데이터베이스와 MongoDB, Redis 등의 비관계형 데이터베이스를 지원합니다. 지금 사용해 보세요! \n\n🔥 공식 웹사이트: https://chat2db-ai.com/\n🔥 초대 코드: {1}\n\n초대 코드 안내: https://docs.chat2db-ai.com/docs/settings/invite\n',
 };

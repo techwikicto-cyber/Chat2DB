@@ -52,5 +52,5 @@ export default {
   'invite.status.waitWithdraw': 'Retirada pendiente',
 
   'invite.share.text':
-    'Recomiendo Chat2DB, una herramienta de gestión de bases de datos con IA muy fácil de usar. Admite 22 tipos de bases de datos, incluidas marcas nacionales como Dameng, OpenGuass, OceanBase y TiDB, además de bases de datos no relacionales como MongoDB y Redis. ¡Pruébela! \n\n🔥 Sitio web oficial: https://chat2db-ai.com/\n🔥 Código de invitación: {1}\n\nIntroducción al código de invitación: https://docs.chat2db-ai.com/docs/settings/invite\n',
+    'Recomiendo Bina Platform, una herramienta de gestión de bases de datos con IA muy fácil de usar. Admite 22 tipos de bases de datos, incluidas marcas nacionales como Dameng, OpenGuass, OceanBase y TiDB, además de bases de datos no relacionales como MongoDB y Redis. ¡Pruébela! \n\n🔥 Sitio web oficial: https://chat2db-ai.com/\n🔥 Código de invitación: {1}\n\nIntroducción al código de invitación: https://docs.chat2db-ai.com/docs/settings/invite\n',
 };

@@ -92,7 +92,14 @@ const createBuildProfile = () => {
     title: runtimeProfile.title,
     appName: process.env.APP_NAME || runtimeProfile.defaultAppName,
     publicPath,
-    faviconUrl: runtimeProfile.localLogo ? `${assetPublicPath}logo.ico` : DEFAULT_LOGO_URL,
+    // The community build serves its own mark from public/. The CDN-hosted
+    // default is both upstream branding and an outbound request, which a
+    // self-hosted or air-gapped deployment cannot make.
+    faviconUrl: runtimeProfile.community
+      ? `${assetPublicPath}favicon.svg`
+      : runtimeProfile.localLogo
+        ? `${assetPublicPath}logo.ico`
+        : DEFAULT_LOGO_URL,
     defaultProxyTarget: runtimeProfile.defaultProxyTarget,
     storageVersionKey: runtimeProfile.storageVersionKey,
     storageKeys: createStorageKeys(runtimeProfile.storageKeyPrefix),
@@ -297,7 +304,14 @@ export default defineConfig({
   //   rel: 'manifest',
   //   href: 'manifest.json',
   // }],
-  links: [{ rel: 'icon', type: 'image/ico', sizes: '32x32', href: buildProfile.faviconUrl }],
+  links: [
+    {
+      rel: 'icon',
+      type: buildProfile.faviconUrl.endsWith('.svg') ? 'image/svg+xml' : 'image/ico',
+      sizes: '32x32',
+      href: buildProfile.faviconUrl,
+    },
+  ],
   headScripts: createHeadScripts(),
   favicons: [buildProfile.faviconUrl],
   define: {

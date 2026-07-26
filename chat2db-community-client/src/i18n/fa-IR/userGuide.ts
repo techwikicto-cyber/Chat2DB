@@ -20,7 +20,7 @@ export default {
   'userguide.vipStatus.offlineTrialExpired': 'دوره آزمایشی به پایان رسید',
   'userguide.vipStatus.activate': 'فعال‌سازی',
 
-  'userguide.firstLogin.title': '👋 سلام~ به Chat2DB خوش آمدید',
+  'userguide.firstLogin.title': '👋 سلام~ به پلتفرم بینا خوش آمدید',
   'userguide.firstLogin.subTitle': 'دوره آزمایشی ۳۰ روزه شما آغاز شد',
   'userguide.firstLogin.highlightSubTitle': 'دوره آزمایشی ۳۰ روزه',
   'userguide.firstLogin.dividingLine': 'شما به قابلیت‌های زیر دسترسی خواهید داشت',
@@ -35,7 +35,7 @@ export default {
   'userguide.firstLogin.feature5.title': 'پشتیبانی فنی ۲۴ ساعته و ۷ روز هفته',
   'userguide.firstLogin.feature5.subtitle': 'حل به‌موقع مشکلات و کمک فنی به شما',
   'userguide.firstLogin.primaryButton.title': 'شروع دوره آزمایشی ۳۰ روزه رایگان نسخه حرفه‌ای',
-  'userguide.firstLogin.secondaryButton.title': 'چطور از Chat2DB استفاده کنیم؟',
+  'userguide.firstLogin.secondaryButton.title': 'چطور از پلتفرم بینا استفاده کنیم؟',
 
   'userguide.subscribed.title': '🎉 از حمایت شما سپاسگزاریم',
   'userguide.subscribed.subTitle': 'حساب شما به نسخه حرفه‌ای ارتقا یافت',
@@ -71,7 +71,7 @@ export default {
   'userguide.expired.primaryButton.title': 'رفتن به صفحه پرداخت',
   'userguide.expired.secondaryButton.title': 'آموزش‌های بیشتر را ببینید',
 
-  'userguide.offlineTrial.title': 'به نسخه آفلاین Chat2DB خوش آمدید',
+  'userguide.offlineTrial.title': 'به نسخه آفلاین پلتفرم بینا خوش آمدید',
   'userguide.offlineTrial.subTitle': 'دیگر نگران مسائل امنیت داده نباشید',
   'userguide.offlineTrial.highlightSubTitle': 'نسخه آفلاین',
   'userguide.offlineTrial.dividingLine': 'شما به قابلیت‌های زیر دسترسی خواهید داشت',

@@ -52,5 +52,5 @@ export default {
   'invite.status.waitWithdraw': '引き出し待ち',
 
   'invite.share.text':
-    'おすすめのAIデータベース管理ツールChat2DBを紹介します。22種類のデータベースをサポートし、国内のブランドやOpenGuass、OceanBase、TiDB、非関係型のMongoDB、Redisなどをサポートしています。試してみてください！\n\n🔥 公式サイト：https://chat2db-ai.com/\n🔥 招待コード：{1}\n\n招待コードの説明：https://docs.chat2db-ai.com/docs/settings/invite\n',
+    'おすすめのAIデータベース管理ツールBina Platformを紹介します。22種類のデータベースをサポートし、国内のブランドやOpenGuass、OceanBase、TiDB、非関係型のMongoDB、Redisなどをサポートしています。試してみてください！\n\n🔥 公式サイト：https://chat2db-ai.com/\n🔥 招待コード：{1}\n\n招待コードの説明：https://docs.chat2db-ai.com/docs/settings/invite\n',
 };

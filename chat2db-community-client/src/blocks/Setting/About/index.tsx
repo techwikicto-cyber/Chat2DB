@@ -1,5 +1,4 @@
 import Iconfont from '@/components/Iconfont';
-import Logo from '@/components/Logo';
 import { APP_CONFIG } from '@/constants/appConfig';
 import { runtimeEditionConfig } from '@/constants/runtimeEdition';
 import { UpdatedStatus } from '@/constants/settings';
@@ -90,8 +89,9 @@ export default function AboutUs() {
 
   return (
     <div>
+      {/* The Chat2DB brand mark used to sit here; the About panel now leads
+          with the product name alone. */}
       <div className={styles.versionsInfo}>
-        <Logo size={98} className={styles.brandLogo} />
         <div>
           <div className={styles.currentVersion}>
             <span className={styles.appName}>{APP_CONFIG.displayName}</span>

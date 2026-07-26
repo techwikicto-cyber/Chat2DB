@@ -6,7 +6,7 @@ export default {
   'license.deviceCertificate': 'Introduzca el certificado del dispositivo',
   'license.getDeviceCertificate': 'Obtener certificado del dispositivo',
   'license.offlineCertificateInstruction':
-    'Si no dispone de conexión, puede obtener el certificado del dispositivo siguiendo estos pasos: vaya al sitio web oficial de Chat2DB (https://chat2db-ai.com/) → inicie sesión y haga clic en el avatar → Certificado del dispositivo',
+    'Si no dispone de conexión, puede obtener el certificado del dispositivo siguiendo estos pasos: vaya al sitio web oficial de Bina Platform (https://chat2db-ai.com/) → inicie sesión y haga clic en el avatar → Certificado del dispositivo',
   'license.offlineActivationAIWarning':
     'Una vez generado el certificado sin conexión, no se puede revocar ni cambiar el dispositivo.',
   'license.offlineAIWarning': 'Los dispositivos activados sin conexión no podrán usar las funciones de IA',
@@ -17,7 +17,7 @@ export default {
     'Complete la información correspondiente y el sistema generará automáticamente un certificado del dispositivo,',
   'license.certificateWarning': 'Una vez generado, no se puede modificar',
   'license.licenseTooltip':
-    'Actualmente solo los pedidos de la versión permanente de Chat2DB Local necesitan generar certificados para activar dispositivos; los demás pedidos se pueden activar sin ellos',
+    'Actualmente solo los pedidos de la versión permanente de Bina Platform Local necesitan generar certificados para activar dispositivos; los demás pedidos se pueden activar sin ellos',
   'license.selectOrder': 'Seleccione su pedido',
   'license.deviceNameLabel': 'Nombre del dispositivo',
   'license.deviceNameTooltip': 'Añada una nota con el nombre del dispositivo',
@@ -38,7 +38,7 @@ export default {
   'license.copyButton': 'Copiar certificado del dispositivo',
   'license.offlineUsageNotes': 'Notas de uso sin conexión',
   'license.viewActivationProcess': 'Haga clic para ver el proceso de activación sin conexión',
-  'license.permanentVersion': 'Versión de por vida de Chat2DB Local',
+  'license.permanentVersion': 'Versión de por vida de Bina Platform Local',
   'license.offlineActivationIntro': 'Si no conoce el proceso de activación sin conexión,',
   'license.deviceLimit': 'Se alcanzó el límite de dispositivos vinculados a la licencia',
   'license.licenseNotSupported': 'La activación sin conexión no admite IA',

@@ -4,7 +4,7 @@ export default {
   'chat.input.tableSelect.error.TooManyTable': '最多选择8张表',
   'chat.input.remain.dialog.tips': '关注公众号，发送"推广"获取更多体验次数',
   'chat.input.syncTable.tips':
-    '自动同步所有表结构给AI上下文（在群内联系群主，申请Chat2DBAI白名单后，仅在Chat2DBAI模型下可用）',
+    '自动同步所有表结构给AI上下文（在群内联系群主，申请Bina PlatformAI白名单后，仅在Bina PlatformAI模型下可用）',
   'chat.input.remain.tooltip': '手动选中的表的结构将会同步给AI上下文',
   'chat.input.syncTable.tempTips': '🎉上线：自动同步所有表结构到AI上下文',
 
@@ -65,7 +65,7 @@ export default {
   'chat.sheetSwitchLastNext.last': '上一个',
   'chat.sheetSwitchLastNext.next': '继续填写【{1}】表头',
   'chat.excelPreview.title': 'Excel预览',
-  'chat.ai.common.think': 'Chat2DB可能会出错，请考虑核对重要信息',
+  'chat.ai.common.think': 'Bina Platform可能会出错，请考虑核对重要信息',
   'chat.ai.common.analyzingText': '代码生成中...',
   'chat.ai.common.analyzedText': '代码生成完成',
   'chat.ai.common.analyzingText.dashboard': '报表生成中...',

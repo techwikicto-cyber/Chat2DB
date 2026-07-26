@@ -20,7 +20,7 @@ export default {
   'userguide.vipStatus.offlineTrialExpired': 'Prueba expirada',
   'userguide.vipStatus.activate': 'Activar',
 
-  'userguide.firstLogin.title': '👋 Hola, bienvenido a Chat2DB',
+  'userguide.firstLogin.title': '👋 Hola, bienvenido a Bina Platform',
   'userguide.firstLogin.subTitle': 'Enhorabuena por su prueba de 30 días',
   'userguide.firstLogin.highlightSubTitle': 'Prueba de 30 días',
   'userguide.firstLogin.dividingLine': 'Podrá disfrutar de las funciones siguientes',
@@ -35,7 +35,7 @@ export default {
   'userguide.firstLogin.feature5.title': 'Soporte técnico 24×7',
   'userguide.firstLogin.feature5.subtitle': 'Resolución oportuna de problemas y asistencia técnica',
   'userguide.firstLogin.primaryButton.title': 'Iniciar prueba gratuita de Pro durante 30 días',
-  'userguide.firstLogin.secondaryButton.title': '¿Cómo se utiliza Chat2DB?',
+  'userguide.firstLogin.secondaryButton.title': '¿Cómo se utiliza Bina Platform?',
 
   'userguide.subscribed.title': '🎉 Gracias por su apoyo',
   'userguide.subscribed.subTitle': 'Su cuenta se ha actualizado a Pro',
@@ -71,7 +71,7 @@ export default {
   'userguide.expired.primaryButton.title': 'Ir al pago',
   'userguide.expired.secondaryButton.title': 'Más información sobre los tutoriales',
 
-  'userguide.offlineTrial.title': 'Bienvenido a Chat2DB Offline Edition',
+  'userguide.offlineTrial.title': 'Bienvenido a Bina Platform Offline Edition',
   'userguide.offlineTrial.subTitle': 'No vuelva a preocuparse por la seguridad de los datos',
   'userguide.offlineTrial.highlightSubTitle': 'Edición sin conexión',
   'userguide.offlineTrial.dividingLine': 'Podrá disfrutar de las funciones siguientes',

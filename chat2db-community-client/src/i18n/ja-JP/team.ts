@@ -127,7 +127,7 @@ export default {
   'team.createOrJoin.title': 'チームを作成するか参加する',
   'team.create.title': '新しいチームを作成',
   'team.create.title.desc': '新しいチームを作成し、同僚を招待して一緒に働きましょう',
-  'team.create.title.desc2': '正確な情報を提供し、Chat2DBで会社の同僚と効率的なコラボレーションを開始しましょう',
+  'team.create.title.desc2': '正確な情報を提供し、Bina Platformで会社の同僚と効率的なコラボレーションを開始しましょう',
   'team.createSuccess.title': 'チームの作成に成功しました',
   'team.createSuccess.title2': 'おめでとうございます、チームが正常に作成されました',
   'team.createSuccess.title.desc': '以下のリンクをコピーして、同僚を招待して一緒に楽しく働きましょう',
@@ -137,7 +137,7 @@ export default {
   'team.join.title.desc': '今すぐ参加して、一緒に働く楽しさを体験しましょう',
   'team.join.title.desc2': '個人情報を入力して、メンバーとしてチームに参加を申請してください',
   'team.joinSuccess.title': 'チーム申請が送信されました',
-  'team.joinSuccess.title2': 'Chat2DBチーム申請が送信されました',
+  'team.joinSuccess.title2': 'Bina Platformチーム申請が送信されました',
   'team.joinSuccess.title.desc': '管理者の承認をお待ちください',
 
   'team.create.form.title': 'チーム名',
@@ -165,8 +165,8 @@ export default {
 
   'team.invite.title.subtitle1': '100万人以上の開発者が使用しているAIデータ開発および分析プラットフォーム',
   'team.invite.title.subtitle2': 'データ管理をより簡単に、効率的に、楽しく😎',
-  'team.invite.question': 'Chat2DBとは？',
-  'team.invite.init.content1': '{1} がChat2DBを使用しています',
+  'team.invite.question': 'Bina Platformとは？',
+  'team.invite.init.content1': '{1} がBina Platformを使用しています',
   'team.invite.init.content2': '{1} チームに参加するように招待します',
   'team.invite.init.next': '次へ',
   'team.invite.confirm.content1': '実際の身分情報を記入してください',

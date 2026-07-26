@@ -127,7 +127,7 @@ export default {
   'team.create.title': 'ساخت تیم جدید',
   'team.create.title.desc': 'یک تیم جدید بسازید و همکارانتان را برای همکاری دعوت کنید',
   'team.create.title.desc2':
-    'اطلاعات دقیق وارد کنید تا همکاری کارآمد با همکاران شرکتتان را در Chat2DB آغاز کنید',
+    'اطلاعات دقیق وارد کنید تا همکاری کارآمد با همکاران شرکتتان را در پلتفرم بینا آغاز کنید',
   'team.createSuccess.title': 'تیم با موفقیت ساخته شد',
   'team.createSuccess.title2': 'تبریک، تیم با موفقیت ساخته شد',
   'team.createSuccess.title.desc': 'پیوند زیر را کپی کنید و همکارانتان را برای پیوستن و همکاری دعوت کنید',
@@ -137,7 +137,7 @@ export default {
   'team.join.title.desc': 'همین حالا بپیوندید و لذت همکاری را تجربه کنید',
   'team.join.title.desc2': 'اطلاعات شخصی خود را وارد کنید تا درخواست عضویت در تیم ثبت شود',
   'team.joinSuccess.title': 'درخواست عضویت در تیم ارسال شد',
-  'team.joinSuccess.title2': 'درخواست عضویت در تیم Chat2DB ارسال شد',
+  'team.joinSuccess.title2': 'درخواست عضویت در تیم پلتفرم بینا ارسال شد',
   'team.joinSuccess.title.desc': 'لطفاً تا تأیید مدیر شکیبا باشید',
 
   'team.create.form.title': 'نام تیم',
@@ -165,7 +165,7 @@ export default {
 
   'team.invite.title.subtitle1': 'پلتفرم توسعه و تحلیل داده مبتنی بر هوش مصنوعی با بیش از یک میلیون توسعه‌دهنده',
   'team.invite.title.subtitle2': 'مدیریت داده را ساده‌تر، کارآمدتر و لذت‌بخش‌تر می‌کند 😎',
-  'team.invite.question': 'Chat2DB چیست؟',
+  'team.invite.question': 'پلتفرم بینا چیست؟',
   'team.invite.init.content1': '{1} در حال استفاده از {2} است',
   'team.invite.init.content2': 'شما را به {1} دعوت می‌کند، لطفاً برای پیوستن روی دکمه زیر کلیک کنید',
   'team.invite.init.next': 'بعدی',

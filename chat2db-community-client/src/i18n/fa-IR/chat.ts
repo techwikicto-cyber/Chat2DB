@@ -65,7 +65,7 @@ export default {
   'chat.sheetSwitchLastNext.last': 'قبلی',
   'chat.sheetSwitchLastNext.next': 'ادامه تکمیل سرستون [{1}]',
   'chat.excelPreview.title': 'پیش‌نمایش اکسل',
-  'chat.ai.common.think': 'Chat2DB ممکن است اشتباه کند. اطلاعات مهم را حتماً بررسی کنید',
+  'chat.ai.common.think': 'پلتفرم بینا ممکن است اشتباه کند. اطلاعات مهم را حتماً بررسی کنید',
   'chat.ai.common.analyzingText': 'در حال تحلیل...',
   'chat.ai.common.analyzedText': 'تحلیل شد',
   'chat.ai.common.analyzingText.dashboard': 'در حال تحلیل داشبورد...',
