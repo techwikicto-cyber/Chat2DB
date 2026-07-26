@@ -4,6 +4,7 @@ import { getUserComputerLanguage } from '@/utils';
 import { DEFAULT_RESULT_PAGE_SIZE } from './pagination';
 
 export enum LangType {
+  FA_IR = 'fa-IR',
   EN_US = 'en-US',
   ZH_CN = 'zh-CN',
   JA_JP = 'ja-JP',

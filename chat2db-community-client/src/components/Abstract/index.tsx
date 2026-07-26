@@ -49,6 +49,7 @@ export default memo<IProps>((props) => {
         return 72;
       case LangType.KO_KR:
         return 72;
+      case LangType.FA_IR:
       case LangType.ES_ES:
       case LangType.EN_US:
         return 92;
@@ -65,6 +66,7 @@ export default memo<IProps>((props) => {
         return 220;
       case LangType.KO_KR:
         return 220;
+      case LangType.FA_IR:
       case LangType.ES_ES:
       case LangType.EN_US:
         return 240;

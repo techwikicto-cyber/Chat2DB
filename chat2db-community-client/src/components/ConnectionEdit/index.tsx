@@ -32,6 +32,41 @@ const OSCAR_JDBC_URL_PREFIX = 'jdbc:oscar://';
 const OSCAR_DRIVER_CLASS = 'com.oscar.Driver';
 
 const connectionFormTranslations: Partial<Record<LangType, Record<string, string>>> = {
+  [LangType.FA_IR]: {
+    'USE SSH': 'استفاده از SSH',
+    'SSH Hostname': 'میزبان SSH',
+    'SSH Port': 'پورت SSH',
+    'SSH UserName': 'نام کاربری SSH',
+    LocalPort: 'پورت محلی',
+    'Need not fill in': 'اختیاری',
+    Authentication: 'احراز هویت',
+    Password: 'رمز عبور',
+    password: 'رمز عبور',
+    'Private key file': 'فایل کلید خصوصی',
+    'Private key': 'کلید خصوصی',
+    Passphrase: 'عبارت عبور',
+    Env: 'محیط',
+    Storage: 'ذخیره‌سازی',
+    Port: 'پورت',
+    Name: 'نام',
+    Host: 'میزبان',
+    User: 'کاربر',
+    Database: 'پایگاه‌داده',
+    'Service type': 'نوع سرویس',
+    'Service name': 'نام سرویس',
+    Driver: 'درایور',
+    'Account email': 'ایمیل حساب',
+    'Project ID': 'شناسه پروژه',
+    File: 'فایل',
+    'Key file': 'فایل کلید',
+    Server: 'سرور',
+    Instance: 'نمونه',
+    Datatset: 'مجموعه داده',
+    'Google Service Account': 'حساب سرویس گوگل',
+    'User&Password': 'کاربر و رمز عبور',
+    LocalFile: 'فایل محلی',
+    Service: 'سرویس',
+  },
   [LangType.ES_ES]: {
     'USE SSH': 'Usar SSH',
     'SSH Hostname': 'Host SSH',
@@ -788,6 +823,7 @@ function RenderForm(props: IRenderFormProps) {
     }
     const curLanguage = useGlobalStore.getState().baseSetting.language;
     const defaultLabelWidth: Record<LangType, string> = {
+      [LangType.FA_IR]: '110px',
       [LangType.EN_US]: '110px',
       [LangType.ZH_CN]: '70px',
       [LangType.JA_JP]: '100px',

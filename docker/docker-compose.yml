@@ -1,15 +1,51 @@
+# Chat2DB Community - Persian web edition
+#
+#   cd <repository root>
+#   docker compose -f docker/docker-compose.yml up -d --build
+#
+# Then open http://127.0.0.1:10825
+#
+# Nothing needs to exist on the host beforehand: the image is built from this
+# repository and the encryption key is generated into the data volume on first
+# start.
+#
+# SECURITY: the default binding is 127.0.0.1, so the service is reachable only
+# from the machine it runs on. Chat2DB Community has no login and no user
+# accounts - anyone who can reach this port gets full access to every database
+# connection stored in it. Before setting CHAT2DB_BIND_ADDRESS to 0.0.0.0, put
+# it behind a reverse proxy that terminates TLS and authenticates users, or
+# restrict it to a private network / VPN.
+
 services:
   chat2db:
-    image: chat2db/chat2db:${CHAT2DB_IMAGE_TAG:-latest}
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        # Uncomment when the pinned China mirror (registry.npmmirror.com) is
+        # unreachable from your build network:
+        # NPM_REGISTRY: https://registry.npmjs.org/
+        APP_VERSION: ${CHAT2DB_APP_VERSION:-5.3.0}
+    image: chat2db-fa:${CHAT2DB_IMAGE_TAG:-latest}
     container_name: chat2db-community
     restart: unless-stopped
     ports:
       - "${CHAT2DB_BIND_ADDRESS:-127.0.0.1}:${CHAT2DB_PORT:-10825}:10825"
     environment:
-      CHAT2DB_COMMUNITY_ENCRYPTION_KEY_FILE: /run/secrets/chat2db-community-encryption.key
+      # Supply your own key to pin it explicitly; otherwise one is generated at
+      # /root/.chat2db-community/config/encryption.key inside the volume below.
+      CHAT2DB_COMMUNITY_ENCRYPTION_KEY: ${CHAT2DB_COMMUNITY_ENCRYPTION_KEY:-}
+      JAVA_OPTS: ${CHAT2DB_JAVA_OPTS:--Xmx2g}
     volumes:
+      # Holds saved connections, query history and the encryption key.
       - chat2db-community-data:/root/.chat2db-community
-      - "${HOME}/.config/chat2db-community/encryption.key:/run/secrets/chat2db-community-encryption.key:ro"
+    healthcheck:
+      # /dev/tcp is a bash builtin; the image's /bin/sh is dash, so call bash.
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/10825"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 120s
 
 volumes:
   chat2db-community-data:

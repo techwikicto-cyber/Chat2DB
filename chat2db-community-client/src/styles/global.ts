@@ -1,6 +1,12 @@
 import { memo, useEffect } from 'react';
 import { createGlobalStyle, css, createStyles } from 'antd-style';
 import iconEdit from '../../node_modules/@chat2db/ui/es/ThemeProvider/fonts/icon-editor.woff2';
+// Vazirmatn is bundled from node_modules rather than loaded from a CDN, so the
+// Persian UI renders correctly on air-gapped servers and inside Docker.
+import vazirmatnRegular from 'vazirmatn/fonts/webfonts/Vazirmatn-Regular.woff2';
+import vazirmatnMedium from 'vazirmatn/fonts/webfonts/Vazirmatn-Medium.woff2';
+import vazirmatnSemiBold from 'vazirmatn/fonts/webfonts/Vazirmatn-SemiBold.woff2';
+import vazirmatnBold from 'vazirmatn/fonts/webfonts/Vazirmatn-Bold.woff2';
 import { useStylesStore } from '@/store/styles';
 
 export const useStyles = createStyles(() => {
@@ -181,6 +187,36 @@ const GlobalStyle = createGlobalStyle(({ theme: token }) => {
     @font-face {
       font-family: 'icon-editor';
       src: url(${iconEdit}) format('woff2');
+    }
+    /* swap: Persian text stays readable in a fallback face while the webfont
+       loads, instead of flashing invisible. */
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url(${vazirmatnRegular}) format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url(${vazirmatnMedium}) format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url(${vazirmatnSemiBold}) format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Vazirmatn';
+      src: url(${vazirmatnBold}) format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
     }
     ${scrollbarStyle},
     ${resizerStyle},

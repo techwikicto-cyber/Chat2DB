@@ -364,10 +364,12 @@ export function getUserComputerLanguage() {
 // Receive a string and convert it into language
 export function getLanguageType(language?: string) {
   if (!language) {
-    return LangType.EN_US;
+    return LangType.FA_IR;
   }
   const normalizedLanguage = language.toLowerCase();
-  if (normalizedLanguage.startsWith('zh-cn')) {
+  if (normalizedLanguage.startsWith('fa') || normalizedLanguage.startsWith('pes')) {
+    return LangType.FA_IR;
+  } else if (normalizedLanguage.startsWith('zh-cn')) {
     return LangType.ZH_CN;
   } else if (normalizedLanguage.startsWith('ja')) {
     return LangType.JA_JP;
@@ -375,8 +377,10 @@ export function getLanguageType(language?: string) {
     return LangType.ES_ES;
   } else if (normalizedLanguage.startsWith('ko')) {
     return LangType.KO_KR;
-  } else {
+  } else if (normalizedLanguage.startsWith('en')) {
     return LangType.EN_US;
+  } else {
+    return LangType.FA_IR;
   }
 }
 

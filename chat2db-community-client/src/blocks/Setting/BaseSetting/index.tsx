@@ -2,7 +2,6 @@ import themeAutoImg from '@/assets/img/theme-auto.png';
 import themeDarkDimmedImg from '@/assets/img/theme-dark-dimmed.png';
 import themeDarkImg from '@/assets/img/theme-dark.png';
 import themeLightImg from '@/assets/img/theme-light.png';
-import { runtimeEditionConfig } from '@/constants/runtimeEdition';
 import { LangType } from '@/constants/settings';
 import i18n from '@/i18n';
 import { useGlobalStore } from '@/store/global';
@@ -14,12 +13,12 @@ import { useMemo } from 'react';
 import SettingSubsection from '../SettingSubsection';
 import { useStyles } from './style';
 
+// This build ships Persian as the product language, with English kept as the
+// fallback locale. The other bundled locales stay in the codebase but are not
+// offered in the picker.
 const languageOptions = [
-  { value: LangType.ZH_CN, label: '简体中文' },
+  { value: LangType.FA_IR, label: 'فارسی' },
   { value: LangType.EN_US, label: 'English' },
-  { value: LangType.JA_JP, label: '日本語' },
-  { value: LangType.ES_ES, label: 'Español' },
-  { value: LangType.KO_KR, label: '한국어' },
 ];
 
 const customFontSizeOptions = [
@@ -66,12 +65,10 @@ export default function BaseSetting() {
     setCustomFont,
     customFontSize,
     setCustomFontSize,
-    isCN,
   } = useGlobalStore((state) => {
     return {
       ...settingSelectors.currentBaseSetting(state),
       setAppearance: state.setAppearance,
-      isCN: state.appConfig.isCN,
       setPrimaryColor: state.setPrimaryColor,
       setNeutralColor: state.setNeutralColor,
       setLanguage: state.setLanguage,
@@ -80,21 +77,16 @@ export default function BaseSetting() {
     };
   });
 
-  // If it is not a domestic version, Chinese will not be displayed.
-  const curLanguageOptions = useMemo(() => {
-    if (runtimeEditionConfig.languageRegionRestricted && !isCN) {
-      return languageOptions.filter((item) => item.value !== LangType.ZH_CN);
-    }
-    return languageOptions;
-  }, [isCN]);
+  const curLanguageOptions = languageOptions;
 
-  // If it is not a domestic version, Chinese will not be displayed.
+  // A profile saved before this build may hold a locale that is no longer
+  // offered; show Persian rather than leaving the Select blank.
   const curLanguage = useMemo(() => {
-    if (runtimeEditionConfig.languageRegionRestricted && !isCN && language === LangType.ZH_CN) {
-      return LangType.EN_US;
+    if (languageOptions.some((item) => item.value === language)) {
+      return language;
     }
-    return language;
-  }, [language, isCN]);
+    return LangType.FA_IR;
+  }, [language]);
 
   const isDark = appearance.includes('dark');
 

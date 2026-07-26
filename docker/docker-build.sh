@@ -71,9 +71,12 @@ mvn -B clean package \
 test -f "${target_dir}/chat2db-community.jar"
 test -d "${target_dir}/lib"
 
+# Dockerfile.prebuilt packages the jar this script just built on the host.
+# docker/Dockerfile is the self-contained variant that builds everything inside
+# Docker and takes the repository root as its context instead.
 docker build \
   --tag "${image}" \
-  --file "${script_dir}/Dockerfile" \
+  --file "${script_dir}/Dockerfile.prebuilt" \
   "${target_dir}"
 
 echo "Built ${image}"

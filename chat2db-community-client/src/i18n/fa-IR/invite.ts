@@ -1,0 +1,56 @@
+export default {
+  'invite.setting.nav.title': 'دعوت‌های من',
+  'invite.setting.title': 'دعوت از دوستان',
+  'invite.setting.titleDes': 'دوستانتان را دعوت کنید، برداشت بدون محدودیت',
+  'invite.setting.checkRule': 'مشاهده قوانین',
+  'invite.setting.inviteCode': 'کد دعوت',
+  'invite.setting.toWithdraw': 'برداشت',
+  'invite.setting.totalAssets': 'مجموع دارایی',
+  'invite.setting.withdrawnAmount': 'مبلغ برداشت‌شده',
+  'invite.setting.withdrawing': 'در حال برداشت',
+  'invite.setting.withdrawable': 'قابل برداشت',
+  'invite.setting.waitWithdraw': 'در انتظار برداشت',
+  'invite.setting.inviteList': 'فهرست دعوت‌ها',
+  'invite.setting.invitedUser': 'کاربر دعوت‌شده',
+  'invite.setting.subscribedProduct': 'محصول اشتراکی',
+  'invite.setting.inviteTime': 'زمان دعوت',
+  'invite.setting.rewardAmount': 'مبلغ پاداش',
+  'invite.setting.inviteStatus': 'وضعیت دعوت',
+  'invite.setting.createInviteCode': 'ساخت کد دعوت',
+  'invite.setting.inviteCodeLength': 'کد دعوت باید ۶ نویسه باشد',
+  'invite.setting.createInviteCodeSuccess': 'کد دعوت با موفقیت ساخته شد',
+  'invite.setting.createInviteCodeFail': 'ساخت کد دعوت ناموفق بود، لطفاً دوباره تلاش کنید',
+  'invite.setting.inputInviteCode': 'لطفاً یک کد دعوت ۶ نویسه‌ای (حروف و اعداد) وارد کنید',
+  'invite.setting.withdrawal.title': 'تکمیل اطلاعات برداشت',
+  'invite.setting.withdrawal.tip': 'اطلاعات برداشت با موفقیت ثبت شد، لطفاً منتظر بمانید',
+
+  'invite.setting.withdrawal.name': 'نام',
+  'invite.setting.withdrawal.name.required': 'لطفاً نام واقعی خود را وارد کنید',
+  'invite.setting.withdrawal.name.min': 'نام باید دست‌کم ۲ نویسه باشد',
+  'invite.setting.withdrawal.name.max': 'نام حداکثر می‌تواند ۵۰ نویسه باشد',
+  'invite.setting.withdrawal.name.placeholder': 'لطفاً نام واقعی خود را وارد کنید',
+
+  'invite.setting.withdrawal.id': 'شماره شناسایی',
+  'invite.setting.withdrawal.id.required': 'لطفاً شماره شناسایی خود را وارد کنید',
+  'invite.setting.withdrawal.id.max': 'شماره شناسایی باید ۱۸ نویسه باشد',
+  'invite.setting.withdrawal.id.placeholder': 'لطفاً شماره شناسایی خود را وارد کنید',
+
+  'invite.setting.withdrawal.aliPay': 'حساب Alipay',
+  'invite.setting.withdrawal.aliPay.required': 'لطفاً حساب Alipay خود را وارد کنید',
+  'invite.setting.withdrawal.aliPay.placeholder': 'لطفاً حساب Alipay خود را وارد کنید',
+
+  'invite.setting.withdrawal.phone': 'شماره تماس',
+  'invite.setting.withdrawal.phone.required': 'لطفاً شماره تماس خود را وارد کنید',
+  'invite.setting.withdrawal.phone.pattern': 'لطفاً یک شماره تماس معتبر وارد کنید',
+  'invite.setting.withdrawal.phone.placeholder': 'لطفاً شماره تماس خود را وارد کنید',
+
+  'invite.price.inviteCode': 'کد دعوت تخفیف‌دار',
+  'invite.price.inviteCode.invalid': 'کد دعوت تخفیف‌دار نامعتبر است',
+
+  'invite.status.withdrawing': 'در حال برداشت',
+  'invite.status.withdrawed': 'برداشت‌شده',
+  'invite.status.waitWithdraw': 'در انتظار برداشت',
+
+  'invite.share.text':
+    'یک ابزار بسیار کاربردی مدیریت پایگاه‌داده با هوش مصنوعی به شما پیشنهاد می‌کنم: Chat2DB، با پشتیبانی از ۲۲ نوع پایگاه‌داده، شامل برندهای بومی مانند Dameng، OpenGuass، OceanBase و TiDB و همچنین پایگاه‌داده‌های غیررابطه‌ای مانند MongoDB و Redis. حتماً امتحان کنید! \n\n🔥 وب‌سایت رسمی: https://chat2db-ai.com/\n🔥 کد دعوت: {1}\n\nمعرفی کد دعوت: https://docs.chat2db-ai.com/docs/settings/invite\n',
+};

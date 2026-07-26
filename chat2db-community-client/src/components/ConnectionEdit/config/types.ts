@@ -8,6 +8,7 @@ export type ILocalizedConnectionText = {
   [LangType.JA_JP]: string;
   [LangType.ES_ES]?: string;
   [LangType.KO_KR]?: string;
+  [LangType.FA_IR]?: string;
 };
 
 export type ISelect = {

@@ -1,4 +1,20 @@
-*
-!chat2db-community.jar
-!lib/
-!lib/**
+# Build context is the repository root. Keep out everything the multi-stage
+# build regenerates itself, so the context stays small and a dirty working tree
+# cannot leak host artefacts into the image.
+.git
+.github
+**/node_modules
+**/target
+**/dist
+**/.umi
+**/.umi-production
+**/logs
+*.log
+
+# Desktop packaging only - never used by the web/Docker build.
+jpackage
+script/package
+
+# Staged frontend output; the frontend stage produces this fresh.
+chat2db-community-server/chat2db-community-start/src/main/resources/static/front
+chat2db-community-server/chat2db-community-start/src/main/resources/thymeleaf/index.html

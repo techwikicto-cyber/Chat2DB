@@ -5,6 +5,7 @@ import { settingSelectors } from '@/store/global/selectors';
 import { LangType } from '@/constants/settings';
 import enUS from 'antd/locale/en_US';
 import esES from 'antd/locale/es_ES';
+import faIR from 'antd/locale/fa_IR';
 import jaJP from 'antd/locale/ja_JP';
 import koKR from 'antd/locale/ko_KR';
 import zhCN from 'antd/locale/zh_CN';
@@ -12,6 +13,7 @@ import dayjs from 'dayjs';
 
 import 'dayjs/locale/en';
 import 'dayjs/locale/es';
+import 'dayjs/locale/fa';
 import 'dayjs/locale/ja';
 import 'dayjs/locale/ko';
 import 'dayjs/locale/zh-cn';
@@ -19,6 +21,7 @@ import 'dayjs/locale/zh-cn';
 dayjs.locale('en');
 
 const dayjsLocales: Record<LangType, string> = {
+  [LangType.FA_IR]: 'fa',
   [LangType.EN_US]: 'en',
   [LangType.ZH_CN]: 'zh-cn',
   [LangType.JA_JP]: 'ja',
@@ -35,6 +38,8 @@ const ConfigProvider = memo<ConfigProviderProps>(({ children }) => {
 
   const locale = useMemo(() => {
     switch (language) {
+      case LangType.FA_IR:
+        return faIR;
       case LangType.ZH_CN:
         return zhCN;
       case LangType.JA_JP:
@@ -52,7 +57,13 @@ const ConfigProvider = memo<ConfigProviderProps>(({ children }) => {
     dayjs.locale(dayjsLocales[language] || dayjsLocales[LangType.EN_US]);
   }, [language]);
 
-  return <AntdConfigProvider locale={locale}>{children}</AntdConfigProvider>;
+  // Persian ships as translated copy only: the SQL editor, result grid and object
+  // tree hold inherently LTR content, so the layout stays LTR for every language.
+  return (
+    <AntdConfigProvider locale={locale} direction="ltr">
+      {children}
+    </AntdConfigProvider>
+  );
 });
 
 export default ConfigProvider;

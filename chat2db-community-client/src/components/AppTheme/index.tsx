@@ -1,5 +1,6 @@
 import { ReactNode, memo, useMemo } from 'react';
 import { PrimaryColors, ThemeProvider, ThemeAppearance } from '@chat2db/ui';
+import { UI_FONT_FAMILY } from '@/constants/font';
 import { useGlobalStore } from '@/store/global';
 import { settingSelectors } from '@/store/global/selectors';
 
@@ -30,7 +31,8 @@ const AppTheme = memo<AppThemeProps>(({ children }) => {
       appearance={appearance === ThemeAppearance.Auto ? undefined : appearance}
       defaultAppearance={appearance}
       customBaseToken={{
-        fontFamily: customFont || '',
+        // A font chosen in Settings still wins; Vazirmatn is only the default.
+        fontFamily: customFont || UI_FONT_FAMILY,
         fontSize: customFontSize,
       }}
     >

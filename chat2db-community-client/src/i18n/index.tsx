@@ -5,11 +5,13 @@ import { getUserComputerLanguage } from '@/utils';
 import React, { Fragment } from 'react';
 import en_US from './en-US';
 import es_ES from './es-ES';
+import fa_IR from './fa-IR';
 import ja_JP from './ja-JP';
 import ko_KR from './ko-KR';
 import zh_CN from './zh-CN';
 
 const locale = {
+  [LangType.FA_IR]: fa_IR,
   [LangType.EN_US]: en_US,
   [LangType.ZH_CN]: zh_CN,
   [LangType.JA_JP]: ja_JP,
