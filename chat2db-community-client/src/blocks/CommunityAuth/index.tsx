@@ -1,45 +1,90 @@
-import { ReactNode, useCallback, useEffect, useState } from 'react';
+import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Button, Input, Spin } from 'antd';
 import i18n from '@/i18n';
 import ProductLogo from '@/components/Logo';
 import { PRODUCT_NAME } from '@/constants/branding';
-import { communityLogin, getCommunityAuthStatus } from '@/service/communityAuth';
+import {
+  CommunityRole,
+  communityLogin,
+  communityLogout,
+  getCommunityAuthStatus,
+} from '@/service/communityAuth';
 import { useStyles } from './style';
 
+interface CommunityAuthValue {
+  /** False when sign-in has been switched off outright on the server. */
+  required: boolean;
+  username: string | null;
+  role: CommunityRole | null;
+  isAdmin: boolean;
+  refresh: () => Promise<void>;
+  signOut: () => Promise<void>;
+}
+
+const CommunityAuthContext = createContext<CommunityAuthValue>({
+  required: false,
+  username: null,
+  role: null,
+  isAdmin: false,
+  refresh: async () => undefined,
+  signOut: async () => undefined,
+});
+
+/** Who is signed in, for the screens that need to know. */
+export const useCommunityAuth = () => useContext(CommunityAuthContext);
+
 /**
- * Shared-password gate for the Community web deployment.
+ * Sign-in gate for the Community web deployment.
  *
  * Stands between the browser and the application shell, so nothing behind it
- * mounts - and nothing behind it calls the API - until the password is entered.
+ * mounts - and nothing behind it calls the API - until someone has signed in.
  * It is a convenience, not the enforcement: the server rejects unauthenticated
  * API calls whether or not this screen was shown.
- *
- * When no password is configured the server reports the gate as satisfied and
- * this renders its children immediately, which is how every existing
- * installation and the desktop build keep behaving as before.
  */
 export default function CommunityAuthGate({ children }: { children: ReactNode }) {
   const { styles } = useStyles();
   const [checking, setChecking] = useState(true);
-  const [authenticated, setAuthenticated] = useState(false);
+  const [required, setRequired] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
+  const [role, setRole] = useState<CommunityRole | null>(null);
 
-  const refreshStatus = useCallback(async () => {
+  const authenticated = !required || !!username;
+
+  const refresh = useCallback(async () => {
     try {
       const status = await getCommunityAuthStatus(undefined as void);
-      setAuthenticated(!status?.required || !!status?.authenticated);
+      setRequired(!!status?.required);
+      setUsername(status?.authenticated ? status?.username ?? null : null);
+      setRole(status?.authenticated ? status?.role ?? null : null);
     } catch {
       // The status endpoint is unreachable - the server is still starting, or
       // this build is served without one. Failing open here changes nothing:
       // the API enforces the gate regardless of what this screen decides.
-      setAuthenticated(true);
+      setRequired(false);
+      setUsername(null);
+      setRole(null);
     } finally {
       setChecking(false);
     }
   }, []);
 
+  const signOut = useCallback(async () => {
+    try {
+      await communityLogout(undefined as void);
+    } finally {
+      setUsername(null);
+      setRole(null);
+    }
+  }, []);
+
   useEffect(() => {
-    refreshStatus();
-  }, [refreshStatus]);
+    refresh();
+  }, [refresh]);
+
+  const value = useMemo<CommunityAuthValue>(
+    () => ({ required, username, role, isAdmin: role === 'ADMIN', refresh, signOut }),
+    [required, username, role, refresh, signOut],
+  );
 
   if (checking) {
     return (
@@ -49,32 +94,33 @@ export default function CommunityAuthGate({ children }: { children: ReactNode })
     );
   }
 
-  if (authenticated) {
-    return <>{children}</>;
-  }
-
-  return <CommunityLoginScreen onSignedIn={() => setAuthenticated(true)} />;
+  return (
+    <CommunityAuthContext.Provider value={value}>
+      {authenticated ? children : <CommunityLoginScreen onSignedIn={refresh} />}
+    </CommunityAuthContext.Provider>
+  );
 }
 
 function CommunityLoginScreen({ onSignedIn }: { onSignedIn: () => void }) {
   const { styles } = useStyles();
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
   const submit = async () => {
-    if (!password || submitting) {
+    if (!username || !password || submitting) {
       return;
     }
     setSubmitting(true);
     setError('');
     try {
-      await communityLogin({ password });
+      await communityLogin({ username, password });
       onSignedIn();
     } catch {
-      // The only expected failure is a wrong password; anything else still
-      // leaves the user on this screen, so one message covers both.
-      setError(i18n('login.community.invalidPassword'));
+      // The server answers a wrong password and an unknown account the same
+      // way, so this screen cannot be used to find out which accounts exist.
+      setError(i18n('login.community.invalidCredentials'));
       setPassword('');
     } finally {
       setSubmitting(false);
@@ -89,8 +135,16 @@ function CommunityLoginScreen({ onSignedIn }: { onSignedIn: () => void }) {
         <div className={styles.subtitle}>{i18n('login.community.subtitle')}</div>
 
         <div className={styles.form}>
-          <Input.Password
+          <Input
             autoFocus
+            size="large"
+            value={username}
+            disabled={submitting}
+            placeholder={i18n('login.form.user.placeholder')}
+            onChange={(event) => setUsername(event.target.value)}
+            onPressEnter={submit}
+          />
+          <Input.Password
             size="large"
             value={password}
             disabled={submitting}

@@ -49,4 +49,5 @@ export default {
   'login.text.wechatScan': '微信扫码',
   'login.community.subtitle': '此部署受共享密码保护。如果没有密码，请向配置该服务的人索取。',
   'login.community.invalidPassword': '密码不正确，请重试。',
+  'login.community.invalidCredentials': '用户名或密码不正确。',
 };

@@ -49,4 +49,5 @@ export default {
   'login.text.wechatScan': 'Escanear con WeChat',
   'login.community.subtitle': 'Esta instalación está protegida con una contraseña compartida. Pídesela a quien la haya configurado si no la tienes.',
   'login.community.invalidPassword': 'Contraseña incorrecta. Inténtalo de nuevo.',
+  'login.community.invalidCredentials': 'Usuario o contraseña incorrectos.',
 };

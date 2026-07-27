@@ -5,13 +5,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+/** Changing one's own password; the current one is required to prove it is you. */
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommunityLoginRequest {
+public class CommunityPasswordChangeRequest {
 
-    private String username;
+    private String currentPassword;
 
-    private String password;
+    private String newPassword;
 }

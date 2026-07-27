@@ -49,4 +49,5 @@ export default {
   'login.text.wechatScan': 'WeChat 스캔',
   'login.community.subtitle': '이 배포는 공유 비밀번호로 보호됩니다. 비밀번호가 없다면 설정한 사람에게 문의하세요.',
   'login.community.invalidPassword': '비밀번호가 올바르지 않습니다. 다시 시도해 주세요.',
+  'login.community.invalidCredentials': '사용자 이름 또는 비밀번호가 올바르지 않습니다.',
 };

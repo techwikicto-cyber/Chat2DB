@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * What the interface needs to decide between the sign-in screen and the app.
  *
- * {@code required} is false when no shared password is configured, which is the
- * default and leaves the deployment open exactly as before.
+ * {@code required} is false only when sign-in has been switched off outright.
  */
 @Data
 @NoArgsConstructor
@@ -18,4 +17,10 @@ public class CommunityAuthStatusResponse {
     private boolean required;
 
     private boolean authenticated;
+
+    /** Null while signed out. */
+    private String username;
+
+    /** Null while signed out; "ADMIN" or "USER". */
+    private String role;
 }

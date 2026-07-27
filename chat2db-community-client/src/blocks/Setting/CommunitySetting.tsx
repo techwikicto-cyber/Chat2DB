@@ -2,6 +2,7 @@ import i18n from '@/i18n';
 import { useEffect, useMemo } from 'react';
 import { history } from 'umi';
 import About from './About';
+import AccountSetting from './AccountSetting';
 import BaseSetting from './BaseSetting';
 import EditorSetting from './EditorSetting';
 import McpSetting from './McpSetting';
@@ -39,6 +40,13 @@ function CommunitySetting() {
         iconCode: 'icon-setting',
         body: <BaseSetting />,
         code: 'basic',
+      },
+      {
+        title: i18n('setting.nav.account'),
+        describe: i18n('setting.nav.accountDescribe'),
+        iconCode: 'icon-user',
+        body: <AccountSetting />,
+        code: 'account',
       },
       {
         title: i18n('setting.nav.editSetting'),

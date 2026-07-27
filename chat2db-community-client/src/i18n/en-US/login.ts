@@ -49,4 +49,5 @@ export default {
   'login.text.wechatScan': 'WeChat Scan',
   'login.community.subtitle': 'This deployment is protected by a shared password. Ask whoever set it up if you do not have it.',
   'login.community.invalidPassword': 'Wrong password. Please try again.',
+  'login.community.invalidCredentials': 'Wrong username or password.',
 };

@@ -49,4 +49,5 @@ export default {
   'login.text.wechatScan': 'WeChatスキャン',
   'login.community.subtitle': 'この環境は共有パスワードで保護されています。お持ちでない場合は設定した担当者にお問い合わせください。',
   'login.community.invalidPassword': 'パスワードが正しくありません。もう一度お試しください。',
+  'login.community.invalidCredentials': 'ユーザー名またはパスワードが正しくありません。',
 };

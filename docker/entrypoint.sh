@@ -126,12 +126,13 @@ generate_password_file() {
   if mv -n "${tmp_file}" "${password_file}" 2>/dev/null && [ ! -e "${tmp_file}" ]; then
     chmod 600 "${password_file}"
     echo "[chat2db] ============================================================"
-    echo "[chat2db]  Sign-in password (generated on first start):"
+    echo "[chat2db]  Sign-in password for the 'admin' account:"
     echo "[chat2db]"
     echo "[chat2db]      $(cat "${password_file}")"
     echo "[chat2db]"
     echo "[chat2db]  Stored at ${password_file} inside the data volume."
-    echo "[chat2db]  Set CHAT2DB_COMMUNITY_PASSWORD to use your own instead."
+    echo "[chat2db]  Sign in as admin, then add accounts in Settings > Account."
+    echo "[chat2db]  Set CHAT2DB_COMMUNITY_PASSWORD to choose this password yourself."
     echo "[chat2db] ============================================================"
   else
     rm -f "${tmp_file}"
