@@ -47,4 +47,6 @@ export default {
   'login.text.useVerificationCode': '인증 코드 사용',
   'login.text.wechatLoginTips': '{1}을(를) 사용하여 공식 계정을 팔로우하면 바로 로그인할 수 있습니다',
   'login.text.wechatScan': 'WeChat 스캔',
+  'login.community.subtitle': '이 배포는 공유 비밀번호로 보호됩니다. 비밀번호가 없다면 설정한 사람에게 문의하세요.',
+  'login.community.invalidPassword': '비밀번호가 올바르지 않습니다. 다시 시도해 주세요.',
 };

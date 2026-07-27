@@ -10,11 +10,14 @@
 # start.
 #
 # SECURITY: the default binding is 127.0.0.1, so the service is reachable only
-# from the machine it runs on. Chat2DB Community has no login and no user
-# accounts - anyone who can reach this port gets full access to every database
-# connection stored in it. Before setting CHAT2DB_BIND_ADDRESS to 0.0.0.0, put
-# it behind a reverse proxy that terminates TLS and authenticates users, or
-# restrict it to a private network / VPN.
+# from the machine it runs on. Anyone who can reach this port gets full access
+# to every database connection stored in it, so before setting
+# CHAT2DB_BIND_ADDRESS to 0.0.0.0, set CHAT2DB_COMMUNITY_PASSWORD as well - it
+# puts a shared password in front of the whole API. That is a gate, not an
+# identity system: everyone who signs in is the same anonymous operator, and
+# nothing is scoped per person. For real user separation, or over the public
+# internet, still put it behind a reverse proxy that terminates TLS, or restrict
+# it to a private network / VPN.
 
 services:
   chat2db:
@@ -45,6 +48,15 @@ services:
       # Set this to pin your own key; otherwise one is generated at
       # /root/.chat2db-community/config/encryption.key inside the volume below.
       - CHAT2DB_COMMUNITY_ENCRYPTION_KEY
+      # Shared password for the sign-in screen. Unset means no sign-in at all,
+      # which is only appropriate on a loopback binding.
+      - CHAT2DB_COMMUNITY_PASSWORD
+      # Extra browser origins to trust, comma separated. Needed only when a
+      # reverse proxy hides the address the browser actually used.
+      - CHAT2DB_COMMUNITY_ALLOWED_ORIGINS
+      # Set to true to build every subsystem during startup instead of on first
+      # use. Slightly faster first page, slower and riskier start.
+      - CHAT2DB_EAGER_INIT
     volumes:
       # Holds saved connections, query history and the encryption key.
       - chat2db-community-data:/root/.chat2db-community

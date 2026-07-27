@@ -47,4 +47,6 @@ export default {
   'login.text.useVerificationCode': 'Use verification code',
   'login.text.wechatLoginTips': 'Please use {1} to follow the official account and login immediately',
   'login.text.wechatScan': 'WeChat Scan',
+  'login.community.subtitle': 'This deployment is protected by a shared password. Ask whoever set it up if you do not have it.',
+  'login.community.invalidPassword': 'Wrong password. Please try again.',
 };

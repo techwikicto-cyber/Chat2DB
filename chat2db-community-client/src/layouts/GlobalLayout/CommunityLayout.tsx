@@ -5,6 +5,7 @@ import { createStyles } from 'antd-style';
 import AppTheme, { AppThemeProps } from '@/components/AppTheme';
 import LoadingGracile from '@/components/Loading/LoadingGracile';
 import ConfigProvider from '@/components/ConfigProvider';
+import CommunityAuthGate from '@/blocks/CommunityAuth';
 import GlobalStyle from '@/styles/global';
 import GlobalComponentCommunity from '@/layouts/init/GlobalComponentCommunity';
 import useInit from '../init/init';
@@ -51,6 +52,27 @@ const useStyles = createStyles(({ css }) => {
 });
 
 const CommunityLayout: FC<CommunityLayoutProps> = () => {
+  return (
+    <ConfigProvider>
+      <AppTheme>
+        <GlobalStyle />
+        {/* Outside the gate: the sign-in screen reports failures through these. */}
+        <GlobalComponentCommunity />
+        <CommunityAuthGate>
+          <CommunityShell />
+        </CommunityAuthGate>
+      </AppTheme>
+    </ConfigProvider>
+  );
+};
+
+/**
+ * Everything behind the password gate.
+ *
+ * Split out so `useInit` - which queries the API, restores settings and boots
+ * the editor - only runs once there is a session to run it under.
+ */
+const CommunityShell: FC = () => {
   const { styles } = useStyles();
   const serviceStatus = useGlobalStore((state) => state.serviceStatus);
 
@@ -79,16 +101,10 @@ const CommunityLayout: FC<CommunityLayoutProps> = () => {
   };
 
   return (
-    <ConfigProvider>
-      <AppTheme>
-        <GlobalStyle />
-        <GlobalComponentCommunity />
-        <div className={styles.app}>
-          <AppTitleBar />
-          <div className={styles.appContent}>{renderApp()}</div>
-        </div>
-      </AppTheme>
-    </ConfigProvider>
+    <div className={styles.app}>
+      <AppTitleBar />
+      <div className={styles.appContent}>{renderApp()}</div>
+    </div>
   );
 };
 

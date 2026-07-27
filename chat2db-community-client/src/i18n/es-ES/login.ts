@@ -47,4 +47,6 @@ export default {
   'login.text.useVerificationCode': 'Usar código de verificación',
   'login.text.wechatLoginTips': 'Use {1} para seguir la cuenta oficial e iniciar sesión de inmediato',
   'login.text.wechatScan': 'Escanear con WeChat',
+  'login.community.subtitle': 'Esta instalación está protegida con una contraseña compartida. Pídesela a quien la haya configurado si no la tienes.',
+  'login.community.invalidPassword': 'Contraseña incorrecta. Inténtalo de nuevo.',
 };

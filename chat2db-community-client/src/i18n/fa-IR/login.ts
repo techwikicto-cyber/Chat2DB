@@ -48,4 +48,6 @@ export default {
   'login.text.useVerificationCode': 'استفاده از کد تأیید',
   'login.text.wechatLoginTips': 'لطفاً با {1} حساب رسمی را دنبال کنید و بلافاصله وارد شوید',
   'login.text.wechatScan': 'اسکن با WeChat',
+  'login.community.subtitle': 'دسترسی به این سرویس با یک گذرواژه‌ی مشترک محافظت می‌شود. اگر آن را ندارید از کسی که سرویس را راه‌اندازی کرده بگیرید.',
+  'login.community.invalidPassword': 'گذرواژه نادرست است. دوباره تلاش کنید.',
 };
