@@ -48,7 +48,7 @@ export default {
   'price.text.professionalPower4': 'ابزارهای هوشمند مدیریت بصری و گزارش‌سازی',
   'price.text.professionalPower5': 'محیط خط فرمان SQL جامع',
   'price.text.professionalPower6': 'مشاهده و ویرایش بصری داده و اجرای فایل SQL',
-  'price.text.professionalPower7': 'راهکارهای درون‌ریزی، برون‌بری، مهاجرت، پشتیبان‌گیری و بازگردانی داده',
+  'price.text.professionalPower7': 'راهکارهای درون‌ریزی، استخراج، مهاجرت، پشتیبان‌گیری و بازگردانی داده',
   'price.text.teamPower.title': 'علاوه بر آن',
   'price.text.teamPower1': 'همکاری در ویرایش و بازبینی کد SQL.',
   'price.text.teamPower2': 'اشتراک‌گذاری اسکریپت‌های SQL و گزارش‌ها درون تیم.',

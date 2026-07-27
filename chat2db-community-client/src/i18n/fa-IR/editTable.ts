@@ -13,7 +13,7 @@ export default {
   'editTable.label.indexMethod': 'روش ایندکس',
   'editTable.label.includeColumn': 'ستون‌های شامل',
   'editTable.button.createTable': 'ساخت جدول',
-  'editTable.button.importTable': 'برون‌بری جدول',
+  'editTable.button.importTable': 'استخراج جدول',
   'editTable.label.index': 'ایندکس',
   'editTable.label.columnName': 'نام ستون',
   'editTable.label.columnSize': 'اندازه',

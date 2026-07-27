@@ -134,7 +134,7 @@ export default {
   'userguide.personal.feature3.title': 'ابزارهای هوشمند و آسان مدیریت بصری اشیاء',
   'userguide.personal.feature4.title': 'محیط خط فرمان SQL هوشمند و پرقابلیت',
   'userguide.personal.feature5.title': 'مشاهده و ویرایش بصری داده‌ها',
-  'userguide.personal.feature6.title': 'درون‌ریزی و برون‌بری داده و اجرای فایل SQL',
+  'userguide.personal.feature6.title': 'درون‌ریزی و استخراج داده و اجرای فایل SQL',
   'userguide.personal.feature7.title': 'ابزار گزارش‌سازی هوشمند چندبُعدی',
   'userguide.personal.feature8.title': 'راهکارهای انعطاف‌پذیر مهاجرت، پشتیبان‌گیری و بازگردانی داده',
 
@@ -153,7 +153,7 @@ export default {
   'userguide.offline.feature3.title': 'سرویس‌های هوش مصنوعی با پشتیبانی از طیف گسترده‌ای از انواع پایگاه‌داده',
   'userguide.offline.feature4.title': 'محیط خط فرمان SQL جامع و هوشمند',
   'userguide.offline.feature5.title': 'مشاهده و ویرایش بصری داده‌ها',
-  'userguide.offline.feature6.title': 'درون‌ریزی و برون‌بری داده و اجرای فایل SQL',
+  'userguide.offline.feature6.title': 'درون‌ریزی و استخراج داده و اجرای فایل SQL',
   'userguide.offline.feature7.title': 'ابزار گزارش‌سازی هوشمند چندبُعدی',
   'userguide.offline.feature8.title': 'راهکارهای انعطاف‌پذیر مهاجرت، پشتیبان‌گیری و بازگردانی داده',
 };

@@ -70,11 +70,6 @@ export const useStyles = createStyles(({ css, token }) => {
       justify-content: center;
     `,
 
-    aiSpark: css`
-      color: ${token.colorPrimary};
-      font-size: 32px;
-      line-height: 1;
-    `,
 
     aiTitle: css`
       font-size: 32px;

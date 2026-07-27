@@ -46,5 +46,5 @@ export default {
   'connection.import.success': '{1} اتصال با موفقیت درون‌ریزی شد',
   'connection.import.unable.password.tips':
     'امکان درون‌ریزی رمز عبور اتصال‌ها وجود ندارد. پس از پایان درون‌ریزی، لطفاً رمز عبور اتصال را دوباره وارد کنید',
-  'workspace.menu.exportConnections': 'برون‌بری اتصال‌ها',
+  'workspace.menu.exportConnections': 'استخراج اتصال‌ها',
 };

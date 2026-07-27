@@ -4,7 +4,7 @@ export default {
   'dashboard.modal.editTitle': 'ویرایش داشبورد',
   'dashboard.modal.addTitle': 'افزودن داشبورد',
   'dashboard.modal.name.placeholder': 'لطفاً نام داشبورد را وارد کنید.',
-  'dashboard.export2image': 'برون‌بری به تصویر',
+  'dashboard.export2image': 'استخراج به تصویر',
   'dashboard.delete': 'حذف',
   'dashboard.editor.cascader.placeholder': 'لطفاً یک استخر اتصال انتخاب کنید',
   'dashboard.editor.execute.noDataSource': 'لطفاً ابتدا یک منبع داده انتخاب کنید',

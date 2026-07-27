@@ -294,7 +294,7 @@ export default {
   'setting.purchaseDetails.trial': 'آزمایشی',
   'setting.purchaseDetails.inactive': 'غیرفعال',
   'setting.purchaseDetails.expired': 'منقضی‌شده',
-  'setting.placeholder.customFont': 'لطفاً نام فونت را وارد کنید، مانند Vazirmatn یا SN Pro',
+  'setting.placeholder.customFont': 'لطفاً نام فونت را وارد کنید، مانند iranyekan یا Vazirmatn',
   'setting.modelConfig.title': 'مدل‌های سفارشی',
   'setting.modelConfig.entry': 'مدل سفارشی',
   'setting.modelConfig.entryHint': 'اتصال به OpenAI، Claude، Gemini یا APIهای سازگار',
