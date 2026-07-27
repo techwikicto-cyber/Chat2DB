@@ -5,7 +5,6 @@ import miscService from '@/service/misc';
 import { InboxOutlined } from '@ant-design/icons';
 import { i18n } from '@/i18n';
 import { BucketTypeEnum, UploadTypeEnum } from '@/typings/upload';
-import OSS from 'ali-oss';
 import { v4 as uuid } from 'uuid';
 import { useUserStore } from '@/store/user';
 interface IProps extends UploadProps {
@@ -50,6 +49,9 @@ export default memo(({ className, children, dragger, uploadType = UploadTypeEnum
     if (!signature) {
       onError?.(new Error('Get signature error!'));
     }
+
+    // Loaded on demand - the SDK is ~680 KB and only an actual upload needs it.
+    const { default: OSS } = await import('ali-oss');
 
     const client = new OSS({
       region: signature.endpoint.split('.')[0],

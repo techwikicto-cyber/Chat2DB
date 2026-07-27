@@ -232,6 +232,7 @@ CHAT2DB_COMMUNITY_ENCRYPTION_KEY=<کلیدی که ساختید>
 | `CHAT2DB_COMMUNITY_ENCRYPTION_KEY` | (خودکار) | کلید رمزنگاری |
 | `CHAT2DB_IMAGE_TAG` | `latest` | برچسب ایمیج |
 | `CHAT2DB_APP_VERSION` | `5.3.0` | نسخه‌ی نمایش‌داده‌شده در برنامه |
+| `CHAT2DB_LAZY_INIT` | `false` | با `true` اجزای برنامه به‌جای زمان راه‌اندازی، هنگام اولین درخواست ساخته می‌شوند؛ کانتینر زودتر بالا می‌آید ولی اولین باز شدن صفحه کند می‌شود |
 
 نمونه‌ی فایل `.env`:
 

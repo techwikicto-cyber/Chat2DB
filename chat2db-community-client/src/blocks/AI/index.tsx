@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react';
 import { Dropdown, Flex, Modal } from 'antd';
 import feedback from '@/utils/feedback';
 import {
@@ -12,7 +12,6 @@ import {
 } from '@ant-design/icons';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import ChartCardBox from '@/blocks/BI/ChartCardBox';
 import { IChartItem } from '@/typings/dashboard';
 import { ChartSchema } from '@/blocks/BI/Chart/typings';
 import { ChartType, LineType, OrderByType, OrderByRule } from '@/blocks/BI/Chart/constants';
@@ -35,8 +34,14 @@ import i18n from '@/i18n';
 import { keyboardKey } from '@/utils';
 import { cx } from 'antd-style';
 import AIModelConfigModal from './components/AIModelConfigModal';
+import { reconcileSelectedModel } from './components/AIModelSelect/modelSelectOptions';
 import { listAvailableModelOptions, resolveModelRequestPayload } from '@/service/aiModelConfig';
 import { isDesktop } from '@/utils/env';
+
+// Only an answer containing a ```chart block renders this, and it reaches the
+// charting stack, the result grid and the editor behind its edit dialog - none
+// of which belong in the first page load.
+const ChartCardBox = lazy(() => import('@/blocks/BI/ChartCardBox'));
 
 /** detects unclosed text in flowing text ```chart block, return chart and whether there are any unfinished diagrams */
 function splitIncompleteChartBlock(text: string): { textBeforeChart: string; hasIncompleteChart: boolean } {
@@ -224,12 +229,14 @@ function MarkdownCodeBlock({ className, children }: { className?: string; childr
       const chartDetail = buildChartDetail(chartJson);
       return (
         <div className={styles.chartCard}>
-          <ChartCardBox
-            chartDetail={chartDetail}
-            showDing
-            className={styles.chartCardInner}
-            submitEditorChartCallback={submitEditorChartCallback}
-          />
+          <Suspense fallback={null}>
+            <ChartCardBox
+              chartDetail={chartDetail}
+              showDing
+              className={styles.chartCardInner}
+              submitEditorChartCallback={submitEditorChartCallback}
+            />
+          </Suspense>
         </div>
       );
     } catch {
@@ -828,22 +835,9 @@ export default function AI({ variant = 'page', onTableClick, onPinSql, onSession
           isDefault: !!item.defaultOption,
         })),
       );
-      const currentValue = selectedModel?.value;
-      const currentOption = currentValue ? result.find((item) => item.value === currentValue) : undefined;
-      const hasCurrent = !!currentOption;
-      if (currentOption && currentOption.label !== selectedModel?.label) {
-        setSelectedModel({
-          value: currentOption.value,
-          label: currentOption.label,
-        });
-        return;
-      }
-      if (!hasCurrent && result.length > 0) {
-        const defaultOption = result.find((item) => item.defaultOption) || result[0];
-        setSelectedModel({
-          value: defaultOption.value,
-          label: defaultOption.label,
-        });
+      const nextSelection = reconcileSelectedModel(selectedModel, result);
+      if (nextSelection !== undefined) {
+        setSelectedModel(nextSelection);
       }
     } catch {
       setModelOptions([]);

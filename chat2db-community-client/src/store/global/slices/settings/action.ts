@@ -1,4 +1,4 @@
-import { EditorSettings } from '@/components/SQLEditor';
+import { EditorSettings } from '@/components/SQLEditor/type';
 import { APP_URL_CONFIG_CHINA, APP_URL_CONFIG_OVERSEAS } from '@/constants/appConfig';
 import { runtimeEditionConfig } from '@/constants/runtimeEdition';
 import {

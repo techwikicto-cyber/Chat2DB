@@ -1,8 +1,13 @@
 // Pinned form
+import { Suspense, lazy } from 'react';
 import { openModal } from '@/store/common/components';
 import i18n from '@/i18n';
-import SchemaSync from '@/blocks/SchemaSync';
 import { type ISelectDatabase } from '@/hooks/useSelectDatabase';
+
+// Reached from the tree store, which the chat page pulls in on load. A static
+// import would drag the editor that SchemaSync embeds into the first page load,
+// for a modal that opens only from a tree context menu.
+const SchemaSync = lazy(() => import('@/blocks/SchemaSync'));
 
 export const openSchemaSyncModal = (params: ISelectDatabase) => {
   const handleClose = () => {
@@ -14,13 +19,15 @@ export const openSchemaSyncModal = (params: ISelectDatabase) => {
     title: i18n('workspace.syncStructure.title'),
     headerIconCode: 'icon-schema-sync',
     content: (
-      <SchemaSync
-        initSourceData={{
-          ...params,
-          selectDone: true,
-        }}
-        onClose={handleClose}
-      />
+      <Suspense fallback={null}>
+        <SchemaSync
+          initSourceData={{
+            ...params,
+            selectDone: true,
+          }}
+          onClose={handleClose}
+        />
+      </Suspense>
     ),
   });
 };

@@ -10,6 +10,7 @@ import { useAIStore } from '@/store/ai';
 import i18n from '@/i18n';
 
 import AIModelConfigModal from '@/blocks/AI/components/AIModelConfigModal';
+import { reconcileSelectedModel } from '@/blocks/AI/components/AIModelSelect/modelSelectOptions';
 import { listAvailableModelOptions, resolveModelRequestPayload } from '@/service/aiModelConfig';
 import feedback from '@/utils/feedback';
 
@@ -40,11 +41,6 @@ const AIFloatLayer = () => {
     selectedModel: state.selectedModel,
     setSelectedModel: state.setSelectedModel,
   }));
-
-  console.log('[DEBUG:AIFloatLayer] Component rendered', {
-    activeConsoleId,
-    workspaceTabCount: workspaceTabList?.length
-  });
 
   const { uniqueData } =
     useMemo(() => {
@@ -95,22 +91,9 @@ const AIFloatLayer = () => {
         })),
       );
 
-      const currentValue = selectedModel?.value;
-      const currentOption = currentValue ? result.find((item) => item.value === currentValue) : undefined;
-      const hasCurrent = !!currentOption;
-      if (currentOption && currentOption.label !== selectedModel?.label) {
-        setSelectedModel({
-          value: currentOption.value,
-          label: currentOption.label,
-        });
-        return;
-      }
-      if (!hasCurrent && result.length > 0) {
-        const defaultOption = result.find((item) => item.defaultOption) || result[0];
-        setSelectedModel({
-          value: defaultOption.value,
-          label: defaultOption.label,
-        });
+      const nextSelection = reconcileSelectedModel(selectedModel, result);
+      if (nextSelection !== undefined) {
+        setSelectedModel(nextSelection);
       }
     } catch {
       setModelOptionMap({});

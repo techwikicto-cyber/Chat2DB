@@ -1,13 +1,27 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Splitter } from 'antd';
+import React, { Suspense, lazy, useState, useEffect, useCallback } from 'react';
+import { Spin, Splitter } from 'antd';
 import AI, { ITableClickContext } from '@/blocks/AI';
-import ViewTable from '@/components/ViewTable';
-import SQLExecute from '@/pages/main/workspace/components/SQLExecute';
 import CustomTabs, { ITabItem } from '@/components/Tabs';
 import { IViewTableParams } from '@/typings';
 import { ConsoleStatus, WorkspaceTabType } from '@/constants';
 import { getDatabaseSupport } from '@/utils/database';
 import { useStyles } from './style';
+
+// The right-hand pane is empty until an answer opens a table or a console, but
+// these two carry the two heaviest dependencies in the product - the canvas grid
+// and Monaco. Static imports put both in the first page load, for a pane nobody
+// has opened yet.
+const ViewTable = lazy(() => import('@/components/ViewTable'));
+const SQLExecute = lazy(() => import('@/pages/main/workspace/components/SQLExecute'));
+
+/** Shown for the moment a lazily loaded pane's chunk is in flight. */
+function PaneLoading() {
+  return (
+    <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Spin />
+    </div>
+  );
+}
 
 interface IRightTab {
   key: string;
@@ -126,16 +140,20 @@ export default function StreamPage() {
     canClosed: true,
     children:
       tab.type === 'table' && tab.tableParams ? (
-        <ViewTable key={tab.key} viewTableParams={tab.tableParams} />
+        <Suspense fallback={<PaneLoading />}>
+          <ViewTable key={tab.key} viewTableParams={tab.tableParams} />
+        </Suspense>
       ) : tab.type === 'console' && tab.consoleParams ? (
-        <SQLExecute
-          key={tab.key}
-          boundInfo={tab.consoleParams.boundInfo}
-          initDDL={tab.consoleParams.initDDL}
-          type={WorkspaceTabType.CONSOLE}
-          isActive={activeTabKey === tab.key}
-          isConsole={false}
-        />
+        <Suspense fallback={<PaneLoading />}>
+          <SQLExecute
+            key={tab.key}
+            boundInfo={tab.consoleParams.boundInfo}
+            initDDL={tab.consoleParams.initDDL}
+            type={WorkspaceTabType.CONSOLE}
+            isActive={activeTabKey === tab.key}
+            isConsole={false}
+          />
+        </Suspense>
       ) : null,
   }));
 

@@ -96,7 +96,7 @@ const createBuildProfile = () => {
     // default is both upstream branding and an outbound request, which a
     // self-hosted or air-gapped deployment cannot make.
     faviconUrl: runtimeProfile.community
-      ? `${assetPublicPath}favicon.svg`
+      ? `${assetPublicPath}logo.png`
       : runtimeProfile.localLogo
         ? `${assetPublicPath}logo.ico`
         : DEFAULT_LOGO_URL,
@@ -104,6 +104,12 @@ const createBuildProfile = () => {
     storageVersionKey: runtimeProfile.storageVersionKey,
     storageKeys: createStorageKeys(runtimeProfile.storageKeyPrefix),
   };
+};
+
+const faviconMimeType = (url: string) => {
+  if (url.endsWith('.svg')) return 'image/svg+xml';
+  if (url.endsWith('.png')) return 'image/png';
+  return 'image/ico';
 };
 
 const buildProfile = createBuildProfile();
@@ -199,8 +205,14 @@ export default defineConfig({
   publicPath: buildProfile.publicPath,
   hash: false,
   ...(disableMfsu ? { mfsu: false } : {}),
+  // depPerChunk gives every npm package its own file, which pays off only over
+  // HTTP/2. This build is served by Tomcat over plain HTTP/1.1, where the
+  // browser opens six connections per origin and the hundreds of resulting
+  // requests queue behind each other - the reason the first page load took so
+  // long. granularChunks keeps the framework and vendor code in a handful of
+  // cacheable files instead.
   codeSplitting: {
-    jsStrategy: 'depPerChunk',
+    jsStrategy: 'granularChunks',
   },
   routes: [
     {
@@ -307,7 +319,7 @@ export default defineConfig({
   links: [
     {
       rel: 'icon',
-      type: buildProfile.faviconUrl.endsWith('.svg') ? 'image/svg+xml' : 'image/ico',
+      type: faviconMimeType(buildProfile.faviconUrl),
       sizes: '32x32',
       href: buildProfile.faviconUrl,
     },

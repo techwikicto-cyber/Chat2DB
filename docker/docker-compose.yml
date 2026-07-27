@@ -54,7 +54,10 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-      start_period: 120s
+      # Beans initialise eagerly (see docker/entrypoint.sh), so the port opens
+      # later than it used to - but once it does, the app is genuinely ready and
+      # the first page load no longer pays for the warm-up.
+      start_period: 180s
 
 volumes:
   chat2db-community-data:

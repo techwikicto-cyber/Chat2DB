@@ -7,6 +7,12 @@ import vazirmatnRegular from 'vazirmatn/fonts/webfonts/Vazirmatn-Regular.woff2';
 import vazirmatnMedium from 'vazirmatn/fonts/webfonts/Vazirmatn-Medium.woff2';
 import vazirmatnSemiBold from 'vazirmatn/fonts/webfonts/Vazirmatn-SemiBold.woff2';
 import vazirmatnBold from 'vazirmatn/fonts/webfonts/Vazirmatn-Bold.woff2';
+// IRANYekan is the face the rest of the product line uses, so it leads the
+// stack; Vazirmatn stays behind it as the fallback. Bundled, not fetched: the
+// same air-gapped requirement as above.
+import iranYekanRegular from '@/assets/fonts/iranyekan/IRANYekanWeb-Regular.woff';
+import iranYekanMedium from '@/assets/fonts/iranyekan/IRANYekanWeb-Medium.woff';
+import iranYekanBold from '@/assets/fonts/iranyekan/IRANYekanWeb-Bold.woff';
 import { useStylesStore } from '@/store/styles';
 
 export const useStyles = createStyles(() => {
@@ -190,6 +196,29 @@ const GlobalStyle = createGlobalStyle(({ theme: token }) => {
     }
     /* swap: Persian text stays readable in a fallback face while the webfont
        loads, instead of flashing invisible. */
+    @font-face {
+      font-family: 'iranyekan';
+      src: url(${iranYekanRegular}) format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'iranyekan';
+      src: url(${iranYekanMedium}) format('woff');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'iranyekan';
+      /* Also claims 600: the family has no semibold, and without this the
+         browser would fall through to Vazirmatn for every semibold run. */
+      src: url(${iranYekanBold}) format('woff');
+      font-weight: 600 700;
+      font-style: normal;
+      font-display: swap;
+    }
     @font-face {
       font-family: 'Vazirmatn';
       src: url(${vazirmatnRegular}) format('woff2');

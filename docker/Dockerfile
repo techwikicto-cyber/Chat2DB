@@ -105,7 +105,7 @@ ENV CHAT2DB_SERVER_PORT=10825 \
 
 # /dev/tcp is a bash builtin and this image's /bin/sh is dash, so the probe must
 # run under bash explicitly.
-HEALTHCHECK --interval=30s --timeout=5s --start-period=120s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=180s --retries=3 \
   CMD bash -c 'exec 3<>/dev/tcp/127.0.0.1/${CHAT2DB_SERVER_PORT}' || exit 1
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/app/entrypoint.sh"]

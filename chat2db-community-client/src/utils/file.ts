@@ -1,9 +1,7 @@
 import { BucketTypeEnum, UploadTypeEnum, uploadTypeObject } from '@/typings/upload';
-import OSS from 'ali-oss';
 import miscService from '@/service/misc';
 import { v4 as uuid } from 'uuid';
 import { useUserStore } from '@/store/user';
-import html2canvas from 'html2canvas';
 import { isDesktop } from '@/utils/env';
 import jcefApi from '@/jcef';
 import sqlService from '@/service/sql';
@@ -131,6 +129,10 @@ export const customRequestOSS = async ({
     onError?.(new Error('Get signature error!'));
   }
 
+  // Loaded on demand: this module holds general file helpers that half the app
+  // imports, and the OSS SDK is ~680 KB that only an upload needs.
+  const { default: OSS } = await import('ali-oss');
+
   const client = new OSS({
     region: signature.endpoint.split('.')[0],
     accessKeyId: signature.accessKeyId,
@@ -198,13 +200,17 @@ export function createGridPattern(width, height, paddingBottom, paddingRight, co
 export const onExportToImage = (chartRef, name, options?) => {
   const element = chartRef.current;
   if (element) {
-    html2canvas(element, options).then((canvas) => {
-      const image = canvas.toDataURL('image/png');
-      const a = document.createElement('a');
-      const event = new MouseEvent('click');
-      a.download = `${name}.png`;
-      a.href = image;
-      a.dispatchEvent(event);
-    });
+    // Loaded on demand, like the OSS SDK above: ~200 KB that only the
+    // export-chart-as-image action needs.
+    import('html2canvas').then(({ default: html2canvas }) =>
+      html2canvas(element, options).then((canvas) => {
+        const image = canvas.toDataURL('image/png');
+        const a = document.createElement('a');
+        const event = new MouseEvent('click');
+        a.download = `${name}.png`;
+        a.href = image;
+        a.dispatchEvent(event);
+      }),
+    );
   }
 };

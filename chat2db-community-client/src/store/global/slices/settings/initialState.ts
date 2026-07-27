@@ -11,7 +11,8 @@ import {
   DEFAULT_APP_CONFIG,
   DATA_TABLE_SETTINGS,
 } from '@/constants/settings';
-import { DEFAULT_EDITOR_SETTINGS, EditorSettings } from '@/components/SQLEditor';
+import { DEFAULT_EDITOR_SETTINGS } from '@/components/SQLEditor/constants';
+import { EditorSettings } from '@/components/SQLEditor/type';
 
 export interface GlobalSettings {
   baseSetting: GlobalBaseSettings;

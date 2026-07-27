@@ -1,4 +1,3 @@
-import { initializeMonacoEditor } from '@/components/SQLEditor';
 import { ServiceStatus } from '@/constants/common';
 import { runtimeEditionConfig } from '@/constants/runtimeEdition';
 import useDocumentListener from '@/hooks/useDocumentListener';
@@ -92,7 +91,10 @@ const useInit = () => {
     clearOlderLocalStorage();
     registerMessage();
     registerNotification();
-    initializeMonacoEditor();
+    // Monaco used to be registered here, which pulled the largest dependency in
+    // the app into the first page load for a landing tab that has no editor on
+    // it. MonacoEditor now registers itself when its chunk arrives, so this is
+    // deliberately not done at startup.
   }, [serviceStatus, reload, isDesktop]);
 };
 

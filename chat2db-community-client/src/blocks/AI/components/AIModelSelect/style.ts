@@ -24,8 +24,8 @@ export const useStyles = createStyles(({ css, token }) => {
         max-width: 150px;
         color: ${token.colorText};
         font-weight: 500;
-        /* The closed control is a single 24px line. Clip whatever is rendered
-           into it so a multi-line label cannot spill over the toolbar. */
+        /* The closed control is a single 24px line, so a long model name is
+           clipped rather than allowed to grow the toolbar. */
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
@@ -48,26 +48,32 @@ export const useStyles = createStyles(({ css, token }) => {
       & .ant-select-item {
         font-size: 12px !important;
         min-height: 0px !important;
-        /* Let the two-line custom-model entry set its own height instead of
-           being clipped to the uniform option height. */
-        height: auto !important;
         padding: 4px 8px !important;
       }
     `,
-    customModelOption: css`
-      margin-top: 4px;
-      padding: 8px 8px 4px !important;
-      border-top: 1px solid ${token.colorSplit};
-      border-radius: 0 !important;
-    `,
     customModelEntry: css`
       width: 100%;
-      padding: 2px 0;
+      padding: 6px 8px;
       display: flex;
       align-items: center;
       gap: 8px;
+      border-radius: ${token.borderRadiusSM}px;
       color: ${token.colorText};
       text-align: left;
+      cursor: pointer;
+      outline: none;
+      transition: background-color 0.2s ease;
+
+      &:hover,
+      &:focus-visible {
+        background: ${token.colorFillTertiary};
+      }
+    `,
+    customModelEntryDivided: css`
+      margin-top: 4px;
+      border-top: 1px solid ${token.colorSplit};
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     `,
     customModelIcon: css`
       width: 24px;

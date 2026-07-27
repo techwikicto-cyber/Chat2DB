@@ -4,6 +4,7 @@ import { useGlobalStore } from '@/store/global';
 import { debounce } from 'lodash';
 import './completionIcon.less';
 import { handleSetValue } from '../../core/setValue';
+import { initializeMonacoEditor } from '../../core/initializeEditor';
 import { ContentDiffKind, EditorSetValueType } from '../../type';
 import './index.less';
 import { useStyles } from './style';
@@ -44,6 +45,12 @@ interface ContentDiffSnapshot {
   model: monaco.editor.ITextModel;
   modelVersionId: number;
 }
+
+// Themes, snippets and the SQL formatter have to be registered before an editor
+// exists. Startup used to do it, which meant loading Monaco with the first page;
+// now that Monaco arrives on demand, registration rides along with it. The call
+// is idempotent, so the startup path may still run it first.
+initializeMonacoEditor();
 
 monaco.editor.addKeybindingRules([
   {

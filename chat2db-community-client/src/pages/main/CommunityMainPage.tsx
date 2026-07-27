@@ -1,6 +1,6 @@
 import { Confetti, IconButton, IconfontSvg } from '@chat2db/ui';
-import { Tooltip, type InputRef } from 'antd';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Spin, Tooltip, type InputRef } from 'antd';
+import { Suspense, lazy, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import i18n from '@/i18n';
 import { INavItem } from '@/typings/main';
@@ -13,14 +13,11 @@ import { getConnectionEnvList } from '@/store/connection';
 import { useGlobalStore } from '@/store/global';
 import { useUserStore } from '@/store/user';
 
-import CommunitySetting from '@/blocks/Setting/CommunitySetting';
 import OfflineAvatar from '@/blocks/PersonalCenter/components/OfflineAvatar';
 import CustomLayout from '@/components/CustomLayout';
 import StreamSidebar from './components/StreamSidebar';
 
-import Dashboard from './dashboard';
 import DashboardMenuList from './dashboard/DashboardMenuList';
-import Workspace from './workspace';
 import Stream from '../stream';
 
 import { useStyles } from './style';
@@ -32,6 +29,26 @@ import { useChatStore } from '@/store/chat';
 import { useWorkspaceStore } from '@/store/workspace';
 import { isDesktop, isHashHistoryEnv } from '@/utils/env';
 import { checkIsSharePage } from '@/utils/url';
+
+// The app opens on the chat tab, but the other two carry the heaviest
+// dependencies in the product - Monaco and the canvas grid in the workspace,
+// the charting stack in the dashboard. Importing them statically put both into
+// the first page load even though neither is on screen. They are already
+// mounted lazily at runtime (`isLoad`); this makes the code follow.
+const Dashboard = lazy(() => import('./dashboard'));
+const Workspace = lazy(() => import('./workspace'));
+// Same reasoning: settings embed a live editor preview, and the panel is hidden
+// until the user opens it.
+const CommunitySetting = lazy(() => import('@/blocks/Setting/CommunitySetting'));
+
+/** Shown for the moment a lazily loaded tab's chunk is in flight. */
+function TabLoading() {
+  return (
+    <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Spin />
+    </div>
+  );
+}
 
 function CommunityMainPage() {
   const [navConfig, setNavConfig] = useState<INavItem[]>([]);
@@ -49,14 +66,22 @@ function CommunityMainPage() {
         key: 'workspace',
         icon: 'icon-gongxiang-',
         isLoad: false,
-        component: <Workspace />,
+        component: (
+          <Suspense fallback={<TabLoading />}>
+            <Workspace />
+          </Suspense>
+        ),
         name: i18n('workspace.title'),
       },
       {
         key: 'dashboard',
         icon: 'icon-chart-square-bar',
         isLoad: false,
-        component: <Dashboard />,
+        component: (
+          <Suspense fallback={<TabLoading />}>
+            <Dashboard />
+          </Suspense>
+        ),
         name: i18n('dashboard.title'),
       },
     ],
@@ -500,7 +525,11 @@ function CommunityMainPage() {
             {item.isLoad ? item.component : null}
           </div>
         ))}
-        {settingPageActiveTab !== false && <CommunitySetting />}
+        {settingPageActiveTab !== false && (
+          <Suspense fallback={<TabLoading />}>
+            <CommunitySetting />
+          </Suspense>
+        )}
       </div>
 
       <Confetti active={triggerConfetti} />

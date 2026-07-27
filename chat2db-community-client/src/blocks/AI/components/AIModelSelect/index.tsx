@@ -1,15 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Select } from 'antd';
 import { PlusOutlined, RightOutlined } from '@ant-design/icons';
 import { useStyles } from './style';
 import i18n from '@/i18n';
 import { useAIStore } from '@/store/ai/store';
 import { SelectedModelOption } from '@/store/ai/slices/model/initialState';
-import {
-  appendCustomModelEntryOption,
-  isCustomModelEntryOption,
-  ModelSelectOption,
-} from './modelSelectOptions';
+import { ModelSelectOption } from './modelSelectOptions';
 
 interface AIModelSelectProps {
   onChange?: (value: SelectedModelOption | null) => void;
@@ -26,13 +22,14 @@ const AIModelSelect = ({
   onCustomModelClick,
   customModelText,
 }: AIModelSelectProps) => {
-  const { styles } = useStyles();
+  const { styles, cx } = useStyles();
   const { modelList, selectedModel, setSelectedModel, getModelList } = useAIStore((state) => ({
     modelList: state.modelList,
     selectedModel: state.selectedModel,
     setSelectedModel: state.setSelectedModel,
     getModelList: state.getModelList,
   }));
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (options !== undefined) {
@@ -45,11 +42,6 @@ const AIModelSelect = ({
 
   // Handle select change
   const handleChange = (selectedValue: { value: string; label: React.ReactNode }) => {
-    if (isCustomModelEntryOption(selectedValue.value)) {
-      onCustomModelClick?.();
-      return;
-    }
-
     const nextValue = {
       value: selectedValue.value,
       label: String(selectedValue.label || ''),
@@ -61,8 +53,9 @@ const AIModelSelect = ({
   };
 
   // handles the drop-down box opening event
-  const handleDropdownVisibleChange = (open: boolean) => {
-    if (open && (!modelList || modelList.length === 0)) {
+  const handleDropdownVisibleChange = (nextOpen: boolean) => {
+    setOpen(nextOpen);
+    if (nextOpen && (!modelList || modelList.length === 0)) {
       if (options !== undefined) {
         return;
       }
@@ -70,10 +63,38 @@ const AIModelSelect = ({
     }
   };
 
+  const openCustomModelDialog = () => {
+    // The dialog takes over from here; leaving the popup open would park it
+    // behind the modal mask, where the next click outside is the only way out.
+    setOpen(false);
+    onCustomModelClick?.();
+  };
+
   const selectOptions = options !== undefined ? options : modelList;
+  const hasOptions = !!selectOptions?.length;
+
+  // The entry opens a dialog - it is an action, not a model. It is rendered
+  // under the list rather than as one more option because antd otherwise adopts
+  // whatever is clicked as the picker's value: the first click drew this
+  // two-line block inside the 24px control, and every later click was swallowed,
+  // since rc-select skips onChange when the value has not actually changed.
   const customModelEntry =
     showCustomModelEntry && onCustomModelClick ? (
-      <div className={styles.customModelEntry}>
+      <div
+        role="button"
+        tabIndex={0}
+        className={cx(styles.customModelEntry, hasOptions && styles.customModelEntryDivided)}
+        // The popup closes on blur, and mousedown inside it would move focus off
+        // the picker before the click lands.
+        onMouseDown={(event) => event.preventDefault()}
+        onClick={openCustomModelDialog}
+        onKeyDown={(event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openCustomModelDialog();
+          }
+        }}
+      >
         <span className={styles.customModelIcon}>
           <PlusOutlined />
         </span>
@@ -84,21 +105,10 @@ const AIModelSelect = ({
         <RightOutlined className={styles.customModelArrow} />
       </div>
     ) : null;
-  const optionsWithCustomModelEntry = appendCustomModelEntryOption(
-    selectOptions,
-    customModelEntry,
-    selectOptions?.length ? styles.customModelOption : undefined,
-  );
 
   return (
     <Select
       popupMatchSelectWidth={false}
-      // The custom-model entry is two stacked lines plus a wrapping hint, so it
-      // is far taller than the uniform row height rc-virtual-list assumes. With
-      // virtual scrolling on, the list positions rows against that wrong height
-      // and the entry overlaps its neighbours and spills out of the popup.
-      // Rendering in normal flow lets each row size itself.
-      virtual={false}
       // The picker sits inside the chat input's toolbar, which clips its
       // overflow. Rendering the popup into the body takes it out of that
       // stacking/clipping context so it can never be cut off or drawn over the
@@ -110,10 +120,24 @@ const AIModelSelect = ({
       labelInValue
       value={selectedModel && selectedModel.label ? selectedModel : undefined}
       onChange={handleChange}
-      options={optionsWithCustomModelEntry}
+      options={selectOptions}
       size="small"
       placeholder={i18n('ai.select.model')}
+      open={open}
       onDropdownVisibleChange={handleDropdownVisibleChange}
+      dropdownRender={
+        customModelEntry
+          ? (menu) => (
+              <>
+                {menu}
+                {customModelEntry}
+              </>
+            )
+          : undefined
+      }
+      // With no model configured yet the entry is the only thing to do here, so
+      // antd's "no data" placeholder above it is noise.
+      notFoundContent={customModelEntry && !hasOptions ? null : undefined}
     />
   );
 };

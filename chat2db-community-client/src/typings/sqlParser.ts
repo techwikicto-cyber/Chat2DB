@@ -1,4 +1,4 @@
-import { TIP_TYPE } from '@/components/SQLEditor';
+import { TIP_TYPE } from '@/components/SQLEditor/type';
 import * as monaco from 'monaco-editor';
 export interface ISimpleDatabaseVO {
   datasourceName: string;
