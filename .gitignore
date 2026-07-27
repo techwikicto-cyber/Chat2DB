@@ -91,3 +91,12 @@ package-lock.json
 /graphify-out/.needs_update
 # Uncompressed graph: 60 MB, regenerate with `gunzip -k graph.json.gz`.
 /graphify-out/graph.json
+
+# Agent tooling installed into the working copy, not part of the product.
+# Reversible: drop the matching line to start tracking any of these.
+# .claude/ is Claude Code's permission cache and holds machine-local paths.
+/.claude/
+# `npx skills add` installs here (impeccable: 3 MB of third-party skill).
+/.agents/
+# Lockfile for the above.
+/skills-lock.json
