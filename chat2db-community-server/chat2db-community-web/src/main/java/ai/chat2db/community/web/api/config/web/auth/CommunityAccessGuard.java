@@ -82,8 +82,14 @@ public class CommunityAccessGuard {
                 return;
             }
             users.create(BOOTSTRAP_USERNAME, password, CommunityRole.ADMIN);
-            log.info("[chat2db] Created the '{}' account from CHAT2DB_COMMUNITY_PASSWORD. Sign in with it, then "
-                    + "add accounts for everyone else in Settings.", BOOTSTRAP_USERNAME);
+            // Says where the password can be read rather than which variable
+            // carried it: the container puts a generated one into that same
+            // variable, so naming the variable sends people looking in a .env
+            // file that never had it.
+            log.info("[chat2db] Created the '{}' account. Its password is the one printed at first start, also "
+                    + "readable with: docker exec <container> cat /root/.chat2db-community/config/password - "
+                    + "unless you set CHAT2DB_COMMUNITY_PASSWORD yourself. Sign in, then add accounts for "
+                    + "everyone else in Settings > Account.", BOOTSTRAP_USERNAME);
         }
         log.info("[chat2db] Sign-in is ENABLED with {} account(s). Sessions expire after {} days.",
                 users.list().size(), SESSION_TTL.toDays());
