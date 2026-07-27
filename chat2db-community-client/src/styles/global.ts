@@ -219,6 +219,38 @@ const GlobalStyle = createGlobalStyle(({ theme: token }) => {
       font-style: normal;
       font-display: swap;
     }
+
+    /* The same face, minus the digits.
+       This is the "fanum" cut of IRANYekan, which maps ASCII digits to Persian
+       glyphs in its cmap - so 2026-07-27 renders as ۲۰۲۶-۰۷-۲۷ no matter what
+       the interface language is, and no CSS feature setting can turn that off.
+       Excluding U+0030-0039 from the range lets digits fall through to the next
+       family in the stack, which draws them as written. Selected by language,
+       so Persian keeps its numerals and English gets Latin ones. */
+    @font-face {
+      font-family: 'iranyekan-latn';
+      src: url(${iranYekanRegular}) format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+      unicode-range: U+0-2F, U+3A-10FFFF;
+    }
+    @font-face {
+      font-family: 'iranyekan-latn';
+      src: url(${iranYekanMedium}) format('woff');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+      unicode-range: U+0-2F, U+3A-10FFFF;
+    }
+    @font-face {
+      font-family: 'iranyekan-latn';
+      src: url(${iranYekanBold}) format('woff');
+      font-weight: 600 700;
+      font-style: normal;
+      font-display: swap;
+      unicode-range: U+0-2F, U+3A-10FFFF;
+    }
     @font-face {
       font-family: 'Vazirmatn';
       src: url(${vazirmatnRegular}) format('woff2');

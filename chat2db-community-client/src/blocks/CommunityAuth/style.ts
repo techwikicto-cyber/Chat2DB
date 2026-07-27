@@ -22,6 +22,12 @@ export const useStyles = createStyles(({ css, token }) => {
       border-radius: ${token.borderRadiusLG}px;
       background: ${token.colorBgContainer};
     `,
+    /* Pulled out of the column flow so the card still centres on the mark. */
+    language: css`
+      align-self: flex-end;
+      margin-bottom: -8px;
+      color: ${token.colorTextTertiary};
+    `,
     title: css`
       font-size: 20px;
       font-weight: 600;

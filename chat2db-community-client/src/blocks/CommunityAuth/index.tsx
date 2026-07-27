@@ -1,8 +1,10 @@
 import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { Button, Input, Spin } from 'antd';
+import { Button, Input, Select, Spin } from 'antd';
 import i18n from '@/i18n';
 import ProductLogo from '@/components/Logo';
 import { PRODUCT_NAME } from '@/constants/branding';
+import { LangType } from '@/constants/settings';
+import { useGlobalStore } from '@/store/global';
 import {
   CommunityRole,
   communityLogin,
@@ -103,6 +105,15 @@ export default function CommunityAuthGate({ children }: { children: ReactNode })
 
 function CommunityLoginScreen({ onSignedIn }: { onSignedIn: () => void }) {
   const { styles } = useStyles();
+  // Subscribed here rather than inside the picker on purpose. i18n() reads the
+  // store when it is called and does not subscribe, so nothing re-renders on its
+  // own when the language changes - Settings reloads the page to cope. Holding
+  // the value at the top of this screen re-renders the whole card instead, which
+  // relabels it without discarding what has been typed.
+  const { language, setLanguage } = useGlobalStore((state) => ({
+    language: state.baseSetting.language,
+    setLanguage: state.setLanguage,
+  }));
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -130,6 +141,20 @@ function CommunityLoginScreen({ onSignedIn }: { onSignedIn: () => void }) {
   return (
     <div className={styles.screen}>
       <div className={styles.card}>
+        {/* The sign-in screen is the first thing anyone sees, and the language
+            setting used to live on the far side of it. The choice is written
+            where Settings writes it, so it carries into the application. */}
+        <Select<LangType>
+          size="small"
+          variant="borderless"
+          className={styles.language}
+          value={language}
+          onChange={setLanguage}
+          options={[
+            { value: LangType.FA_IR, label: 'فارسی' },
+            { value: LangType.EN_US, label: 'English' },
+          ]}
+        />
         <ProductLogo size={56} />
         <div className={styles.title}>{PRODUCT_NAME}</div>
         <div className={styles.subtitle}>{i18n('login.community.subtitle')}</div>

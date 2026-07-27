@@ -3,7 +3,7 @@ import { PrimaryColors, ThemeProvider, ThemeAppearance } from '@chat2db/ui';
 import { darkAlgorithm } from '@chat2db/ui/es/ThemeProvider/algorithms/darkAlgorithm';
 import { darkDimmedAlgorithm } from '@chat2db/ui/es/ThemeProvider/algorithms/darkDimmedAlgorithm';
 import { lightAlgorithm } from '@chat2db/ui/es/ThemeProvider/algorithms/lightAlgorithm';
-import { UI_FONT_FAMILY } from '@/constants/font';
+import { uiFontFamily } from '@/constants/font';
 import { buildThemeTokens } from '@/constants/palette';
 import { useGlobalStore } from '@/store/global';
 import { settingSelectors } from '@/store/global/selectors';
@@ -39,7 +39,7 @@ function useResolvedAppearance(appearance: string) {
 }
 
 const AppTheme = memo<AppThemeProps>(({ children }) => {
-  const { primaryColor, appearance, customFont, customFontSize } = useGlobalStore((state) => {
+  const { primaryColor, appearance, customFont, customFontSize, language } = useGlobalStore((state) => {
     return {
       ...settingSelectors.currentBaseSetting(state),
     };
@@ -86,8 +86,9 @@ const AppTheme = memo<AppThemeProps>(({ children }) => {
       defaultAppearance={appearance}
       algorithm={algorithm}
       customBaseToken={{
-        // A font chosen in Settings still wins; the Persian stack is the default.
-        fontFamily: customFont || UI_FONT_FAMILY,
+        // A font chosen in Settings still wins; otherwise the stack follows the
+        // interface language, because the bundled face draws digits in Persian.
+        fontFamily: customFont || uiFontFamily(language),
         fontSize: customFontSize,
         ...themeTokens,
       }}
