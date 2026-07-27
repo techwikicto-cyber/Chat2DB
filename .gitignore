@@ -80,3 +80,14 @@ package-lock.json
 /chat2db-community-server/.apifox-helper.properties
 /chat2db-community-server/.easy.api.config
 /chat2db-community-server/latest_version.json
+
+# graphify knowledge graph
+# The report, the visualisation and the compressed graph are committed; these
+# are machine-local or regenerable and must not be.
+/graphify-out/cache/
+/graphify-out/.graphify_python
+/graphify-out/.graphify_root
+/graphify-out/.graphify_*.json
+/graphify-out/.needs_update
+# Uncompressed graph: 60 MB, regenerate with `gunzip -k graph.json.gz`.
+/graphify-out/graph.json
