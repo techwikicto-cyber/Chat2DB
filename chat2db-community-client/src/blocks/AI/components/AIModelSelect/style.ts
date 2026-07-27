@@ -51,6 +51,12 @@ export const useStyles = createStyles(({ css, token }) => {
         padding: 4px 8px !important;
       }
     `,
+    emptyHint: css`
+      padding: 6px 8px;
+      color: ${token.colorTextTertiary};
+      font-size: 12px;
+      text-align: right;
+    `,
     customModelEntry: css`
       width: 100%;
       padding: 6px 8px;

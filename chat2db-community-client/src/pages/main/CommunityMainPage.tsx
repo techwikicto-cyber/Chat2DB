@@ -14,6 +14,7 @@ import { useGlobalStore } from '@/store/global';
 import { useUserStore } from '@/store/user';
 
 import OfflineAvatar from '@/blocks/PersonalCenter/components/OfflineAvatar';
+import ProductLogo from '@/components/Logo';
 import CustomLayout from '@/components/CustomLayout';
 import StreamSidebar from './components/StreamSidebar';
 
@@ -424,6 +425,7 @@ function CommunityMainPage() {
         style={{ display: isEmbedIframe === IframeType.ZOER ? 'none' : 'flex' }}
       >
         <div className={styles.sidebarHeader}>
+          {!sidebarExpanded && <ProductLogo size={24} className={styles.sidebarHeaderLogo} />}
           <Tooltip
             title={sidebarExpanded ? i18n('stream.sidebar.collapse') : i18n('stream.sidebar.expand')}
             placement="right"
@@ -441,7 +443,8 @@ function CommunityMainPage() {
               />
             </span>
           </Tooltip>
-          {sidebarExpanded && <span className={styles.sidebarHeaderSpacer} />}
+          {/* Also balances the row: it occupies the box the spacer used to hold. */}
+          {sidebarExpanded && <ProductLogo size={26} className={styles.sidebarHeaderLogo} />}
         </div>
 
         <div className={styles.navContainer}>

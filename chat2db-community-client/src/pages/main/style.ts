@@ -40,6 +40,11 @@ export const useStyles = createStyles(({ css, token }, { sidebarExpanded }: { si
       height: 30px;
       flex-shrink: 0;
     `,
+    /* Sits in the box the spacer used to hold, so the row stays balanced. */
+    sidebarHeaderLogo: css`
+      flex-shrink: 0;
+      object-fit: contain;
+    `,
     sidebarBtn: css`
       display: flex;
       align-items: center;

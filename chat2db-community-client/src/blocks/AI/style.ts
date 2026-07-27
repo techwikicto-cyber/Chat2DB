@@ -885,10 +885,6 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
       gap: 12px;
     `,
 
-    panelWelcomeSpark: css`
-      color: ${token.colorPrimary};
-      font-size: 28px;
-    `,
 
     panelWelcomeText: css`
       font-size: 16px;
@@ -919,10 +915,6 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
       margin-bottom: 8px;
     `,
 
-    welcomeSpark: css`
-      color: ${token.colorPrimary};
-      font-size: 24px;
-    `,
 
     welcomeTitle: css`
       font-size: 48px;

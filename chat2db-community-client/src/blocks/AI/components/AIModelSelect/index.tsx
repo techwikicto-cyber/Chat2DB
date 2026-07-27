@@ -135,9 +135,15 @@ const AIModelSelect = ({
             )
           : undefined
       }
-      // With no model configured yet the entry is the only thing to do here, so
-      // antd's "no data" placeholder above it is noise.
-      notFoundContent={customModelEntry && !hasOptions ? null : undefined}
+      // Never null, and never falsy. rc-select computes
+      //   emptyListContent = !notFoundContent && emptyOptions
+      //   triggerOpen      = emptyListContent ? false : mergedOpen
+      // so an empty option list with no placeholder suppresses the whole popup -
+      // taking the add-model entry with it, in exactly the state where that
+      // entry is the only thing there is to click.
+      notFoundContent={
+        customModelEntry ? <div className={styles.emptyHint}>{i18n('setting.modelConfig.empty')}</div> : undefined
+      }
     />
   );
 };

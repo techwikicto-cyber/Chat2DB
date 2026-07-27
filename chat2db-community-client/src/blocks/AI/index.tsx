@@ -29,6 +29,7 @@ import { OperationColumn } from '@/constants/tree';
 import { compatibleDataBaseName } from '@/utils/database';
 import { DatabaseTypeCode } from '@/constants';
 import SQLPreview from '@/components/SQLPreview';
+import ProductLogo from '@/components/Logo';
 import { useStyles } from './style';
 import i18n from '@/i18n';
 import { keyboardKey } from '@/utils';
@@ -1985,7 +1986,7 @@ export default function AI({ variant = 'page', onTableClick, onPinSql, onSession
 
           {isEmptyState && isPanel && (
             <div className={styles.panelWelcome}>
-              <span className={styles.panelWelcomeSpark}>✦</span>
+              <ProductLogo size={30} />
               <div className={styles.panelWelcomeText}>{i18n('stream.welcome.title')}</div>
             </div>
           )}
@@ -2002,7 +2003,7 @@ export default function AI({ variant = 'page', onTableClick, onPinSql, onSession
             {isEmptyState && !isPanel && (
               <div className={`${styles.welcome} ${styles.contentWidth}`}>
                 <div className={styles.welcomeGreeting}>
-                  <span className={styles.welcomeSpark}>✦</span>
+                  <ProductLogo size={28} />
                   <span>{i18n('stream.welcome.greeting')}</span>
                 </div>
                 <div className={styles.welcomeTitle}>{i18n('stream.welcome.title')}</div>
