@@ -15,14 +15,15 @@
 # docker/docker-compose.yml config` prints what actually reached the container.
 #
 # SECURITY: the default binding is 127.0.0.1, so the service is reachable only
-# from the machine it runs on. Anyone who can reach this port gets full access
-# to every database connection stored in it, so before setting
-# CHAT2DB_BIND_ADDRESS to 0.0.0.0, set CHAT2DB_COMMUNITY_PASSWORD as well - it
-# puts a shared password in front of the whole API. That is a gate, not an
-# identity system: everyone who signs in is the same anonymous operator, and
-# nothing is scoped per person. For real user separation, or over the public
-# internet, still put it behind a reverse proxy that terminates TLS, or restrict
-# it to a private network / VPN.
+# from the machine it runs on, and a shared password guards the whole API. The
+# password is generated on first start and printed in the container log; set
+# CHAT2DB_COMMUNITY_PASSWORD to choose your own, or CHAT2DB_DISABLE_LOGIN=true
+# to turn the gate off.
+#
+# That gate is not an identity system: everyone who signs in is the same
+# anonymous operator, and nothing is scoped per person. For real user
+# separation, or over the public internet, still put it behind a reverse proxy
+# that terminates TLS, or restrict it to a private network / VPN.
 
 services:
   chat2db:
@@ -53,9 +54,11 @@ services:
       # Set this to pin your own key; otherwise one is generated at
       # /root/.chat2db-community/config/encryption.key inside the volume below.
       - CHAT2DB_COMMUNITY_ENCRYPTION_KEY
-      # Shared password for the sign-in screen. Unset means no sign-in at all,
-      # which is only appropriate on a loopback binding.
+      # Shared password for the sign-in screen. Unset means one is generated on
+      # first start and printed in the log; see docker/entrypoint.sh.
       - CHAT2DB_COMMUNITY_PASSWORD
+      # Set to true to remove the sign-in screen entirely.
+      - CHAT2DB_DISABLE_LOGIN
       # Extra browser origins to trust, comma separated. Needed only when a
       # reverse proxy hides the address the browser actually used.
       - CHAT2DB_COMMUNITY_ALLOWED_ORIGINS

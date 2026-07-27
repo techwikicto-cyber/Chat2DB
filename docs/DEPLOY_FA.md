@@ -240,33 +240,26 @@ CHAT2DB_COMMUNITY_ENCRYPTION_KEY=<کلیدی که ساختید>
 
 ## صفحه‌ی ورود
 
-اگر `CHAT2DB_COMMUNITY_PASSWORD` را تنظیم کنید، قبل از باز شدن برنامه یک صفحه‌ی ورود نمایش داده می‌شود و **تمام** درخواست‌های `/api` بدون نشست معتبر با خطای ۴۰۱ رد می‌شوند — یعنی محافظت واقعی است، نه فقط پنهان کردن صفحه.
+صفحه‌ی ورود **به‌صورت پیش‌فرض فعال است** و هیچ تنظیمی لازم ندارد. کانتینر در اولین اجرا یک گذرواژه می‌سازد، آن را در لاگ چاپ می‌کند و در والیوم داده نگه می‌دارد:
 
 ```bash
-# فایل باید کنار docker-compose.yml باشد، نه در ریشه‌ی مخزن
-cp docker/.env.example docker/.env
-# سپس CHAT2DB_COMMUNITY_PASSWORD را در آن از حالت کامنت خارج و مقداردهی کنید
 docker compose -f docker/docker-compose.yml up -d
+docker compose -f docker/docker-compose.yml logs | grep -A4 "Sign-in password"
 ```
 
-**اگر صفحه‌ی ورود نیامد**، تقریباً همیشه یعنی متغیر به کانتینر نرسیده. سه دستور برای تشخیص:
+خروجی چیزی شبیه این است:
 
-```bash
-# ۱) آیا Compose اصلاً مقدار را می‌بیند؟ نباید null باشد
-docker compose -f docker/docker-compose.yml config | grep CHAT2DB_COMMUNITY_PASSWORD
-
-# ۲) سرور در لاگ راه‌اندازی چه می‌گوید؟
-docker compose -f docker/docker-compose.yml logs | grep -i "shared-password"
-
-# ۳) پاسخ خود سرویس؛ باید required:true باشد
-curl -s http://127.0.0.1:10825/api/community/auth/status
+```
+[chat2db]  Sign-in password (generated on first start):
+[chat2db]
+[chat2db]      a89w_T5eUS2wHcp3QEdTGRWW
 ```
 
-اگر `.env` را در ریشه‌ی مخزن نگه می‌دارید، باید صریح معرفی‌اش کنید:
+تمام درخواست‌های `/api` بدون نشست معتبر با خطای ۴۰۱ رد می‌شوند — یعنی محافظت واقعی است، نه فقط پنهان کردن صفحه.
 
-```bash
-docker compose --env-file .env -f docker/docker-compose.yml up -d
-```
+**برای گذاشتن گذرواژه‌ی دلخواه خودتان** `CHAT2DB_COMMUNITY_PASSWORD` را در `docker/.env` تنظیم کنید (فایل باید کنار `docker-compose.yml` باشد، نه در ریشه‌ی مخزن؛ اگر ترجیح می‌دهید ریشه بماند با `--env-file .env` صریح معرفی‌اش کنید). با `docker compose -f docker/docker-compose.yml config` می‌توانید ببینید مقدار واقعاً منتقل شده یا نه.
+
+**برای حذف کامل صفحه‌ی ورود** `CHAT2DB_DISABLE_LOGIN=true` بگذارید. فقط وقتی منطقی است که سرویس روی `127.0.0.1` باشد.
 
 نکته‌های مهم:
 
