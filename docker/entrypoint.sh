@@ -152,8 +152,13 @@ else
     echo "[chat2db] Using the sign-in password from ${PASSWORD_FILE}"
   fi
   if [ -f "${PASSWORD_FILE}" ]; then
-    CHAT2DB_COMMUNITY_PASSWORD="$(cat "${PASSWORD_FILE}")"
-    export CHAT2DB_COMMUNITY_PASSWORD
+    # Deliberately not CHAT2DB_COMMUNITY_PASSWORD. That variable means "the
+    # operator chose this password", and the server now honours it on every
+    # start so it can serve as the way back in when the admin password is lost.
+    # Passing a container-generated value through it would make every restart
+    # undo a password changed in the interface.
+    CHAT2DB_COMMUNITY_BOOTSTRAP_PASSWORD="$(cat "${PASSWORD_FILE}")"
+    export CHAT2DB_COMMUNITY_BOOTSTRAP_PASSWORD
   fi
 fi
 

@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import ai.chat2db.community.tools.util.ConfigUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 
 
+@Slf4j
 @Component
 public class CorsFilter implements Filter {
 
@@ -44,6 +46,14 @@ public class CorsFilter implements Filter {
         String origin = request.getHeader(HttpHeaders.ORIGIN);
 
         if (ConfigUtils.isCommunity() && !isPublicAsset(request) && !allowCommunityOrigin(origin, request)) {
+            // Say why. A bare 403 here is close to undiagnosable from the outside:
+            // the browser omits Origin on same-origin GETs, so the API looks
+            // healthy right up until the first POST - a sign-in, typically -
+            // which fails with nothing in the log to connect it to CORS at all.
+            log.warn("[chat2db] Refused {} {} : the browser's Origin '{}' is not this deployment's own '{}'. "
+                            + "A reverse proxy that does not pass the original Host produces exactly this; "
+                            + "either forward it, or list the public address in CHAT2DB_COMMUNITY_ALLOWED_ORIGINS.",
+                    request.getMethod(), request.getRequestURI(), origin, requestOrigin(request));
             response.sendError(HttpServletResponse.SC_FORBIDDEN);
             return;
         }

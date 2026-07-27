@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CommunityAccessGuardTest {
 
     private static final String PASSWORD_PROPERTY = "chat2db.community.password";
+    private static final String BOOTSTRAP_PASSWORD_PROPERTY = "chat2db.community.bootstrap-password";
     private static final String DISABLE_PROPERTY = "chat2db.community.disable-login";
 
     @TempDir
@@ -24,6 +25,7 @@ class CommunityAccessGuardTest {
     @AfterEach
     void clearProperties() {
         System.clearProperty(PASSWORD_PROPERTY);
+        System.clearProperty(BOOTSTRAP_PASSWORD_PROPERTY);
         System.clearProperty(DISABLE_PROPERTY);
     }
 
@@ -56,8 +58,10 @@ class CommunityAccessGuardTest {
     }
 
     @Test
-    void firstStartCreatesAnAdminFromTheConfiguredPassword() {
-        System.setProperty(PASSWORD_PROPERTY, "bootstrap-secret");
+    void aContainerGeneratedPasswordSeedsTheAdminAndIsThenLeftAlone() {
+        // The container's own password arrives in its own variable, so a restart
+        // does not undo a password the user changed in the interface.
+        System.setProperty(BOOTSTRAP_PASSWORD_PROPERTY, "generated-secret");
         CommunityUserStore users = store();
         CommunityAccessGuard guard = new CommunityAccessGuard(users);
         guard.bootstrap();
@@ -65,13 +69,62 @@ class CommunityAccessGuardTest {
         CommunityUser admin = users.find(CommunityAccessGuard.BOOTSTRAP_USERNAME).orElseThrow();
         assertTrue(admin.isAdmin());
         assertTrue(admin.isEnabled());
-        assertTrue(guard.authenticate(CommunityAccessGuard.BOOTSTRAP_USERNAME, "bootstrap-secret").isPresent());
+        assertTrue(guard.authenticate(CommunityAccessGuard.BOOTSTRAP_USERNAME, "generated-secret").isPresent());
 
-        // Restarting must not reset the admin's password to the bootstrap value.
         users.setPassword(CommunityAccessGuard.BOOTSTRAP_USERNAME, "changed-later");
         guard.bootstrap();
         assertTrue(guard.authenticate(CommunityAccessGuard.BOOTSTRAP_USERNAME, "changed-later").isPresent());
-        assertFalse(guard.authenticate(CommunityAccessGuard.BOOTSTRAP_USERNAME, "bootstrap-secret").isPresent());
+        assertFalse(guard.authenticate(CommunityAccessGuard.BOOTSTRAP_USERNAME, "generated-secret").isPresent());
+    }
+
+    @Test
+    void anOperatorSetPasswordIsTheAdminPasswordOnEveryStart() {
+        // The behaviour that was missing: setting the variable on an existing
+        // installation did nothing at all, silently, which is exactly when it is
+        // needed - the admin password has been lost and this is the way back in.
+        CommunityUserStore users = store();
+        users.create(CommunityAccessGuard.BOOTSTRAP_USERNAME, "forgotten-password", CommunityRole.ADMIN);
+
+        System.setProperty(PASSWORD_PROPERTY, "operator-choice");
+        CommunityAccessGuard guard = new CommunityAccessGuard(users);
+        guard.bootstrap();
+
+        assertTrue(guard.authenticate(CommunityAccessGuard.BOOTSTRAP_USERNAME, "operator-choice").isPresent());
+        assertFalse(guard.authenticate(CommunityAccessGuard.BOOTSTRAP_USERNAME, "forgotten-password").isPresent());
+    }
+
+    @Test
+    void anOperatorSetPasswordAlsoRestoresADisabledOrDemotedAdmin() {
+        // Half a recovery lever is no lever: a re-enabled account that is no
+        // longer an admin still cannot reach account management.
+        CommunityUserStore users = store();
+        users.create(CommunityAccessGuard.BOOTSTRAP_USERNAME, "operator-choice", CommunityRole.USER);
+        users.setEnabled(CommunityAccessGuard.BOOTSTRAP_USERNAME, false);
+
+        System.setProperty(PASSWORD_PROPERTY, "operator-choice");
+        CommunityAccessGuard guard = new CommunityAccessGuard(users);
+        guard.bootstrap();
+
+        CommunityUser admin = users.find(CommunityAccessGuard.BOOTSTRAP_USERNAME).orElseThrow();
+        assertTrue(admin.isEnabled());
+        assertTrue(admin.isAdmin());
+        assertTrue(guard.authenticate(CommunityAccessGuard.BOOTSTRAP_USERNAME, "operator-choice").isPresent());
+    }
+
+    @Test
+    void anUnchangedOperatorPasswordDoesNotSignAnybodyOut() {
+        // Restarts are routine; they must not end sessions or rewrite the file
+        // just because the variable is still set.
+        CommunityUserStore users = store();
+        users.create(CommunityAccessGuard.BOOTSTRAP_USERNAME, "operator-choice", CommunityRole.ADMIN);
+
+        System.setProperty(PASSWORD_PROPERTY, "operator-choice");
+        CommunityAccessGuard guard = new CommunityAccessGuard(users);
+        String token = guard.issueSession(CommunityAccessGuard.BOOTSTRAP_USERNAME);
+
+        guard.bootstrap();
+
+        assertTrue(guard.isValidSession(token));
     }
 
     @Test
