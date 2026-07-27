@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -28,6 +30,7 @@ import org.springframework.stereotype.Component;
  * Configuring no password leaves the gate open, which keeps existing
  * installations and the desktop build working exactly as before.
  */
+@Slf4j
 @Component
 public class CommunityAccessGuard {
 
@@ -47,6 +50,25 @@ public class CommunityAccessGuard {
      */
     private final Map<String, Instant> sessions = new ConcurrentHashMap<>();
     private final SecureRandom random = new SecureRandom();
+
+    /**
+     * Says on startup whether the gate is up.
+     *
+     * Worth a line in the log because the failure is silent otherwise: a
+     * password that never reaches the process looks exactly like a deployment
+     * with no password configured, and the only symptom is a sign-in screen that
+     * never appears.
+     */
+    @PostConstruct
+    void reportConfiguration() {
+        if (isEnabled()) {
+            log.info("[chat2db] Shared-password sign-in is ENABLED. Sessions expire after {} days.",
+                    SESSION_TTL.toDays());
+        } else {
+            log.warn("[chat2db] No shared password configured: anyone who can reach this port has full access "
+                    + "to every stored connection. Set CHAT2DB_COMMUNITY_PASSWORD to require sign-in.");
+        }
+    }
 
     /** Whether a password is configured at all. No password means no gate. */
     public boolean isEnabled() {

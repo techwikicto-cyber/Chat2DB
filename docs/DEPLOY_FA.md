@@ -242,9 +242,30 @@ CHAT2DB_COMMUNITY_ENCRYPTION_KEY=<کلیدی که ساختید>
 
 اگر `CHAT2DB_COMMUNITY_PASSWORD` را تنظیم کنید، قبل از باز شدن برنامه یک صفحه‌ی ورود نمایش داده می‌شود و **تمام** درخواست‌های `/api` بدون نشست معتبر با خطای ۴۰۱ رد می‌شوند — یعنی محافظت واقعی است، نه فقط پنهان کردن صفحه.
 
-```env
-CHAT2DB_COMMUNITY_PASSWORD=یک-گذرواژه-طولانی-و-تصادفی
-CHAT2DB_BIND_ADDRESS=0.0.0.0
+```bash
+# فایل باید کنار docker-compose.yml باشد، نه در ریشه‌ی مخزن
+cp docker/.env.example docker/.env
+# سپس CHAT2DB_COMMUNITY_PASSWORD را در آن از حالت کامنت خارج و مقداردهی کنید
+docker compose -f docker/docker-compose.yml up -d
+```
+
+**اگر صفحه‌ی ورود نیامد**، تقریباً همیشه یعنی متغیر به کانتینر نرسیده. سه دستور برای تشخیص:
+
+```bash
+# ۱) آیا Compose اصلاً مقدار را می‌بیند؟ نباید null باشد
+docker compose -f docker/docker-compose.yml config | grep CHAT2DB_COMMUNITY_PASSWORD
+
+# ۲) سرور در لاگ راه‌اندازی چه می‌گوید؟
+docker compose -f docker/docker-compose.yml logs | grep -i "shared-password"
+
+# ۳) پاسخ خود سرویس؛ باید required:true باشد
+curl -s http://127.0.0.1:10825/api/community/auth/status
+```
+
+اگر `.env` را در ریشه‌ی مخزن نگه می‌دارید، باید صریح معرفی‌اش کنید:
+
+```bash
+docker compose --env-file .env -f docker/docker-compose.yml up -d
 ```
 
 نکته‌های مهم:

@@ -9,6 +9,11 @@
 # repository and the encryption key is generated into the data volume on first
 # start.
 #
+# Settings go in `docker/.env`, next to this file - see docker/.env.example.
+# That is the project directory for the command above, so a `.env` in the
+# repository root is ignored without a word. `docker compose -f
+# docker/docker-compose.yml config` prints what actually reached the container.
+#
 # SECURITY: the default binding is 127.0.0.1, so the service is reachable only
 # from the machine it runs on. Anyone who can reach this port gets full access
 # to every database connection stored in it, so before setting

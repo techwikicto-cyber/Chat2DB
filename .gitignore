@@ -94,3 +94,6 @@ package-lock.json
 
 # Claude Code's permission cache: machine-local absolute paths, never portable.
 /.claude/settings.local.json
+
+# Local deployment settings. docker/.env holds the sign-in password.
+.env
