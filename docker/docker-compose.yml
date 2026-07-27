@@ -54,9 +54,8 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-      # Beans initialise eagerly (see docker/entrypoint.sh), so the port opens
-      # later than it used to - but once it does, the app is genuinely ready and
-      # the first page load no longer pays for the warm-up.
+      # Generous, because CHAT2DB_EAGER_INIT=true (see docker/entrypoint.sh)
+      # moves subsystem warm-up into startup and delays the port opening.
       start_period: 180s
 
 volumes:

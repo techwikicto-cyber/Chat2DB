@@ -85,18 +85,25 @@ else
   export CHAT2DB_COMMUNITY_ENCRYPTION_KEY_FILE="${DEFAULT_KEY_FILE}"
 fi
 
-# Eager bean initialisation. The application default is lazy, which suits the
-# desktop build - it starts fast and pays for each subsystem the first time
-# something touches it. In a container that bill lands on whoever opens the page
-# first, as a wait with nothing on screen. Here the healthcheck already gates
-# readiness, so the work belongs in startup. Set CHAT2DB_LAZY_INIT=true to go
-# back to the lazy default.
+# Bean initialisation strategy.
 #
+# Lazy is the application default and stays the default here: it starts fast and
+# builds each subsystem the first time something touches it. Eager initialisation
+# moves that work into startup, where the healthcheck already gates readiness, so
+# the first page load does not pay for it - but it also builds beans that lazy
+# initialisation never reaches, and one of those failing takes the whole
+# container down rather than one request. Opt in with CHAT2DB_EAGER_INIT=true and
+# watch the first start.
+lazy_init=true
+if [ "${CHAT2DB_EAGER_INIT:-false}" = "true" ]; then
+  lazy_init=false
+fi
+
 # Word splitting on JAVA_OPTS is intended: it carries multiple JVM flags.
 # shellcheck disable=SC2086
 exec java \
   -Dloader.path=/app/lib \
-  -Dspring.main.lazy-initialization="${CHAT2DB_LAZY_INIT:-false}" \
+  -Dspring.main.lazy-initialization="${lazy_init}" \
   -Dchat2db.gui=false \
   -Dchat2db.runtime.mode=community \
   -Dchat2db.network.status=OFFLINE \

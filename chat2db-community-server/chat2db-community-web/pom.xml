@@ -21,6 +21,19 @@
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-starter-model-anthropic</artifactId>
+            <!--
+              Excluded for the same reason as the OpenAI and Vertex starters
+              below: AiModelFactory builds every chat model by hand from the
+              connection the user saved, so the auto-configured client is never
+              injected. It is also unusable - it asserts a non-null API key at
+              construction, and there is no application-wide key to give it.
+            -->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.ai</groupId>
+                    <artifactId>spring-ai-autoconfigure-model-anthropic</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.ai</groupId>
