@@ -14,6 +14,7 @@ import { useGlobalStore } from '@/store/global';
 import { useUserStore } from '@/store/user';
 
 import OfflineAvatar from '@/blocks/PersonalCenter/components/OfflineAvatar';
+import { useCommunityAuth } from '@/blocks/CommunityAuth';
 import ProductLogo from '@/components/Logo';
 import CustomLayout from '@/components/CustomLayout';
 import StreamSidebar from './components/StreamSidebar';
@@ -88,6 +89,8 @@ function CommunityMainPage() {
     ],
     [],
   );
+
+  const { required: signInRequired, signOut } = useCommunityAuth();
 
   const showLeftContainer = useMemo(() => checkIsSharePage(), []);
 
@@ -498,6 +501,24 @@ function CommunityMainPage() {
             ) : (
               <OfflineAvatar />
             )}
+            {/* Signing out lived on the Account panel, two clicks behind
+                Settings. It belongs beside Settings at the foot of the rail,
+                where leaving is one click from wherever the user is. Absent
+                when sign-in is switched off on the server: there is nothing to
+                sign out of. */}
+            {signInRequired &&
+              (sidebarExpanded ? (
+                <div className={styles.navItem} onClick={signOut}>
+                  <IconfontSvg code="icon-logout" className={styles.navItemIcon} size={20} />
+                  <span className={styles.navItemLabel}>{i18n('login.label.signOut')}</span>
+                </div>
+              ) : (
+                <Tooltip title={i18n('login.label.signOut')} placement="right">
+                  <span>
+                    <IconButton size={{ boxSize: 34, iconSize: 20 }} code="icon-logout" onClick={signOut} />
+                  </span>
+                </Tooltip>
+              ))}
           </div>
         )}
       </div>
