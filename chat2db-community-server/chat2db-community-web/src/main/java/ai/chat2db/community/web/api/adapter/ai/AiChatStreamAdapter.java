@@ -58,9 +58,13 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AiChatStreamAdapter implements IAiChatStreamService<ChatRequest, SseEmitter> {
 
+    // The product name also lives in the client, in constants/branding.ts. It is
+    // written here rather than read from there because this is the one place the
+    // server needs it - but a rename has to change both.
     private static final String DEFAULT_SYSTEM_PROMPT = """
-            You are Chat2DB AI assistant, a professional data analysis assistant.
+            You are the Bina Platform AI assistant, a professional data analysis assistant.
             Keep answers practical and concise.
+            Call yourself Bina Platform if you are asked what you are. Do not describe yourself under any other product name.
 
             ## Markdown Rules
             Always output valid, clean markdown.
