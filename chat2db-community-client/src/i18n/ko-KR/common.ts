@@ -74,6 +74,8 @@ export default {
   'common.button.copy': '복사',
   'common.button.paste': '붙여넣기',
   'common.button.copyName': '이름 복사',
+  'common.button.showFullSql': '전체 SQL 보기',
+  'common.button.showLess': '간략히 보기',
   'common.button.copySuccessfully': '복사되었습니다',
   'common.button.createConsole': '콘솔 만들기',
   'common.button.exportWord': 'Word로 내보내기',

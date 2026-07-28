@@ -115,17 +115,48 @@ export const useStyles = createStyles(({ css, token }) => {
         margin-right: 6px;
       }
     `,
+    sqlBlock: css`
+      margin-top: 4px;
+    `,
     sqlSummary: css`
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
       overflow: hidden;
-      margin-top: 4px;
       color: ${token.colorTextSecondary};
       font-family: ${token.fontFamilyCode};
       font-size: 12px;
       line-height: 18px;
       word-break: break-word;
+    `,
+    /* Expanded: the statement as it was written, line breaks kept, because that
+       is what makes a long one readable. Tall ones scroll inside the row rather
+       than pushing the rest of the log off the panel. */
+    sqlFull: css`
+      max-height: 320px;
+      overflow: auto;
+      color: ${token.colorText};
+      font-family: ${token.fontFamilyCode};
+      font-size: 12px;
+      line-height: 18px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      /* SQL reads left to right whatever the interface language is. */
+      direction: ltr;
+      text-align: left;
+    `,
+    sqlToggle: css`
+      margin-top: 2px;
+      padding: 0;
+      border: none;
+      background: none;
+      color: ${token.colorPrimary};
+      font-size: 12px;
+      line-height: 18px;
+      cursor: pointer;
+      &:hover {
+        color: ${token.colorPrimaryHover};
+      }
     `,
     metaLine: css`
       display: flex;

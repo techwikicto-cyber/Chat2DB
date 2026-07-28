@@ -74,6 +74,8 @@ export default {
   'common.button.copy': 'Copy',
   'common.button.paste': 'Paste',
   'common.button.copyName': 'Copy name',
+  'common.button.showFullSql': 'Show full SQL',
+  'common.button.showLess': 'Show less',
   'common.button.copySuccessfully': 'Copy Successfully',
   'common.button.createConsole': 'Create Console',
   'common.button.exportWord': 'Export to Word',

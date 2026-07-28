@@ -79,6 +79,8 @@ export default {
   'common.button.copy': 'کپی',
   'common.button.paste': 'چسباندن',
   'common.button.copyName': 'کپی نام',
+  'common.button.showFullSql': 'نمایش کامل کوئری',
+  'common.button.showLess': 'نمایش کوتاه',
   'common.button.copySuccessfully': 'با موفقیت کپی شد',
   'common.button.createConsole': 'ساخت کنسول',
   'common.button.exportWord': 'استخراج به Word',

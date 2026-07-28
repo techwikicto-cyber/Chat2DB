@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import classnames from 'classnames';
 import ScrollLoading from '@/components/ScrollLoading';
 import historyService, { IHistoryRecord, OperationTypeEnum } from '@/service/history';
@@ -32,9 +32,69 @@ function getSqlSummary(sql?: string | null) {
   return normalizedSql || '--';
 }
 
+function getHistoryRowKey(item: IDatasource) {
+  return String(item.id || `${item.gmtCreate}-${item.dataSourceName}-${item.ddl}`);
+}
+
 function getHistorySourceKey(item: IDatasource) {
   return item.dataSourceId ? String(item.dataSourceId) : '';
 }
+
+interface IHistorySqlProps {
+  /** The list's copy: whitespace intact, and cut off at 200 characters. */
+  previewSql?: string | null;
+  /** Set once the whole statement has been fetched, which also means expanded. */
+  fullSql?: string;
+  /** The server marked this row's SQL as cut short. */
+  hasMore?: boolean;
+  onToggle: (event: React.MouseEvent) => void;
+}
+
+/**
+ * One statement in the execution log.
+ *
+ * Collapsed it is a two-line summary, which is what makes the list scannable;
+ * the trouble was that there was no way out of it. The list endpoint sends only
+ * the first 200 characters, and the summary clamps whatever arrives to two
+ * lines, so a statement of any size read as an unexplained "...". Expanding
+ * fetches the rest and shows it as written, line breaks and all.
+ */
+const HistorySql = memo<IHistorySqlProps>(({ previewSql, fullSql, hasMore, onToggle }) => {
+  const { styles } = useStyles();
+  const textRef = useRef<HTMLDivElement>(null);
+  const [clamped, setClamped] = useState(false);
+  const expanded = fullSql !== undefined;
+
+  // Whether two lines were enough depends on the panel's width, which the user
+  // can drag, so this is measured rather than guessed at from the text length.
+  useEffect(() => {
+    const element = textRef.current;
+    if (!element || expanded) {
+      return;
+    }
+    const measure = () => setClamped(element.scrollHeight - element.clientHeight > 1);
+    measure();
+    if (typeof ResizeObserver === 'undefined') {
+      return;
+    }
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [previewSql, expanded]);
+
+  return (
+    <div className={styles.sqlBlock}>
+      <div ref={textRef} className={expanded ? styles.sqlFull : styles.sqlSummary}>
+        {expanded ? fullSql : getSqlSummary(previewSql)}
+      </div>
+      {(expanded || clamped || hasMore) && (
+        <button type="button" className={styles.sqlToggle} onClick={onToggle}>
+          {expanded ? i18n('common.button.showLess') : i18n('common.button.showFullSql')}
+        </button>
+      )}
+    </div>
+  );
+});
 
 function getHistoryDataSourceFallback(item: IDatasource) {
   return item.dataSourceId ? `DataSource #${item.dataSourceId}` : '-';
@@ -75,6 +135,9 @@ export default memo<IProps>((props) => {
   const dataSourceList = useTreeStore((state) => state.dataSourceList);
   const [dataSource, setDataSource] = useState<IDatasource[]>([]);
   const [finished, setFinished] = useState(false);
+  // Row key -> the whole statement. A key being present is what "expanded"
+  // means, so the fetched text is kept for as long as the row stays open.
+  const [expandedSql, setExpandedSql] = useState<Record<string, string>>({});
   const outputContentRef = useRef<HTMLDivElement>(null);
   const curPageRef = useRef(1);
   const loadingRef = useRef(false);
@@ -119,6 +182,26 @@ export default memo<IProps>((props) => {
     }
     return item;
   }, []);
+
+  const toggleSqlExpanded = useCallback(
+    async (event: React.MouseEvent, item: IDatasource) => {
+      // The row itself opens the statement in a console tab. Expanding in place
+      // is the other thing someone might want, so it must not do both.
+      event.stopPropagation();
+      const rowKey = getHistoryRowKey(item);
+      if (expandedSql[rowKey] !== undefined) {
+        setExpandedSql((prev) => {
+          const next = { ...prev };
+          delete next[rowKey];
+          return next;
+        });
+        return;
+      }
+      const detail = await getFullHistoryRecord(item);
+      setExpandedSql((prev) => ({ ...prev, [rowKey]: detail.ddl || item.ddl || '' }));
+    },
+    [expandedSql, getFullHistoryRecord],
+  );
 
   const getHistoryList = useCallback(async () => {
     if (loadingRef.current || finishedRef.current) {
@@ -245,9 +328,10 @@ export default memo<IProps>((props) => {
               );
               const sqlScope = [item.databaseName, item.schemaName].filter(Boolean).join(' / ');
               const statusIsSuccess = isSuccessStatus(item.status);
+              const rowKey = getHistoryRowKey(item);
               return (
                 <div
-                  key={item.id || `${item.gmtCreate}-${item.dataSourceName}-${item.ddl}`}
+                  key={rowKey}
                   className={styles.outputItem}
                   onClick={() => openHistoryTab(item)}
                 >
@@ -264,7 +348,13 @@ export default memo<IProps>((props) => {
                           </Tooltip>
                         )}
                       </div>
-                      <div className={styles.sqlSummary}>{getSqlSummary(item.ddl)}</div>
+                      <HistorySql
+                        previewSql={item.ddl}
+                        fullSql={expandedSql[rowKey]}
+                        hasMore={item.more}
+                        onToggle={(event) => toggleSqlExpanded(event, item)}
+                      />
+
                       <div className={styles.metaLine}>
                         <span>{item.gmtCreate}</span>
                         {!!item.useTime && <span>{i18n('common.text.executionTime', item.useTime)}</span>}

@@ -74,6 +74,8 @@ export default {
   'common.button.copy': '复制',
   'common.button.paste': '粘贴',
   'common.button.copyName': '复制名称',
+  'common.button.showFullSql': '显示完整 SQL',
+  'common.button.showLess': '收起',
   'common.button.copySuccessfully': '复制成功',
   'common.button.createConsole': '新建控制台',
   'common.button.exportWord': '导出到Word',

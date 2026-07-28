@@ -74,6 +74,8 @@ export default {
   'common.button.copy': 'Copiar',
   'common.button.paste': 'Pegar',
   'common.button.copyName': 'Copiar nombre',
+  'common.button.showFullSql': 'Ver SQL completo',
+  'common.button.showLess': 'Ver menos',
   'common.button.copySuccessfully': 'Copiado correctamente',
   'common.button.createConsole': 'Crear consola',
   'common.button.exportWord': 'Exportar a Word',

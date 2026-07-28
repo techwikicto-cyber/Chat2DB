@@ -74,6 +74,8 @@ export default {
   'common.button.copy': 'コピー',
   'common.button.paste': '貼り付け',
   'common.button.copyName': '名前をコピー',
+  'common.button.showFullSql': 'SQL全体を表示',
+  'common.button.showLess': '折りたたむ',
   'common.button.copySuccessfully': 'コピー成功',
   'common.button.createConsole': '新しいコンソールを作成',
   'common.button.exportWord': 'Wordにエクスポート',

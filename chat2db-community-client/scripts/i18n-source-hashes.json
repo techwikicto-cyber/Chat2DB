@@ -5,7 +5,7 @@
     "es-ES": {
       "ai.ts": "391a6e14c58d8401bf3bc245eca5bdd4b66efd8225a877bfbbcae01a1c1c019a",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
-      "common.ts": "9ae18f30c9bec0784fc6dca322c63dd440d4d3281e223dbddfd811685f63a7cd",
+      "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
       "connection.ts": "41d07fd10c9550ae51995620cc998de5e99add35edb31c2bb592864c76c13688",
       "dashboard.ts": "12143007f6db386aaa16fa97977774962dc16c001bffb48375423777c4f80f39",
       "editTable.ts": "0f7a808f50053cd52b183d156bb4fd46bb125b8058f8774deb61c7f02894a350",
@@ -32,7 +32,7 @@
     "ko-KR": {
       "ai.ts": "391a6e14c58d8401bf3bc245eca5bdd4b66efd8225a877bfbbcae01a1c1c019a",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
-      "common.ts": "9ae18f30c9bec0784fc6dca322c63dd440d4d3281e223dbddfd811685f63a7cd",
+      "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
       "connection.ts": "41d07fd10c9550ae51995620cc998de5e99add35edb31c2bb592864c76c13688",
       "dashboard.ts": "12143007f6db386aaa16fa97977774962dc16c001bffb48375423777c4f80f39",
       "editTable.ts": "0f7a808f50053cd52b183d156bb4fd46bb125b8058f8774deb61c7f02894a350",
@@ -59,7 +59,7 @@
     "fa-IR": {
       "ai.ts": "391a6e14c58d8401bf3bc245eca5bdd4b66efd8225a877bfbbcae01a1c1c019a",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
-      "common.ts": "9ae18f30c9bec0784fc6dca322c63dd440d4d3281e223dbddfd811685f63a7cd",
+      "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
       "connection.ts": "41d07fd10c9550ae51995620cc998de5e99add35edb31c2bb592864c76c13688",
       "dashboard.ts": "12143007f6db386aaa16fa97977774962dc16c001bffb48375423777c4f80f39",
       "editTable.ts": "0f7a808f50053cd52b183d156bb4fd46bb125b8058f8774deb61c7f02894a350",

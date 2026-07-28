@@ -43,7 +43,10 @@ public class EasyLogSink implements Sink {
 
         webLog.setMethod(method);
         webLog.setPath(LogUtils.cutLog(path));
-        webLog.setQuery(LogUtils.cutLog(request.getQuery()));
+        // The query goes through the same redaction as the bodies. It was the one
+        // place a credential could reach the log untouched, back when redaction
+        // was a blanket smudge that only bodies received.
+        webLog.setQuery(LogUtils.maskString(LogUtils.cutLog(request.getQuery())));
         webLog.setDuration(correlation.getDuration().toMillis());
         webLog.setStartTime(LocalDateTime.ofInstant(correlation.getStart(), ZoneId.systemDefault()));
         webLog.setEndTime(LocalDateTime.ofInstant(correlation.getEnd(), ZoneId.systemDefault()));
