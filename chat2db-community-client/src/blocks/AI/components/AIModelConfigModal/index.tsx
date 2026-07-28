@@ -103,6 +103,13 @@ export default function AIModelConfigModal({ open, onClose, onChanged }: AIModel
     setSaving(true);
     try {
       const result = await saveAIModelConfig({
+        // validateFields returns only the fields the form renders, and Vertex
+        // AI's project and location are no longer among them. They are still in
+        // the form's store, put there when the configuration was loaded, so
+        // read them from there - otherwise saving a configuration that has them
+        // would quietly clear them.
+        projectId: form.getFieldValue('projectId'),
+        location: form.getFieldValue('location'),
         ...values,
         id: editingId || undefined,
       });
@@ -293,12 +300,11 @@ export default function AIModelConfigModal({ open, onClose, onChanged }: AIModel
             <Form.Item name="baseUrl" label={i18n('setting.modelConfig.baseUrl')}>
               <Input autoComplete="off" placeholder={i18n('setting.modelConfig.placeholder.baseUrl')} />
             </Form.Item>
-            <Form.Item name="projectId" label={i18n('setting.modelConfig.projectId')}>
-              <Input autoComplete="off" placeholder={i18n('setting.modelConfig.placeholder.projectId')} />
-            </Form.Item>
-            <Form.Item name="location" label={i18n('setting.modelConfig.location')}>
-              <Input autoComplete="off" placeholder={i18n('setting.modelConfig.placeholder.location')} />
-            </Form.Item>
+            {/* Project ID and Location are Vertex AI's, and are not asked for
+                here: nobody configuring a model against an OpenAI-compatible
+                endpoint needs them, and two empty boxes made the form look like
+                it wanted more than it does. The values are still carried through
+                on save, so a configuration that has them keeps them. */}
             <Form.Item name="temperature" label={i18n('setting.modelConfig.temperature')}>
               <InputNumber
                 style={{ width: '100%' }}
