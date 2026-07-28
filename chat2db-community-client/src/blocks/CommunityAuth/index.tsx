@@ -2,6 +2,7 @@ import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, 
 import { Button, Input, Select, Spin } from 'antd';
 import i18n from '@/i18n';
 import ProductLogo from '@/components/Logo';
+import NetworkBackground from '@/components/NetworkBackground';
 import { useProductName } from '@/hooks/useProductName';
 import { LangType } from '@/constants/settings';
 import { useGlobalStore } from '@/store/global';
@@ -141,6 +142,7 @@ function CommunityLoginScreen({ onSignedIn }: { onSignedIn: () => void }) {
 
   return (
     <div className={styles.screen}>
+      <NetworkBackground />
       <div className={styles.card}>
         {/* The sign-in screen is the first thing anyone sees, and the language
             setting used to live on the far side of it. The choice is written

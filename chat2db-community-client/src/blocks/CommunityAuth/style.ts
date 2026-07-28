@@ -3,14 +3,21 @@ import { createStyles } from 'antd-style';
 export const useStyles = createStyles(({ css, token }) => {
   return {
     screen: css`
+      position: relative;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
       background: ${token.colorBgLayout};
+      /* The drifting network is drawn across this box, so it is the positioning
+         context, and it clips. */
+      overflow: hidden;
     `,
     card: css`
+      /* Sits above the animation behind it. */
+      position: relative;
+      z-index: 1;
       width: 100%;
       max-width: 380px;
       display: flex;

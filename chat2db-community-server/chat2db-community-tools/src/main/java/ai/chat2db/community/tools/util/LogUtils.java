@@ -58,14 +58,10 @@ public class LogUtils {
         "secret", "secretkey", "token"};
 
     /**
-     * A JSON field: the name and colon, then either a quoted string (escapes
-     * allowed) or a bare scalar.
-     */
-    private static final Pattern JSON_FIELD = Pattern.compile(
-        "(\"([A-Za-z0-9_.\\-]{1,64})\"\\s*:\\s*)(\"(?:\\\\.|[^\"\\\\])*\"|[^,}\\]\\s]+)");
-
-    /**
      * A form-encoded or query-string parameter.
+     *
+     * <p>Both quantifiers are over character classes, which the regex engine
+     * walks iteratively. That matters - see {@link #redactJsonFields(String)}.
      */
     private static final Pattern PARAMETER = Pattern.compile("([A-Za-z0-9_.\\-]{1,64})=([^&\\s]*)");
 
@@ -92,17 +88,108 @@ public class LogUtils {
         return redactParameters(redactJsonFields(input));
     }
 
+    /**
+     * Replace the value of every JSON field whose name says it holds a credential.
+     *
+     * <p>Scanned by hand rather than matched with a regex, and that is the whole
+     * point of the method. The obvious pattern for a JSON string value -
+     * {@code "(?:\\.|[^"\\])*"} - puts a quantifier around a group, and the JDK
+     * engine recurses once per repetition for those. A chat message of a few
+     * thousand characters was enough to overflow the stack, and because this
+     * runs while the response body is being logged, the error escaped and left
+     * the client with a truncated response. This walks the string once, and the
+     * only memory it uses is the copy it is building.
+     */
     private static String redactJsonFields(String input) {
-        Matcher matcher = JSON_FIELD.matcher(input);
-        StringBuilder output = new StringBuilder(input.length());
-        while (matcher.find()) {
-            String replacement = isSensitiveField(matcher.group(2)) && !isEmptyJsonValue(matcher.group(3))
-                ? matcher.group(1) + '"' + REDACTED + '"'
-                : matcher.group();
-            matcher.appendReplacement(output, Matcher.quoteReplacement(replacement));
+        int length = input.length();
+        // Built only if something actually needs hiding: most bodies have nothing.
+        StringBuilder output = null;
+        int copiedUpTo = 0;
+        int index = 0;
+
+        while (index < length) {
+            if (input.charAt(index) != '"') {
+                index++;
+                continue;
+            }
+            int nameEnd = endOfJsonString(input, index);
+            if (nameEnd < 0) {
+                break;
+            }
+            int afterName = skipWhitespace(input, nameEnd + 1);
+            if (afterName >= length || input.charAt(afterName) != ':') {
+                // A string that is not a field name - a value in an array, say.
+                index = nameEnd + 1;
+                continue;
+            }
+
+            int valueStart = skipWhitespace(input, afterName + 1);
+            int valueEnd = endOfJsonValue(input, valueStart);
+            if (valueEnd < 0) {
+                break;
+            }
+            if (isSensitiveField(input.substring(index + 1, nameEnd))
+                    && !isEmptyJsonValue(input, valueStart, valueEnd)) {
+                if (output == null) {
+                    output = new StringBuilder(length);
+                }
+                output.append(input, copiedUpTo, valueStart).append('"').append(REDACTED).append('"');
+                copiedUpTo = valueEnd;
+            }
+            // Past the value either way, so nothing inside a value is ever read
+            // as a field name.
+            index = valueEnd;
         }
-        matcher.appendTail(output);
-        return output.toString();
+
+        return output == null ? input : output.append(input, copiedUpTo, length).toString();
+    }
+
+    /**
+     * @param input the text being scanned.
+     * @param quoteIndex index of the opening quote.
+     * @return index of the closing quote, or -1 if the string never ends - which
+     *         happens when the body was cut short before being logged.
+     */
+    private static int endOfJsonString(String input, int quoteIndex) {
+        for (int index = quoteIndex + 1; index < input.length(); index++) {
+            char character = input.charAt(index);
+            if (character == '\\') {
+                index++;
+            } else if (character == '"') {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    private static int skipWhitespace(String input, int from) {
+        int index = from;
+        while (index < input.length() && Character.isWhitespace(input.charAt(index))) {
+            index++;
+        }
+        return index;
+    }
+
+    /**
+     * @return the index one past the end of the value, or -1 if it never ends.
+     */
+    private static int endOfJsonValue(String input, int valueStart) {
+        if (valueStart >= input.length()) {
+            return -1;
+        }
+        if (input.charAt(valueStart) == '"') {
+            int end = endOfJsonString(input, valueStart);
+            return end < 0 ? -1 : end + 1;
+        }
+        int index = valueStart;
+        while (index < input.length()) {
+            char character = input.charAt(index);
+            if (character == ',' || character == '}' || character == ']' || Character.isWhitespace(character)) {
+                break;
+            }
+            index++;
+        }
+        return index == valueStart ? -1 : index;
     }
 
     private static String redactParameters(String input) {
@@ -131,8 +218,12 @@ public class LogUtils {
         return false;
     }
 
-    private static boolean isEmptyJsonValue(String value) {
-        return "\"\"".equals(value) || "null".equals(value);
+    private static boolean isEmptyJsonValue(String input, int valueStart, int valueEnd) {
+        int length = valueEnd - valueStart;
+        if (length == 2) {
+            return input.charAt(valueStart) == '"' && input.charAt(valueStart + 1) == '"';
+        }
+        return length == 4 && input.startsWith("null", valueStart);
     }
 
 

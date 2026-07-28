@@ -79,4 +79,42 @@ class LogUtilsMaskStringTest {
         assertEquals("", LogUtils.maskString(""));
         assertEquals(null, LogUtils.maskString(null));
     }
+
+    @Test
+    void survivesABodyWithAVeryLongValue() {
+        // The regex this replaced recursed once per character of a string value
+        // and overflowed the stack somewhere past two thousand. Chat history
+        // messages are routinely longer than that, and because the redaction
+        // runs while the response is being logged, the error escaped and left
+        // the browser with a truncated response.
+        String longMessage = "x".repeat(50_000);
+        String body = "{\"role\":\"assistant\",\"content\":\"" + longMessage + "\",\"password\":\"hunter2\"}";
+
+        String masked = LogUtils.maskString(body);
+
+        assertTrue(masked.contains(longMessage), "the long value should come back whole");
+        assertTrue(masked.contains("\"password\":\"***\""), "and the credential after it should still be hidden");
+        assertFalse(masked.contains("hunter2"));
+    }
+
+    @Test
+    void survivesABodyThatWasCutShortMidValue() {
+        // cutLog truncates before this runs, so an unterminated string is normal.
+        String masked = LogUtils.maskString("{\"password\":\"abc\",\"content\":\"unterminated");
+
+        assertFalse(masked.contains("abc"));
+        assertTrue(masked.contains("unterminated"));
+    }
+
+    @Test
+    void doesNotReadFieldNamesOutOfInsideAValue() {
+        // The value below contains something that looks like a field. It is text,
+        // not structure, and must not be treated as one.
+        String body = "{\"content\":\"the docs say \\\"password\\\": put it in the vault\",\"token\":\"t0ken\"}";
+
+        String masked = LogUtils.maskString(body);
+
+        assertTrue(masked.contains("put it in the vault"), "prose about a password is not a password");
+        assertFalse(masked.contains("t0ken"), "the real credential is still hidden");
+    }
 }

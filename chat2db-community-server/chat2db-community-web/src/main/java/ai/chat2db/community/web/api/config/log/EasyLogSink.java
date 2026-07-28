@@ -29,7 +29,14 @@ public class EasyLogSink implements Sink {
     public void write(final Correlation correlation, final HttpRequest request, final HttpResponse response) {
         try {
             printLog(correlation, request, response);
-        } catch (Exception e) {
+        } catch (Throwable e) { // impl-contract: writing a log line must never affect the response.
+            // Throwable, not Exception. This sink runs while the response body
+            // is being handed back, so anything that escapes it truncates the
+            // response the client is reading - which is what a StackOverflowError
+            // in the redaction pass did: the browser got
+            // ERR_INCOMPLETE_CHUNKED_ENCODING and the page reported that it
+            // could not load. A failure to log is worth a line in the log and
+            // nothing more.
             log.error("Failed to record web log", e);
         }
     }
