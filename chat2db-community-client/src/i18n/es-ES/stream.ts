@@ -3,6 +3,7 @@ export default {
   'stream.codeBlock.pin': 'Fijar en la consola',
   'stream.codeBlock.copy': 'Copiar',
   'stream.codeBlock.copied': 'Copiado',
+  'stream.codeBlock.download': 'Descargar',
   'stream.error.loadModelList': 'No se pudo cargar la lista de modelos',
   'stream.error.loadSessionMessages': 'No se pudieron cargar los mensajes de la sesión',
   'stream.warning.selectModel': 'Seleccione primero un modelo',

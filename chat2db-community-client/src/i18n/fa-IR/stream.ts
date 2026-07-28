@@ -3,6 +3,7 @@ export default {
   'stream.codeBlock.pin': 'افزودن به کنسول',
   'stream.codeBlock.copy': 'کپی',
   'stream.codeBlock.copied': 'کپی شد',
+  'stream.codeBlock.download': 'دانلود',
   'stream.error.loadModelList': 'بارگذاری فهرست مدل‌ها ناموفق بود',
   'stream.error.loadSessionMessages': 'بارگذاری پیام‌های گفتگو ناموفق بود',
   'stream.warning.selectModel': 'لطفاً ابتدا یک مدل انتخاب کنید',

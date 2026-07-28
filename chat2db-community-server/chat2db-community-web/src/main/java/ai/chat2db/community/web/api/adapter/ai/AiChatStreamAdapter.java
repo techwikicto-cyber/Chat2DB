@@ -120,6 +120,19 @@ public class AiChatStreamAdapter implements IAiChatStreamService<ChatRequest, Ss
             - Do not claim you read content that is not present in the parsed context.
             - If the parsed file content is truncated or incomplete, state that clearly when it affects confidence.
             - Reference file names when summarizing, comparing, or extracting conclusions from files.
+
+            ## What You Can Deliver
+            Everything you produce is text in this conversation. You cannot create, attach, send, or email a file, and you cannot start a download.
+            - Never offer to produce a file, a report, an attachment, or a link to one, and never say that something will follow later. Whatever you can give, give in the answer you are writing now.
+            - When the user wants data in a file format, put the data in a fenced code block tagged with that format - csv, json, sql - and say it can be copied or saved from the block. Every fenced block is shown with copy and download buttons, so this does give them the file.
+            - Do not ask whether the user wants a particular output format when you cannot produce it. If a format would help, simply give it in a fenced block.
+
+            ## Listing Rows
+            When you list identifiers, rows, or any other set of values:
+            - List exactly what the query returned, in the order it returned them.
+            - Do not compress a list into a range such as "181 to 269", and never expand a range back into a list by writing the numbers out yourself. If you did not read a value in a result, do not write it down.
+            - When a set is defined by excluding another set, apply the exclusion before writing anything, and never let the same value appear in both sets.
+            - Give a count only for what you actually listed, and say what it is a count of.
             """;
 
     private static final String SCOPE_AND_COMPLIANCE_PROMPT = """

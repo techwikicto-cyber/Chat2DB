@@ -3,6 +3,7 @@ export default {
   'stream.codeBlock.pin': '콘솔에 고정',
   'stream.codeBlock.copy': '복사',
   'stream.codeBlock.copied': '복사됨',
+  'stream.codeBlock.download': '다운로드',
   'stream.error.loadModelList': '모델 목록을 불러오지 못했습니다',
   'stream.error.loadSessionMessages': '세션 메시지를 불러오지 못했습니다',
   'stream.warning.selectModel': '먼저 모델을 선택해 주세요',

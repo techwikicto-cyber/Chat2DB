@@ -3,6 +3,7 @@ export default {
   'stream.codeBlock.pin': 'コンソールに固定',
   'stream.codeBlock.copy': 'コピー',
   'stream.codeBlock.copied': 'コピー済み',
+  'stream.codeBlock.download': 'ダウンロード',
   'stream.error.loadModelList': 'モデルリストの読み込みに失敗しました',
   'stream.error.loadSessionMessages': 'セッションメッセージの読み込みに失敗しました',
   'stream.warning.selectModel': 'モデルを選択してください',

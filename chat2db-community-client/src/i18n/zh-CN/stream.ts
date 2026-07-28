@@ -3,6 +3,7 @@ export default {
   'stream.codeBlock.pin': '钉到控制台',
   'stream.codeBlock.copy': '复制',
   'stream.codeBlock.copied': '已复制',
+  'stream.codeBlock.download': '下载',
   'stream.error.loadModelList': '加载模型列表失败',
   'stream.error.loadSessionMessages': '加载会话消息失败',
   'stream.warning.selectModel': '请先选择模型',

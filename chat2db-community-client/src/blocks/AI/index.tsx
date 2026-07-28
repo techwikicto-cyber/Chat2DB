@@ -4,6 +4,7 @@ import feedback from '@/utils/feedback';
 import {
   CopyOutlined,
   CheckOutlined,
+  DownloadOutlined,
   PushpinOutlined,
   PlusOutlined,
   HistoryOutlined,
@@ -167,6 +168,41 @@ function normalizeTextSegment(text: string) {
     .replace(/(^|\n)-(\d{4}-\d{2}-\d{2})/g, '$1- $2');
 }
 
+/**
+ * What a fenced block is called once it is saved.
+ *
+ * The assistant is told it may hand data over as a fenced block because the
+ * block can be downloaded - so the block has to actually produce a sensible
+ * file. Unknown languages still save; the extension is just the tag.
+ */
+const CODE_BLOCK_FILES: Record<string, { name: string; type: string }> = {
+  csv: { name: 'data.csv', type: 'text/csv' },
+  json: { name: 'data.json', type: 'application/json' },
+  sql: { name: 'query.sql', type: 'application/sql' },
+  md: { name: 'notes.md', type: 'text/markdown' },
+  markdown: { name: 'notes.md', type: 'text/markdown' },
+  txt: { name: 'data.txt', type: 'text/plain' },
+};
+
+function downloadCodeBlock(code: string, language: string) {
+  const descriptor = CODE_BLOCK_FILES[language.toLowerCase()] || {
+    name: `snippet.${language.toLowerCase().replace(/[^a-z0-9]/g, '') || 'txt'}`,
+    type: 'text/plain',
+  };
+  // Excel reads a UTF-8 CSV as mojibake unless it opens with a byte order mark,
+  // and the data here is routinely Persian.
+  const isCsv = descriptor.type === 'text/csv';
+  const blob = new Blob([isCsv ? `\uFEFF${code}` : code], { type: `${descriptor.type};charset=utf-8` });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = descriptor.name;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
 /** Table name click callback Context, used by MarkdownCodeBlock */
 const TableClickContext = React.createContext<((tableName: string) => void) | null>(null);
 
@@ -258,6 +294,17 @@ function MarkdownCodeBlock({ className, children }: { className?: string; childr
     onPinSql?.(code);
   };
 
+  const handleDownload = () => {
+    downloadCodeBlock(code, lang);
+  };
+
+  const downloadButton = (
+    <button className={styles.codeBlockCopyBtn} onClick={handleDownload}>
+      <DownloadOutlined />
+      <span>{i18n('stream.codeBlock.download')}</span>
+    </button>
+  );
+
   if (isSql) {
     return (
       <SQLPreview
@@ -266,16 +313,17 @@ function MarkdownCodeBlock({ className, children }: { className?: string; childr
         language={lang}
         source="ai-markdown-sql-code-block"
         type="block"
-        renderAddons={
-          onPinSql
-            ? () => (
-                <button className={styles.codeBlockCopyBtn} onClick={handlePin}>
-                  <PushpinOutlined />
-                  <span>{i18n('stream.codeBlock.pin')}</span>
-                </button>
-              )
-            : undefined
-        }
+        renderAddons={() => (
+          <>
+            {onPinSql && (
+              <button className={styles.codeBlockCopyBtn} onClick={handlePin}>
+                <PushpinOutlined />
+                <span>{i18n('stream.codeBlock.pin')}</span>
+              </button>
+            )}
+            {downloadButton}
+          </>
+        )}
       />
     );
   }
@@ -291,6 +339,7 @@ function MarkdownCodeBlock({ className, children }: { className?: string; childr
               <span>{i18n('stream.codeBlock.pin')}</span>
             </button>
           )}
+          {downloadButton}
           <button className={styles.codeBlockCopyBtn} onClick={handleCopy}>
             {copied ? <CheckOutlined /> : <CopyOutlined />}
             <span>{copied ? i18n('stream.codeBlock.copied') : i18n('stream.codeBlock.copy')}</span>

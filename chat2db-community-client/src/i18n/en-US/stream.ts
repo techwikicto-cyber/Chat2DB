@@ -3,6 +3,7 @@ export default {
   'stream.codeBlock.pin': 'Pin to Console',
   'stream.codeBlock.copy': 'Copy',
   'stream.codeBlock.copied': 'Copied',
+  'stream.codeBlock.download': 'Download',
   'stream.error.loadModelList': 'Failed to load model list',
   'stream.error.loadSessionMessages': 'Failed to load session messages',
   'stream.warning.selectModel': 'Please select a model first',
