@@ -1844,7 +1844,15 @@ export default function AI({ variant = 'page', onTableClick, onPinSql, onSession
                         ))}
                       </div>
                     ) : null}
-                    <div className={styles.userBubble}>{round.user.content}</div>
+                    {/* dir="auto" takes the base direction from the first
+                        letter that has one, so a Persian question reads
+                        right-to-left and an English one left-to-right. Laid out
+                        left-to-right regardless, a Persian sentence containing
+                        a table or column name puts that name at the wrong end
+                        of the line and the sentence stops making sense. */}
+                    <div dir="auto" className={styles.userBubble}>
+                      {round.user.content}
+                    </div>
                   </div>
                 </div>
               )}

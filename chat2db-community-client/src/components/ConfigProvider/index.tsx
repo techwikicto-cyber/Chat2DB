@@ -55,10 +55,18 @@ const ConfigProvider = memo<ConfigProviderProps>(({ children }) => {
 
   useEffect(() => {
     dayjs.locale(dayjsLocales[language] || dayjsLocales[LangType.EN_US]);
+    // Publishes the interface language to CSS: the bidirectional-text rules in
+    // styles/global.ts select on html[lang]. The browser and screen readers
+    // read the same attribute for hyphenation and pronunciation.
+    document.documentElement.lang = language;
   }, [language]);
 
-  // Persian ships as translated copy only: the SQL editor, result grid and object
-  // tree hold inherently LTR content, so the layout stays LTR for every language.
+  // The frame stays left-to-right in every language. What mirrors is the text:
+  // styles/global.ts gives each block of Persian its own base direction, which
+  // is what a sentence needs to read correctly when a table name sits in the
+  // middle of it. The SQL editor, the result grid and the object tree are left
+  // alone - they hold identifiers and code, which are left-to-right whatever
+  // language surrounds them.
   return (
     <AntdConfigProvider locale={locale} direction="ltr">
       {children}

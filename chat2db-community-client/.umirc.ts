@@ -123,6 +123,17 @@ const chainWebpack = (config: any, { webpack }: any) => {
   config.plugin('monaco-editor').use(MonacoWebpackPlugin, [
     {
       languages: ['mysql', 'pgsql', 'sql', 'json'],
+      // The editor's workers were the only files left with a fixed name, and
+      // the server now tells browsers to keep everything under /static for a
+      // year - which would have pinned a stale worker against a newer editor
+      // after an upgrade. The plugin writes the name it chooses into the
+      // bundle, so hashing it here keeps the two in step.
+      //
+      // Only when the bundle is served by a server. A relative public path
+      // means the build is opened over file:// by the desktop shell, and there
+      // src/utils/monaco.ts resolves the workers by their plain names itself -
+      // it would not find a hashed one.
+      ...(buildProfile.publicPath.startsWith('.') ? {} : { filename: '[name].worker.[contenthash:8].js' }),
     },
   ]);
   if (buildProfile.isCommunity) {
@@ -203,7 +214,14 @@ export default defineConfig({
   base: '/',
   history: buildProfile.isLocalDesktop ? { type: 'hash' } : undefined,
   publicPath: buildProfile.publicPath,
-  hash: false,
+  // Content hashes in the filenames. Without them every build emits the same
+  // names - umi.js, p__main__CommunityMainPage.async.js - so a browser holding
+  // yesterday's copy of one chunk and today's copy of another runs a mixture of
+  // two builds. Webpack then looks up a module id that its chunk no longer
+  // defines and throws "Cannot read properties of undefined (reading 'call')",
+  // which is what a deployment over a warm cache looked like. A hashed name
+  // cannot collide with the old file, so the browser fetches what it lacks.
+  hash: true,
   ...(disableMfsu ? { mfsu: false } : {}),
   // depPerChunk gives every npm package its own file, which pays off only over
   // HTTP/2. This build is served by Tomcat over plain HTTP/1.1, where the

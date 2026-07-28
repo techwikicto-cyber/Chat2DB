@@ -279,6 +279,60 @@ const GlobalStyle = createGlobalStyle(({ theme: token }) => {
       font-style: normal;
       font-display: swap;
     }
+    /* Bidirectional text, for the Persian interface.
+       Persian runs right to left, but nearly every sentence in this product
+       carries a run that goes the other way - a table name, a column, a number,
+       a SQL keyword. Laid out from a left-to-right base the browser puts those
+       runs at the wrong end and the sentence comes apart: "تعداد رکوردهای داخل
+       تیبل public چقدره" is drawn as "چقدره public تعداد رکوردهای داخل تیبل".
+       'plaintext' is the CSS spelling of dir="auto": each block takes its
+       direction from the first letter in it that has one, so Persian blocks lay
+       out right to left while English blocks are left alone - which matters,
+       because the same screen shows both.
+       Only the reading order is set here, deliberately. text-align is an
+       inherited property, so declaring it - even through :where() - would beat
+       inheritance and quietly un-centre everything a parent had centred. Where
+       a surface should also hug the right edge, it says so itself; the chat
+       bubbles and rendered answers do.
+       The SQL editor, the result grid and anything monospaced are excluded:
+       code reads left to right even when it contains Persian, and the editor
+       does its own bidi handling. */
+    html[lang^='fa']
+      :where(
+        p,
+        span,
+        div,
+        li,
+        dd,
+        dt,
+        td,
+        th,
+        label,
+        legend,
+        figcaption,
+        summary,
+        blockquote,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        input,
+        textarea
+      ) {
+      unicode-bidi: plaintext;
+    }
+
+    /* The exclusions, as a second rule rather than a :not() chain: same
+       specificity as the rule above and written after it, so it wins wherever
+       both apply. Code, the editor and the result grid stay one left-to-right
+       paragraph however much Persian they contain. */
+    html[lang^='fa'] :where(.monaco-editor, .monaco-editor *, .vtable, .vtable *, pre, pre *, code, code *) {
+      unicode-bidi: normal;
+      direction: ltr;
+    }
+
     ${scrollbarStyle},
     ${resizerStyle},
     ${canvasTable},

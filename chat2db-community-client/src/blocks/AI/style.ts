@@ -354,6 +354,30 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
       color: ${token.colorText};
       word-break: break-word;
 
+      /* An answer mixes Persian prose with the names the database uses, and one
+         answer can hold paragraphs of each. 'plaintext' is the CSS spelling of
+         dir="auto": each block below takes its direction from the first letter
+         that has one, so a paragraph reads the way it was written rather than
+         the way the paragraph above it was. Code and SQL are left out - those
+         are always left-to-right. */
+      p,
+      li,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      blockquote,
+      th,
+      td {
+        unicode-bidi: plaintext;
+        /* Safe to state here - nothing in an answer is centred - and with
+           plaintext above it resolves per block, so a Persian paragraph hugs
+           the right edge and an English one the left. */
+        text-align: start;
+      }
+
       p {
         margin: 0 0 8px;
         &:last-child {
@@ -418,6 +442,19 @@ export const useStyles = createStyles(({ css, token, prefixCls }) => {
       td {
         border: 1px solid ${token.colorBorder};
         padding: 6px 12px;
+        /* start, not left: a cell that resolved to right-to-left above should
+           hug the right edge, and an English one the left. */
+        text-align: start;
+      }
+
+      /* Code and SQL keep their own direction whatever language surrounds them:
+         a query that happens to open with a Persian comment or a quoted Persian
+         literal must still read left to right. */
+      pre,
+      pre code,
+      code {
+        direction: ltr;
+        unicode-bidi: embed;
         text-align: left;
       }
 

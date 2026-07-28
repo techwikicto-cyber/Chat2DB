@@ -37,6 +37,14 @@ spring:
   web:
     resources:
       static-locations[0]: classpath:/static/
+      # Every filename under /static/ carries a content hash, so one URL always
+      # answers with the same bytes and the browser may keep it indefinitely.
+      # index.html does not come from here - Thymeleaf renders it and marks it
+      # no-store - so a new deployment is still picked up on the next load.
+      cache:
+        cachecontrol:
+          max-age: 365d
+          cache-public: true
   flyway:
     enabled: false
   # Database schema version management.

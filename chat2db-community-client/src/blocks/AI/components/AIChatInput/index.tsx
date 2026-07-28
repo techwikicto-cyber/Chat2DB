@@ -612,6 +612,9 @@ const AIChatInput = forwardRef((props: ChatInputProps, ref: ForwardedRef<ChatInp
           )}
           <Input.TextArea
             ref={textareaRef}
+            // Follows what is being typed, so a Persian question is composed
+            // right-to-left and reads here the way it will in the bubble.
+            dir="auto"
             className={styles.textarea}
             placeholder={loading ? undefined : i18n('ai.input.placeholder', `${keyboardKey.command} + K`)}
             value={inputValue}

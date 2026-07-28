@@ -1,6 +1,8 @@
 package ai.chat2db.community.start.thymeleaf;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -16,6 +18,7 @@ public class ThymeleafController {
      * <p>
      * Endpoint: {@code GET multiple mapped routes}.
      *
+     * @param response the response whose caching is being suppressed.
      * @return string value for the request.
      */
     @GetMapping({
@@ -43,7 +46,12 @@ public class ThymeleafController {
             "/dashboard/share/**",
             "/knowledge-management"
     })
-    public String index() {
+    public String index(HttpServletResponse response) {
+        // This page names the hashed bundles a build produced, and nothing in
+        // its own URL changes between deployments. Left to its own devices a
+        // browser may reuse it from heuristic caching and go on asking for the
+        // previous build's files, so say plainly that it must not be kept.
+        response.setHeader(HttpHeaders.CACHE_CONTROL, "no-store, must-revalidate");
         return "index";
     }
 }
