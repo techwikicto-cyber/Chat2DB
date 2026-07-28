@@ -24,6 +24,7 @@ export default {
   'dashboard.chart.aiChartEmpty': 'No hay gráficos coincidentes. Vuelva a intentarlo',
   'dashboard.chart.xField': 'Eje horizontal',
   'dashboard.chart.yField': 'Eje vertical',
+  'dashboard.chart.noField': 'Ninguno',
   'dashboard.chart.lineType': 'Tipo de línea',
   'dashboard.chart.linear': 'Lineal',
   'dashboard.chart.smooth': 'Suave',

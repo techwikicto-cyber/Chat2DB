@@ -24,6 +24,7 @@ export default {
   'dashboard.chart.aiChartEmpty': 'チャートが一致しません。もう一度お試しください',
   'dashboard.chart.xField': '横轴',
   'dashboard.chart.yField': '纵轴',
+  'dashboard.chart.noField': 'なし',
   'dashboard.chart.lineType': '折れ線タイプ',
   'dashboard.chart.linear': '直線型',
   'dashboard.chart.smooth': '曲線型',

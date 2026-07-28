@@ -24,6 +24,7 @@ export default {
   'dashboard.chart.aiChartEmpty': '일치하는 차트가 없습니다. 다시 시도해 주세요',
   'dashboard.chart.xField': '가로축',
   'dashboard.chart.yField': '세로축',
+  'dashboard.chart.noField': '없음',
   'dashboard.chart.lineType': '선 유형',
   'dashboard.chart.linear': '직선',
   'dashboard.chart.smooth': '곡선',

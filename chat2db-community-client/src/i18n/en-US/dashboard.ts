@@ -24,6 +24,7 @@ export default {
   'dashboard.chart.aiChartEmpty': 'No charts match, please try again',
   'dashboard.chart.xField': 'Horizontal axis',
   'dashboard.chart.yField': 'Vertical axis',
+  'dashboard.chart.noField': 'None',
   'dashboard.chart.lineType': 'Line type',
   'dashboard.chart.linear': 'Linear',
   'dashboard.chart.smooth': 'Smooth',

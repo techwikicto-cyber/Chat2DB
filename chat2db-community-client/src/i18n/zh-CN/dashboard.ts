@@ -24,6 +24,7 @@ export default {
   'dashboard.chart.aiChartEmpty': '暂无图表匹配，请重新尝试',
   'dashboard.chart.xField': '横轴',
   'dashboard.chart.yField': '纵轴',
+  'dashboard.chart.noField': '无',
   'dashboard.chart.lineType': '折线类型',
   'dashboard.chart.linear': '直线型',
   'dashboard.chart.smooth': '曲线型',

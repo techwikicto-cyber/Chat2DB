@@ -24,6 +24,7 @@ export default {
   'dashboard.chart.aiChartEmpty': 'نمودار متناسبی پیدا نشد، لطفاً دوباره تلاش کنید',
   'dashboard.chart.xField': 'محور افقی',
   'dashboard.chart.yField': 'محور عمودی',
+  'dashboard.chart.noField': 'هیچ‌کدام',
   'dashboard.chart.lineType': 'نوع خط',
   'dashboard.chart.linear': 'خطی',
   'dashboard.chart.smooth': 'نرم',
