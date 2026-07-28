@@ -5,6 +5,7 @@ import { ChatSourceType, QuestionType } from '@/constants/chat';
 import { PromptTableVO } from '@/typings/chat';
 
 import i18n from '@/i18n';
+import { runtimeEditionConfig } from '@/constants/runtimeEdition';
 import AICascaderSource, { IAICascaderData } from '../AICascaderSource';
 import AIAtMetion from '../AIAtMetion';
 import { SuggestionItem } from '../AIAtMetion/interface';
@@ -478,7 +479,9 @@ const AIChatInput = forwardRef((props: ChatInputProps, ref: ForwardedRef<ChatInp
   );
 
   const handleAttachmentTrigger = useCallback(() => {
-    if (attachmentLoading || loading) {
+    // The switch is enforced here as well as on the menu entry, so the picker
+    // cannot be opened through the imperative handle either.
+    if (!runtimeEditionConfig.chatAttachments || attachmentLoading || loading) {
       return;
     }
 
@@ -584,14 +587,18 @@ const AIChatInput = forwardRef((props: ChatInputProps, ref: ForwardedRef<ChatInp
     >
       {({ onTrigger, onKeyDown, isOpen }) => (
         <div className={`${styles.chatInputArea}${chatInputAreaClassName ? ` ${chatInputAreaClassName}` : ''}`}>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept={ATTACHMENT_ACCEPT}
-            multiple
-            className={styles.hiddenFileInput}
-            onChange={handleFileInputChange}
-          />
+          {/* Not rendered at all while attachments are switched off, so there is
+              no picker for anything to reach. */}
+          {runtimeEditionConfig.chatAttachments && (
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept={ATTACHMENT_ACCEPT}
+              multiple
+              className={styles.hiddenFileInput}
+              onChange={handleFileInputChange}
+            />
+          )}
           {!!attachments.length && (
             <div className={styles.attachmentList}>
               {attachments.map((attachment, index) => (

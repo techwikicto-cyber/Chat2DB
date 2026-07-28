@@ -16,6 +16,15 @@ export interface RuntimeEditionConfig {
   remoteSubscription: boolean;
   remoteAiModelOptions: boolean;
   aiDataCollection: boolean;
+  /**
+   * Whether a chat message may carry an uploaded file.
+   *
+   * The file is parsed to plain text and pasted into that one prompt - there is
+   * no index, no embeddings, and nothing is carried to the next message. Off in
+   * the community build while it is decided whether that is worth having;
+   * turning it back on is this one line.
+   */
+  chatAttachments: boolean;
   spmTracking: boolean;
   googleAds: boolean;
   pricingAutoPopup: boolean;
@@ -74,6 +83,7 @@ const commonConfig: RuntimeEditionConfig = {
   remoteSubscription: true,
   remoteAiModelOptions: true,
   aiDataCollection: true,
+  chatAttachments: true,
   spmTracking: true,
   googleAds: true,
   pricingAutoPopup: true,
@@ -176,6 +186,7 @@ const communityConfig: RuntimeEditionConfig = {
   remoteSubscription: false,
   remoteAiModelOptions: false,
   aiDataCollection: false,
+  chatAttachments: false,
   spmTracking: false,
   googleAds: false,
   pricingAutoPopup: false,

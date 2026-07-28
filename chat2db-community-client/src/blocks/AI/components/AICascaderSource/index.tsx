@@ -28,6 +28,8 @@ interface IAICascaderOption {
   extraParams?: any;
   children?: IAICascaderOption[];
   isLeaf?: boolean;
+  /** Shown greyed out and not selectable. */
+  disabled?: boolean;
 }
 
 interface IProps {
@@ -105,6 +107,10 @@ const AICascaderSource = (props: IProps) => {
         key: 'file',
         iconCode: 'icon-sql-file-1',
         isLeaf: true,
+        // Greyed out rather than removed while attachments are switched off.
+        // Whether the feature earns its place is still being decided, and a
+        // disabled row says "not now" where a missing one would say nothing.
+        disabled: !runtimeEditionConfig.chatAttachments,
       },
     ];
     if (runtimeEditionConfig.aiDataCollection) {
