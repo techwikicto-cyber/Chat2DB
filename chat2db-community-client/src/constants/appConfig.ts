@@ -1,5 +1,5 @@
 import { AppConfig } from '@/typings/appConfig';
-import { PRODUCT_NAME } from '@/constants/branding';
+import { PRODUCT_NAME_ASCII } from '@/constants/branding';
 
 export const APP_URL_CONFIG_OVERSEAS = {
   WEBSITE_URL: `https://chat2db.ai`,
@@ -75,7 +75,9 @@ export const appConfigMap: {
     // on the upstream value; only displayName is user-visible.
     name: 'chat2db-community',
     capitalName: 'Bina-Platform',
-    displayName: PRODUCT_NAME,
+    // A fixed string in a static config map, so it cannot follow the interface
+    // language. Screens that show a name to the user read useProductName instead.
+    displayName: PRODUCT_NAME_ASCII,
   },
   'chat2db-community-test': {
     name: 'chat2db-community-test',

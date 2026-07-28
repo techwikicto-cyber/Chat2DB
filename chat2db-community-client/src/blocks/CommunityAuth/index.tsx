@@ -2,7 +2,7 @@ import { ReactNode, createContext, useCallback, useContext, useEffect, useMemo, 
 import { Button, Input, Select, Spin } from 'antd';
 import i18n from '@/i18n';
 import ProductLogo from '@/components/Logo';
-import { PRODUCT_NAME } from '@/constants/branding';
+import { useProductName } from '@/hooks/useProductName';
 import { LangType } from '@/constants/settings';
 import { useGlobalStore } from '@/store/global';
 import {
@@ -104,6 +104,7 @@ export default function CommunityAuthGate({ children }: { children: ReactNode })
 }
 
 function CommunityLoginScreen({ onSignedIn }: { onSignedIn: () => void }) {
+  const productName = useProductName();
   const { styles } = useStyles();
   // Subscribed here rather than inside the picker on purpose. i18n() reads the
   // store when it is called and does not subscribe, so nothing re-renders on its
@@ -156,7 +157,7 @@ function CommunityLoginScreen({ onSignedIn }: { onSignedIn: () => void }) {
           ]}
         />
         <ProductLogo size={56} />
-        <div className={styles.title}>{PRODUCT_NAME}</div>
+        <div className={styles.title}>{productName}</div>
         <div className={styles.subtitle}>{i18n('login.community.subtitle')}</div>
 
         <div className={styles.form}>

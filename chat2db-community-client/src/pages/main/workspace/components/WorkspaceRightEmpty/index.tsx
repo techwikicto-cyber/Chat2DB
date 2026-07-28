@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { osNow } from '@/utils';
 import { useGlobalStore } from '@/store/global';
 import { IframeType } from '@/constants';
-import { PRODUCT_NAME } from '@/constants/branding';
+import { useProductName } from '@/hooks/useProductName';
 import ProductLogo from '@/components/Logo';
 import { IconfontSvg } from '@chat2db/ui';
 
@@ -52,6 +52,7 @@ const shortcutsList = [
 ];
 
 export default memo<IProps>((props) => {
+  const productName = useProductName();
   const { className, slot } = props;
   const { styles } = useStyles();
   const { isEmbedIframe, dismissed, setWorkspaceAiIntroDismissed } = useGlobalStore((state) => ({
@@ -79,7 +80,7 @@ export default memo<IProps>((props) => {
           <div className={styles.aiIconWrap}>
             <ProductLogo size={44} />
           </div>
-          <div className={styles.aiTitle}>{PRODUCT_NAME}</div>
+          <div className={styles.aiTitle}>{productName}</div>
           <div className={styles.aiDesc}>{i18n('stream.intro.desc')}</div>
           <div className={styles.featureRow}>
             <div className={styles.featureCard}>
@@ -109,7 +110,7 @@ export default memo<IProps>((props) => {
 
   return (
     <div className={classnames(styles.box, className)}>
-      <div className={styles.letterpress}>{PRODUCT_NAME}</div>
+      <div className={styles.letterpress}>{productName}</div>
       <div className={styles.shortcuts}>
         {shortcutsList.map((t, i) => {
           return (

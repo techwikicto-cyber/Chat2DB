@@ -47,7 +47,7 @@ export default {
   'login.text.useVerificationCode': '使用验证码',
   'login.text.wechatLoginTips': '请使用{1}关注公众号即刻登录',
   'login.text.wechatScan': '微信扫码',
-  'login.community.subtitle': '此部署受共享密码保护。如果没有密码，请向配置该服务的人索取。',
+  'login.community.subtitle': '使用分配给你的账号登录。如果还没有账号，请向配置该服务的人索取。',
   'login.community.invalidPassword': '密码不正确，请重试。',
   'login.community.invalidCredentials': '用户名或密码不正确。',
 };

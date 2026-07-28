@@ -1,6 +1,6 @@
 import Iconfont from '@/components/Iconfont';
 import ProductLogo from '@/components/Logo';
-import { APP_CONFIG } from '@/constants/appConfig';
+import { useProductName } from '@/hooks/useProductName';
 import { runtimeEditionConfig } from '@/constants/runtimeEdition';
 import { UpdatedStatus } from '@/constants/settings';
 import i18n from '@/i18n';
@@ -15,6 +15,7 @@ import { useStyles } from './style';
 
 // About Us
 export default function AboutUs() {
+  const productName = useProductName();
   const { styles } = useStyles();
   const { appUrlConfig, hotUpdateConfig, updateDetail, updateHotUpdateConfig, updateAndRestartApp, handleCheckUpdate } =
     useGlobalStore((state) => ({
@@ -94,7 +95,7 @@ export default function AboutUs() {
         <ProductLogo size={52} className={styles.brandLogo} />
         <div>
           <div className={styles.currentVersion}>
-            <span className={styles.appName}>{APP_CONFIG.displayName}</span>
+            <span className={styles.appName}>{productName}</span>
             <span>{__APP_VERSION__}</span>
           </div>
           <div className={styles.newVersion} onClick={jumpDoc}>

@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { Flex } from 'antd';
 import { type LogoProps } from '@chat2db/ui';
-import { PRODUCT_NAME } from '@/constants/branding';
+import { useProductName } from '@/hooks/useProductName';
 import owlMark from '@/assets/logo/community/bina-owl.png';
 
 /**
@@ -15,27 +15,28 @@ import owlMark from '@/assets/logo/community/bina-owl.png';
  */
 export default memo<LogoProps>(({ type = 'image', size = 24, image, className, appName: _appName, ...rest }) => {
   const src = image || owlMark;
+  const name = useProductName();
 
   if (type === 'text') {
     return (
       <span className={className} style={{ fontSize: size / 2, fontWeight: 700, whiteSpace: 'nowrap' }}>
-        {PRODUCT_NAME}
+        {name}
       </span>
     );
   }
 
-  const mark = <img src={src} height={size} width={size} alt={PRODUCT_NAME} />;
+  const mark = <img src={src} height={size} width={size} alt={name} />;
 
   if (type === 'imageWithText') {
     return (
       <Flex className={className} justify="flex-start" align="center" gap={size / 4} {...rest}>
         {mark}
-        <span style={{ fontSize: size / 1.8, fontWeight: 700, whiteSpace: 'nowrap' }}>{PRODUCT_NAME}</span>
+        <span style={{ fontSize: size / 1.8, fontWeight: 700, whiteSpace: 'nowrap' }}>{name}</span>
       </Flex>
     );
   }
 
   return (
-    <img src={src} className={className} height={size} width={size} alt={PRODUCT_NAME} />
+    <img src={src} className={className} height={size} width={size} alt={name} />
   );
 });
