@@ -19,6 +19,7 @@ import ai.chat2db.community.domain.api.service.db.IDbTableService;
 import ai.chat2db.community.tools.wrapper.result.ListResult;
 import ai.chat2db.community.tools.model.Context;
 import ai.chat2db.community.tools.util.ContextUtils;
+import ai.chat2db.community.tools.util.SqlExecutionLimits;
 import ai.chat2db.community.domain.api.service.ops.IOpsSqlOperationLogService;
 import ai.chat2db.community.domain.api.enums.operation.SqlOperationLogSourceEnum;
 import ai.chat2db.community.domain.api.model.request.datasource.DbDataSourcePageQueryRequest;
@@ -78,6 +79,34 @@ public class AiToolServiceImpl implements IAiToolService {
     private static final int MAX_SQL_PAGE_SIZE = 500;
     private static final int MAX_SQL_RESULT_ROWS = 50;
     private static final int MAX_GLOBAL_DATASOURCES = 200;
+
+    /**
+     * How long a statement written by the assistant may run.
+     *
+     * <p>Five minutes. Long enough for a real analytical query over a large
+     * table, short enough that a query nobody meant to run does not sit on the
+     * database until somebody notices. A query typed into the console is not
+     * affected: whoever typed it is watching it.
+     *
+     * <p>Override with CHAT2DB_AI_SQL_TIMEOUT_SECONDS; 0 or less removes the
+     * deadline entirely, which is worth doing only if something else is
+     * enforcing one.
+     */
+    private static final int DEFAULT_AI_SQL_TIMEOUT_SECONDS = 300;
+
+    private static Integer aiSqlTimeoutSeconds() {
+        String configured = System.getenv("CHAT2DB_AI_SQL_TIMEOUT_SECONDS");
+        if (StringUtils.isBlank(configured)) {
+            return DEFAULT_AI_SQL_TIMEOUT_SECONDS;
+        }
+        try {
+            return Integer.parseInt(configured.trim());
+        } catch (NumberFormatException e) {
+            log.warn("CHAT2DB_AI_SQL_TIMEOUT_SECONDS is not a number: {} - using {}s",
+                    configured, DEFAULT_AI_SQL_TIMEOUT_SECONDS);
+            return DEFAULT_AI_SQL_TIMEOUT_SECONDS;
+        }
+    }
     public String listAllDataSources(AiToolContextRequest toolContext) {
         DbDataSourcePageQueryRequest queryRequest = new DbDataSourcePageQueryRequest();
         queryRequest.setPageNo(1);
@@ -222,7 +251,11 @@ public class AiToolServiceImpl implements IAiToolService {
             executeParam.setPageSizeAll(false);
             executeParam.setErrorContinue(false);
 
-            ListResult<ExecuteResponse> executeResult = wrapExecuteResults(dlTemplateService.execute(executeParam));
+            // Under a deadline: nobody is watching this query run, so nothing else
+            // would stop it walking a table with a billion rows in it.
+            ListResult<ExecuteResponse> executeResult = SqlExecutionLimits.runWithTimeout(
+                    aiSqlTimeoutSeconds(),
+                    () -> wrapExecuteResults(dlTemplateService.execute(executeParam)));
             OpsSqlOperationLogListResultRequest sqlOperationLogListResultRequest = OpsSqlOperationLogListResultRequest.of(
                     trimmedSql, executeResult.getSuccess(), executeResult.getErrorMessage(), executeResult.getData(),
                     SqlOperationLogSourceEnum.AI_TOOL.name());

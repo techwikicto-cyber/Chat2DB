@@ -30,6 +30,7 @@ import ai.chat2db.community.domain.api.service.db.ISqlExecutionCancellation;
 import ai.chat2db.community.domain.api.service.db.ISqlExecutionResultConsumer;
 import ai.chat2db.community.domain.api.service.db.ISqlExecutionStatementListener;
 import ai.chat2db.spi.sql.Chat2DBContext;
+import ai.chat2db.community.tools.util.SqlExecutionLimits;
 import ai.chat2db.spi.util.JdbcUtils;
 import ai.chat2db.spi.util.ResultSetUtils;
 import ai.chat2db.spi.util.SqlUtils;
@@ -243,6 +244,9 @@ public class DefaultSQLExecutor implements ICommandExecutor {
         Assert.notNull(sql, "SQL must not be null");
         ExecuteResponse executeResult = ExecuteResponse.builder().sql(sql).success(Boolean.TRUE).build();
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            // A deadline, when the caller set one. Only the assistant does: a
+            // query it writes has nobody watching it run.
+            SqlExecutionLimits.apply(stmt);
             stmt.setFetchSize(IEasyToolsConstant.MAX_PAGE_SIZE);
             if (sql.toLowerCase().startsWith("select")) {
                 if (offset != null && count != null) {
@@ -280,6 +284,9 @@ public class DefaultSQLExecutor implements ICommandExecutor {
     public Long count(String sql, Connection connection) throws SQLException {
         Assert.notNull(sql, "SQL must not be null");
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            // Counting walks the whole result, so it needs the deadline as much
+            // as the query it is counting.
+            SqlExecutionLimits.apply(stmt);
             boolean query = stmt.execute();
             if (query) {
                 long n = 0;
