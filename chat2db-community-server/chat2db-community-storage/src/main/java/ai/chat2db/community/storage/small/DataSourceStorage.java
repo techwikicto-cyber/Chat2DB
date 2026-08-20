@@ -1,5 +1,6 @@
 package ai.chat2db.community.storage.small;
 
+import ai.chat2db.community.storage.WorkspaceStorages;
 import ai.chat2db.community.domain.api.enums.NodeTypeEnum;
 import ai.chat2db.community.domain.api.model.datasource.DataSource;
 import ai.chat2db.community.domain.api.model.datasource.DataSourceNamespace;
@@ -18,10 +19,16 @@ import java.util.stream.Collectors;
 
 public class DataSourceStorage extends SmallDataStorage<DataSource> {
 
-    public static final DataSourceStorage INSTANCE = new DataSourceStorage();
+    private static final WorkspaceStorages<DataSourceStorage> WORKSPACES =
+            new WorkspaceStorages<>(DataSourceStorage::new);
 
-    protected DataSourceStorage() {
-        super("datasource", DataSource.class);
+    /** The instance for the workspace of the request being served. */
+    public static DataSourceStorage current() {
+        return WORKSPACES.current();
+    }
+
+    protected DataSourceStorage(String basePath) {
+        super(basePath, "datasource", DataSource.class);
     }
 
     @Override
@@ -35,7 +42,7 @@ public class DataSourceStorage extends SmallDataStorage<DataSource> {
 
 
     public DataResult<DataSourceNamespace> getNamespaceDatasource() {
-        List<Namespace> namespaces = NamespaceStorage.INSTANCE.getDataList();
+        List<Namespace> namespaces = NamespaceStorage.current().getDataList();
         List<DataSource> dataSources = getDataList();
         Map<Long, DataSource> dataSourceMap = dataSources.stream().collect(Collectors.toMap(DataSource::getId, Function.identity()));
         DataSourceNamespace dataSourceNamespace = new DataSourceNamespace();
@@ -62,14 +69,14 @@ public class DataSourceStorage extends SmallDataStorage<DataSource> {
     }
 
     public List<Node> getNodes() {
-        List<Node> nodes = TreeNodeStorage.INSTANCE.getNodes();
+        List<Node> nodes = TreeNodeStorage.current().getNodes();
         if (CollectionUtils.isEmpty(nodes)) {
             nodes = buildTree();
-            TreeNodeStorage.INSTANCE.createTree(nodes);
+            TreeNodeStorage.current().createTree(nodes);
             return nodes;
         }
         List<DataSource> dataSourceList = getDataList();
-        List<Namespace> namespaceList = NamespaceStorage.INSTANCE.getDataList();
+        List<Namespace> namespaceList = NamespaceStorage.current().getDataList();
         Map<Long, DataSource> dataSourceMap = new HashMap<>();
         Map<Long, Namespace> namespaceMap = new HashMap<>();
         if (CollectionUtils.isNotEmpty(dataSourceList)) {
@@ -169,12 +176,12 @@ public class DataSourceStorage extends SmallDataStorage<DataSource> {
         Node node = new Node();
         node.setId(datasourceId);
         node.setType(NodeTypeEnum.DATA_SOURCE.name());
-        TreeNodeStorage.INSTANCE.updatePosition(dropToNode, node, 2);
+        TreeNodeStorage.current().updatePosition(dropToNode, node, 2);
     }
 
     public void delete(Long id) {
         super.delete(id);
-        NamespaceStorage.INSTANCE.deleteDataSourcePosition(id);
-        TreeNodeStorage.INSTANCE.deleteNode(Node.builder().id(id).type(NodeTypeEnum.DATA_SOURCE.name()).build());
+        NamespaceStorage.current().deleteDataSourcePosition(id);
+        TreeNodeStorage.current().deleteNode(Node.builder().id(id).type(NodeTypeEnum.DATA_SOURCE.name()).build());
     }
 }

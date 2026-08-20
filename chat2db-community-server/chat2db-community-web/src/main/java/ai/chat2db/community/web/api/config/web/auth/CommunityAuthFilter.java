@@ -3,6 +3,7 @@ package ai.chat2db.community.web.api.config.web.auth;
 import java.io.IOException;
 import java.util.Optional;
 
+import ai.chat2db.community.tools.util.CommunityAccountContext;
 import ai.chat2db.community.tools.util.ConfigUtils;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -43,20 +44,29 @@ public class CommunityAuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         Optional<CommunityUser> user = guard.resolveSession(sessionToken(request));
         user.ifPresent(value -> request.setAttribute(CURRENT_USER_ATTRIBUTE, value));
+        // Published here so it reaches the storage layer, which decides whose
+        // workspace to open from it. Cleared in the finally below: the thread
+        // goes back to a pool, and one left set would hand the next request
+        // somebody else's data.
+        CommunityAccountContext.set(user.map(CommunityUser::getUsername).orElse(null));
 
-        if (!isGuarded(request)) {
+        try {
+            if (!isGuarded(request)) {
+                chain.doFilter(request, response);
+                return;
+            }
+            if (user.isEmpty()) {
+                reject(response, HttpServletResponse.SC_UNAUTHORIZED, "community.auth.required");
+                return;
+            }
+            if (isAdminPath(request.getRequestURI(), request.getContextPath()) && !user.get().isAdmin()) {
+                reject(response, HttpServletResponse.SC_FORBIDDEN, "community.auth.adminRequired");
+                return;
+            }
             chain.doFilter(request, response);
-            return;
+        } finally {
+            CommunityAccountContext.clear();
         }
-        if (user.isEmpty()) {
-            reject(response, HttpServletResponse.SC_UNAUTHORIZED, "community.auth.required");
-            return;
-        }
-        if (isAdminPath(request.getRequestURI(), request.getContextPath()) && !user.get().isAdmin()) {
-            reject(response, HttpServletResponse.SC_FORBIDDEN, "community.auth.adminRequired");
-            return;
-        }
-        chain.doFilter(request, response);
     }
 
     private boolean isGuarded(HttpServletRequest request) {

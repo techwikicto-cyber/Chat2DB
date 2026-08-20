@@ -27,6 +27,11 @@ public final class CommunityIdentity {
         LoginUser loginUser = new LoginUser();
         loginUser.setId(USER_ID);
         loginUser.setDisplayName(DISPLAY_NAME);
+        // Everything else about this identity is fixed, because Community has no
+        // account system of its own to ask. The account name is the exception:
+        // the web deployment does have accounts, and this is how the one signing
+        // the request reaches the storage layer.
+        loginUser.setAccountName(CommunityAccountContext.current());
         loginUser.setAdmin(Boolean.TRUE);
         loginUser.setRoleCodes(List.of(ROLE_CODE));
         loginUser.setVip(Boolean.TRUE);

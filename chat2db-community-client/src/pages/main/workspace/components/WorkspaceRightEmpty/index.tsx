@@ -1,9 +1,8 @@
-import { memo, Fragment } from 'react';
+import { memo } from 'react';
 import { Button } from 'antd';
 import i18n from '@/i18n';
 import { useStyles } from './style';
 import classnames from 'classnames';
-import { osNow } from '@/utils';
 import { useGlobalStore } from '@/store/global';
 import { IframeType } from '@/constants';
 import { useProductName } from '@/hooks/useProductName';
@@ -14,42 +13,6 @@ interface IProps {
   className?: string;
   slot: any;
 }
-
-const keyboardKey = (function () {
-  if (osNow().isMac) {
-    return {
-      command: '⌘',
-      Shift: '⇧',
-    };
-  }
-  return {
-    command: 'Ctrl',
-    Shift: 'Shift',
-  };
-})();
-
-const shortcutsList = [
-  {
-    title: i18n('common.text.executeSelectedSQL'),
-    keys: [keyboardKey.command, 'R'],
-  },
-  {
-    title: i18n('common.text.saveConsole'),
-    keys: [keyboardKey.command, 'S'],
-  },
-  {
-    title: i18n('common.button.createConsole'),
-    keys: [keyboardKey.command, keyboardKey.Shift, 'L'],
-  },
-  {
-    title: i18n('common.text.textToSQL'),
-    keys: ['/'],
-  },
-  {
-    title: i18n('common.text.moreAI'),
-    keys: [i18n('common.text.editorRightClick')],
-  },
-];
 
 export default memo<IProps>((props) => {
   const productName = useProductName();
@@ -110,26 +73,12 @@ export default memo<IProps>((props) => {
 
   return (
     <div className={classnames(styles.box, className)}>
+      {/* No shortcut list here. It was hardcoded rather than read from the
+          shortcut settings, and had drifted: "create console" is Ctrl + T, not
+          Ctrl + Shift + L, and Ctrl + R runs the whole console rather than the
+          selection. The real bindings live in Settings > Shortcuts, where they
+          are also editable. */}
       <div className={styles.letterpress}>{productName}</div>
-      <div className={styles.shortcuts}>
-        {shortcutsList.map((t, i) => {
-          return (
-            <div key={i} className={styles.shortcutsItem}>
-              <div className={styles.title}>{t.title}</div>
-              <div className={styles.plusSignBox}>
-                {t.keys.map((item, index) => {
-                  return (
-                    <Fragment key={index}>
-                      <span>{item}</span>
-                      {index + 1 < t.keys.length && <span className={styles.plusSign}>+</span>}
-                    </Fragment>
-                  );
-                })}
-              </div>
-            </div>
-          );
-        })}
-      </div>
       {slot()}
     </div>
   );

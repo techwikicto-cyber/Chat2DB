@@ -1,5 +1,6 @@
 package ai.chat2db.community.storage.small;
 
+import ai.chat2db.community.storage.WorkspaceStorages;
 import ai.chat2db.community.domain.api.model.pin.PinTable;
 import com.google.common.collect.Lists;
 import org.apache.commons.collections4.CollectionUtils;
@@ -10,10 +11,16 @@ import java.util.List;
 
 public class PinTableStorage extends SmallDataStorage<PinTable> {
 
-    public static final PinTableStorage INSTANCE = new PinTableStorage();
+    private static final WorkspaceStorages<PinTableStorage> WORKSPACES =
+            new WorkspaceStorages<>(PinTableStorage::new);
 
-    protected PinTableStorage() {
-        super("pin_table", PinTable.class);
+    /** The instance for the workspace of the request being served. */
+    public static PinTableStorage current() {
+        return WORKSPACES.current();
+    }
+
+    protected PinTableStorage(String basePath) {
+        super(basePath, "pin_table", PinTable.class);
     }
 
     public void delete(PinTable pinTable) {

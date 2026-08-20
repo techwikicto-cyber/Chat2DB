@@ -3,7 +3,7 @@ package ai.chat2db.community.storage.large;
 import ai.chat2db.community.domain.api.converter.LocalStorageConverter;
 import ai.chat2db.community.domain.api.service.storage.IWorkspaceLocalStorage;
 import ai.chat2db.community.storage.IdUtil;
-import ai.chat2db.community.tools.util.ConfigUtils;
+import ai.chat2db.community.storage.WorkspaceScope;
 import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson2.JSON;
 import com.google.common.collect.Lists;
@@ -20,9 +20,6 @@ import java.util.stream.Collectors;
 @Slf4j
 public class LargeDataStorage<T> implements IWorkspaceLocalStorage<T> {
 
-    private static final String DB_STORAGE_PATH = ConfigUtils.getEnvBasePath()
-            + File.separator + "storage";
-
     private ConcurrentSkipListMap<Long, T> dataMap = new ConcurrentSkipListMap<>();
 
 
@@ -35,7 +32,7 @@ public class LargeDataStorage<T> implements IWorkspaceLocalStorage<T> {
     private int limit;
 
     protected LargeDataStorage(String name, Class<T> clazz, int limit) {
-        this(name, clazz, limit, DB_STORAGE_PATH);
+        this(name, clazz, limit, WorkspaceScope.sharedBasePath());
     }
 
     protected LargeDataStorage(String name, Class<T> clazz, int limit, String storageBasePath) {

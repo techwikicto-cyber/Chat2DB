@@ -1,5 +1,6 @@
 package ai.chat2db.community.storage.small;
 
+import ai.chat2db.community.storage.WorkspaceStorages;
 import ai.chat2db.community.domain.api.enums.NodeTypeEnum;
 import ai.chat2db.community.domain.api.model.workspace.Namespace;
 import ai.chat2db.community.domain.api.model.workspace.Node;
@@ -10,10 +11,16 @@ import java.util.List;
 
 public class NamespaceStorage extends SmallDataStorage<Namespace> {
 
-    public static final NamespaceStorage INSTANCE = new NamespaceStorage();
+    private static final WorkspaceStorages<NamespaceStorage> WORKSPACES =
+            new WorkspaceStorages<>(NamespaceStorage::new);
 
-    protected NamespaceStorage() {
-        super("namespace", Namespace.class);
+    /** The instance for the workspace of the request being served. */
+    public static NamespaceStorage current() {
+        return WORKSPACES.current();
+    }
+
+    protected NamespaceStorage(String basePath) {
+        super(basePath, "namespace", Namespace.class);
     }
 
 
@@ -65,11 +72,11 @@ public class NamespaceStorage extends SmallDataStorage<Namespace> {
         Node node = new Node();
         node.setId(namespace.getId());
         node.setType(NodeTypeEnum.NAMESPACE.name());
-        TreeNodeStorage.INSTANCE.updatePosition(dropToNode, node, 2);
+        TreeNodeStorage.current().updatePosition(dropToNode, node, 2);
         return id;
     }
     public void delete(Long id) {
         super.delete(id);
-        TreeNodeStorage.INSTANCE.deleteNode(Node.builder().id(id).type(NodeTypeEnum.NAMESPACE.name()).build());
+        TreeNodeStorage.current().deleteNode(Node.builder().id(id).type(NodeTypeEnum.NAMESPACE.name()).build());
     }
 }

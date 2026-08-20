@@ -29,27 +29,6 @@ export const useStyles = createStyles(({ css, token }) => {
       overflow: hidden;
       margin-bottom: 30px;
     `,
-    shortcuts: css`
-      margin-bottom: 32px;
-    `,
-    shortcutsItem: css`
-      display: flex;
-      justify-content: center;
-      font-size: 14px;
-      margin: 10px 0px;
-    `,
-    title: css`
-      width: 200px;
-      text-align: right;
-      margin-right: 10px;
-    `,
-    plusSignBox: css`
-      width: 200px;
-      color: ${token.colorPrimary};
-    `,
-    plusSign: css`
-      margin: 0px 4px;
-    `,
 
     // AI introduction page styles.
     aiIntro: css`

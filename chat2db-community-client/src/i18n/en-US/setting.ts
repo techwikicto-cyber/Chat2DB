@@ -347,7 +347,7 @@ export default {
   'setting.account.changePassword': 'Change password',
   'setting.account.passwordChanged': 'Password changed',
   'setting.account.usersTitle': 'Accounts',
-  'setting.account.usersHint': 'Everyone shares the same connections, consoles and history: an account gives each person their own credentials and lets you revoke one without disturbing the rest. It does not separate anyone’s data. To keep someone away from a database, give that database a read-only user.',
+  'setting.account.usersHint': 'Each account has its own workspace: connections, consoles, history and dashboards are visible only to the person who created them, and an admin sees no more than anyone else. Deleting an account does not delete its workspace. Note that anyone with a connection can run whatever the database credentials in it allow, so give each person a database user with the rights they should have.',
   'setting.account.addUser': 'Add',
   'setting.account.role': 'Role',
   'setting.account.enabled': 'Enabled',

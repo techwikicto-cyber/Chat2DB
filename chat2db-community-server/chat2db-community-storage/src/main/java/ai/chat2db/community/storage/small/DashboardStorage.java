@@ -1,5 +1,6 @@
 package ai.chat2db.community.storage.small;
 
+import ai.chat2db.community.storage.WorkspaceStorages;
 import ai.chat2db.community.domain.api.model.chart.Dashboard;
 
 import java.util.Comparator;
@@ -7,10 +8,16 @@ import java.util.List;
 
 public class DashboardStorage extends SmallDataStorage<Dashboard> {
 
-    public static final DashboardStorage INSTANCE = new DashboardStorage();
+    private static final WorkspaceStorages<DashboardStorage> WORKSPACES =
+            new WorkspaceStorages<>(DashboardStorage::new);
 
-    protected DashboardStorage() {
-        super("dashboard", Dashboard.class);
+    /** The instance for the workspace of the request being served. */
+    public static DashboardStorage current() {
+        return WORKSPACES.current();
+    }
+
+    protected DashboardStorage(String basePath) {
+        super(basePath, "dashboard", Dashboard.class);
     }
 
     @Override

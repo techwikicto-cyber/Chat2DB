@@ -30,6 +30,12 @@ import org.springframework.stereotype.Component;
  * put a table in, and introducing one for a handful of accounts would be a much
  * larger commitment than the feature warrants.
  *
+ * Note the singular {@code user} directory: it holds the account list itself and
+ * belongs to the installation, one level above the per-account workspaces in
+ * {@code storage/users}. Nothing may move it into one of them - see
+ * {@code WorkspaceMigration}, which lists what it moves rather than sweeping the
+ * directory, for exactly this reason.
+ *
  * Usernames are the identity and are matched case-insensitively, so "Ali" and
  * "ali" cannot become two accounts.
  */

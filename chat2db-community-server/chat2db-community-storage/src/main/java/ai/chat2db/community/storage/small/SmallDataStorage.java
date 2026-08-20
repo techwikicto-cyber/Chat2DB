@@ -3,7 +3,7 @@ package ai.chat2db.community.storage.small;
 import ai.chat2db.community.domain.api.converter.LocalStorageConverter;
 import ai.chat2db.community.domain.api.service.storage.IWorkspaceLocalStorage;
 import ai.chat2db.community.storage.IdUtil;
-import ai.chat2db.community.tools.util.ConfigUtils;
+import ai.chat2db.community.storage.WorkspaceScope;
 import cn.hutool.core.io.FileUtil;
 import com.alibaba.fastjson2.JSON;
 import com.google.common.collect.Lists;
@@ -18,14 +18,21 @@ import java.util.concurrent.ConcurrentSkipListMap;
 @Slf4j
 public class SmallDataStorage<T> implements IWorkspaceLocalStorage<T> {
 
-    protected static final String DB_STORAGE_PATH = ConfigUtils.getEnvBasePath() + File.separator + "storage";
-
     protected Map<Long, T> dataMap = new ConcurrentSkipListMap<>();
 
     protected String filePath;
 
     protected SmallDataStorage(String name, Class<T> clazz) {
-        this.filePath = DB_STORAGE_PATH + File.separator + name + File.separator + name + ".json";
+        this(WorkspaceScope.sharedBasePath(), name, clazz);
+    }
+
+    /**
+     * Reads and writes below {@code storageBasePath}, which is one account's
+     * workspace or the shared one. The whole file is held in this instance, so
+     * two workspaces are two instances and neither can see the other's rows.
+     */
+    protected SmallDataStorage(String storageBasePath, String name, Class<T> clazz) {
+        this.filePath = storageBasePath + File.separator + name + File.separator + name + ".json";
         if (!FileUtil.exist(filePath)) {
             FileUtil.writeUtf8String("", filePath);
         } else {

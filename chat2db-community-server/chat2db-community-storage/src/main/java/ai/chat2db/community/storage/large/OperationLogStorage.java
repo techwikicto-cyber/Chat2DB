@@ -1,5 +1,6 @@
 package ai.chat2db.community.storage.large;
 
+import ai.chat2db.community.storage.WorkspaceStorages;
 import ai.chat2db.community.domain.api.model.operation.OperationLog;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -8,10 +9,16 @@ import java.util.List;
 
 public class OperationLogStorage extends LargeDataStorage<OperationLog> {
 
-    public static final OperationLogStorage INSTANCE = new OperationLogStorage();
+    private static final WorkspaceStorages<OperationLogStorage> WORKSPACES =
+            new WorkspaceStorages<>(OperationLogStorage::new);
 
-    protected OperationLogStorage() {
-        super("operation_log", OperationLog.class, 1000);
+    /** The instance for the workspace of the request being served. */
+    public static OperationLogStorage current() {
+        return WORKSPACES.current();
+    }
+
+    protected OperationLogStorage(String basePath) {
+        super("operation_log", OperationLog.class, 1000, basePath);
     }
 
     @Override

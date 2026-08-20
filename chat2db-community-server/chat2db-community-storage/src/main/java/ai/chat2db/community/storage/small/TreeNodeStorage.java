@@ -3,6 +3,7 @@ package ai.chat2db.community.storage.small;
 import ai.chat2db.community.domain.api.enums.NodeTypeEnum;
 import ai.chat2db.community.domain.api.model.workspace.Node;
 import ai.chat2db.community.domain.api.model.db.TreeNode;
+import ai.chat2db.community.storage.WorkspaceStorages;
 import ai.chat2db.community.tools.wrapper.result.ActionResult;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.filter.PropertyFilter;
@@ -17,10 +18,17 @@ import java.util.List;
 
 @Slf4j
 public class TreeNodeStorage extends SmallDataStorage<TreeNode> {
-    public static final TreeNodeStorage INSTANCE = new TreeNodeStorage();
 
-    protected TreeNodeStorage() {
-        super("tree", TreeNode.class);
+    private static final WorkspaceStorages<TreeNodeStorage> WORKSPACES =
+            new WorkspaceStorages<>(TreeNodeStorage::new);
+
+    /** The instance for the workspace of the request being served. */
+    public static TreeNodeStorage current() {
+        return WORKSPACES.current();
+    }
+
+    protected TreeNodeStorage(String basePath) {
+        super(basePath, "tree", TreeNode.class);
         if (MapUtils.isEmpty(dataMap)) {
 
         }

@@ -12,6 +12,12 @@ import lombok.experimental.SuperBuilder;
 public class LoginUser {
     private Long id;
     private String displayName;
+    /**
+     * The Community account this request is signed in as, and the thing that
+     * decides which workspace the storage layer reads and writes. Null outside
+     * the Community web build, where there are no accounts.
+     */
+    private String accountName;
     private Boolean admin;
     private List<String> roleCodes;
     private String email;

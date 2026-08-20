@@ -51,7 +51,7 @@ public class LocalDashboardService implements IDashboardService {
     public PageResponse<Dashboard> listDashboards(Integer pageNo, Integer pageSize, String searchKey) {
         int normalizedPageNo = Math.max(1, pageNo == null ? 1 : pageNo);
         int normalizedPageSize = Math.max(1, pageSize == null ? 20 : pageSize);
-        List<Dashboard> dashboards = filterDashboards(DashboardStorage.INSTANCE.getDataList(), searchKey);
+        List<Dashboard> dashboards = filterDashboards(DashboardStorage.current().getDataList(), searchKey);
         int fromIndex = Math.min((normalizedPageNo - 1) * normalizedPageSize, dashboards.size());
         int toIndex = Math.min(fromIndex + normalizedPageSize, dashboards.size());
         return PageResponse.of(dashboards.subList(fromIndex, toIndex), (long) dashboards.size(),
@@ -60,7 +60,7 @@ public class LocalDashboardService implements IDashboardService {
 
     @Override
     public Dashboard getDashboard(Long id) {
-        return DashboardStorage.INSTANCE.getById(id);
+        return DashboardStorage.current().getById(id);
     }
 
     @Override
@@ -71,32 +71,32 @@ public class LocalDashboardService implements IDashboardService {
         if (dashboard.getChartIds() == null) {
             dashboard.setChartIds(new ArrayList<>());
         }
-        return DashboardStorage.INSTANCE.save(dashboard);
+        return DashboardStorage.current().save(dashboard);
     }
 
     @Override
     public void updateDashboard(Dashboard dashboard) {
         dashboard.setGmtModified(new Date());
-        DashboardStorage.INSTANCE.update(dashboard);
+        DashboardStorage.current().update(dashboard);
     }
 
     @Override
     public void deleteDashboard(Long id) {
-        Dashboard dashboard = DashboardStorage.INSTANCE.getById(id);
+        Dashboard dashboard = DashboardStorage.current().getById(id);
         if (dashboard != null && dashboard.getChartIds() != null) {
-            dashboard.getChartIds().forEach(ChartStorage.INSTANCE::delete);
+            dashboard.getChartIds().forEach(ChartStorage.current()::delete);
         }
-        DashboardStorage.INSTANCE.delete(id);
+        DashboardStorage.current().delete(id);
     }
 
     @Override
     public Chart getChart(Long id) {
-        return ChartStorage.INSTANCE.getById(id);
+        return ChartStorage.current().getById(id);
     }
 
     @Override
     public Chart getChartDetail(Long chartId, Boolean refresh) {
-        Chart chart = ChartStorage.INSTANCE.getById(chartId);
+        Chart chart = ChartStorage.current().getById(chartId);
         if (chart == null) {
             return null;
         }
@@ -115,7 +115,7 @@ public class LocalDashboardService implements IDashboardService {
         if (StringUtils.isBlank(chart.getName())) {
             chart.setName(resolveChartTitle(chart));
         }
-        return ChartStorage.INSTANCE.save(chart);
+        return ChartStorage.current().save(chart);
     }
 
     @Override
@@ -124,12 +124,12 @@ public class LocalDashboardService implements IDashboardService {
         if (StringUtils.isBlank(chart.getName())) {
             chart.setName(resolveChartTitle(chart));
         }
-        ChartStorage.INSTANCE.update(chart);
+        ChartStorage.current().update(chart);
     }
 
     @Override
     public void deleteChart(Long id) {
-        ChartStorage.INSTANCE.delete(id);
+        ChartStorage.current().delete(id);
     }
 
     private List<Dashboard> filterDashboards(List<Dashboard> dashboards, String searchKey) {

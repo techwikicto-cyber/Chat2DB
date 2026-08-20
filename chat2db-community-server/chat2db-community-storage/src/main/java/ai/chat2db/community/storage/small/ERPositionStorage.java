@@ -1,5 +1,6 @@
 package ai.chat2db.community.storage.small;
 
+import ai.chat2db.community.storage.WorkspaceStorages;
 import ai.chat2db.community.domain.api.model.er.ERPosition;
 import cn.hutool.core.util.ObjectUtil;
 
@@ -7,10 +8,16 @@ import java.util.List;
 
 public class ERPositionStorage extends SmallDataStorage<ERPosition> {
 
-    public static final ERPositionStorage INSTANCE = new ERPositionStorage();
+    private static final WorkspaceStorages<ERPositionStorage> WORKSPACES =
+            new WorkspaceStorages<>(ERPositionStorage::new);
 
-    protected ERPositionStorage() {
-        super("er_position", ERPosition.class);
+    /** The instance for the workspace of the request being served. */
+    public static ERPositionStorage current() {
+        return WORKSPACES.current();
+    }
+
+    protected ERPositionStorage(String basePath) {
+        super(basePath, "er_position", ERPosition.class);
     }
 
     public String getPosition(Long dataSourceId, String databaseName, String schemaName) {

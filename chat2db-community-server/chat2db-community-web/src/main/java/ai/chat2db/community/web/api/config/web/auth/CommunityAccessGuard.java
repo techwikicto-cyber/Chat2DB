@@ -22,11 +22,13 @@ import org.springframework.stereotype.Component;
  * a desktop and not fine on a server, so this puts named accounts in front of
  * the whole API.
  *
- * What an account is and is not: everyone shares the same datasources, consoles
- * and history, because nothing in the storage model is scoped per user. Accounts
- * buy individual credentials, revoking one person without disturbing the rest,
- * and a name against each operation. They do not separate anyone's data from
- * anyone else's.
+ * An account owns a workspace: its datasources, consoles and history live in a
+ * directory of their own and are not visible to anyone else, an admin included.
+ * The role decides who may manage accounts, not who may see what.
+ *
+ * What that does not buy: a connection carries database credentials, and whoever
+ * holds it can do whatever those credentials allow. Keeping someone out of a
+ * table is still the database's job.
  *
  * The first start creates an {@code admin} account from
  * CHAT2DB_COMMUNITY_PASSWORD - which the container entrypoint generates and
