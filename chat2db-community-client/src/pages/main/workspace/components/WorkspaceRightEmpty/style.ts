@@ -19,15 +19,97 @@ export const useStyles = createStyles(({ css, token }) => {
       align-items: center;
       width: 100%;
     `,
-    letterpress: css`
+    /* The workspace canvas with nothing open in it. Quiet on purpose: this is a
+       working surface, and whatever sits here is read once and then acted on. */
+    stage: css`
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      font-size: 80px;
-      font-weight: 900;
-      color: ${token.colorTextQuaternary};
-      overflow: hidden;
-      margin-bottom: 30px;
+      max-width: 520px;
+      padding: 0 24px;
+      text-align: center;
+    `,
+
+    stageTitle: css`
+      margin: 0;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      color: ${token.colorText};
+    `,
+
+    stageDesc: css`
+      margin: 8px 0 0;
+      font-size: 14px;
+      line-height: 1.7;
+      color: ${token.colorTextSecondary};
+    `,
+
+    stageAction: css`
+      margin-top: 24px;
+    `,
+
+    databaseRow: css`
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    `,
+
+    databaseChip: css`
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      height: 36px;
+      padding: 0 14px;
+      border: 1px solid ${token.colorBorderSecondary};
+      border-radius: 999px;
+      background: ${token.colorBgContainer};
+      font-size: 13px;
+      font-weight: 500;
+      color: ${token.colorText};
+      cursor: pointer;
+      transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+
+      &:hover {
+        border-color: ${token.colorPrimaryBorderHover};
+        background: ${token.colorPrimaryBg};
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+
+      &:focus-visible {
+        outline: 2px solid ${token.colorPrimaryBorder};
+        outline-offset: 2px;
+      }
+    `,
+
+    stageFootnote: css`
+      margin: 20px 0 0;
+      display: flex;
+      align-items: center;
+      /* The parent centres text, which does nothing for flex children. */
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 12px;
+      /* Secondary rather than tertiary: this is 12px, and tertiary only just
+         clears 4.5:1 on the container background. */
+      color: ${token.colorTextSecondary};
+    `,
+
+    shortcutKey: css`
+      padding: 2px 6px;
+      border: 1px solid ${token.colorBorderSecondary};
+      border-radius: 4px;
+      background: ${token.colorFillQuaternary};
+      font-family: inherit;
+      font-size: 11px;
+      color: ${token.colorTextSecondary};
     `,
 
     // AI introduction page styles.
@@ -48,7 +130,6 @@ export const useStyles = createStyles(({ css, token }) => {
       align-items: center;
       justify-content: center;
     `,
-
 
     aiTitle: css`
       font-size: 32px;
