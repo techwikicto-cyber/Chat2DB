@@ -1,5 +1,5 @@
 export default {
-  'ai.input.placeholder': 'データベースの質問をしてください({1}), @ を使用してテーブルを参照してください',
+  'ai.input.placeholder': 'データベースの質問をしてください、@ を使用してテーブルを参照してください',
 
   'ai.aiType.Text2SQL.title': '自然言語からSQLへ',
   'ai.aiType.Text2SQL.desc': '入力された自然言語から対応するSQL内容を生成する',

@@ -1,5 +1,5 @@
 export default {
-  'ai.input.placeholder': '{1} 唤起/关闭AI对话, @ 选中表进行数据库问答',
+  'ai.input.placeholder': '数据库问答，@ 选中表',
 
   'ai.aiType.Text2SQL.title': '自然语言转SQL',
   'ai.aiType.Text2SQL.desc': '通过输入的自然语言，生成对应的SQL内容',

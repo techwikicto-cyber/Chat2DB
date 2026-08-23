@@ -1,5 +1,5 @@
 export default {
-  'ai.input.placeholder': '데이터베이스에 무엇이든 질문하세요({1}). @로 테이블을 지정할 수 있습니다',
+  'ai.input.placeholder': '데이터베이스에 무엇이든 질문하세요. @로 테이블을 지정할 수 있습니다',
 
   'ai.aiType.Text2SQL.title': '텍스트를 SQL로 변환',
   'ai.aiType.Text2SQL.desc': '입력한 자연어에 해당하는 SQL을 생성합니다',

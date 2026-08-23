@@ -15,7 +15,6 @@ import aiDataCollectionService from '@/service/aiDataCollection';
 import { ITable } from '@/typings';
 import { useGlobalStore } from '@/store/global';
 import { useStyles } from './style';
-import { keyboardKey } from '@/utils';
 import { useAIStore } from '@/store/ai';
 import { ErrorCode } from '@/constants/request';
 
@@ -623,7 +622,7 @@ const AIChatInput = forwardRef((props: ChatInputProps, ref: ForwardedRef<ChatInp
             // right-to-left and reads here the way it will in the bubble.
             dir="auto"
             className={styles.textarea}
-            placeholder={loading ? undefined : i18n('ai.input.placeholder', `${keyboardKey.command} + K`)}
+            placeholder={loading ? undefined : i18n('ai.input.placeholder')}
             value={inputValue}
             disabled={loading || attachmentLoading}
             autoSize={autoSize ?? { minRows: 1, maxRows: 8 }}

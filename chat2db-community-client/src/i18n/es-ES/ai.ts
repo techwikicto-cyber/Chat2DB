@@ -1,5 +1,5 @@
 export default {
-  'ai.input.placeholder': 'Pregunte cualquier cosa a la base de datos ({1}); use @ para mencionar una tabla',
+  'ai.input.placeholder': 'Pregunte cualquier cosa a la base de datos; use @ para mencionar una tabla',
 
   'ai.aiType.Text2SQL.title': 'Texto a SQL',
   'ai.aiType.Text2SQL.desc': 'Genera el SQL correspondiente a partir del lenguaje natural introducido',

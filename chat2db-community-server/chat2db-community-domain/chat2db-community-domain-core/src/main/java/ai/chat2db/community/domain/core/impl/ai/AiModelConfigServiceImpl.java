@@ -127,18 +127,24 @@ public class AiModelConfigServiceImpl implements IAiModelConfigService {
                     options.add(item);
                 });
 
-        getPresetModelMap().forEach((provider, models) -> {
-            for (String model : models) {
-                AiModelOptionItem item = new AiModelOptionItem();
-                item.setValue(presetOptionValue(provider, model));
-                item.setLabel(model);
-                item.setProvider(provider.name());
-                item.setModel(model);
-                item.setCustomOption(Boolean.FALSE);
-                item.setDefaultOption(Boolean.FALSE);
-                options.add(item);
-            }
-        });
+        // Preset models belong to a hosted service that supplies the credentials.
+        // Community has no such service: nothing stands behind these names, so
+        // offering them lists models the person never added and cannot use, and
+        // picking one fails at the first message.
+        if (!ConfigUtils.isCommunity()) {
+            getPresetModelMap().forEach((provider, models) -> {
+                for (String model : models) {
+                    AiModelOptionItem item = new AiModelOptionItem();
+                    item.setValue(presetOptionValue(provider, model));
+                    item.setLabel(model);
+                    item.setProvider(provider.name());
+                    item.setModel(model);
+                    item.setCustomOption(Boolean.FALSE);
+                    item.setDefaultOption(Boolean.FALSE);
+                    options.add(item);
+                }
+            });
+        }
 
         if (options.stream().noneMatch(i -> Boolean.TRUE.equals(i.getDefaultOption())) && CollectionUtils.isNotEmpty(options)) {
             options.get(0).setDefaultOption(Boolean.TRUE);

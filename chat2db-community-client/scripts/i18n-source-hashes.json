@@ -3,7 +3,7 @@
   "algorithm": "sha256",
   "locales": {
     "es-ES": {
-      "ai.ts": "391a6e14c58d8401bf3bc245eca5bdd4b66efd8225a877bfbbcae01a1c1c019a",
+      "ai.ts": "7e4fec0e03a1cfc8ab279b11283b910de5d9dcfce77d361c58d2e2cde7dcdf4c",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
       "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
       "connection.ts": "41d07fd10c9550ae51995620cc998de5e99add35edb31c2bb592864c76c13688",
@@ -30,7 +30,7 @@
       "workspace.ts": "543bdd58dea1ec7e2b91c5bd088824ddc2df1ebb884d5fcf3e60316ab962c4b2"
     },
     "ko-KR": {
-      "ai.ts": "391a6e14c58d8401bf3bc245eca5bdd4b66efd8225a877bfbbcae01a1c1c019a",
+      "ai.ts": "7e4fec0e03a1cfc8ab279b11283b910de5d9dcfce77d361c58d2e2cde7dcdf4c",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
       "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
       "connection.ts": "41d07fd10c9550ae51995620cc998de5e99add35edb31c2bb592864c76c13688",
@@ -57,7 +57,7 @@
       "workspace.ts": "543bdd58dea1ec7e2b91c5bd088824ddc2df1ebb884d5fcf3e60316ab962c4b2"
     },
     "fa-IR": {
-      "ai.ts": "391a6e14c58d8401bf3bc245eca5bdd4b66efd8225a877bfbbcae01a1c1c019a",
+      "ai.ts": "7e4fec0e03a1cfc8ab279b11283b910de5d9dcfce77d361c58d2e2cde7dcdf4c",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
       "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
       "connection.ts": "41d07fd10c9550ae51995620cc998de5e99add35edb31c2bb592864c76c13688",

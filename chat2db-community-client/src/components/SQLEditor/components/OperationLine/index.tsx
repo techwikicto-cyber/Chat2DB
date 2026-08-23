@@ -57,9 +57,10 @@ const OperationLine = ({
     return true;
   }, [showRoutineButtons, zoerBoundInfo]);
 
-  const showOptimizeButton = useMemo(() => {
-    return showRunButton && !zoerBoundInfo;
-  }, [showRunButton]);
+  // "Optimize" sends the statement to the assistant and opens the chat panel -
+  // it is an AI action wearing a toolbar icon, so it follows the rest of the
+  // assistant out of the editor.
+  const showOptimizeButton = false;
 
   const showFormatButton = useMemo(() => {
     return !showRoutineButtons;

@@ -680,7 +680,10 @@ const SQLExecute = forwardRef((props: IProps, ref: ForwardedRef<SQLExecuteRef>) 
           onExecuteSQL={handleExecuteSQL}
           reloadSQL={loadSQL}
           isConsole={isConsole}
-          useAI={isConsole}
+          // The editor is for writing SQL. The assistant has its own panel, and
+          // in here it only added a slash key that swallowed the character and
+          // a placeholder telling people to press it.
+          useAI={false}
           sqlActionEnabled={sqlActionEnabled}
         />
       </div>
