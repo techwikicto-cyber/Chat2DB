@@ -43,6 +43,33 @@ export const useStyles = createStyles(({ css, token }) => {
       margin-bottom: 16px;
       max-width: 760px;
     `,
+    rowActions: css`
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+    `,
+    resetPasswordForm: css`
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 260px;
+    `,
+    resetPasswordTitle: css`
+      font-size: 13px;
+      font-weight: 600;
+      color: ${token.colorText};
+    `,
+    resetPasswordHint: css`
+      font-size: 12px;
+      line-height: 1.7;
+      color: ${token.colorTextSecondary};
+    `,
+    resetPasswordActions: css`
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    `,
     disabledNotice: css`
       font-size: 13px;
       line-height: 1.9;

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Button, Input, Popconfirm, Select, Switch, Table, Tag } from 'antd';
+import { Button, Input, Popconfirm, Popover, Select, Switch, Table, Tag } from 'antd';
 import i18n from '@/i18n';
 import feedback from '@/utils/feedback';
 import { useCommunityAuth } from '@/blocks/CommunityAuth';
@@ -17,11 +17,10 @@ import { useStyles } from './style';
 /**
  * The signed-in account, and - for admins - everyone else's.
  *
- * Accounts do not separate anyone's data: every account reaches the same
- * connections, consoles and history, because nothing in the storage model is
- * scoped per user. What they give is individual credentials and the ability to
- * revoke one person without disturbing the rest. The screen says so, rather than
- * letting the presence of roles imply an isolation that does not exist.
+ * Each account owns a workspace: its connections, consoles and history are its
+ * own, and an admin sees no more of them than anyone else does. What the role
+ * decides is who may manage accounts. The hint on the screen says as much, so
+ * the presence of roles is not read as a database permission it is not.
  */
 export default function AccountSetting() {
   const { styles } = useStyles();
@@ -222,19 +221,100 @@ function UserManagement({ currentUsername }: { currentUsername: string | null })
           { title: i18n('setting.account.createdAt'), dataIndex: 'createdAt', width: 160 },
           {
             title: '',
-            width: 80,
-            render: (_, user) =>
-              user.lastAdmin || user.username === currentUsername ? null : (
-                <Popconfirm title={i18n('setting.account.deleteConfirm')} onConfirm={() => remove(user)}>
-                  <Button size="small" danger>
-                    {i18n('common.button.delete')}
-                  </Button>
-                </Popconfirm>
-              ),
+            width: 180,
+            render: (_, user) => (
+              <div className={styles.rowActions}>
+                {/* Not offered on your own row: a reset ends that account's
+                    sessions, so doing it to yourself would sign you out
+                    mid-click. The form above changes your own password and
+                    asks for the current one, which is the right shape for it. */}
+                {user.username === currentUsername ? null : (
+                  <ResetPasswordButton username={user.username} onDone={load} />
+                )}
+                {user.lastAdmin || user.username === currentUsername ? null : (
+                  <Popconfirm title={i18n('setting.account.deleteConfirm')} onConfirm={() => remove(user)}>
+                    <Button size="small" danger>
+                      {i18n('common.button.delete')}
+                    </Button>
+                  </Popconfirm>
+                )}
+              </div>
+            ),
           },
         ]}
       />
     </section>
+  );
+}
+
+/**
+ * Sets another account's password, without asking for the old one.
+ *
+ * That is the point of it: an admin resets a password precisely when nobody
+ * knows the current one any more. The server ends that account's sessions on
+ * the way through, so a reset also locks out whoever prompted it.
+ *
+ * A popover rather than a dialog - one field, no consequences to weigh, and
+ * nothing else on the screen worth blocking for.
+ */
+function ResetPasswordButton({ username, onDone }: { username: string; onDone: () => Promise<void> | void }) {
+  const { styles } = useStyles();
+  const [open, setOpen] = useState(false);
+  const [password, setPassword] = useState('');
+  const [saving, setSaving] = useState(false);
+
+  const close = () => {
+    setOpen(false);
+    setPassword('');
+  };
+
+  const submit = async () => {
+    setSaving(true);
+    try {
+      await updateCommunityUser({ username, password });
+      feedback.success(i18n('setting.account.passwordReset'));
+      close();
+      await onDone();
+    } catch (error: any) {
+      // Left open with the value intact: the usual refusal is a password below
+      // the minimum, and retyping it from scratch helps nobody.
+      feedback.error(describe(error));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <Popover
+      open={open}
+      trigger="click"
+      placement="topRight"
+      destroyTooltipOnHide
+      onOpenChange={(next) => (next ? setOpen(true) : close())}
+      content={
+        <div className={styles.resetPasswordForm}>
+          <div className={styles.resetPasswordTitle}>{i18n('setting.account.resetPasswordFor', username)}</div>
+          <Input.Password
+            autoFocus
+            value={password}
+            placeholder={i18n('setting.account.newPassword')}
+            onChange={(event) => setPassword(event.target.value)}
+            onPressEnter={() => password && submit()}
+          />
+          <div className={styles.resetPasswordHint}>{i18n('setting.account.resetPasswordHint')}</div>
+          <div className={styles.resetPasswordActions}>
+            <Button size="small" onClick={close}>
+              {i18n('common.button.cancel')}
+            </Button>
+            <Button size="small" type="primary" loading={saving} disabled={!password} onClick={submit}>
+              {i18n('common.button.confirm')}
+            </Button>
+          </div>
+        </div>
+      }
+    >
+      <Button size="small">{i18n('setting.account.resetPassword')}</Button>
+    </Popover>
   );
 }
 
