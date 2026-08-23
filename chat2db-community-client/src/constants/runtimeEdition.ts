@@ -180,11 +180,18 @@ const communityConfig: RuntimeEditionConfig = {
   ...commonConfig,
   mode: RUNTIME_ENV.COMMUNITY,
   usesFixedIdentity: true,
-  localPersistence: true,
+  // Server, not localStorage. This build is reached from a browser and signed
+  // in to, so a model defined on one machine has to be there on the next one -
+  // and it has to belong to the account rather than to whoever last used that
+  // browser profile. Both of those are impossible while the configuration
+  // lives in localStorage.
+  localPersistence: false,
   commercialAccount: false,
   remoteAppConfig: false,
   remoteSubscription: false,
-  remoteAiModelOptions: false,
+  // Follows from the line above: with nothing kept locally, the model list in
+  // the picker can only come from the server.
+  remoteAiModelOptions: true,
   aiDataCollection: false,
   chatAttachments: false,
   spmTracking: false,

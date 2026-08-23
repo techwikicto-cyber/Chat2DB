@@ -131,11 +131,59 @@ const createLocalModelOption = (config: IAIModelConfigItem): IModelOptionItem =>
   defaultOption: !!config.defaultConfig,
 });
 
+/**
+ * Moves models defined before this build stored them on the server.
+ *
+ * They were kept in localStorage, so they belonged to a browser rather than to
+ * an account. Anyone upgrading has some there and would otherwise open the
+ * picker to find them gone and have to type every API key again.
+ *
+ * Runs once per browser: the local copy is cleared as soon as it is saved, and
+ * only when the account has none of its own, so it cannot overwrite a set that
+ * has already been moved from somewhere else.
+ */
+const adoptLocalConfigs = async (remote: IAIModelConfigItem[]) => {
+  const local = loadLocalConfigs();
+  if (!local.length) {
+    return remote;
+  }
+  if (remote.length) {
+    // The account already has models. Whatever is in this browser is a stale
+    // copy of them, or somebody else's - either way it is not wanted.
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+    return remote;
+  }
+  try {
+    for (const config of local) {
+      await saveRemoteModelConfig({
+        name: config.name,
+        provider: config.provider,
+        model: config.model,
+        apiKey: config.apiKey,
+        baseUrl: config.baseUrl,
+        projectId: config.projectId,
+        location: config.location,
+        temperature: config.temperature,
+        maxTokens: config.maxTokens,
+        enabled: config.enabled,
+        defaultConfig: config.defaultConfig,
+      });
+    }
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
+  } catch {
+    // Left in place to be retried on the next load; a half-moved set is worse
+    // than one that has not started.
+    return remote;
+  }
+  return (await listRemoteModelConfigs(undefined as void)) || [];
+};
+
 export const listAIModelConfigs = async () => {
   if (runtimeEditionConfig.localPersistence) {
     return loadLocalConfigs();
   }
-  return (await listRemoteModelConfigs(undefined as void)) || [];
+  const remote = (await listRemoteModelConfigs(undefined as void)) || [];
+  return adoptLocalConfigs(remote);
 };
 
 export const saveAIModelConfig = async (payload: IAIModelConfigSaveRequest) => {

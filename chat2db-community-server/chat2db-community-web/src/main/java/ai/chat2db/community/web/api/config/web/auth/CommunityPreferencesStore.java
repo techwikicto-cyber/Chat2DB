@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -63,19 +64,26 @@ public class CommunityPreferencesStore {
         load();
     }
 
-    /** What this account has saved, or an empty map if it has saved nothing. */
+    /**
+     * What this account has saved, or an empty map if it has saved nothing.
+     *
+     * Copied through a HashMap rather than {@code Map.copyOf}, which rejects
+     * null values: "no model chosen" arrives as a null and threw on the way back
+     * out, so settings saved fine and then failed to load.
+     */
     public Map<String, Object> find(String username) {
         if (StringUtils.isBlank(username)) {
             return Map.of();
         }
-        return Map.copyOf(preferences.getOrDefault(key(username), Map.of()));
+        Map<String, Object> stored = preferences.get(key(username));
+        return stored == null ? Map.of() : Collections.unmodifiableMap(new HashMap<>(stored));
     }
 
     public synchronized void save(String username, Map<String, Object> value) {
         if (StringUtils.isBlank(username)) {
             return;
         }
-        preferences.put(key(username), value == null ? Map.of() : new HashMap<>(value));
+        preferences.put(key(username), value == null ? new HashMap<>() : new HashMap<>(value));
         persist();
     }
 

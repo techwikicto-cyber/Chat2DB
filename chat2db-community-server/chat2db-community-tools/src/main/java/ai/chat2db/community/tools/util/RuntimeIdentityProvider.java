@@ -25,7 +25,7 @@ public final class RuntimeIdentityProvider {
 
     public static Optional<Long> userId() {
         if (ConfigUtils.isCommunity()) {
-            return Optional.of(CommunityIdentity.USER_ID);
+            return Optional.of(CommunityIdentity.userId());
         }
         return Optional.empty();
     }

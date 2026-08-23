@@ -103,6 +103,23 @@ class CommunityPreferencesStoreTest {
     }
 
     @Test
+    void aSettingWithNoValueSurvivesTheRoundTrip() {
+        // "no model chosen" is a null, and Map.copyOf rejects null values - so
+        // this saved happily and then threw on the way back out, which read as
+        // settings that would not load at all.
+        CommunityPreferencesStore store = new CommunityPreferencesStore(file());
+        Map<String, Object> withNull = new HashMap<>();
+        withNull.put("selectedModel", null);
+        withNull.put("theme", "dark");
+
+        store.save("foad", withNull);
+
+        assertEquals("dark", store.find("foad").get("theme"));
+        assertTrue(store.find("foad").containsKey("selectedModel"));
+        assertEquals("dark", new CommunityPreferencesStore(file()).find("foad").get("theme"));
+    }
+
+    @Test
     void whatComesBackCannotBeChangedFromOutside() {
         CommunityPreferencesStore store = new CommunityPreferencesStore(file());
         Map<String, Object> saved = new HashMap<>();

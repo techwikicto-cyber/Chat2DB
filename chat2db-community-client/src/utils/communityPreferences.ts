@@ -34,17 +34,33 @@ let unsubscribe: (() => void)[] = [];
 let flushOnUnload: (() => void) | null = null;
 /** Bumped on every start, so a slow load cannot land on a later account. */
 let started = 0;
+/**
+ * The last selection worth keeping.
+ *
+ * The picker clears its selection whenever the model list is empty, which it is
+ * for the moment before the list arrives - and that cleared value was being
+ * saved straight over the account's real choice, so signing in wiped the very
+ * thing that had just been loaded.
+ */
+let lastKnownSelectedModel: unknown;
 
 /** What is worth carrying between browsers. Open tabs and layout are not: those describe a session. */
 function collect(): StoredPreferences {
   const global = useGlobalStore.getState();
   const ai = useAIStore.getState();
+  // No models to choose from is not the same as choosing none, and only the
+  // second is worth recording. The payload replaces the stored document whole,
+  // so the remembered value has to be sent rather than the field omitted.
+  const noBasisForAChoice = !ai.selectedModel && !ai.modelList?.length;
+  if (!noBasisForAChoice) {
+    lastKnownSelectedModel = ai.selectedModel;
+  }
   return {
     version: VERSION,
     baseSetting: global.baseSetting,
     editorSettings: global.editorSettings,
     dataTableSettings: global.dataTableSettings,
-    selectedModel: ai.selectedModel,
+    selectedModel: noBasisForAChoice ? lastKnownSelectedModel : ai.selectedModel,
   };
 }
 
@@ -70,6 +86,7 @@ function apply(stored: StoredPreferences): boolean {
     global.updateDataTableSettings(stored.dataTableSettings as any);
   }
   if (stored.selectedModel !== undefined) {
+    lastKnownSelectedModel = stored.selectedModel;
     useAIStore.getState().setSelectedModel(stored.selectedModel as any);
   }
   return languageChanged;
@@ -136,6 +153,9 @@ function watch() {
 
 export function stopWatching() {
   started += 1;
+  // Belongs to whoever was signed in; carrying it into the next account would
+  // save their choice under someone else's name.
+  lastKnownSelectedModel = undefined;
   unsubscribe.forEach((off) => off());
   unsubscribe = [];
   if (flushOnUnload) {
