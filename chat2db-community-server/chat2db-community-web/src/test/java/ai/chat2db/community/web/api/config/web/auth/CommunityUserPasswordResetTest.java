@@ -31,11 +31,13 @@ class CommunityUserPasswordResetTest {
 
     private CommunityUserStore users;
     private CommunityAccessGuard guard;
+    private CommunityPreferencesStore preferences;
 
     private CommunityUserController controller() {
         users = new CommunityUserStore(dataDir.resolve("user.json"));
         guard = new CommunityAccessGuard(users);
-        return new CommunityUserController(users, guard);
+        preferences = new CommunityPreferencesStore(dataDir.resolve("preferences.json"));
+        return new CommunityUserController(users, guard, preferences);
     }
 
     @Test

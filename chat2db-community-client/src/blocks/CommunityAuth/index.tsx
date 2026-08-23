@@ -12,6 +12,7 @@ import {
   communityLogout,
   getCommunityAuthStatus,
 } from '@/service/communityAuth';
+import { startCommunityPreferencesSync, stopWatching } from '@/utils/communityPreferences';
 import { useStyles } from './style';
 
 interface CommunityAuthValue {
@@ -73,6 +74,9 @@ export default function CommunityAuthGate({ children }: { children: ReactNode })
 
   const signOut = useCallback(async () => {
     try {
+      // Stopped before the session ends, so a settings change made on the way
+      // out cannot be saved against an account that is no longer signed in.
+      stopWatching();
       await communityLogout(undefined as void);
     } finally {
       setUsername(null);
@@ -83,6 +87,17 @@ export default function CommunityAuthGate({ children }: { children: ReactNode })
   useEffect(() => {
     refresh();
   }, [refresh]);
+
+  // Settings belong to the account, not to this browser. Loaded once somebody
+  // is signed in, and kept saved from then on; signing out stops it, and
+  // signing in as somebody else starts it again for them.
+  useEffect(() => {
+    if (!authenticated) {
+      return undefined;
+    }
+    startCommunityPreferencesSync();
+    return stopWatching;
+  }, [authenticated, username]);
 
   const value = useMemo<CommunityAuthValue>(
     () => ({ required, username, role, isAdmin: role === 'ADMIN', refresh, signOut }),

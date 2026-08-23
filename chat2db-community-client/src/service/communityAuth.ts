@@ -64,3 +64,20 @@ export const deleteCommunityUser = createRequest<{ username: string }, void>('/a
   method: 'delete',
   errorLevel: false,
 });
+
+/**
+ * Settings that belong to the account rather than to the browser.
+ *
+ * Opaque on the wire: whatever is sent comes back. The shape is decided by
+ * `syncCommunityPreferences`, so adding a setting needs no server change.
+ */
+export type ICommunityPreferences = Record<string, any>;
+
+export const getCommunityPreferences = createRequest<void, ICommunityPreferences>('/api/community/preferences', {
+  errorLevel: false,
+});
+
+export const putCommunityPreferences = createRequest<ICommunityPreferences, void>('/api/community/preferences', {
+  method: 'put',
+  errorLevel: false,
+});

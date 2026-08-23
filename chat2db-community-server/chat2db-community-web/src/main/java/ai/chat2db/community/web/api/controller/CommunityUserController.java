@@ -7,6 +7,7 @@ import ai.chat2db.community.tools.wrapper.result.ActionResult;
 import ai.chat2db.community.tools.wrapper.result.DataResult;
 import ai.chat2db.community.web.api.config.web.auth.CommunityAccessGuard;
 import ai.chat2db.community.web.api.config.web.auth.CommunityAuthSupport;
+import ai.chat2db.community.web.api.config.web.auth.CommunityPreferencesStore;
 import ai.chat2db.community.web.api.config.web.auth.CommunityRole;
 import ai.chat2db.community.web.api.config.web.auth.CommunityUser;
 import ai.chat2db.community.web.api.config.web.auth.CommunityUserStore;
@@ -36,10 +37,13 @@ public class CommunityUserController {
 
     private final CommunityUserStore users;
     private final CommunityAccessGuard guard;
+    private final CommunityPreferencesStore preferences;
 
-    public CommunityUserController(CommunityUserStore users, CommunityAccessGuard guard) {
+    public CommunityUserController(CommunityUserStore users, CommunityAccessGuard guard,
+            CommunityPreferencesStore preferences) {
         this.users = users;
         this.guard = guard;
+        this.preferences = preferences;
     }
 
     /**
@@ -148,6 +152,10 @@ public class CommunityUserController {
         }
         users.delete(username);
         guard.revokeSessionsFor(username);
+        // The workspace is left alone deliberately - deleting an account should
+        // not destroy its work - but the settings are the account's own, and
+        // leaving them would hand them to whoever next takes the name.
+        preferences.delete(username);
         return ActionResult.isSuccess();
     }
 
