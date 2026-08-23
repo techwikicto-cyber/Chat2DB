@@ -15,15 +15,19 @@
 # docker/docker-compose.yml config` prints what actually reached the container.
 #
 # SECURITY: the default binding is 127.0.0.1, so the service is reachable only
-# from the machine it runs on, and a shared password guards the whole API. The
-# password is generated on first start and printed in the container log; set
-# CHAT2DB_COMMUNITY_PASSWORD to choose your own, or CHAT2DB_DISABLE_LOGIN=true
-# to turn the gate off.
+# from the machine it runs on, and named accounts guard the whole API. An
+# `admin` account is created on first start and its password printed in the
+# container log; set CHAT2DB_COMMUNITY_PASSWORD to choose your own, or
+# CHAT2DB_DISABLE_LOGIN=true to turn the gate off.
 #
-# That gate is not an identity system: everyone who signs in is the same
-# anonymous operator, and nothing is scoped per person. For real user
-# separation, or over the public internet, still put it behind a reverse proxy
-# that terminates TLS, or restrict it to a private network / VPN.
+# Each account owns a workspace: its connections, consoles, history and settings
+# are its own, and an admin sees no more of them than anyone else. What an
+# account is not is a database permission - a connection carries the database's
+# own credentials, and whoever holds it can do whatever those allow.
+#
+# There is still no TLS here, so the sign-in password crosses the wire in the
+# clear. Over anything but loopback, put it behind a reverse proxy that
+# terminates TLS, or restrict it to a private network / VPN.
 
 services:
   chat2db:
