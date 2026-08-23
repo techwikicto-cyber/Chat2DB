@@ -15,7 +15,8 @@ export default {
   'login.label.newPassword': 'New password',
   'login.label.confirmPassword': 'Confirm password',
   'login.tips.requiredPassword': 'Please provide a new password',
-  'login.tips.checkoutPassword': 'Password must be 8 characters long, and contain at least one uppercase letter, one lowercase letter, one number.',
+  'login.tips.checkoutPassword':
+    'Password must be 8 characters long, and contain at least one uppercase letter, one lowercase letter, one number.',
   'login.button.savePassword': 'Update password',
   'login.label.newEmail': 'New email',
   'login.label.verificationCode': 'Verification code',
@@ -47,7 +48,8 @@ export default {
   'login.text.useVerificationCode': 'Use verification code',
   'login.text.wechatLoginTips': 'Please use {1} to follow the official account and login immediately',
   'login.text.wechatScan': 'WeChat Scan',
-  'login.community.subtitle': 'Sign in with the account you were given. Ask whoever set this service up if you do not have one.',
+  'login.community.subtitle':
+    'Sign in with the account you were given. Ask whoever set this service up if you do not have one.',
   'login.community.invalidPassword': 'Wrong password. Please try again.',
   'login.community.invalidCredentials': 'Wrong username or password.',
 };

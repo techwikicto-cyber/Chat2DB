@@ -151,7 +151,7 @@ export default {
   'team.create.form.proxy': '作成することで、あなたは私たちの',
   'team.create.form.proxy.service': 'サービス規約',
   'team.create.form.proxy.org': '組織規約',
-  
+
   'team.join.form.name': '名前',
   'team.join.form.name.placeholder': '名前を入力してください',
   'team.join.form.code': 'チームコード',

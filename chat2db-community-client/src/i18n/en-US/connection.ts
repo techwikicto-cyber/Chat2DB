@@ -21,7 +21,7 @@ export default {
   'connection.tableHeader.name': 'Name',
   'connection.tableHeader.statistics': 'Statistics',
   'connection.title.uploadDriver': 'Upload',
-  'connection.tips.customUpload': "Upload driver",
+  'connection.tips.customUpload': 'Upload driver',
   'connection.title.deleteDriver': 'Delete Driver',
   'connection.tips.deleteDriverConfirm': 'Delete custom driver "{1}"? The related jar files will be removed as well.',
   'connection.title.driver': 'Driver',
@@ -34,7 +34,8 @@ export default {
   'connection.label.shared': 'Shared',
   'connection.button.createConnection': 'Create connection',
   'connection.tips.noConnection': 'You have not created any connections yet',
-  'connection.tips.noConnectionTips': 'You do not have permission to view the connection details, but you can connect to the connection directly',
+  'connection.tips.noConnectionTips':
+    'You do not have permission to view the connection details, but you can connect to the connection directly',
   'connection.tips.noCreateConnectionTips': 'Contact your space administrator to create a connection',
   'connection.title.importTitle': 'Import file,.ncx(navicat) or.dbp(dbever)',
   'connection.title.importChat2DB': 'Import Chat2DB connections',
@@ -43,6 +44,7 @@ export default {
   'connection.title.importDataGrip': 'Import DataGrip connections',
   'connection.title.importDBeaver': 'Import DBeaver connections',
   'connection.import.success': 'Successfully imported {1} connections',
-  'connection.import.unable.password.tips': 'We cannot import connection passwords. After the import is complete, please re-enter the connection password',
+  'connection.import.unable.password.tips':
+    'We cannot import connection passwords. After the import is complete, please re-enter the connection password',
   'workspace.menu.exportConnections': 'Export connections',
 };

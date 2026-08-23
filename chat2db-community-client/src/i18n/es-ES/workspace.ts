@@ -59,11 +59,11 @@ export default {
   'workspace.deleteDatabaseSchema.inputConfirmSuffix': ' para confirmar la eliminación',
   'workspace.deleteDatabaseSchema.confirmNameMismatch': 'El valor introducido no coincide con el nombre',
   'workspace.empty.connect.title': 'Conecta una base de datos para empezar',
-  'workspace.empty.connect.desc': 'Las consolas, las consultas y el asistente funcionan sobre una conexión. Elige una base de datos para crear la primera.',
+  'workspace.empty.connect.desc':
+    'Las consolas, las consultas y el asistente funcionan sobre una conexión. Elige una base de datos para crear la primera.',
   'workspace.empty.connect.more': 'Todas las bases de datos compatibles están en el panel de la izquierda.',
   'workspace.empty.console.title': 'No hay ninguna consola abierta',
   'workspace.empty.console.desc': 'Abre una consola para escribir y ejecutar SQL sobre tus conexiones.',
-  'workspace.empty.console.shortcut': 'o pulsa',
   'workspace.tips.noConnection': 'Todavía no ha creado ninguna conexión',
   'workspace.tips.noSearchResult': 'No hay resultados coincidentes',
   'workspace.tips.maxConsole': 'Solo puede abrir hasta 20 consolas',
@@ -273,7 +273,8 @@ export default {
   'workspace.databaseAccount.selectPrivileges': 'Seleccionar privilegios',
   'workspace.databaseAccount.grantOption': 'Permitir concesiones adicionales (WITH GRANT OPTION)',
   'workspace.databaseAccount.previewSql': 'Vista previa de SQL',
-  'workspace.databaseAccount.previewEmpty': 'Complete los detalles de los privilegios para generar el SQL automáticamente',
+  'workspace.databaseAccount.previewEmpty':
+    'Complete los detalles de los privilegios para generar el SQL automáticamente',
   'workspace.databaseAccount.confirmChange': 'Confirmar cambios',
   'workspace.databaseAccount.executeSql': 'Ejecutar SQL',
   'workspace.databaseAccount.executeSuccess': 'Ejecución correcta',

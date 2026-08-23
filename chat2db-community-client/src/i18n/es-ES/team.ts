@@ -163,7 +163,8 @@ export default {
   'team.join.form.reason': 'Motivo de la solicitud (opcional)',
   'team.join.apply': 'Solicitar',
 
-  'team.invite.title.subtitle1': 'Una plataforma de desarrollo y análisis de datos con IA utilizada por más de un millón de desarrolladores',
+  'team.invite.title.subtitle1':
+    'Una plataforma de desarrollo y análisis de datos con IA utilizada por más de un millón de desarrolladores',
   'team.invite.title.subtitle2': 'Una gestión de datos más sencilla, eficiente y entretenida 😎',
   'team.invite.question': '¿Qué es Bina Platform?',
   'team.invite.init.content1': '{1} utiliza {2}',

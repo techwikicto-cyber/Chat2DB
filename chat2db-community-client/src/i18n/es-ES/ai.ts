@@ -5,7 +5,8 @@ export default {
   'ai.aiType.Text2SQL.desc': 'Genera el SQL correspondiente a partir del lenguaje natural introducido',
 
   'ai.aiType.Dashboard.title': 'Generación de paneles',
-  'ai.aiType.Dashboard.desc': 'Genera la información del informe correspondiente a partir del lenguaje natural introducido',
+  'ai.aiType.Dashboard.desc':
+    'Genera la información del informe correspondiente a partir del lenguaje natural introducido',
 
   'ai.aiType.SQLExplain.title': 'Explicación de SQL',
   'ai.aiType.SQLExplain.desc': 'Explica la sentencia SQL introducida',

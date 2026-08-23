@@ -79,8 +79,6 @@ export interface IHotUpdateConfig {
   autoInstall: boolean;
 }
 
-export type { ShortcutOverride, ShortcutOverrides } from '@/constants/shortcut';
-
 export interface IUpdateDetail {
   status?: UpdatedStatus; // update status
   progress?: number; // update progress

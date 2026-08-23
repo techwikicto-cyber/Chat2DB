@@ -58,11 +58,11 @@ export default {
   'workspace.deleteDatabaseSchema.inputConfirmSuffix': '을(를) 입력하여 삭제 확인',
   'workspace.deleteDatabaseSchema.confirmNameMismatch': '입력한 내용이 이름과 일치하지 않습니다',
   'workspace.empty.connect.title': '데이터베이스를 연결하고 시작하세요',
-  'workspace.empty.connect.desc': '콘솔, 쿼리, 어시스턴트 모두 연결을 기준으로 동작합니다. 데이터베이스를 선택해 연결을 만드세요.',
+  'workspace.empty.connect.desc':
+    '콘솔, 쿼리, 어시스턴트 모두 연결을 기준으로 동작합니다. 데이터베이스를 선택해 연결을 만드세요.',
   'workspace.empty.connect.more': '지원되는 모든 데이터베이스는 왼쪽 패널에 있습니다.',
   'workspace.empty.console.title': '열린 콘솔이 없습니다',
   'workspace.empty.console.desc': '콘솔을 열어 연결에 대해 SQL을 작성하고 실행하세요.',
-  'workspace.empty.console.shortcut': '또는 다음 키',
   'workspace.tips.noConnection': '아직 연결을 만들지 않았습니다',
   'workspace.tips.noSearchResult': '일치하는 결과가 없습니다',
   'workspace.tips.maxConsole': '콘솔은 최대 20개까지 열 수 있습니다',

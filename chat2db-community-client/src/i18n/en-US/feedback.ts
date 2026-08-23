@@ -14,7 +14,6 @@ export default {
   'feedback.validate.improve': 'Please select your suggestion',
   'feedback.validate.content': 'Please fill in your suggestion',
   'feedback.validate.upload.image': 'Image size should be less than 2MB',
-  
 
   'feedback.title': 'Give Feedback',
   'feedback.subtitle':

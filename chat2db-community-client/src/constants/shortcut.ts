@@ -65,12 +65,6 @@ export interface ShortcutDefinition {
   canModify?: boolean;
 }
 
-export interface ShortcutOverride {
-  binding: string | null;
-}
-
-export type ShortcutOverrides = Partial<Record<ShortcutAction, ShortcutOverride>>;
-
 export interface EffectiveShortcutConfig extends ShortcutDefinition {
   binding: string | null;
   disabled: boolean;
@@ -611,44 +605,26 @@ export const isShortcutEventMatch = (event: KeyboardEvent | React.KeyboardEvent,
   return getEventShortcutBinding(event) === normalizedBinding;
 };
 
-export const getEffectiveShortcutConfig = (
-  action: ShortcutAction,
-  overrides: ShortcutOverrides = {},
-): EffectiveShortcutConfig => {
+/**
+ * Bindings are fixed. They used to be overridable from a settings screen, which
+ * no longer exists - the keys still work, they are just no longer named or
+ * listed anywhere in the interface.
+ */
+export const getEffectiveShortcutConfig = (action: ShortcutAction): EffectiveShortcutConfig => {
   const defaultConfig = DEFAULT_SHORTCUT_CONFIG[action];
-  const override = overrides?.[action];
-  const normalizedOverride = normalizeShortcutBinding(override?.binding);
-  const binding = override ? normalizedOverride : defaultConfig.defaultBinding;
-
   return {
     ...defaultConfig,
-    binding,
-    disabled: binding === null,
-    isDefault: !override || isShortcutBindingEqual(binding, defaultConfig.defaultBinding),
+    binding: defaultConfig.defaultBinding,
+    disabled: defaultConfig.defaultBinding === null,
+    isDefault: true,
   };
 };
 
-export const getEffectiveShortcutConfigMap = (
-  overrides: ShortcutOverrides = {},
-): Record<ShortcutAction, EffectiveShortcutConfig> =>
+export const getEffectiveShortcutConfigMap = (): Record<ShortcutAction, EffectiveShortcutConfig> =>
   Object.values(ShortcutAction).reduce((configMap, action) => {
-    configMap[action] = getEffectiveShortcutConfig(action, overrides);
+    configMap[action] = getEffectiveShortcutConfig(action);
     return configMap;
   }, {} as Record<ShortcutAction, EffectiveShortcutConfig>);
-
-export const getShortcutOverrideValue = (
-  action: ShortcutAction,
-  binding: string | null,
-): ShortcutOverride | undefined => {
-  const normalizedBinding = normalizeShortcutBinding(binding);
-  const defaultBinding = DEFAULT_SHORTCUT_CONFIG[action]?.defaultBinding;
-  if (isShortcutBindingEqual(normalizedBinding, defaultBinding)) {
-    return undefined;
-  }
-  return {
-    binding: normalizedBinding,
-  };
-};
 
 export const getShortcutLabel = (binding?: string | null): string => {
   const normalizedBinding = normalizeShortcutBinding(binding);

@@ -15,7 +15,8 @@ export default {
   'login.label.newPassword': 'Nueva contraseña',
   'login.label.confirmPassword': 'Confirmar contraseña',
   'login.tips.requiredPassword': 'Introduzca una nueva contraseña',
-  'login.tips.checkoutPassword': 'La contraseña debe tener 8 caracteres e incluir al menos una letra mayúscula, una minúscula y un número.',
+  'login.tips.checkoutPassword':
+    'La contraseña debe tener 8 caracteres e incluir al menos una letra mayúscula, una minúscula y un número.',
   'login.button.savePassword': 'Actualizar contraseña',
   'login.label.newEmail': 'Nuevo correo electrónico',
   'login.label.verificationCode': 'Código de verificación',
@@ -34,10 +35,12 @@ export default {
   'login.text.signInWithWeChat': 'Iniciar sesión con WeChat',
   'login.text.signInWithWatcha': 'Iniciar sesión con Watcha',
   'login.text.or': 'o',
-  'login.tips.sendVerificationCode': 'Hemos enviado un código de verificación a su correo electrónico. Revise su bandeja de entrada.',
+  'login.tips.sendVerificationCode':
+    'Hemos enviado un código de verificación a su correo electrónico. Revise su bandeja de entrada.',
   'login.tips.passwordsMustMatch': 'Las contraseñas deben coincidir.',
   'login.tips.passwordMustBeAtLeast4Characters': 'La contraseña debe tener al menos 4 caracteres.',
-  'login.tips.resetPasswords': 'Puede usar el código de verificación para iniciar sesión y restablecer su contraseña en Configuración.',
+  'login.tips.resetPasswords':
+    'Puede usar el código de verificación para iniciar sesión y restablecer su contraseña en Configuración.',
   'login.button.forgetPassword': '¿Ha olvidado la contraseña?',
   'login.text.agreement': 'Al hacer clic en Continuar, acepta nuestros',
   'login.text.termsOfService': 'Términos del servicio',
@@ -47,7 +50,8 @@ export default {
   'login.text.useVerificationCode': 'Usar código de verificación',
   'login.text.wechatLoginTips': 'Use {1} para seguir la cuenta oficial e iniciar sesión de inmediato',
   'login.text.wechatScan': 'Escanear con WeChat',
-  'login.community.subtitle': 'Inicia sesión con la cuenta que te hayan dado. Pídesela a quien haya configurado este servicio si no tienes una.',
+  'login.community.subtitle':
+    'Inicia sesión con la cuenta que te hayan dado. Pídesela a quien haya configurado este servicio si no tienes una.',
   'login.community.invalidPassword': 'Contraseña incorrecta. Inténtalo de nuevo.',
   'login.community.invalidCredentials': 'Usuario o contraseña incorrectos.',
 };

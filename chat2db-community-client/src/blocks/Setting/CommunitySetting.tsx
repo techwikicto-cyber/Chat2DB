@@ -7,7 +7,6 @@ import BaseSetting from './BaseSetting';
 import EditorSetting from './EditorSetting';
 import McpSetting from './McpSetting';
 import NetworkProxySetting from './NetworkProxySetting';
-import ShortcutSetting from './ShortcutSetting';
 
 import { IconButton, ListItem } from '@chat2db/ui';
 import { useStyles } from './style';
@@ -77,13 +76,6 @@ function CommunitySetting() {
             },
           ]
         : []),
-      {
-        title: i18n('setting.nav.shortcut'),
-        describe: '',
-        iconCode: 'icon-a-kuaijiejian1',
-        body: <ShortcutSetting />,
-        code: 'shortcut',
-      },
       {
         title: i18n('setting.nav.aboutUs'),
         describe: i18n('setting.nav.aboutUsDescribe'),

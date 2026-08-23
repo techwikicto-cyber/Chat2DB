@@ -2,8 +2,7 @@ export default {
   'chat.input.remain': '{1} 残り',
   'chat.input.tableSelect.placeholder': 'テーブルを選択してください',
   'chat.input.tableSelect.error.TooManyTable': 'テーブルは最大8つまで選択できます',
-  'chat.input.remain.dialog.tips':
-    '公式のWeChatアカウントを購読し、推進を送信して、より多くの体験の機会を得る。',
+  'chat.input.remain.dialog.tips': '公式のWeChatアカウントを購読し、推進を送信して、より多くの体験の機会を得る。',
   'chat.input.syncTable.tips': '全てのテーブル構造をAIコンテキストに自動的に同期',
   'chat.input.remain.tooltip': '手動で選択したテーブルはAIコンテキストに同期されます',
   'chat.input.syncTable.tempTips': '🎉更新: 全てのテーブル構造をAIコンテキストに自動的に同期',
@@ -29,7 +28,7 @@ export default {
   'chat.share.permission.view': '閲覧のみ',
   'chat.share.permission.edit': '編集',
   'chat.share.link': '共有リンク',
-  
+
   'chat.message.error': 'エラー：AIサービスに異常があります。もう一度試してください',
   'chat.create.title': 'チャットを作成',
   'chat.edit.title': 'チャット情報を変更',
@@ -46,7 +45,8 @@ export default {
 
   'chat.uploadExcel.description1': 'クリックまたはドラッグして単一のExcelファイルをアップロード',
   'chat.uploadExcel.description2': 'ExcelファイルをアップロードしてAIチャットを作成します',
-  'chat.uploadExcel.uploadExcelTips': '1行目がヘッダーで、2行目以降がデータである単一行のヘッダー付きExcelファイルをアップロードしてください',
+  'chat.uploadExcel.uploadExcelTips':
+    '1行目がヘッダーで、2行目以降がデータである単一行のヘッダー付きExcelファイルをアップロードしてください',
 
   'chat.functionDescription.title': 'Hi~ Excelのヘッダー情報を決定するのにあなたの助けが必要です',
   'chat.functionDescription.description': 'ヘッダーを決定した後、AI Q&Aはより正確になります',

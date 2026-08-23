@@ -1,13 +1,6 @@
 import { EditorSettings } from '@/components/SQLEditor/type';
 import { APP_URL_CONFIG_CHINA, APP_URL_CONFIG_OVERSEAS } from '@/constants/appConfig';
 import { runtimeEditionConfig } from '@/constants/runtimeEdition';
-import {
-  EffectiveShortcutConfig,
-  getEffectiveShortcutConfigMap,
-  getShortcutOverrideValue,
-  normalizeShortcutBinding,
-  ShortcutAction,
-} from '@/constants/shortcut';
 import i18n from '@/i18n';
 import aiService from '@/service/ai';
 import configService from '@/service/config';
@@ -19,7 +12,6 @@ import {
   GlobalAISettings,
   GlobalBaseSettings,
   IUpdateDetail,
-  ShortcutOverrides,
 } from '@/typings/settings';
 import { getSystemThemeMode } from '@/utils/color';
 import { isDesktop, isDesktopEnv, isOfflineEnv } from '@/utils/env';
@@ -112,26 +104,6 @@ export interface SettingsAction {
    * RBI
    */
   fetchSpm: () => void;
-
-  /**
-   * Get shortcut key configuration
-   */
-  getShortcutConfig: () => Record<ShortcutAction, EffectiveShortcutConfig>;
-
-  /**
-   * Update shortcut key configuration
-   */
-  updateShortcutConfig: (key: ShortcutAction, value: string | null) => void;
-
-  /**
-   * Reset individual shortcut keys
-   */
-  resetShortcutConfig: (key: ShortcutAction) => void;
-
-  /**
-   * Reset all shortcut keys
-   */
-  resetAllShortcutConfig: () => void;
 
   /**
    * Update table settings
@@ -321,33 +293,6 @@ export const createSettingsAction: StateCreator<GlobalStore, [['zustand/devtools
       deviceUuid,
       clientVersion: get().appConfig.version,
       userAgent: window.navigator.userAgent,
-    });
-  },
-  getShortcutConfig: () => {
-    return getEffectiveShortcutConfigMap(get().shortcutOverrides as ShortcutOverrides);
-  },
-  updateShortcutConfig: (key: ShortcutAction, value: string | null) => {
-    const override = getShortcutOverrideValue(key, normalizeShortcutBinding(value));
-    set(
-      produce(get(), (draft) => {
-        if (override) {
-          draft.shortcutOverrides[key] = override;
-        } else {
-          delete draft.shortcutOverrides[key];
-        }
-      }),
-    );
-  },
-  resetShortcutConfig: (key: ShortcutAction) => {
-    set(
-      produce(get(), (draft) => {
-        delete draft.shortcutOverrides[key];
-      }),
-    );
-  },
-  resetAllShortcutConfig: () => {
-    set({
-      shortcutOverrides: {},
     });
   },
   updateDataTableSettings: (dataTableSettings) => {

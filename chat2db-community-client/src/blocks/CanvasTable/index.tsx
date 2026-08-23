@@ -16,13 +16,7 @@ import ContextMenu, { ContextMenuRef } from '@/components/ContextMenu';
 import { ITableInstance } from './typings';
 import useTooltip from './hooks/useTooltip';
 import { copyToClipboard } from '@/utils';
-import {
-  ShortcutAction,
-  ShortcutOverrides,
-  getEffectiveShortcutConfigMap,
-  isShortcutEventMatch,
-} from '@/constants/shortcut';
-import { useGlobalStore } from '@/store/global';
+import { ShortcutAction, getEffectiveShortcutConfigMap, isShortcutEventMatch } from '@/constants/shortcut';
 
 export interface ICustomOptions {
   // Whether to display the left border
@@ -89,11 +83,7 @@ const CanvasTable = forwardRef((props: IProps, ref: ForwardedRef<CanvasTableRef>
   const contextMenuRef = useRef<ContextMenuRef>(null);
   const tooltipTongs = useTooltip({ tableInstance, tooltip });
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const shortcutOverrides = useGlobalStore((s) => s.shortcutOverrides);
-  const shortcutConfig = useMemo(
-    () => getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides),
-    [shortcutOverrides],
-  );
+  const shortcutConfig = useMemo(() => getEffectiveShortcutConfigMap(), []);
 
   useEffect(() => {
     // On Windows, this area conflicts with the table's horizontal scrollbar.

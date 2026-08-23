@@ -4,7 +4,6 @@ import { handelCreateConsole } from '@/pages/main/workspace/functions/shortcutKe
 import { useWorkspaceStore } from '@/store/workspace';
 import {
   ShortcutAction,
-  ShortcutOverrides,
   ShortcutScope,
   getEffectiveShortcutConfigMap,
   isShortcutEventMatch,
@@ -153,9 +152,7 @@ class ShortcutManager {
 
   private handleKeyDown = (e: KeyboardEvent): void => {
     const isFromEditable = isEditableElement(e.target);
-
-    const { shortcutOverrides } = useGlobalStore.getState();
-    const shortcutConfig = getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides);
+    const shortcutConfig = getEffectiveShortcutConfigMap();
 
     const matchedConfig = Object.values(shortcutConfig).find((config) => {
       return config.scope === ShortcutScope.Global && !config.disabled && isShortcutEventMatch(e, config.binding);

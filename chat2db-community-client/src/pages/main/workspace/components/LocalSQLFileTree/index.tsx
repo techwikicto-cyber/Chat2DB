@@ -23,11 +23,9 @@ import {
   getEffectiveShortcutConfigMap,
   isShortcutEventMatch,
   ShortcutAction,
-  ShortcutOverrides,
 } from '@/constants/shortcut';
 import i18n from '@/i18n';
 import jcefApi from '@/jcef';
-import { useGlobalStore } from '@/store/global';
 import { useWorkspaceStore } from '@/store/workspace';
 import { getLocalTextFileIcon, LOCAL_TEXT_FILE_ICON_MAP, SQL_FILE_EXTENSION_NAME } from '../../utils/localTextFile';
 import { useStyles } from './style';
@@ -332,10 +330,9 @@ const LocalSQLFileTree = forwardRef<LocalSQLFileTreeRef, LocalSQLFileTreeProps>(
   const [contextMenu, setContextMenu] = useState<LocalSQLFileTreeContextIntent | null>(null);
   const [dropTargetKey, setDropTargetKey] = useState<string>();
   const selectedRowRef = React.useRef<HTMLDivElement | null>(null);
-  const shortcutOverrides = useGlobalStore((state) => state.shortcutOverrides);
   const shortcutConfig = useMemo(
-    () => getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides),
-    [shortcutOverrides],
+    () => getEffectiveShortcutConfigMap(),
+    [],
   );
   const readFile = useWorkspaceStore((state) => state.readFile);
   const { activeConsoleId, workspaceTabList, setWorkspaceTabList, setActiveConsoleId, deleteEditor } =

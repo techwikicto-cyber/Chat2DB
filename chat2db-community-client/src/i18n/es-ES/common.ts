@@ -144,7 +144,8 @@ export default {
   'common.button.whereSql': 'SQL WHERE',
   'common.button.copyAsSqlInValues': 'Valores SQL de IN',
   'common.sqlInValues.singleColumnRequired': 'Seleccione una sola columna',
-  'common.sqlInValues.largeValueRejected': 'Los valores grandes, binarios o no compatibles no se pueden copiar como valores de SQL IN',
+  'common.sqlInValues.largeValueRejected':
+    'Los valores grandes, binarios o no compatibles no se pueden copiar como valores de SQL IN',
   'common.sqlInValues.emptySelection': 'Seleccione los valores que desea copiar',
   'common.sqlInValues.emptyInput': 'El portapapeles no contiene valores convertibles',
   'common.sqlInValues.missingConnection': 'Seleccione una conexión válida a una fuente de datos',
@@ -193,12 +194,15 @@ export default {
   'common.largeCellValue.status.complete': 'Completo',
   'common.largeCellValue.status.partial': 'Parcial',
   'common.largeCellValue.status.editorLimitReached': 'Se alcanzó el límite del editor',
-  'common.largeCellValue.tip.editorLimit': 'El valor supera el límite del editor. Use Descargar para obtener el valor completo.',
+  'common.largeCellValue.tip.editorLimit':
+    'El valor supera el límite del editor. Use Descargar para obtener el valor completo.',
   'common.largeCellValue.imageAlt': 'Imagen de la celda',
-  'common.largeCellValue.error.tokenExpired': 'La referencia a este valor grande ha expirado. Actualice el conjunto de resultados y vuelva a abrir la celda.',
+  'common.largeCellValue.error.tokenExpired':
+    'La referencia a este valor grande ha expirado. Actualice el conjunto de resultados y vuelva a abrir la celda.',
   'common.largeCellValue.error.loadFailed': 'No se pudo cargar el valor',
   'common.largeCellValue.error.downloadFailed': 'No se pudo descargar el valor',
-  'common.largeCellValue.error.fullValueUnsupported': 'No se puede leer el valor grande completo para este conjunto de resultados',
+  'common.largeCellValue.error.fullValueUnsupported':
+    'No se puede leer el valor grande completo para este conjunto de resultados',
   'common.button.close': 'Cerrar',
   'common.button.prev': 'Anterior',
   'common.button.next': 'Siguiente',

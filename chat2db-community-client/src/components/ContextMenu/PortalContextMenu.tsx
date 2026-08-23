@@ -1,7 +1,6 @@
 import { memo, useMemo } from 'react';
 import { Menu, type MenuProps } from 'antd';
 
-import ShortcutMenuLabel from '@/components/ShortcutMenuLabel';
 import MainContextMenu from '@/pages/main/components/MainContextMenu';
 import {
   ContextMenuAction,
@@ -36,7 +35,7 @@ const PortalContextMenu = <TIntent extends ContextMenuIntent>(props: PortalConte
 
         return {
           key: entry.id,
-          label: <ShortcutMenuLabel label={entry.label} shortcutAction={entry.shortcutAction} />,
+          label: entry.label,
           icon: entry.icon,
           danger: entry.danger,
           disabled: entry.disabled,

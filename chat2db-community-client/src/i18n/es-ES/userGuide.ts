@@ -89,7 +89,8 @@ export default {
   'userguide.offlineTrial.primaryButton2.title': 'Verificar código de activación',
   'userguide.offlineTrial.secondaryButton.title': 'Más información sobre las opciones de pago',
 
-  'userguide.offlineTrialExpired.title': 'La prueba gratuita de 14 días ha expirado o se alcanzó el límite de uso de IA',
+  'userguide.offlineTrialExpired.title':
+    'La prueba gratuita de 14 días ha expirado o se alcanzó el límite de uso de IA',
   'userguide.offlineTrialExpired.subTitle': 'Compre un código de activación para seguir utilizando el producto',
   'userguide.offlineTrialExpired.highlightSubTitle': 'Edición sin conexión',
   'userguide.offlineTrialExpired.dividingLine':
@@ -145,7 +146,8 @@ export default {
   'userguide.team.feature2.title': 'La colaboración de desarrollo permite editar y revisar código SQL en equipo',
   'userguide.team.feature3.title': 'Los miembros del equipo pueden compartir scripts SQL e informes',
   'userguide.team.feature4.title': 'Gestión de miembros del equipo y autorizaciones de datos',
-  'userguide.team.feature5.title': 'Los procesos de aprobación integrados garantizan la revisión estricta de los cambios en bases de datos',
+  'userguide.team.feature5.title':
+    'Los procesos de aprobación integrados garantizan la revisión estricta de los cambios en bases de datos',
   'userguide.team.feature6.title': 'Gestión detallada de permisos para bases de datos, tablas y campos',
   'userguide.team.feature7.title': 'Cumplimiento de la seguridad de los datos y auditoría de operaciones',
 

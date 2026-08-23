@@ -16,8 +16,7 @@ export default {
   'feedback.validate.upload.image': 'El tamaño de la imagen debe ser inferior a 2 MB',
 
   'feedback.title': 'Enviar comentarios',
-  'feedback.subtitle':
-    'Sus comentarios nos ayudan a comprender mejor sus necesidades y adaptar nuestros servicios',
+  'feedback.subtitle': 'Sus comentarios nos ayudan a comprender mejor sus necesidades y adaptar nuestros servicios',
   'feedback.contactInfo': 'Su información de contacto',
   'feedback.contactInfo.placeholder': 'Correo electrónico/teléfono/ID de WeChat',
   'feedback.feeling': '¿Qué le parece nuestro producto?',

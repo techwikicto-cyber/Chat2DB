@@ -20,13 +20,7 @@ import { getBlankCreateCellValue, transformOperations } from '@/blocks/SearchRes
 import MonacoEditorErrorTips from '@/components/SQLEditor/components/MonacoEditorErrorTips';
 import { v4 as uuidv4 } from 'uuid';
 import { ITableInstance } from '@/blocks/CanvasTable/typings';
-import {
-  ShortcutAction,
-  ShortcutOverrides,
-  getEffectiveShortcutConfigMap,
-  isShortcutEventMatch,
-} from '@/constants/shortcut';
-import { useGlobalStore } from '@/store/global';
+import { ShortcutAction, getEffectiveShortcutConfigMap, isShortcutEventMatch } from '@/constants/shortcut';
 import { useAIStore } from '@/store/ai';
 import { useWorkspaceStore } from '@/store/workspace';
 import {
@@ -76,11 +70,7 @@ export default memo<IProps>(
     const currentWorkspaceExtend = useWorkspaceStore((state) => state.currentWorkspaceExtend);
     const inspectorExtendCode = useMemo(() => getWorkspaceResultInspectorCode(searchAreaId), [searchAreaId]);
     const inspectorOpen = currentWorkspaceExtend === inspectorExtendCode;
-    const shortcutOverrides = useGlobalStore((s) => s.shortcutOverrides);
-    const shortcutConfig = useMemo(
-      () => getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides),
-      [shortcutOverrides],
-    );
+    const shortcutConfig = useMemo(() => getEffectiveShortcutConfigMap(), []);
 
     useEffect(() => {
       setResultData(props.resultData);
@@ -106,11 +96,7 @@ export default memo<IProps>(
     useEffect(() => {
       const workspaceStore = useWorkspaceStore.getState();
       if (
-        shouldClearInactiveResultInspector(
-          workspaceStore.currentWorkspaceExtend,
-          inspectorExtendCode,
-          props.active,
-        )
+        shouldClearInactiveResultInspector(workspaceStore.currentWorkspaceExtend, inspectorExtendCode, props.active)
       ) {
         workspaceStore.setCurrentWorkspaceExtend(null);
       }
@@ -354,20 +340,23 @@ export default memo<IProps>(
       [activateInspector, resultData?.canEdit],
     );
 
-    const openRowInspector = useCallback((params) => {
-      if (!params) {
-        return;
-      }
-      const record = params.tableInstance.getRecordByCell(params.col, params.row);
-      setLastActiveCell({
-        tableInstance: params.tableInstance,
-        col: params.col,
-        row: params.row,
-        rowId: params.rowId ?? record?.CHAT2DB_ROW_NUMBER,
-      });
-      activateInspector('row');
-      setTimeout(() => rowDetailRef.current?.openPanel(params), 0);
-    }, [activateInspector]);
+    const openRowInspector = useCallback(
+      (params) => {
+        if (!params) {
+          return;
+        }
+        const record = params.tableInstance.getRecordByCell(params.col, params.row);
+        setLastActiveCell({
+          tableInstance: params.tableInstance,
+          col: params.col,
+          row: params.row,
+          rowId: params.rowId ?? record?.CHAT2DB_ROW_NUMBER,
+        });
+        activateInspector('row');
+        setTimeout(() => rowDetailRef.current?.openPanel(params), 0);
+      },
+      [activateInspector],
+    );
 
     const onTableOperationUtils = useMemo(() => {
       return {
@@ -420,10 +409,7 @@ export default memo<IProps>(
     const handleRowDetailChangeData = useCallback((params: IChangeDataParams) => {
       const { tableInstance: targetTableInstance, col, row, field, value } = params;
       const originData = targetTableInstance.getRecordByCell(col, row);
-      if (
-        params.rowId !== undefined &&
-        String(originData?.CHAT2DB_ROW_NUMBER) !== String(params.rowId)
-      ) {
+      if (params.rowId !== undefined && String(originData?.CHAT2DB_ROW_NUMBER) !== String(params.rowId)) {
         return;
       }
       const currentValue = targetTableInstance.getCellOriginValue(col, row);
@@ -567,7 +553,8 @@ export default memo<IProps>(
                   onSelectionChange={handleSelectionChange}
                 />
               </div>
-              {inspectorOpen && inspectorPortalTarget &&
+              {inspectorOpen &&
+                inspectorPortalTarget &&
                 createPortal(
                   <aside className={styles.inspector}>
                     <Tabs
@@ -609,10 +596,7 @@ export default memo<IProps>(
                           key: 'aggregates',
                           label: i18n('common.resultInspector.aggregates'),
                           children: (
-                            <SelectionAggregates
-                              selectedValues={selectedValues}
-                              selectedRowCount={selectedRowCount}
-                            />
+                            <SelectionAggregates selectedValues={selectedValues} selectedRowCount={selectedRowCount} />
                           ),
                         },
                       ]}

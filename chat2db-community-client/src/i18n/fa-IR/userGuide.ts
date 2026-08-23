@@ -89,10 +89,12 @@ export default {
   'userguide.offlineTrial.primaryButton2.title': 'بررسی کد فعال‌سازی',
   'userguide.offlineTrial.secondaryButton.title': 'جزئیات بیشتر نسخه پولی',
 
-  'userguide.offlineTrialExpired.title': 'دوره آزمایشی رایگان ۱۴ روزه شما تمام شده یا سقف استفاده از هوش مصنوعی پر شده است',
+  'userguide.offlineTrialExpired.title':
+    'دوره آزمایشی رایگان ۱۴ روزه شما تمام شده یا سقف استفاده از هوش مصنوعی پر شده است',
   'userguide.offlineTrialExpired.subTitle': 'برای ادامه استفاده، لطفاً کد فعال‌سازی تهیه کنید',
   'userguide.offlineTrialExpired.highlightSubTitle': 'نسخه آفلاین',
-  'userguide.offlineTrialExpired.dividingLine': 'پس از تهیه کد فعال‌سازی، می‌توانید به استفاده از قابلیت‌های زیر ادامه دهید',
+  'userguide.offlineTrialExpired.dividingLine':
+    'پس از تهیه کد فعال‌سازی، می‌توانید به استفاده از قابلیت‌های زیر ادامه دهید',
   'userguide.offlineTrialExpired.feature1.title': 'پشتیبانی از انواع گوناگون پایگاه‌داده',
   'userguide.offlineTrialExpired.feature1.subtitle': 'ساخت اتصال نامحدود به پایگاه‌داده',
   'userguide.offlineTrialExpired.feature2.title': 'بیش از ۱۰ سرویس هوش مصنوعی، در حال توسعه مداوم',
@@ -111,7 +113,8 @@ export default {
   'userguide.offlineLicenseExpired.title': 'مجوز نسخه آفلاین شما منقضی شده است',
   'userguide.offlineLicenseExpired.subTitle': 'برای ادامه استفاده، لطفاً کد فعال‌سازی تهیه کنید',
   'userguide.offlineLicenseExpired.highlightSubTitle': 'نسخه آفلاین',
-  'userguide.offlineLicenseExpired.dividingLine': 'پس از تهیه کد فعال‌سازی، می‌توانید به استفاده از قابلیت‌های زیر ادامه دهید',
+  'userguide.offlineLicenseExpired.dividingLine':
+    'پس از تهیه کد فعال‌سازی، می‌توانید به استفاده از قابلیت‌های زیر ادامه دهید',
   'userguide.offlineLicenseExpired.feature1.title': 'پشتیبانی از طیف گسترده‌ای از انواع پایگاه‌داده',
   'userguide.offlineLicenseExpired.feature1.subtitle': 'ساخت اتصال نامحدود به پایگاه‌داده',
   'userguide.offlineLicenseExpired.feature2.title': 'قابلیت‌های هوش مصنوعی',

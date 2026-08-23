@@ -54,7 +54,6 @@ import {
 } from '../../helper/sqlInsertValueDefaults';
 import {
   ShortcutAction,
-  ShortcutOverrides,
   getEffectiveShortcutConfigMap,
   isShortcutEventMatch,
   shortcutBindingToMonacoKeybinding,
@@ -176,9 +175,8 @@ const SQLEditor = forwardRef<SQLEditorRef, SQLEditorProps>(
     const sqlStatementListRef = useRef<SqlStatement[]>([]);
     const markMessageListRef = useRef<MarkMessage[]>([]);
     const tableDDLTriggerMode = useGlobalStore((s) => getTableDDLTriggerMode(s.editorSettings));
-    const shortcutOverrides = useGlobalStore((s) => s.shortcutOverrides);
     const [isObjectClickModifierPressed, setIsObjectClickModifierPressed] = useState(false);
-    const shortcutConfig = getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides);
+    const shortcutConfig = getEffectiveShortcutConfigMap();
 
     useImperativeHandle(ref, () => ({
       getId: () => id,

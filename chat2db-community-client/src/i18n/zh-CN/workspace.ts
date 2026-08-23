@@ -61,7 +61,6 @@ export default {
   'workspace.empty.connect.more': '全部受支持的数据库都在左侧面板中。',
   'workspace.empty.console.title': '没有打开的控制台',
   'workspace.empty.console.desc': '打开一个控制台，针对你的连接编写并运行 SQL。',
-  'workspace.empty.console.shortcut': '或按',
   'workspace.tips.noConnection': '你还没有创建连接',
   'workspace.tips.noSearchResult': '没有匹配的结果',
   'workspace.tips.maxConsole': '最多只能打开20个控制台',

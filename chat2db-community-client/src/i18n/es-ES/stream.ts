@@ -45,7 +45,8 @@ export default {
   'stream.trace.returned': 'devolvió',
   'stream.attachment.parsing': 'Analizando archivos...',
   'stream.attachment.parseFailed': 'No se pudo analizar el archivo. Compruebe el formato o el contenido.',
-  'stream.attachment.partialFailed': 'No se pudieron analizar algunos archivos. Se analizaron correctamente {1} archivo(s).',
+  'stream.attachment.partialFailed':
+    'No se pudieron analizar algunos archivos. Se analizaron correctamente {1} archivo(s).',
   'stream.attachment.added': 'Se añadieron {1} archivo(s).',
   'stream.source.files': 'Archivos',
 };

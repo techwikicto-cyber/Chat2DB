@@ -45,8 +45,7 @@ export default {
   'ai.select.model': 'لطفاً یک مدل انتخاب کنید',
   'ai.insertData.title': 'ساخت داده آزمایشی برای {1}',
   'ai.insertData.error.title': 'رفع خطاهای {1}',
-  'ai.sqlDebug.prefill':
-    'لطفاً خطای SQL زیر را بررسی و راه‌حل قابل اجرا ارائه کن.\n\nSQL:\n{1}\n\nخطا:\n{2}',
+  'ai.sqlDebug.prefill': 'لطفاً خطای SQL زیر را بررسی و راه‌حل قابل اجرا ارائه کن.\n\nSQL:\n{1}\n\nخطا:\n{2}',
   'ai.codeBlock.run.title': 'این کد پایگاه‌داده را تغییر می‌دهد. از اجرای آن مطمئن هستید؟',
   'ai.codeBlock.run.desction': 'مطمئن شوید که به‌اشتباه چیز مهمی را حذف نمی‌کنید.',
 };

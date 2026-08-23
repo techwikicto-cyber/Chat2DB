@@ -59,11 +59,11 @@ export default {
   'workspace.deleteDatabaseSchema.inputConfirmSuffix': ' to confirm deletion',
   'workspace.deleteDatabaseSchema.confirmNameMismatch': 'The input does not match the name',
   'workspace.empty.connect.title': 'Connect a database to get started',
-  'workspace.empty.connect.desc': 'Consoles, queries and the assistant all work against a connection. Pick a database to set one up.',
+  'workspace.empty.connect.desc':
+    'Consoles, queries and the assistant all work against a connection. Pick a database to set one up.',
   'workspace.empty.connect.more': 'Every supported database is in the panel on the left.',
   'workspace.empty.console.title': 'No console open',
   'workspace.empty.console.desc': 'Open a console to write and run SQL against your connections.',
-  'workspace.empty.console.shortcut': 'or press',
   'workspace.tips.noConnection': 'You have not created a connection yet',
   'workspace.tips.noSearchResult': 'No matching results',
   'workspace.tips.maxConsole': 'You can only open up to 20 consoles',

@@ -8,5 +8,6 @@ export default {
   'sqlEditor.text.fieldName': 'Nombre de campo',
   'sqlEditor.hint.insertValueParameter': 'Sugerencias de parámetros',
   'sqlEditor.warning.insertValueMismatch': 'El número de valores de INSERT no coincide',
-  'sqlEditor.warning.insertValueCountMismatch': 'El número de valores de INSERT no coincide: se esperaban {1}, se recibieron {2}',
+  'sqlEditor.warning.insertValueCountMismatch':
+    'El número de valores de INSERT no coincide: se esperaban {1}, se recibieron {2}',
 };

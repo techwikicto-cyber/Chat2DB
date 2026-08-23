@@ -6,7 +6,8 @@ export default {
     'Suscríbase a nuestra cuenta oficial de WeChat y envíe «promotion» para obtener más oportunidades de prueba.',
   'chat.input.syncTable.tips': 'Sincroniza automáticamente todas las estructuras de tablas con el contexto de la IA',
   'chat.input.remain.tooltip': 'La tabla seleccionada manualmente se sincronizará con el contexto de la IA',
-  'chat.input.syncTable.tempTips': '🎉 Novedad: sincronice automáticamente todas las estructuras de tablas con el contexto de la IA',
+  'chat.input.syncTable.tempTips':
+    '🎉 Novedad: sincronice automáticamente todas las estructuras de tablas con el contexto de la IA',
 
   'chat.menu.create': 'Crear nuevo chat',
   'chat.menu.share': 'Compartir',
@@ -46,10 +47,12 @@ export default {
 
   'chat.uploadExcel.description1': 'Haga clic o arrastre un único archivo de Excel para cargarlo',
   'chat.uploadExcel.description2': 'Actualmente solo se admite la carga de una tabla en formato xlsx, xls o csv',
-  'chat.uploadExcel.uploadExcelTips': 'Cargue un archivo de Excel con un encabezado de una sola línea: la primera línea debe ser el encabezado y las siguientes, los datos',
+  'chat.uploadExcel.uploadExcelTips':
+    'Cargue un archivo de Excel con un encabezado de una sola línea: la primera línea debe ser el encabezado y las siguientes, los datos',
 
   'chat.functionDescription.title': 'Hola, necesitamos su ayuda para determinar la información del encabezado de Excel',
-  'chat.functionDescription.description': 'Una vez determinado el encabezado, las respuestas de la IA serán más precisas',
+  'chat.functionDescription.description':
+    'Una vez determinado el encabezado, las respuestas de la IA serán más precisas',
   'chat.tableType.title': '¿El encabezado de [{1}] es horizontal o vertical?',
   'chat.tableType.horizontal': 'Horizontal',
   'chat.tableType.vertical': 'Vertical',

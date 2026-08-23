@@ -21,13 +21,13 @@
       "plugin.ts": "01f15b6342cc5b29899ee4144d67b04bb4bc02c6bb10779806be322dc5e9a2bc",
       "price.ts": "a48a84e1495d41cc8fec36fdf93ae1d7e0b44c5b63ee05a45c1e91edc900535d",
       "redis.ts": "a73e4fca6d783031370060e20bb1bbba13f663a0773cd031e1744be1cb4e93af",
-      "setting.ts": "4ac8debcc30a8b111ca11833582817c143251db50e7899de060554f5d02f0ae6",
+      "setting.ts": "7489ede2622ebcbdaf58706965d109c463103f8d53f4e0092b8cfd7127127d27",
       "spaceSetting.ts": "defdf3138e5e1782f0282760bcef4ce1b8550cc80b03052fea468d97165cb980",
       "sqlEditor.ts": "5c41e5f24d5ba78909795bcc681cabb8460cca075233b665dc4940afe82ce0c9",
       "stream.ts": "4cfdd07703ad5e71928a4cbf14d4d81043d29181689412fb985bad372afbcc1b",
       "team.ts": "70b550258585d40b78c704c1cb2c7ab2af471aeb29c32fb88367f788a2b31b08",
       "userGuide.ts": "21a76cb5d251fe6867c34beab483ef70f6dd346d80e2206b7f40d22d8d65bf56",
-      "workspace.ts": "54853ce4d90b60c164133fb8d6e90bf46560cd44423cfb1034b86f4eb566c073"
+      "workspace.ts": "543bdd58dea1ec7e2b91c5bd088824ddc2df1ebb884d5fcf3e60316ab962c4b2"
     },
     "ko-KR": {
       "ai.ts": "391a6e14c58d8401bf3bc245eca5bdd4b66efd8225a877bfbbcae01a1c1c019a",
@@ -48,13 +48,13 @@
       "plugin.ts": "01f15b6342cc5b29899ee4144d67b04bb4bc02c6bb10779806be322dc5e9a2bc",
       "price.ts": "a48a84e1495d41cc8fec36fdf93ae1d7e0b44c5b63ee05a45c1e91edc900535d",
       "redis.ts": "a73e4fca6d783031370060e20bb1bbba13f663a0773cd031e1744be1cb4e93af",
-      "setting.ts": "4ac8debcc30a8b111ca11833582817c143251db50e7899de060554f5d02f0ae6",
+      "setting.ts": "7489ede2622ebcbdaf58706965d109c463103f8d53f4e0092b8cfd7127127d27",
       "spaceSetting.ts": "defdf3138e5e1782f0282760bcef4ce1b8550cc80b03052fea468d97165cb980",
       "sqlEditor.ts": "5c41e5f24d5ba78909795bcc681cabb8460cca075233b665dc4940afe82ce0c9",
       "stream.ts": "4cfdd07703ad5e71928a4cbf14d4d81043d29181689412fb985bad372afbcc1b",
       "team.ts": "70b550258585d40b78c704c1cb2c7ab2af471aeb29c32fb88367f788a2b31b08",
       "userGuide.ts": "21a76cb5d251fe6867c34beab483ef70f6dd346d80e2206b7f40d22d8d65bf56",
-      "workspace.ts": "54853ce4d90b60c164133fb8d6e90bf46560cd44423cfb1034b86f4eb566c073"
+      "workspace.ts": "543bdd58dea1ec7e2b91c5bd088824ddc2df1ebb884d5fcf3e60316ab962c4b2"
     },
     "fa-IR": {
       "ai.ts": "391a6e14c58d8401bf3bc245eca5bdd4b66efd8225a877bfbbcae01a1c1c019a",
@@ -75,13 +75,13 @@
       "plugin.ts": "01f15b6342cc5b29899ee4144d67b04bb4bc02c6bb10779806be322dc5e9a2bc",
       "price.ts": "a48a84e1495d41cc8fec36fdf93ae1d7e0b44c5b63ee05a45c1e91edc900535d",
       "redis.ts": "a73e4fca6d783031370060e20bb1bbba13f663a0773cd031e1744be1cb4e93af",
-      "setting.ts": "4ac8debcc30a8b111ca11833582817c143251db50e7899de060554f5d02f0ae6",
+      "setting.ts": "7489ede2622ebcbdaf58706965d109c463103f8d53f4e0092b8cfd7127127d27",
       "spaceSetting.ts": "defdf3138e5e1782f0282760bcef4ce1b8550cc80b03052fea468d97165cb980",
       "sqlEditor.ts": "5c41e5f24d5ba78909795bcc681cabb8460cca075233b665dc4940afe82ce0c9",
       "stream.ts": "4cfdd07703ad5e71928a4cbf14d4d81043d29181689412fb985bad372afbcc1b",
       "team.ts": "70b550258585d40b78c704c1cb2c7ab2af471aeb29c32fb88367f788a2b31b08",
       "userGuide.ts": "21a76cb5d251fe6867c34beab483ef70f6dd346d80e2206b7f40d22d8d65bf56",
-      "workspace.ts": "54853ce4d90b60c164133fb8d6e90bf46560cd44423cfb1034b86f4eb566c073"
+      "workspace.ts": "543bdd58dea1ec7e2b91c5bd088824ddc2df1ebb884d5fcf3e60316ab962c4b2"
     }
   }
 }

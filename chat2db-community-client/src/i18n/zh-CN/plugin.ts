@@ -12,6 +12,6 @@ export default {
 
   'plugin.item.usage.status.valid': '有效',
   'plugin.item.usage.status.invalid': '已过期',
-  
+
   'plugin.item.usage.status.needBuy': '购买或激活后才能使用该插件',
 };

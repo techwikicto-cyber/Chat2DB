@@ -59,11 +59,11 @@ export default {
   'workspace.deleteDatabaseSchema.inputConfirmSuffix': ' تا حذف تأیید شود',
   'workspace.deleteDatabaseSchema.confirmNameMismatch': 'مقدار واردشده با نام مطابقت ندارد',
   'workspace.empty.connect.title': 'برای شروع، یک پایگاه‌داده وصل کنید',
-  'workspace.empty.connect.desc': 'کنسول‌ها، کوئری‌ها و دستیار هوش مصنوعی همه روی یک اتصال کار می‌کنند. یک پایگاه‌داده انتخاب کنید تا بسازیمش.',
+  'workspace.empty.connect.desc':
+    'کنسول‌ها، کوئری‌ها و دستیار هوش مصنوعی همه روی یک اتصال کار می‌کنند. یک پایگاه‌داده انتخاب کنید تا بسازیمش.',
   'workspace.empty.connect.more': 'همه‌ی پایگاه‌داده‌های پشتیبانی‌شده در پنل سمت چپ هستند.',
   'workspace.empty.console.title': 'کنسولی باز نیست',
   'workspace.empty.console.desc': 'یک کنسول باز کنید تا روی اتصال‌هایتان SQL بنویسید و اجرا کنید.',
-  'workspace.empty.console.shortcut': 'یا این کلید را بزنید',
   'workspace.tips.noConnection': 'هنوز اتصالی نساخته‌اید',
   'workspace.tips.noSearchResult': 'نتیجه مطابقی پیدا نشد',
   'workspace.tips.maxConsole': 'حداکثر می‌توانید ۲۰ کنسول باز کنید',

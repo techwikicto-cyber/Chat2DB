@@ -58,11 +58,11 @@ export default {
   'workspace.deleteDatabaseSchema.inputConfirmSuffix': ' を入力してください',
   'workspace.deleteDatabaseSchema.confirmNameMismatch': '入力が名前と一致しません',
   'workspace.empty.connect.title': 'データベースに接続して始めましょう',
-  'workspace.empty.connect.desc': 'コンソール、クエリ、アシスタントはすべて接続の上で動きます。データベースを選んで接続を作成してください。',
+  'workspace.empty.connect.desc':
+    'コンソール、クエリ、アシスタントはすべて接続の上で動きます。データベースを選んで接続を作成してください。',
   'workspace.empty.connect.more': '対応しているデータベースはすべて左のパネルにあります。',
   'workspace.empty.console.title': '開いているコンソールはありません',
   'workspace.empty.console.desc': 'コンソールを開いて、接続に対して SQL を書いて実行できます。',
-  'workspace.empty.console.shortcut': 'または',
   'workspace.tips.noConnection': 'まだ接続を作成していません',
   'workspace.tips.noSearchResult': '一致する結果がありません',
   'workspace.tips.maxConsole': 'コンソールは最大20まで開くことができます',
@@ -283,7 +283,8 @@ export default {
   'workspace.databaseAccount.operation': '操作',
   'workspace.databaseAccount.grantPrivilege': '権限を付与',
   'workspace.databaseAccount.revokePrivilege': '権限を取り消し',
-  'workspace.databaseAccount.lockUnsupported': 'この MySQL バージョンまたは現在の権限ではアカウントロックを利用できません',
+  'workspace.databaseAccount.lockUnsupported':
+    'この MySQL バージョンまたは現在の権限ではアカウントロックを利用できません',
   'workspace.routine.button.invoke': 'ルーチンを呼び出す',
   'workspace.routine.button.apply': '変更を適用',
   'workspace.routine.button.refresh': 'DDL を再読み込み',

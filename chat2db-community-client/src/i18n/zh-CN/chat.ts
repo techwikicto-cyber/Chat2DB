@@ -29,7 +29,7 @@ export default {
   'chat.share.permission.view': '只读',
   'chat.share.permission.edit': '编辑',
   'chat.share.link': '分享链接',
-  
+
   'chat.message.error': 'Error: 服务异常，请重新尝试',
   'chat.create.title': '新建对话',
   'chat.edit.title': '修改对话信息',

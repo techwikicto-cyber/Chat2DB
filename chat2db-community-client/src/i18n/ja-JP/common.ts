@@ -193,9 +193,11 @@ export default {
   'common.largeCellValue.status.complete': '完了',
   'common.largeCellValue.status.partial': '一部のみ',
   'common.largeCellValue.status.editorLimitReached': 'エディター上限に到達',
-  'common.largeCellValue.tip.editorLimit': 'この値はエディター内の上限を超えています。完全な値はダウンロードしてください。',
+  'common.largeCellValue.tip.editorLimit':
+    'この値はエディター内の上限を超えています。完全な値はダウンロードしてください。',
   'common.largeCellValue.imageAlt': 'セル画像',
-  'common.largeCellValue.error.tokenExpired': '大きな値の参照が期限切れです。結果セットを更新して、このセルを開き直してください。',
+  'common.largeCellValue.error.tokenExpired':
+    '大きな値の参照が期限切れです。結果セットを更新して、このセルを開き直してください。',
   'common.largeCellValue.error.loadFailed': '値の読み込みに失敗しました',
   'common.largeCellValue.error.downloadFailed': '値のダウンロードに失敗しました',
   'common.largeCellValue.error.fullValueUnsupported': 'この結果セットでは大きな値全体を読み取れません',

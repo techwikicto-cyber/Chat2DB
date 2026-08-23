@@ -23,7 +23,8 @@ export default {
   'connection.title.uploadDriver': 'Cargar',
   'connection.tips.customUpload': 'Cargar controlador',
   'connection.title.deleteDriver': 'Eliminar controlador',
-  'connection.tips.deleteDriverConfirm': '¿Eliminar el controlador personalizado "{1}"? También se quitarán los archivos jar relacionados.',
+  'connection.tips.deleteDriverConfirm':
+    '¿Eliminar el controlador personalizado "{1}"? También se quitarán los archivos jar relacionados.',
   'connection.title.driver': 'Controlador',
   'connection.button.clickUpload': 'Haga clic para cargar',
   'connection.text.downloadDriver': 'Descargar controlador',
@@ -34,8 +35,10 @@ export default {
   'connection.label.shared': 'Compartida',
   'connection.button.createConnection': 'Crear conexión',
   'connection.tips.noConnection': 'Todavía no ha creado ninguna conexión',
-  'connection.tips.noConnectionTips': 'No tiene permiso para ver los detalles de la conexión, pero puede conectarse directamente',
-  'connection.tips.noCreateConnectionTips': 'Póngase en contacto con el administrador del espacio para crear una conexión',
+  'connection.tips.noConnectionTips':
+    'No tiene permiso para ver los detalles de la conexión, pero puede conectarse directamente',
+  'connection.tips.noCreateConnectionTips':
+    'Póngase en contacto con el administrador del espacio para crear una conexión',
   'connection.title.importTitle': 'Importar archivo .ncx (Navicat) o .dbp (DBeaver)',
   'connection.title.importChat2DB': 'Importar conexiones de Chat2DB',
   'connection.title.importChat2DBCommunity': 'Importar conexiones de Chat2DB Community',
@@ -43,6 +46,7 @@ export default {
   'connection.title.importDataGrip': 'Importar conexiones de DataGrip',
   'connection.title.importDBeaver': 'Importar conexiones de DBeaver',
   'connection.import.success': 'Se importaron correctamente {1} conexiones',
-  'connection.import.unable.password.tips': 'No podemos importar las contraseñas de las conexiones. Cuando termine la importación, vuelva a introducirlas',
+  'connection.import.unable.password.tips':
+    'No podemos importar las contraseñas de las conexiones. Cuando termine la importación, vuelva a introducirlas',
   'workspace.menu.exportConnections': 'Exportar conexiones',
 };

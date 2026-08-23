@@ -81,7 +81,8 @@ export default {
   'price.text.previousTwoMonthsHint': 'First 2 months {1}, then {2}',
   'price.text.freeTrialDaysLabel': '{1}-Day Free',
   'price.text.freeTrialBilledYearlyHint': '{1} / month, billed yearly',
-  'price.text.startFreeSubTitle': 'Don\'t worry, you can cancel anytime during your 30-day free trial and you won\'t be charged anything.',
+  'price.text.startFreeSubTitle':
+    "Don't worry, you can cancel anytime during your 30-day free trial and you won't be charged anything.",
   'price.text.startFreeButton': 'Start Free 30-Day Pro Trial',
   'price.text.chat2dbPro.subTitle': 'For individuals',
   'price.text.chat2dbPro.title': 'PROFESSIONAL',

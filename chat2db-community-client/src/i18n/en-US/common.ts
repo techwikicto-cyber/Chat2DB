@@ -193,9 +193,11 @@ export default {
   'common.largeCellValue.status.complete': 'Complete',
   'common.largeCellValue.status.partial': 'Partial',
   'common.largeCellValue.status.editorLimitReached': 'Editor limit reached',
-  'common.largeCellValue.tip.editorLimit': 'Value is larger than the in-editor limit. Use Download for the complete value.',
+  'common.largeCellValue.tip.editorLimit':
+    'Value is larger than the in-editor limit. Use Download for the complete value.',
   'common.largeCellValue.imageAlt': 'Cell image',
-  'common.largeCellValue.error.tokenExpired': 'This large value reference has expired. Refresh the result set and reopen this cell.',
+  'common.largeCellValue.error.tokenExpired':
+    'This large value reference has expired. Refresh the result set and reopen this cell.',
   'common.largeCellValue.error.loadFailed': 'Failed to load value',
   'common.largeCellValue.error.downloadFailed': 'Failed to download value',
   'common.largeCellValue.error.fullValueUnsupported': 'The full large value cannot be read for this result set',

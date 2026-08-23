@@ -7,8 +7,7 @@ export default {
   'price.tab.localPro': 'Local',
   'price.tab.localPro.warning': 'La activación sin conexión requiere una suscripción de por vida.',
   'price.payblock.team.select.title': 'Seleccione el equipo que desea actualizar',
-  'price.payblock.team.select.placeholder':
-    'Una vez generado el pedido, no se puede modificar. Elija con atención.',
+  'price.payblock.team.select.placeholder': 'Una vez generado el pedido, no se puede modificar. Elija con atención.',
   'price.payblock.team.select.tips':
     'Si todavía no ha creado un equipo, crearemos «Mi equipo» por usted. Podrá modificar la información relacionada más adelante en la configuración del equipo.',
   'price.payblock.seat.title': 'Seleccione el número de puestos',
@@ -39,7 +38,8 @@ export default {
   'price.text.community': 'Community',
   'price.text.communityDescribe': 'Para estudiantes, docentes y desarrolladores individuales.',
   'price.text.professional': 'Profesional',
-  'price.text.professionalDescribe': 'Para desarrolladores profesionales o analistas de datos, como asistente de trabajo.',
+  'price.text.professionalDescribe':
+    'Para desarrolladores profesionales o analistas de datos, como asistente de trabajo.',
   'price.text.download': 'Descargar',
   'price.text.buyPlan': 'Comprar plan',
   'price.text.professionalPower.title': 'Incluye',
@@ -49,7 +49,8 @@ export default {
   'price.text.professionalPower4': 'Herramientas inteligentes de gestión visual e informes',
   'price.text.professionalPower5': 'Interfaz de línea de comandos SQL completa',
   'price.text.professionalPower6': 'Visualización y edición de datos, y ejecución de archivos SQL',
-  'price.text.professionalPower7': 'Soluciones de importación, exportación, migración, copia de seguridad y reversión de datos',
+  'price.text.professionalPower7':
+    'Soluciones de importación, exportación, migración, copia de seguridad y reversión de datos',
   'price.text.teamPower.title': 'También incluye',
   'price.text.teamPower1': 'Colaboración en la edición y revisión de código SQL.',
   'price.text.teamPower2': 'Uso compartido de scripts SQL e informes dentro del equipo.',
@@ -81,7 +82,8 @@ export default {
   'price.text.previousTwoMonthsHint': 'Primeros 2 meses {1}; después {2}',
   'price.text.freeTrialDaysLabel': '{1} días gratis',
   'price.text.freeTrialBilledYearlyHint': '{1} al mes, facturado anualmente',
-  'price.text.startFreeSubTitle': 'Puede cancelar en cualquier momento durante la prueba gratuita de 30 días y no se le cobrará nada.',
+  'price.text.startFreeSubTitle':
+    'Puede cancelar en cualquier momento durante la prueba gratuita de 30 días y no se le cobrará nada.',
   'price.text.startFreeButton': 'Iniciar prueba gratuita de Pro durante 30 días',
   'price.text.chat2dbPro.subTitle': 'Para particulares',
   'price.text.chat2dbPro.title': 'PROFESIONAL',

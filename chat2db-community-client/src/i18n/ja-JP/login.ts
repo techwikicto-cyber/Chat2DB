@@ -47,7 +47,8 @@ export default {
   'login.text.useVerificationCode': '確認コードを使用',
   'login.text.wechatLoginTips': '公式アカウントをフォローして、{1}でログインしてください',
   'login.text.wechatScan': 'WeChatスキャン',
-  'login.community.subtitle': '付与されたアカウントでサインインしてください。お持ちでない場合は、この環境を設定した担当者にお問い合わせください。',
+  'login.community.subtitle':
+    '付与されたアカウントでサインインしてください。お持ちでない場合は、この環境を設定した担当者にお問い合わせください。',
   'login.community.invalidPassword': 'パスワードが正しくありません。もう一度お試しください。',
   'login.community.invalidCredentials': 'ユーザー名またはパスワードが正しくありません。',
 };

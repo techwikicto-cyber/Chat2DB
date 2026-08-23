@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import { Button } from 'antd';
 import i18n from '@/i18n';
 import { useStyles } from './style';
@@ -7,12 +7,6 @@ import { useGlobalStore } from '@/store/global';
 import { useTreeStore } from '@/store/tree';
 import { DatabaseTypeCode, IframeType } from '@/constants';
 import { databaseMap } from '@/constants/database';
-import {
-  ShortcutAction,
-  ShortcutOverrides,
-  getEffectiveShortcutConfigMap,
-  getShortcutLabel,
-} from '@/constants/shortcut';
 import { useProductName } from '@/hooks/useProductName';
 import ProductLogo from '@/components/Logo';
 import { IconfontSvg } from '@chat2db/ui';
@@ -46,28 +40,16 @@ export default memo<IProps>((props) => {
     styles,
     theme: { appearance },
   } = useStyles();
-  const { isEmbedIframe, dismissed, setWorkspaceAiIntroDismissed, shortcutOverrides } = useGlobalStore((state) => ({
+  const { isEmbedIframe, dismissed, setWorkspaceAiIntroDismissed } = useGlobalStore((state) => ({
     isEmbedIframe: state.isEmbedIframe,
     dismissed: state.workspaceAiIntroDismissed,
     setWorkspaceAiIntroDismissed: state.setWorkspaceAiIntroDismissed,
-    shortcutOverrides: state.shortcutOverrides,
   }));
   const { dataSourceList, setConnectionDetail, setIsModalVisible } = useTreeStore((state) => ({
     dataSourceList: state.dataSourceList,
     setConnectionDetail: state.setConnectionDetail,
     setIsModalVisible: state.setIsModalVisible,
   }));
-
-  // Read rather than restated. The list that used to sit here was typed out by
-  // hand and had drifted from the bindings it claimed to describe; this one
-  // cannot, and it follows the user's own remapping.
-  const newConsoleShortcut = useMemo(
-    () =>
-      getShortcutLabel(
-        getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides)[ShortcutAction.NewConsole]?.binding,
-      ),
-    [shortcutOverrides],
-  );
 
   if (isEmbedIframe === IframeType.ZOER) {
     return null;
@@ -179,12 +161,6 @@ export default memo<IProps>((props) => {
         {/* The slot's own wrapper carries class names that are not defined
             anywhere, so it arrives with no spacing of its own. */}
         <div className={styles.stageAction}>{slot()}</div>
-        {newConsoleShortcut ? (
-          <p className={styles.stageFootnote}>
-            {i18n('workspace.empty.console.shortcut')}
-            <kbd className={styles.shortcutKey}>{newConsoleShortcut}</kbd>
-          </p>
-        ) : null}
       </div>
     </div>
   );

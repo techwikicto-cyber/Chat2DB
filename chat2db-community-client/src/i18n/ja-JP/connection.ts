@@ -21,7 +21,7 @@ export default {
   'connection.tableHeader.name': '名前',
   'connection.tableHeader.statistics': '数字統計',
   'connection.title.uploadDriver': 'アップロード',
-  'connection.tips.customUpload': "ドライバをアップロード",
+  'connection.tips.customUpload': 'ドライバをアップロード',
   'connection.title.deleteDriver': 'ドライバを削除',
   'connection.tips.deleteDriverConfirm': 'カスタムドライバ「{1}」を削除しますか？関連する jar ファイルも削除されます。',
   'connection.title.driver': 'ドライバ',
@@ -43,6 +43,7 @@ export default {
   'connection.title.importDataGrip': 'DataGripリンクをインポート',
   'connection.title.importDBeaver': 'DBeaverリンクをインポート',
   'connection.import.success': '{1} つの接続を正常にインポートしました',
-  'connection.import.unable.password.tips': '接続パスワードをインポートできません。インポートが完了したら、接続パスワードを再入力してください',
+  'connection.import.unable.password.tips':
+    '接続パスワードをインポートできません。インポートが完了したら、接続パスワードを再入力してください',
   'workspace.menu.exportConnections': '接続をエクスポート',
 };

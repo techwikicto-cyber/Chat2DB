@@ -18,7 +18,6 @@ import { useStyles } from './style';
 import { runtimeEditionConfig } from '@/constants/runtimeEdition';
 import { useGlobalStore } from '@/store/global';
 import DeviceCer from './DeviceCer';
-import ShortcutSetting from './ShortcutSetting';
 
 function Setting() {
   const {
@@ -81,13 +80,6 @@ function Setting() {
             ]
           : []),
         {
-          title: i18n('setting.nav.shortcut'),
-          describe: '',
-          iconCode: 'icon-a-kuaijiejian1',
-          body: <ShortcutSetting />,
-          code: 'shortcut',
-        },
-        {
           title: i18n('setting.nav.aboutUs'),
           describe: i18n('setting.nav.aboutUsDescribe'),
           iconCode: 'icon-exclamation-circle',
@@ -135,13 +127,6 @@ function Setting() {
               },
             ]
           : []),
-        {
-          title: i18n('setting.nav.shortcut'),
-          describe: '',
-          iconCode: 'icon-a-kuaijiejian1',
-          body: <ShortcutSetting />,
-          code: 'shortcut',
-        },
         ...(runtimeEditionConfig.licenseSetting
           ? [
               {
@@ -207,13 +192,6 @@ function Setting() {
             },
           ]
         : []),
-      {
-        title: i18n('setting.nav.shortcut'),
-        describe: '',
-        iconCode: 'icon-a-kuaijiejian1',
-        body: <ShortcutSetting />,
-        code: 'shortcut',
-      },
       // {
       //   title: i18n('setting.nav.apiKeys'),
       //   describe: '',

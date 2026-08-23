@@ -80,7 +80,8 @@ export default {
   'price.text.previousTwoMonthsHint': '最初の2ヶ月 {1}、その後 {2}',
   'price.text.freeTrialDaysLabel': '{1}日間無料',
   'price.text.freeTrialBilledYearlyHint': '{1} / 月、年額請求',
-  'price.text.startFreeSubTitle': '無料特典を受け取り、30日間の無料トライアル期間中は料金が発生しませんのでご安心ください。',
+  'price.text.startFreeSubTitle':
+    '無料特典を受け取り、30日間の無料トライアル期間中は料金が発生しませんのでご安心ください。',
   'price.text.startFreeButton': '30日間の無料トライアルを開始',
   'price.text.chat2dbPro.subTitle': '個人向け',
   'price.text.chat2dbPro.title': 'PROFESSIONAL',

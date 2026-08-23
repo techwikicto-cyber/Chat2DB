@@ -5,13 +5,10 @@ import * as monaco from 'monaco-editor';
 import { MonacoEditorRef } from '../../editor/MonacoEditor';
 import { SQLOptType, EditorType } from '../../type';
 import i18n, { en_US } from '@/i18n';
-import ShortcutMenuLabel from '@/components/ShortcutMenuLabel';
 import { WorkspaceTabType } from '@/constants';
-import { useGlobalStore } from '@/store/global';
 import { isTemporaryId } from '@/utils';
 import {
   ShortcutAction,
-  ShortcutOverrides,
   getEffectiveShortcutConfigMap,
   shortcutBindingToMonacoKeybinding,
 } from '@/constants/shortcut';
@@ -69,10 +66,9 @@ const ContextMenu = memo((props: IProps) => {
   } = props;
   const { open, context, position } = config;
   const { styles } = useStyles();
-  const shortcutOverrides = useGlobalStore((s) => s.shortcutOverrides);
   const shortcutConfig = useMemo(
-    () => getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides),
-    [shortcutOverrides],
+    () => getEffectiveShortcutConfigMap(),
+    [],
   );
 
   const menus = useMemo<MenuEntry[]>(
@@ -213,11 +209,11 @@ export default ContextMenu;
 
 const ContextMenuItem = memo(({ menu, onClick }: { menu: IMenuItem; onClick: (key: SQLOptType) => void }) => {
   const { styles } = useStyles();
-  const { key, label, shortcutAction } = menu;
+  const { key, label } = menu;
 
   return (
     <DropdownMenu.Item className={styles.ContextMenuItem} onClick={() => onClick(key)}>
-      <ShortcutMenuLabel label={i18n(label)} shortcutAction={shortcutAction} />
+      {i18n(label)}
     </DropdownMenu.Item>
   );
 });

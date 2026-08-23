@@ -25,7 +25,5 @@ export default {
   'feedback.upload.tip': '最多5张图片，每张图片不超过2M',
   'feedback.upload.log': '上传日志可以帮助我们更好的定位问题',
 
-
-
   'feedback.submit.success': '反馈提交成功, 我们会尽快联系你',
 };

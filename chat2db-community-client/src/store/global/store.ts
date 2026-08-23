@@ -29,7 +29,6 @@ type GlobalPersist = Pick<
   | 'hotUpdateConfig'
   | 'editorSettings'
   | 'dataTableSettings'
-  | 'shortcutOverrides'
   | 'workspaceAiIntroDismissed'
 >;
 
@@ -43,7 +42,6 @@ const persistOptions: PersistOptions<GlobalStore, GlobalPersist> = {
     hotUpdateConfig: state.hotUpdateConfig,
     editorSettings: state.editorSettings,
     dataTableSettings: state.dataTableSettings,
-    shortcutOverrides: state.shortcutOverrides,
     workspaceAiIntroDismissed: state.workspaceAiIntroDismissed,
   }),
 };
@@ -69,6 +67,5 @@ export const clearGlobalStore = () => {
     appConfig: useGlobalStore.getState().appConfig,
     appUrlConfig: useGlobalStore.getState().appUrlConfig,
     editorSettings: useGlobalStore.getState().editorSettings,
-    shortcutOverrides: useGlobalStore.getState().shortcutOverrides,
   });
 };

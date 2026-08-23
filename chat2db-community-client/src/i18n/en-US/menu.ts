@@ -1,3 +1,3 @@
 export default {
-  'menu.file' : 'File'
-}
+  'menu.file': 'File',
+};

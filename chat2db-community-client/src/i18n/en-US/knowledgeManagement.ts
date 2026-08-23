@@ -1,14 +1,20 @@
 export default {
   'knowledgeManagement.title': 'Knowledge Management',
   'knowledgeManagement.nav.terminology': 'Knowledge Terminology',
-  'knowledgeManagement.terminology.description': 'Help Bina Platform better understand your target description in the data mining process. You can enter specific terms here (supports specifying data sources, otherwise global effect).',
-  'knowledgeManagement.terminology.tips': 'Terminology Name: Bad Loan, Terminology Description: A loan that the borrower cannot repay according to the agreed period and amount.',
+  'knowledgeManagement.terminology.description':
+    'Help Bina Platform better understand your target description in the data mining process. You can enter specific terms here (supports specifying data sources, otherwise global effect).',
+  'knowledgeManagement.terminology.tips':
+    'Terminology Name: Bad Loan, Terminology Description: A loan that the borrower cannot repay according to the agreed period and amount.',
   'knowledgeManagement.nav.businessLogic': 'Business Logic',
-  'knowledgeManagement.businessLogic.description': 'Help Bina Platform better understand the business logic contained in your database. You can enter detailed logic here (supports specifying data sources, otherwise global effect).',
-  'knowledgeManagement.businessLogic.tips': 'Business Logic Name: Income, Business Logic Description: The status field in the order_item table is PAY_SUCCESS, and the order amount needs to be divided by 100 and reserved to two decimal places.',
+  'knowledgeManagement.businessLogic.description':
+    'Help Bina Platform better understand the business logic contained in your database. You can enter detailed logic here (supports specifying data sources, otherwise global effect).',
+  'knowledgeManagement.businessLogic.tips':
+    'Business Logic Name: Income, Business Logic Description: The status field in the order_item table is PAY_SUCCESS, and the order amount needs to be divided by 100 and reserved to two decimal places.',
   'knowledgeManagement.nav.caseOptimization': 'Case Optimization',
-  'knowledgeManagement.caseOptimization.description': 'If you have tried the above two methods and the output result is still not ideal, you can configure SQL templates for the model to guide the model output (supports specifying data sources, otherwise global effect).',
-  'knowledgeManagement.caseOptimization.tips': 'Case Optimization Name: Recent 30-day New Users, Case Optimization Content: SELECT DATE(create_time) AS date, COUNT(*) AS new_users_count FROM user WHERE create_time >= CURDATE() - INTERVAL 30 DAY GROUP BY DATE(create_time) ORDER BY date;',
+  'knowledgeManagement.caseOptimization.description':
+    'If you have tried the above two methods and the output result is still not ideal, you can configure SQL templates for the model to guide the model output (supports specifying data sources, otherwise global effect).',
+  'knowledgeManagement.caseOptimization.tips':
+    'Case Optimization Name: Recent 30-day New Users, Case Optimization Content: SELECT DATE(create_time) AS date, COUNT(*) AS new_users_count FROM user WHERE create_time >= CURDATE() - INTERVAL 30 DAY GROUP BY DATE(create_time) ORDER BY date;',
   'knowledgeManagement.tips.save': 'Please save the current row first',
   'knowledgeManagement.tips.incomplete': 'Please fill in the complete information',
   'knowledgeManagement.label.knowledgeName': 'Knowledge Name',
@@ -19,7 +25,8 @@ export default {
   'knowledgeManagement.label.caseOptimizationName': 'Case Optimization Name',
   'knowledgeManagement.label.caseOptimizationContent': 'Case Optimization Content',
   'knowledgeManagement.nav.annotationTable': 'Database Table Annotation',
-  'knowledgeManagement.annotationTable.description': 'Bina Platform supports detailed annotations for the fields of database tables. This helps AI to better understand the meaning of each field and improve the accuracy of data processing and analysis.',
+  'knowledgeManagement.annotationTable.description':
+    'Bina Platform supports detailed annotations for the fields of database tables. This helps AI to better understand the meaning of each field and improve the accuracy of data processing and analysis.',
   'knowledgeManagement.label.batchOperation': 'Batch Operation',
   'knowledgeManagement.label.batchImport': 'Batch Add',
   'knowledgeManagement.label.batchExport': 'Batch Export',

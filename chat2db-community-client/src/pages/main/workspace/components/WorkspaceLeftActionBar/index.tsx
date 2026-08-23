@@ -15,7 +15,6 @@ import { useUpdateEffect } from 'ahooks';
 import { debounce } from 'lodash';
 import {
   ShortcutAction,
-  ShortcutOverrides,
   getEffectiveShortcutConfigMap,
   isShortcutEventMatch,
 } from '@/constants/shortcut';
@@ -53,14 +52,10 @@ const WorkspaceLeftActionBar = memo<WorkspaceLeftActionBarProps>(
       hiddenTreeNodeIds: s.hiddenTreeNodeIds,
     }));
 
-    const { isEmbedIframe, shortcutOverrides } = useGlobalStore((s) => ({
+    const { isEmbedIframe } = useGlobalStore((s) => ({
       isEmbedIframe: s.isEmbedIframe,
-      shortcutOverrides: s.shortcutOverrides,
     }));
-    const shortcutConfig = useMemo(
-      () => getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides),
-      [shortcutOverrides],
-    );
+    const shortcutConfig = useMemo(() => getEffectiveShortcutConfigMap(), []);
 
     const { styles } = useStyles();
 

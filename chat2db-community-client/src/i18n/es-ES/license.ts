@@ -24,8 +24,7 @@ export default {
   'license.deviceNamePlaceholder': 'Introduzca el nombre del dispositivo',
   'license.osLabel': 'Sistema operativo',
   'license.selectOS': 'Seleccione su sistema operativo',
-  'license.deviceIdExtra':
-    'El cliente generará automáticamente un ID de dispositivo; cópielo sin modificarlo',
+  'license.deviceIdExtra': 'El cliente generará automáticamente un ID de dispositivo; cópielo sin modificarlo',
   'license.deviceIdPlaceholder': 'Introduzca el ID del dispositivo',
   'license.offlineAIConfirm':
     'Tenga en cuenta que, una vez generado el certificado sin conexión, no se puede revocar ni cambiar el dispositivo. Los dispositivos activados sin conexión no pueden utilizar funciones de IA aunque se conecten a Internet',

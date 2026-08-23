@@ -102,16 +102,6 @@ export const useStyles = createStyles(({ css, token }) => {
       color: ${token.colorTextSecondary};
     `,
 
-    shortcutKey: css`
-      padding: 2px 6px;
-      border: 1px solid ${token.colorBorderSecondary};
-      border-radius: 4px;
-      background: ${token.colorFillQuaternary};
-      font-family: inherit;
-      font-size: 11px;
-      color: ${token.colorTextSecondary};
-    `,
-
     // AI introduction page styles.
     aiIntro: css`
       display: flex;

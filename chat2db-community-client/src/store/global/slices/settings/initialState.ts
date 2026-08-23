@@ -2,7 +2,6 @@ import {
   GlobalAISettings,
   GlobalAppConfig,
   GlobalBaseSettings,
-  ShortcutOverrides,
   DataTableSettings,
 } from '@/typings/settings';
 import {
@@ -20,7 +19,6 @@ export interface GlobalSettings {
   appConfig: GlobalAppConfig;
   editorSettings: EditorSettings;
   dataTableSettings: DataTableSettings;
-  shortcutOverrides: ShortcutOverrides;
 }
 
 export interface GlobalSettingState extends GlobalSettings {}
@@ -31,5 +29,4 @@ export const initialSettingState: GlobalSettingState = {
   appConfig: DEFAULT_APP_CONFIG,
   editorSettings: DEFAULT_EDITOR_SETTINGS,
   dataTableSettings: DATA_TABLE_SETTINGS,
-  shortcutOverrides: {},
 };

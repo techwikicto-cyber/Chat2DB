@@ -46,7 +46,8 @@ export default {
 
   'chat.uploadExcel.description1': 'Click or drag a single Excel file to upload',
   'chat.uploadExcel.description2': 'Currently only supports single table upload, supports xlsx, xls, csv formats',
-  'chat.uploadExcel.uploadExcelTips': 'Please upload an Excel file with a single line header, the first line is the header, and the second line and subsequent lines are data',
+  'chat.uploadExcel.uploadExcelTips':
+    'Please upload an Excel file with a single line header, the first line is the header, and the second line and subsequent lines are data',
 
   'chat.functionDescription.title': 'Hi~ we need your help to determine the Excel header information',
   'chat.functionDescription.description': 'After determining the header, the AI Q&A will be more accurate',

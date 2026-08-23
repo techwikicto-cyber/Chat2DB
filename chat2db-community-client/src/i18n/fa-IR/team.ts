@@ -126,8 +126,7 @@ export default {
   'team.createOrJoin.title': 'ساخت یا پیوستن به تیم',
   'team.create.title': 'ساخت تیم جدید',
   'team.create.title.desc': 'یک تیم جدید بسازید و همکارانتان را برای همکاری دعوت کنید',
-  'team.create.title.desc2':
-    'اطلاعات دقیق وارد کنید تا همکاری کارآمد با همکاران شرکتتان را در پلتفرم بینا آغاز کنید',
+  'team.create.title.desc2': 'اطلاعات دقیق وارد کنید تا همکاری کارآمد با همکاران شرکتتان را در پلتفرم بینا آغاز کنید',
   'team.createSuccess.title': 'تیم با موفقیت ساخته شد',
   'team.createSuccess.title2': 'تبریک، تیم با موفقیت ساخته شد',
   'team.createSuccess.title.desc': 'پیوند زیر را کپی کنید و همکارانتان را برای پیوستن و همکاری دعوت کنید',

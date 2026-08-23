@@ -7,8 +7,7 @@ export default {
   'license.getDeviceCertificate': 'دریافت گواهی دستگاه',
   'license.offlineCertificateInstruction':
     'اگر کاملاً آفلاین هستید، می‌توانید گواهی دستگاه را از این مسیر بگیرید: وب‌سایت رسمی پلتفرم بینا (https://chat2db-ai.com/) ← ورود و کلیک روی تصویر پروفایل ← گواهی دستگاه',
-  'license.offlineActivationAIWarning':
-    'پس از ساخت گواهی آفلاین، امکان ابطال آن یا تغییر دستگاه وجود ندارد!',
+  'license.offlineActivationAIWarning': 'پس از ساخت گواهی آفلاین، امکان ابطال آن یا تغییر دستگاه وجود ندارد!',
   'license.offlineAIWarning': 'دستگاه‌هایی که آفلاین فعال شوند نمی‌توانند از قابلیت‌های هوش مصنوعی استفاده کنند',
 
   'license.deviceCertificateTitle': 'گواهی دستگاه',

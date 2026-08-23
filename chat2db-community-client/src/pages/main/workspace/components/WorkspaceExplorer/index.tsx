@@ -5,11 +5,9 @@ import i18n from '@/i18n';
 import { LOCAL_SQL_SESSION_DRAG_TYPE, WorkspaceTabType, workspaceTabConfig } from '@/constants';
 import {
   ShortcutAction,
-  ShortcutOverrides,
   getEffectiveShortcutConfigMap,
   isShortcutEventMatch,
 } from '@/constants/shortcut';
-import { useGlobalStore } from '@/store/global';
 import { useWorkspaceStore } from '@/store/workspace';
 import type { IWorkspaceTab } from '@/typings';
 import LocalSQLFileTree, { type LocalSQLFileTreeRef } from '../LocalSQLFileTree';
@@ -46,10 +44,9 @@ const WorkspaceExplorer = memo(
     editorList: state.editorList,
     setActiveConsoleId: state.setActiveConsoleId,
   }));
-  const shortcutOverrides = useGlobalStore((state) => state.shortcutOverrides);
   const shortcutConfig = useMemo(
-    () => getEffectiveShortcutConfigMap(shortcutOverrides as ShortcutOverrides),
-    [shortcutOverrides],
+    () => getEffectiveShortcutConfigMap(),
+    [],
   );
 
   const openSessions = useMemo(() => {
