@@ -1,5 +1,10 @@
 package ai.chat2db.community.tools.util;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
+import ai.chat2db.community.tools.model.Context;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,6 +23,7 @@ class CommunityIdentityTest {
     @AfterEach
     void clearAccount() {
         CommunityAccountContext.clear();
+        ContextUtils.removeContext();
     }
 
     @Test
@@ -51,6 +57,45 @@ class CommunityIdentityTest {
     void idsArePositiveSoTheyCannotCollideWithTheNoAccountId() {
         for (String account : new String[] {"a", "admin", "foad", "nima", "ali", "z".repeat(64)}) {
             assertTrue(CommunityIdentity.accountUserId(account) >= 0, account);
+        }
+    }
+
+    @Test
+    void workHandedToAnotherThreadKeepsTheAccount() throws Exception {
+        // The thread local belongs to the request thread. Everything handed off -
+        // the assistant calling a tool, an export, the SQL executor - carries the
+        // Context instead, and reading only the thread local there fell back to
+        // the shared id: the account's AI model configuration was then looked up
+        // under the wrong key and came back empty.
+        CommunityAccountContext.set("foad");
+        Context captured = CommunityIdentity.context();
+        long onRequestThread = CommunityIdentity.userId();
+
+        ExecutorService worker = Executors.newSingleThreadExecutor();
+        try {
+            Future<Long> onWorkerThread = worker.submit(() -> {
+                ContextUtils.setContext(captured);
+                try {
+                    return CommunityIdentity.userId();
+                } finally {
+                    ContextUtils.removeContext();
+                }
+            });
+            assertEquals(onRequestThread, onWorkerThread.get());
+        } finally {
+            worker.shutdownNow();
+        }
+    }
+
+    @Test
+    void aThreadWithNeitherFallsBackToTheSharedId() throws Exception {
+        CommunityAccountContext.set("foad");
+
+        ExecutorService worker = Executors.newSingleThreadExecutor();
+        try {
+            assertEquals(CommunityIdentity.USER_ID, worker.submit(CommunityIdentity::userId).get());
+        } finally {
+            worker.shutdownNow();
         }
     }
 

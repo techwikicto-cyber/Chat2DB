@@ -45,11 +45,38 @@ public final class CommunityIdentity {
      * Always positive, so it can never collide with the no-account id above.
      */
     public static long userId() {
-        String account = CommunityAccountContext.current();
+        String account = currentAccount();
         if (StringUtils.isBlank(account)) {
             return USER_ID;
         }
         return accountUserId(account);
+    }
+
+    /**
+     * The signed-in account, from wherever it can be found on this thread.
+     *
+     * The thread local is set by the servlet filter and so only exists on the
+     * thread serving the request. Work handed to another thread - the assistant
+     * calling a tool, an export, the SQL executor - carries the {@link Context}
+     * instead, which is captured and restored at each of those boundaries.
+     *
+     * Reading only the thread local was a bug: on a tool thread it came back
+     * empty, the id fell back to the shared one, and looking up the account's AI
+     * model configuration under it found nothing - so the assistant could not
+     * resolve a model to answer with and reported that it could not read the
+     * database.
+     *
+     * Context first, because it is the one that survives the hand-off; the
+     * thread local second, for the moment on the request thread before the
+     * Context has been built from it.
+     */
+    public static String currentAccount() {
+        Context context = ContextUtils.queryContext();
+        if (context != null && context.getLoginUser() != null
+                && StringUtils.isNotBlank(context.getLoginUser().getAccountName())) {
+            return context.getLoginUser().getAccountName();
+        }
+        return CommunityAccountContext.current();
     }
 
     static long accountUserId(String account) {
@@ -75,7 +102,7 @@ public final class CommunityIdentity {
         // account system of its own to ask. The account name is the exception:
         // the web deployment does have accounts, and this is how the one signing
         // the request reaches the storage layer.
-        loginUser.setAccountName(CommunityAccountContext.current());
+        loginUser.setAccountName(currentAccount());
         loginUser.setAdmin(Boolean.TRUE);
         loginUser.setRoleCodes(List.of(ROLE_CODE));
         loginUser.setVip(Boolean.TRUE);

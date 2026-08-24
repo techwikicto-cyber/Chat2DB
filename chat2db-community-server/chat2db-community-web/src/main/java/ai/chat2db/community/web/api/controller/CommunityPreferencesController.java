@@ -2,7 +2,7 @@ package ai.chat2db.community.web.api.controller;
 
 import java.util.Map;
 
-import ai.chat2db.community.tools.util.CommunityAccountContext;
+import ai.chat2db.community.tools.util.CommunityIdentity;
 import ai.chat2db.community.tools.wrapper.result.ActionResult;
 import ai.chat2db.community.tools.wrapper.result.DataResult;
 import ai.chat2db.community.web.api.config.web.auth.CommunityAuthSupport;
@@ -41,7 +41,7 @@ public class CommunityPreferencesController {
      */
     @GetMapping("")
     public DataResult<Map<String, Object>> read() {
-        String account = CommunityAccountContext.current();
+        String account = CommunityIdentity.currentAccount();
         if (StringUtils.isBlank(account)) {
             // Sign-in switched off: there is no account to attribute settings
             // to, so the browser keeps its own and this returns nothing.
@@ -60,7 +60,7 @@ public class CommunityPreferencesController {
      */
     @PutMapping("")
     public ActionResult write(@RequestBody(required = false) Map<String, Object> body) {
-        String account = CommunityAccountContext.current();
+        String account = CommunityIdentity.currentAccount();
         if (StringUtils.isBlank(account)) {
             return ActionResult.isSuccess();
         }
