@@ -108,13 +108,15 @@ public class AiToolServiceImpl implements IAiToolService {
         }
     }
     public String listAllDataSources(AiToolContextRequest toolContext) {
+        return invokeWithRequestContext(toolContext, () -> doListAllDataSources(toolContext));
+    }
+
+    private String doListAllDataSources(AiToolContextRequest toolContext) {
         DbDataSourcePageQueryRequest queryRequest = new DbDataSourcePageQueryRequest();
         queryRequest.setPageNo(1);
         queryRequest.setPageSize(MAX_GLOBAL_DATASOURCES);
 
-        PageResponse<WorkspaceDataSource> result = invokeWithRequestContext(
-                toolContext,
-                () -> workspaceStorageFacade.listDataSources(queryRequest));
+        PageResponse<WorkspaceDataSource> result = workspaceStorageFacade.listDataSources(queryRequest);
         if (Objects.isNull(result)) {
             return emitToolResult(toolContext, "list_all_datasources", "Failed to query datasources: unknown error");
         }
@@ -139,6 +141,13 @@ public class AiToolServiceImpl implements IAiToolService {
                 .collect(Collectors.joining("\n")));
     }
     public String listAllTables(AiListTablesRequest aiListTablesRequest) {
+        AiToolContextRequest requestContext = aiListTablesRequest == null
+                ? null
+                : aiListTablesRequest.getAiToolContextRequest();
+        return invokeWithRequestContext(requestContext, () -> doListAllTables(aiListTablesRequest));
+    }
+
+    private String doListAllTables(AiListTablesRequest aiListTablesRequest) {
         Long dataSourceId = aiListTablesRequest == null ? null : aiListTablesRequest.getDataSourceId();
         String databaseName = aiListTablesRequest == null ? null : aiListTablesRequest.getDatabaseName();
         String schemaName = aiListTablesRequest == null ? null : aiListTablesRequest.getSchemaName();
@@ -167,6 +176,10 @@ public class AiToolServiceImpl implements IAiToolService {
     }
     public String listAllDatabases(Long dataSourceId,
             AiToolContextRequest toolContext) {
+        return invokeWithRequestContext(toolContext, () -> doListAllDatabases(dataSourceId, toolContext));
+    }
+
+    private String doListAllDatabases(Long dataSourceId, AiToolContextRequest toolContext) {
         ConnectionProfile profile = requireScopedConnectInfo(toolContext, dataSourceId, null, null);
         try {
             connectionContextService.bindProfile(profile);
@@ -191,6 +204,10 @@ public class AiToolServiceImpl implements IAiToolService {
     }
     public String listAllSchemas(String databaseName,Long dataSourceId,
             AiToolContextRequest toolContext) {
+        return invokeWithRequestContext(toolContext, () -> doListAllSchemas(databaseName, dataSourceId, toolContext));
+    }
+
+    private String doListAllSchemas(String databaseName, Long dataSourceId, AiToolContextRequest toolContext) {
         ConnectionProfile profile = requireScopedConnectInfo(toolContext, dataSourceId, databaseName, null);
         String targetDatabase = StringUtils.defaultIfBlank(databaseName, profile.getDatabaseName());
         if (StringUtils.isBlank(targetDatabase)) {
@@ -219,6 +236,13 @@ public class AiToolServiceImpl implements IAiToolService {
         }
     }
     public String executeSql(AiExecuteSqlRequest aiExecuteSqlRequest) {
+        AiToolContextRequest requestContext = aiExecuteSqlRequest == null
+                ? null
+                : aiExecuteSqlRequest.getAiToolContextRequest();
+        return invokeWithRequestContext(requestContext, () -> doExecuteSql(aiExecuteSqlRequest));
+    }
+
+    private String doExecuteSql(AiExecuteSqlRequest aiExecuteSqlRequest) {
         String sql = aiExecuteSqlRequest == null ? null : aiExecuteSqlRequest.getSql();
         Integer pageSize = aiExecuteSqlRequest == null ? null : aiExecuteSqlRequest.getPageSize();
         Long dataSourceId = aiExecuteSqlRequest == null ? null : aiExecuteSqlRequest.getDataSourceId();
@@ -286,6 +310,13 @@ public class AiToolServiceImpl implements IAiToolService {
         }
     }
     public String getTablesSchema(AiGetTablesSchemaRequest aiGetTablesSchemaRequest) {
+        AiToolContextRequest requestContext = aiGetTablesSchemaRequest == null
+                ? null
+                : aiGetTablesSchemaRequest.getAiToolContextRequest();
+        return invokeWithRequestContext(requestContext, () -> doGetTablesSchema(aiGetTablesSchemaRequest));
+    }
+
+    private String doGetTablesSchema(AiGetTablesSchemaRequest aiGetTablesSchemaRequest) {
         List<String> tableNames = aiGetTablesSchemaRequest == null ? null : aiGetTablesSchemaRequest.getTableNames();
         Long dataSourceId = aiGetTablesSchemaRequest == null ? null : aiGetTablesSchemaRequest.getDataSourceId();
         String databaseName = aiGetTablesSchemaRequest == null ? null : aiGetTablesSchemaRequest.getDatabaseName();
@@ -326,6 +357,26 @@ public class AiToolServiceImpl implements IAiToolService {
         return content;
     }
 
+    /**
+     * Runs a tool under the identity of whoever asked the question.
+     *
+     * <p>A tool does not run on the thread that served the request. The model
+     * decides to call one part-way through the response, so it runs on whichever
+     * thread the streaming client happens to be on, and that thread has no
+     * {@link Context} of its own. The web layer therefore captures the request's
+     * Context into the tool context, and this restores it.
+     *
+     * <p>Every tool has to be wrapped in its entirety, not just the part that
+     * obviously reads storage. Each one resolves a connection and then binds it,
+     * and binding looks the datasource up a second time; each one records what
+     * it did to the operation log. Storage is per account now, so any of those
+     * running outside the Context reads the wrong workspace and reports the
+     * datasource missing - which is what "datasource.not.found" was, coming back
+     * from a tool whose first lookup had succeeded.
+     *
+     * <p>Nesting is harmless: an inner call finds the Context already set and
+     * simply runs.
+     */
     private <T> T invokeWithRequestContext(AiToolContextRequest toolContext, java.util.function.Supplier<T> supplier) {
         Context currentContext = ContextUtils.queryThreadContext();
         Context requestContext = resolveRequestContext(toolContext);
@@ -742,11 +793,7 @@ public class AiToolServiceImpl implements IAiToolService {
             resolvedSchemaName = contextProfile.getSchemaName();
         }
         if (Objects.nonNull(resolvedDataSourceId)) {
-            final Long scopedDataSourceId = resolvedDataSourceId;
-            final String scopedDatabaseName = resolvedDatabaseName;
-            final String scopedSchemaName = resolvedSchemaName;
-            return invokeWithRequestContext(toolContext,
-                    () -> buildProfile(scopedDataSourceId, scopedDatabaseName, scopedSchemaName));
+            return buildProfile(resolvedDataSourceId, resolvedDatabaseName, resolvedSchemaName);
         }
         throw new IllegalArgumentException(
                 "No database connection context found. Call list_all_datasources first, then provide dataSourceId/databaseName.");

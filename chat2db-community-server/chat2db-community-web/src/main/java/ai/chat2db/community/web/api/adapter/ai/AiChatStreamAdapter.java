@@ -691,16 +691,31 @@ public class AiChatStreamAdapter implements IAiChatStreamService<ChatRequest, Ss
                     """;
     }
 
+    /**
+     * The interface language, offered only as a tie-breaker.
+     *
+     * <p>What decides the reply's language is the rule in the system prompt:
+     * answer in whatever language the question was asked in. This section used
+     * to end the prompt by naming one language outright - English for every
+     * locale except Chinese and Japanese - and being the last thing the model
+     * read, that is what it followed. A question typed in Persian came back in
+     * English.
+     *
+     * <p>What is left is the one case the rule cannot decide: a message with no
+     * language of its own. A bare SELECT, a stack trace, a table name. The
+     * language the person set their interface to is the best guess there, and
+     * it is a guess, not an override.
+     */
     private String buildOutputLanguagePrompt() {
         Locale locale = LocaleContextHolder.getLocale();
-        String language = locale != null ? locale.getLanguage() : "";
-        if ("zh".equalsIgnoreCase(language)) {
-            return "\n\n## Output Language\nRespond in Simplified Chinese for both the final answer and the reasoning content.";
+        String language = locale == null ? null : StringUtils.trimToNull(locale.getDisplayLanguage(Locale.ENGLISH));
+        if (language == null) {
+            return "";
         }
-        if ("ja".equalsIgnoreCase(language)) {
-            return "\n\n## Output Language\nRespond in Japanese for both the final answer and the reasoning content.";
-        }
-        return "\n\n## Output Language\nRespond in English for both the final answer and the reasoning content.";
+        return "\n\n## Output Language\nAnswer in the language the user wrote in, as described above - "
+                + "this applies to the reasoning content as much as to the final answer. "
+                + "Only when their message carries no language of its own - a bare SQL statement, an identifier, "
+                + "an error string - fall back to " + language + ", the language their interface is set to.";
     }
 
     private String buildSelectedDatabasePrompt(Map<String, Object> toolContext) {
