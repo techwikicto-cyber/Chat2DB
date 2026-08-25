@@ -102,4 +102,7 @@ public class DataSourceResponse {
 
 
     private Long spaceId;
+
+    /** How much of this connection's data may reach the model: NONE, SAMPLE or FULL. */
+    private String aiDisclosurePolicy;
 }

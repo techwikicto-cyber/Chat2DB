@@ -71,4 +71,7 @@ public class WorkspaceDataSource {
     private String storageType;
 
     private Long spaceId;
+
+    /** See {@code DataSource#aiDisclosurePolicy}: NONE, SAMPLE or FULL. */
+    private String aiDisclosurePolicy;
 }

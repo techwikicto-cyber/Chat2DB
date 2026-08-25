@@ -34,6 +34,8 @@ export interface IConnectionDetails {
   extendInfo: IConnectionExtendInfoItem[];
   environmentId: number;
   storageType: DataSourceStorageType;
+  /** How much of this connection's data may reach the model: NONE, SAMPLE or FULL. */
+  aiDisclosurePolicy?: string | null;
   ssh: any;
   driverConfig: {
     jdbcDriver: string;

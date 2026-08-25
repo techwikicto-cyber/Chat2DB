@@ -10,6 +10,10 @@ import { FolderOpenOutlined } from '@ant-design/icons';
 import { Button, Collapse, Form, Input, Select, Table } from 'antd';
 import classnames from 'classnames';
 import React, { ForwardedRef, Fragment, forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
+import AiDisclosure, {
+  AiDisclosurePolicy,
+  DEFAULT_AI_DISCLOSURE_POLICY,
+} from './components/AiDisclosure';
 import Driver from './components/Driver';
 import { dataSourceFormConfigs } from './config/dataSource';
 import { InputType } from './config/enum';
@@ -362,6 +366,9 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
   const [baseInfoForm] = Form.useForm();
   const [sshForm] = Form.useForm();
   const [driveData, setDriveData] = useState<any>({});
+  const [aiDisclosurePolicy, setAiDisclosurePolicy] = useState<AiDisclosurePolicy>(
+    () => (connectionData?.aiDisclosurePolicy as AiDisclosurePolicy) || DEFAULT_AI_DISCLOSURE_POLICY,
+  );
   const [backfillData, setBackfillData] = useState<IConnectionDetails>(() => normalizeConnectionData(connectionData));
   const [loadings, setLoading] = useState({
     confirmButton: false,
@@ -391,6 +398,9 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
 
   useEffect(() => {
     setBackfillData(normalizeConnectionData(props.connectionData));
+    setAiDisclosurePolicy(
+      (props.connectionData?.aiDisclosurePolicy as AiDisclosurePolicy) || DEFAULT_AI_DISCLOSURE_POLICY,
+    );
   }, [props.connectionData]);
 
   function driverFormChange(data: any) {
@@ -426,6 +436,18 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
             </div>
           </div>
         </div>
+      ),
+    },
+    {
+      forceRender: true,
+      key: 'aiDisclosure',
+      label: i18n('connection.aiDisclosure.title'),
+      children: (
+        <AiDisclosure
+          value={aiDisclosurePolicy}
+          onChange={setAiDisclosurePolicy}
+          disabled={backfillData.isAdmin === false}
+        />
       ),
     },
     {
@@ -467,6 +489,7 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
       extendInfo,
       connectionEnvType: ConnectionEnvType.DAILY,
       type: backfillData.type,
+      aiDisclosurePolicy,
     };
 
     if (backfillData.id) {

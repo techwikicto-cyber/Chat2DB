@@ -11,6 +11,18 @@ export default {
   'connection.label.JDBCDrive': 'Controlador JDBC',
   'connection.label.port': 'puerto',
   'connection.button.testConnection': 'Probar',
+  'connection.aiDisclosure.title': 'Datos compartidos con la IA',
+  'connection.aiDisclosure.intro':
+    'Preguntar al asistente sobre esta conexión envía parte de la respuesta a tu proveedor de modelos. Elige cuánto sale de la base de datos.',
+  'connection.aiDisclosure.none': 'Solo la forma del resultado',
+  'connection.aiDisclosure.noneDescription':
+    'Al asistente se le dice cuántas filas volvieron y con qué nombres de columna, y ningún valor. Sigue pudiendo escribir y explicar consultas; no puede leer los resultados.',
+  'connection.aiDisclosure.sample': 'Una página de filas',
+  'connection.aiDisclosure.sampleDescription':
+    'Hasta una página de resultados, que es lo que ocurre hoy. Un equilibrio razonable para la mayoría de bases de datos.',
+  'connection.aiDisclosure.full': 'Todo lo que devolvió la consulta',
+  'connection.aiDisclosure.fullDescription':
+    'Todas las filas, hasta el límite de la plataforma. Para datos no sensibles, o un proveedor que no es un tercero.',
   'connection.label.advancedConfiguration': 'Configuración avanzada',
   'connection.label.sshConfiguration': 'Configuración SSH',
   'connection.button.addConnection': 'Añadir conexión',

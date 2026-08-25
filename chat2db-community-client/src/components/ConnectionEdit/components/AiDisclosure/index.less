@@ -1,0 +1,53 @@
+@import '../../../../styles/var.less';
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px 0 8px;
+}
+
+.intro {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* The label and its consequence sit on separate lines: the choice is made from
+   the consequence, so it must not be a tooltip the reader has to go looking for. */
+.option {
+  display: flex;
+  align-items: flex-start;
+  margin: 0;
+
+  :global(.ant-radio) {
+    margin-top: 3px;
+  }
+
+  > span:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-inline-start: 8px;
+  }
+}
+
+.optionLabel {
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.optionDescription {
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.6;
+  max-width: 58ch;
+}

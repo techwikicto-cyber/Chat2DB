@@ -92,4 +92,14 @@ public class DataSource {
 
 
     private Long spaceId;
+
+    /**
+     * How much of this connection's data the assistant may send to the model
+     * provider: NONE, SAMPLE or FULL.
+     *
+     * <p>Blank on every connection made before the setting existed, which
+     * reads as the default and so leaves those connections behaving exactly as
+     * they did. See {@code AiDisclosurePolicyEnum}.
+     */
+    private String aiDisclosurePolicy;
 }

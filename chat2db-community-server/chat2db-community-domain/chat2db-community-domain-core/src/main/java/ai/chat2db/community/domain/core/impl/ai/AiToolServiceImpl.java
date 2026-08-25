@@ -1,5 +1,6 @@
 package ai.chat2db.community.domain.core.impl.ai;
 
+import ai.chat2db.community.domain.api.enums.ai.AiDisclosurePolicyEnum;
 import ai.chat2db.community.domain.api.enums.parser.SqlTypeEnum;
 import ai.chat2db.community.domain.api.model.request.db.DbDlExecuteRequest;
 import ai.chat2db.community.domain.api.model.request.db.DbSchemaQueryRequest;
@@ -309,11 +310,12 @@ public class AiToolServiceImpl implements IAiToolService {
                 return emitToolResult(toolContext, "execute_sql", "SQL executed successfully with no result.");
             }
 
+            AiDisclosurePolicyEnum policy = disclosurePolicyOf(profile.getDataSourceId());
             StringBuilder output = new StringBuilder(2048);
             int index = 1;
             for (ExecuteResponse item : executeResult.getData()) {
                 output.append("## Result ").append(index++).append("\n");
-                output.append(formatExecuteResponse(item)).append("\n\n");
+                output.append(formatExecuteResponse(item, policy)).append("\n\n");
             }
             appendCaveats(output, executeResult.getData(), trimmedSql, questionOf(toolContext));
             return emitToolResult(toolContext, "execute_sql", output.toString().trim());
@@ -619,7 +621,7 @@ public class AiToolServiceImpl implements IAiToolService {
         return null;
     }
 
-    private String formatExecuteResponse(ExecuteResponse result) {
+    private String formatExecuteResponse(ExecuteResponse result, AiDisclosurePolicyEnum policy) {
         if (Objects.isNull(result)) {
             return "Empty result.";
         }
@@ -646,9 +648,37 @@ public class AiToolServiceImpl implements IAiToolService {
                 builder.append(", hasNextPage: ").append(result.getHasNextPage());
             }
             builder.append("\n");
-            appendTabularPreview(builder, result.getHeaderList(), result.getDisplayDataList());
+            if (policy.sharesValues()) {
+                appendTabularPreview(builder, result.getHeaderList(), result.getDisplayDataList());
+            } else {
+                appendColumnsOnly(builder, result.getHeaderList());
+            }
         }
         return builder.toString().trim();
+    }
+
+    /**
+     * The shape of the answer, with none of it in.
+     *
+     * <p>Under {@code NONE} the assistant is told what came back without being
+     * shown it: how many rows, under which column names. That is enough to
+     * write about the query, to say whether it found anything, and to propose
+     * a better one - and it is not enough to repeat a single value to anyone.
+     *
+     * <p>The column names themselves are schema, not data. They are already in
+     * the schema block the assistant was given to write the query at all, so
+     * withholding them here would cost the answer its vocabulary and protect
+     * nothing.
+     */
+    private void appendColumnsOnly(StringBuilder builder, List<Header> headers) {
+        String names = headers.stream()
+                .map(header -> StringUtils.defaultIfBlank(header.getName(), header.getColumnName()))
+                .map(name -> StringUtils.defaultIfBlank(name, "col"))
+                .collect(Collectors.joining(", "));
+        builder.append("columns: ").append(names).append("\n");
+        builder.append("Result values were not shared with the model: this connection's disclosure "
+                + "policy is NONE. Describe what the query does and what it found, and say plainly "
+                + "that the values are on screen for the user rather than inventing them.\n");
     }
 
     /**
@@ -680,6 +710,36 @@ public class AiToolServiceImpl implements IAiToolService {
         output.append("## Caveats\n");
         for (String caveat : caveats) {
             output.append("- ").append(caveat).append("\n");
+        }
+    }
+
+    /**
+     * How much of this connection's data may leave for the model provider.
+     *
+     * <p>Read from the connection at the moment the result is about to be
+     * written, not carried along from when the conversation started. A policy
+     * tightened while a thread is open takes effect on the next question
+     * rather than on the next restart, which is the only reading of the
+     * setting that a person tightening it would accept.
+     *
+     * <p>Fails to the default rather than open or closed: a connection that
+     * cannot be read here is one the query just ran against, so refusing to
+     * describe its result would be a strange place to start caring, and
+     * sending everything would be worse.
+     */
+    private AiDisclosurePolicyEnum disclosurePolicyOf(Long dataSourceId) {
+        if (dataSourceId == null) {
+            return AiDisclosurePolicyEnum.DEFAULT;
+        }
+        try {
+            WorkspaceDataSource dataSource = workspaceStorageFacade.queryDataSourceById(dataSourceId, false);
+            return dataSource == null
+                    ? AiDisclosurePolicyEnum.DEFAULT
+                    : AiDisclosurePolicyEnum.of(dataSource.getAiDisclosurePolicy());
+        } catch (Exception e) {
+            log.warn("could not read the disclosure policy for datasource {}, using {}",
+                    dataSourceId, AiDisclosurePolicyEnum.DEFAULT, e);
+            return AiDisclosurePolicyEnum.DEFAULT;
         }
     }
 

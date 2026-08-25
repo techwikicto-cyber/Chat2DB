@@ -11,6 +11,18 @@ export default {
   'connection.label.JDBCDrive': 'درایور JDBC',
   'connection.label.port': 'پورت',
   'connection.button.testConnection': 'آزمایش',
+  'connection.aiDisclosure.title': 'داده‌ای که با هوش مصنوعی به اشتراک می‌گذارید',
+  'connection.aiDisclosure.intro':
+    'هر سؤالی که از دستیار درباره این اتصال بپرسید، بخشی از پاسخ را به ارائه‌دهنده مدل شما می‌فرستد. انتخاب کنید چه مقدار از آن از دیتابیس خارج شود.',
+  'connection.aiDisclosure.none': 'فقط شکل نتیجه',
+  'connection.aiDisclosure.noneDescription':
+    'به دستیار گفته می‌شود چند سطر و با چه نام ستون‌هایی برگشته، و هیچ مقداری فرستاده نمی‌شود. همچنان می‌تواند کوئری بنویسد و توضیح دهد؛ فقط نتیجه را نمی‌خواند.',
+  'connection.aiDisclosure.sample': 'یک صفحه از سطرها',
+  'connection.aiDisclosure.sampleDescription':
+    'حداکثر یک صفحه از نتایج — همان کاری که امروز انجام می‌شود. برای بیشتر دیتابیس‌ها تعادل معقولی است.',
+  'connection.aiDisclosure.full': 'هر چه کوئری برگرداند',
+  'connection.aiDisclosure.fullDescription':
+    'همه سطرها، تا سقف پلتفرم. برای داده‌ای که حساس نیست، یا ارائه‌دهنده‌ای که شخص ثالث نیست.',
   'connection.label.advancedConfiguration': 'تنظیمات پیشرفته',
   'connection.label.sshConfiguration': 'تنظیمات SSH',
   'connection.button.addConnection': 'افزودن اتصال',

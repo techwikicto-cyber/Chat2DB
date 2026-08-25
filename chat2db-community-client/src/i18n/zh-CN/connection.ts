@@ -11,6 +11,16 @@ export default {
   'connection.label.JDBCDrive': 'JDBC驱动',
   'connection.label.port': '端口',
   'connection.button.testConnection': '测试连接',
+  'connection.aiDisclosure.title': '与 AI 共享的数据',
+  'connection.aiDisclosure.intro':
+    '就此连接向助手提问时，部分结果会发送给你的模型提供方。请选择允许多少数据离开数据库。',
+  'connection.aiDisclosure.none': '仅结果结构',
+  'connection.aiDisclosure.noneDescription':
+    '只告诉助手返回了多少行、列名是什么，不发送任何数值。它仍能编写和解释查询，只是读不到结果。',
+  'connection.aiDisclosure.sample': '一页数据',
+  'connection.aiDisclosure.sampleDescription': '最多一页结果，也就是目前的行为。对大多数数据库是合理的平衡。',
+  'connection.aiDisclosure.full': '查询返回的全部内容',
+  'connection.aiDisclosure.fullDescription': '所有行，直到平台上限。适用于不敏感的数据，或并非第三方的提供方。',
   'connection.label.advancedConfiguration': '高级配置',
   'connection.label.sshConfiguration': 'SSH',
   'connection.button.addConnection': '新建连接',

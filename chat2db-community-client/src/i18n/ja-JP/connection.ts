@@ -11,6 +11,17 @@ export default {
   'connection.label.JDBCDrive': 'JDBCドライバ',
   'connection.label.port': 'ポート',
   'connection.button.testConnection': 'テスト',
+  'connection.aiDisclosure.title': 'AI と共有するデータ',
+  'connection.aiDisclosure.intro':
+    'この接続についてアシスタントに質問すると、結果の一部がモデルプロバイダーに送信されます。データベースから出る量を選んでください。',
+  'connection.aiDisclosure.none': '結果の形だけ',
+  'connection.aiDisclosure.noneDescription':
+    '何行返ったか、列名は何かだけを伝え、値は一切送りません。クエリの作成と説明はできますが、結果は読めません。',
+  'connection.aiDisclosure.sample': '1 ページ分の行',
+  'connection.aiDisclosure.sampleDescription': '最大 1 ページ分の結果。現在の動作であり、多くのデータベースに妥当な均衡です。',
+  'connection.aiDisclosure.full': 'クエリが返したすべて',
+  'connection.aiDisclosure.fullDescription':
+    'プラットフォームの上限まですべての行。機微でないデータ、または第三者でないプロバイダー向けです。',
   'connection.label.advancedConfiguration': '詳細設定',
   'connection.label.sshConfiguration': 'SSH設定',
   'connection.button.addConnection': '接続の追加',

@@ -11,6 +11,18 @@ export default {
   'connection.label.JDBCDrive': 'JDBC Driver',
   'connection.label.port': 'port',
   'connection.button.testConnection': 'Test',
+  'connection.aiDisclosure.title': 'Data shared with the AI',
+  'connection.aiDisclosure.intro':
+    'Asking the assistant a question about this connection sends part of the answer to your model provider. Choose how much of it leaves the database.',
+  'connection.aiDisclosure.none': 'Nothing but the shape',
+  'connection.aiDisclosure.noneDescription':
+    'The assistant is told how many rows came back and under which column names, and no values at all. It can still write and explain queries; it cannot read the results.',
+  'connection.aiDisclosure.sample': 'A page of rows',
+  'connection.aiDisclosure.sampleDescription':
+    'Up to one page of results, which is what happens today. A reasonable balance for most databases.',
+  'connection.aiDisclosure.full': 'Everything the query returned',
+  'connection.aiDisclosure.fullDescription':
+    'Every row, up to the platform cap. For data that is not sensitive, or a provider that is not a third party.',
   'connection.label.advancedConfiguration': 'Advanced Configuration',
   'connection.label.sshConfiguration': 'SSH Configuration',
   'connection.button.addConnection': 'Add Connection',

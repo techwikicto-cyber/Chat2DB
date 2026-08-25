@@ -11,6 +11,18 @@ export default {
   'connection.label.JDBCDrive': 'JDBC 드라이버',
   'connection.label.port': '포트',
   'connection.button.testConnection': '테스트',
+  'connection.aiDisclosure.title': 'AI와 공유하는 데이터',
+  'connection.aiDisclosure.intro':
+    '이 연결에 대해 어시스턴트에게 질문하면 결과의 일부가 모델 제공자에게 전송됩니다. 데이터베이스에서 얼마나 나갈지 선택하세요.',
+  'connection.aiDisclosure.none': '결과의 형태만',
+  'connection.aiDisclosure.noneDescription':
+    '몇 행이 반환되었고 열 이름이 무엇인지만 알려주며 값은 전혀 보내지 않습니다. 쿼리 작성과 설명은 여전히 가능하지만 결과는 읽을 수 없습니다.',
+  'connection.aiDisclosure.sample': '한 페이지 분량의 행',
+  'connection.aiDisclosure.sampleDescription':
+    '최대 한 페이지 분량의 결과로, 현재 동작과 같습니다. 대부분의 데이터베이스에 합리적인 균형입니다.',
+  'connection.aiDisclosure.full': '쿼리가 반환한 모든 것',
+  'connection.aiDisclosure.fullDescription':
+    '플랫폼 상한까지 모든 행. 민감하지 않은 데이터나 제3자가 아닌 제공자에 적합합니다.',
   'connection.label.advancedConfiguration': '고급 구성',
   'connection.label.sshConfiguration': 'SSH 구성',
   'connection.button.addConnection': '연결 추가',
