@@ -31,6 +31,8 @@ import ai.chat2db.community.domain.api.model.request.ai.AiExecuteSqlRequest;
 import ai.chat2db.community.domain.api.model.request.ai.AiGetTablesSchemaRequest;
 import ai.chat2db.community.domain.api.model.request.ai.AiListTablesRequest;
 import ai.chat2db.community.domain.api.service.ai.IAiToolService;
+import ai.chat2db.community.domain.core.sqlguard.AiSqlGuard;
+import ai.chat2db.community.domain.core.sqlguard.SqlGuardVerdict;
 import ai.chat2db.community.domain.api.model.metadata.Database;
 import ai.chat2db.community.domain.api.model.result.ExecuteResponse;
 import ai.chat2db.community.domain.api.model.metadata.ForeignKeyInfo;
@@ -256,9 +258,23 @@ public class AiToolServiceImpl implements IAiToolService {
         ConnectionProfile profile = requireScopedConnectInfo(toolContext, dataSourceId, databaseName, schemaName);
         int resolvedPageSize = normalizePageSize(pageSize);
         String trimmedSql = sql.trim();
+        // Two gates, in this order for a reason. The first recognises a
+        // statement that is legitimate but not ours to run - a CREATE, an
+        // UPDATE someone genuinely wants - and hands it back for a person to
+        // review. The second decides whether what remains may execute at all,
+        // and its answers are refusals rather than referrals. Running the
+        // friendly one first keeps a DDL request reading as a referral instead
+        // of as an accusation.
         String unsafeSqlMessage = buildNonQueryExecutionMessage(trimmedSql, profile);
         if (StringUtils.isNotBlank(unsafeSqlMessage)) {
             return emitToolResult(toolContext, "execute_sql", unsafeSqlMessage);
+        }
+        SqlGuardVerdict verdict = AiSqlGuard.inspect(trimmedSql);
+        if (!verdict.allowed()) {
+            log.warn("ai sql refused by the guard, rules={}, sql={}", verdict.ruleIds(), trimmedSql);
+            sqlOperationLogRecorder.recordFailureAsync(trimmedSql, SqlOperationLogSourceEnum.AI_TOOL.name(),
+                    "refused by the SQL guard: " + verdict.ruleIds());
+            return emitToolResult(toolContext, "execute_sql", verdict.feedback());
         }
 
         boolean operationLogged = false;
