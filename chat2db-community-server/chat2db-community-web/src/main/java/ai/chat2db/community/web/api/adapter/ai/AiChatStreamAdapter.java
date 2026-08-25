@@ -774,6 +774,13 @@ public class AiChatStreamAdapter implements IAiChatStreamService<ChatRequest, Ss
             return context;
         }
         context.put("dataSourceId", dataSourceId);
+        // The question itself, so a tool can check its result against what was
+        // actually asked. A tool is handed a statement; without this it cannot
+        // tell that "how many customers are there?" wanted one number and got
+        // four hundred rows.
+        if (StringUtils.isNotBlank(request.getInput())) {
+            context.put("question", request.getInput());
+        }
         if (StringUtils.isNotBlank(databaseName)) {
             context.put("databaseName", databaseName);
         }

@@ -26,6 +26,7 @@ public class AiToolContextConverter {
         }
         param.setDatabaseName(context.get("databaseName") instanceof String value ? value : null);
         param.setSchemaName(context.get("schemaName") instanceof String value ? value : null);
+        param.setQuestion(context.get("question") instanceof String value ? value : null);
         if (context.get("connectionProfile") instanceof ConnectionProfile profile) {
             param.setConnectionProfile(profile);
         }

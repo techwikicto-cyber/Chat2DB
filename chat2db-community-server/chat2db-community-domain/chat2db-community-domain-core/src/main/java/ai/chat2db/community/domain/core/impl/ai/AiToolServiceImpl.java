@@ -299,6 +299,7 @@ public class AiToolServiceImpl implements IAiToolService {
                 output.append("## Result ").append(index++).append("\n");
                 output.append(formatExecuteResponse(item)).append("\n\n");
             }
+            appendCaveats(output, executeResult.getData(), trimmedSql, questionOf(toolContext));
             return emitToolResult(toolContext, "execute_sql", output.toString().trim());
         } catch (RuntimeException e) {
             if (!operationLogged) {
@@ -632,6 +633,43 @@ public class AiToolServiceImpl implements IAiToolService {
             appendTabularPreview(builder, result.getHeaderList(), result.getDisplayDataList());
         }
         return builder.toString().trim();
+    }
+
+    /**
+     * The honest statement about what came back, written where the model reads last.
+     *
+     * <p>The facts were always in the result - {@code hasNextPage: true} sat on
+     * the very line above the rows. But a fact stated as data is a fact the
+     * model is free to skip, and it did: a page of 200 rows became "the only
+     * company at rank 1", with more rows behind it saying otherwise. The same
+     * fact stated as an instruction, at the end where the last thing read
+     * carries the most weight, is one the answer has to reckon with.
+     *
+     * <p>Only the first result is described. A script produces several, but
+     * the assistant executes one statement at a time, so the second is a case
+     * that does not arise from this path; describing all of them would put the
+     * caveats for a result nobody asked about beside the one they did.
+     */
+    void appendCaveats(StringBuilder output, List<ExecuteResponse> results, String sql, String question) {
+        ExecuteResponse first = results.stream().filter(Objects::nonNull).findFirst().orElse(null);
+        if (first == null) {
+            return;
+        }
+        int rowCount = CollectionUtils.size(first.getDataList());
+        boolean hitTheCap = Boolean.TRUE.equals(first.getHasNextPage());
+        List<String> caveats = AiResultCaveats.forResult(question, sql, rowCount, hitTheCap);
+        if (caveats.isEmpty()) {
+            return;
+        }
+        output.append("## Caveats\n");
+        for (String caveat : caveats) {
+            output.append("- ").append(caveat).append("\n");
+        }
+    }
+
+    /** What the user asked, when the web layer knew it. Blank is a valid answer. */
+    private String questionOf(AiToolContextRequest toolContext) {
+        return toolContext == null ? null : toolContext.getQuestion();
     }
 
     private ListResult<ExecuteResponse> wrapExecuteResults(List<ExecuteResponse> results) {
