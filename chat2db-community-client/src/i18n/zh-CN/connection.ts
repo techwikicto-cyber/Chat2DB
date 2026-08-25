@@ -11,6 +11,8 @@ export default {
   'connection.label.JDBCDrive': 'JDBC驱动',
   'connection.label.port': '端口',
   'connection.button.testConnection': '测试连接',
+  'connection.readOnly.confirmed': '该账号的写入被拒绝，因此只能读取。',
+  'connection.readOnly.canWrite': '警告：该账号可以写入数据库。使用只读账号更安全。',
   'connection.aiDisclosure.title': '与 AI 共享的数据',
   'connection.aiDisclosure.intro':
     '就此连接向助手提问时，部分结果会发送给你的模型提供方。请选择允许多少数据离开数据库。',

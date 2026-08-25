@@ -11,6 +11,8 @@ export default {
   'connection.label.JDBCDrive': 'Controlador JDBC',
   'connection.label.port': 'puerto',
   'connection.button.testConnection': 'Probar',
+  'connection.readOnly.confirmed': 'A esta cuenta se le denegó una escritura, así que solo puede leer.',
+  'connection.readOnly.canWrite': 'Aviso: esta cuenta puede escribir en la base de datos. Una cuenta de solo lectura es más segura.',
   'connection.aiDisclosure.title': 'Datos compartidos con la IA',
   'connection.aiDisclosure.intro':
     'Preguntar al asistente sobre esta conexión envía parte de la respuesta a tu proveedor de modelos. Elige cuánto sale de la base de datos.',

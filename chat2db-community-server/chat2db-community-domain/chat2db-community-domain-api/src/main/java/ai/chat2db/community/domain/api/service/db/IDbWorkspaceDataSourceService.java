@@ -2,6 +2,7 @@ package ai.chat2db.community.domain.api.service.db;
 
 import ai.chat2db.community.domain.api.model.PageResponse;
 import ai.chat2db.community.domain.api.model.request.datasource.DbDataSourcePageQueryRequest;
+import ai.chat2db.community.domain.api.model.datasource.DataSourceConnect;
 import ai.chat2db.community.domain.api.model.request.datasource.DbDataSourcePreConnectRequest;
 import ai.chat2db.community.domain.api.model.storage.WorkspaceDataSource;
 
@@ -23,7 +24,7 @@ public interface IDbWorkspaceDataSourceService {
      *
      * @param request datasource pre-connection request.
      */
-    void preConnect(DbDataSourcePreConnectRequest request);
+    DataSourceConnect preConnect(DbDataSourcePreConnectRequest request);
 
     /**
      * Creates a datasource and returns its display representation.

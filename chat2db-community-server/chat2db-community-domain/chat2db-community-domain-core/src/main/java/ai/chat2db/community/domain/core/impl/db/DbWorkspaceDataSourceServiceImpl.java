@@ -4,6 +4,7 @@ import ai.chat2db.community.domain.api.model.PageResponse;
 import ai.chat2db.community.domain.api.enums.plugin.AuthenticationTypeEnum;
 import ai.chat2db.community.domain.api.model.request.datasource.DbDataSourcePageQueryRequest;
 import ai.chat2db.community.domain.api.model.request.datasource.DbDataSourcePreConnectRequest;
+import ai.chat2db.community.domain.api.model.datasource.DataSourceConnect;
 import ai.chat2db.community.domain.api.model.storage.WorkspaceDataSource;
 import ai.chat2db.community.domain.api.service.db.IDbDataSourceService;
 import ai.chat2db.community.domain.api.service.db.IDbWorkspaceDataSourceService;
@@ -69,7 +70,7 @@ public class DbWorkspaceDataSourceServiceImpl implements IDbWorkspaceDataSourceS
     }
 
     @Override
-    public void preConnect(DbDataSourcePreConnectRequest request) {
+    public DataSourceConnect preConnect(DbDataSourcePreConnectRequest request) {
         WorkspaceDataSource savedDataSource = request.getId() == null ? null
                 : queryDisplayDataSourceById(request.getId(), true);
         if (request.getId() != null
@@ -78,7 +79,7 @@ public class DbWorkspaceDataSourceServiceImpl implements IDbWorkspaceDataSourceS
                 && !AuthenticationTypeEnum.NONE.getCode().equals(request.getAuthenticationType())) {
             request.setPassword(savedDataSource.getPassword());
         }
-        dataSourceService.preConnect(request);
+        return dataSourceService.preConnect(request);
     }
 
     @Override

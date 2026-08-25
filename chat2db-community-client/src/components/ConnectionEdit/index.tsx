@@ -541,7 +541,7 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
           );
 
           if (isSuccessful) {
-            staticMessage.success(message);
+            staticMessage.success([message, readOnlyNote(res?.readOnlyVerdict)].filter(Boolean).join(' '));
           } else {
             staticMessage.error(message);
           }
@@ -649,6 +649,25 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
 });
 
 export default ConnectionEdit;
+
+/**
+ * What the connection test found out about this account's ability to write.
+ *
+ * Silent when nothing was learned. A test that says nothing about privileges
+ * is the behaviour everyone is used to, and padding it with "could not
+ * determine" on every connection would train people to stop reading the line
+ * that matters.
+ */
+function readOnlyNote(verdict?: string): string {
+  if (verdict === 'CONFIRMED_READ_ONLY') {
+    return i18n('connection.readOnly.confirmed');
+  }
+  if (verdict === 'CAN_WRITE') {
+    return i18n('connection.readOnly.canWrite');
+  }
+  return '';
+}
+
 
 interface IRenderFormProps {
   tab: ITabsType;

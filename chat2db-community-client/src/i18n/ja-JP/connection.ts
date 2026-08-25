@@ -11,6 +11,8 @@ export default {
   'connection.label.JDBCDrive': 'JDBCドライバ',
   'connection.label.port': 'ポート',
   'connection.button.testConnection': 'テスト',
+  'connection.readOnly.confirmed': 'このアカウントは書き込みを拒否されたため、読み取り専用です。',
+  'connection.readOnly.canWrite': '警告: このアカウントはデータベースに書き込めます。読み取り専用のアカウントの方が安全です。',
   'connection.aiDisclosure.title': 'AI と共有するデータ',
   'connection.aiDisclosure.intro':
     'この接続についてアシスタントに質問すると、結果の一部がモデルプロバイダーに送信されます。データベースから出る量を選んでください。',

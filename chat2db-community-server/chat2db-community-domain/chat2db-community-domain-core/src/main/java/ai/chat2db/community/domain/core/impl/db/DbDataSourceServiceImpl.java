@@ -39,7 +39,7 @@ public class DbDataSourceServiceImpl implements IDbDataSourceService {
 
 
     @Override
-    public void preConnect(DbDataSourcePreConnectRequest param) {
+    public DataSourceConnect preConnect(DbDataSourcePreConnectRequest param) {
         param.setUrl(JdbcUrlUtils.resetUrl(param.getUrl(), param.getType(), param.getServiceType()));
         DbDataSourceTestRequest testParam
                 = dataSourceConverter.param2param(param);
@@ -68,6 +68,7 @@ public class DbDataSourceServiceImpl implements IDbDataSourceService {
             throw new BusinessException(dataSourceConnect.getMessage(),
                     new Object[]{dataSourceConnect.getDescription(), dataSourceConnect.getErrorDetail()});
         }
+        return dataSourceConnect;
     }
 
     @Override

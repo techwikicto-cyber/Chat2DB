@@ -11,6 +11,8 @@ export default {
   'connection.label.JDBCDrive': 'JDBC Driver',
   'connection.label.port': 'port',
   'connection.button.testConnection': 'Test',
+  'connection.readOnly.confirmed': 'This account was refused a write, so it can only read.',
+  'connection.readOnly.canWrite': 'Warning: this account can write to the database. A read-only account is safer.',
   'connection.aiDisclosure.title': 'Data shared with the AI',
   'connection.aiDisclosure.intro':
     'Asking the assistant a question about this connection sends part of the answer to your model provider. Choose how much of it leaves the database.',

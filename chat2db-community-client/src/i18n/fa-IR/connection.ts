@@ -11,6 +11,8 @@ export default {
   'connection.label.JDBCDrive': 'درایور JDBC',
   'connection.label.port': 'پورت',
   'connection.button.testConnection': 'آزمایش',
+  'connection.readOnly.confirmed': 'این حساب اجازه نوشتن نداشت، پس فقط می‌تواند بخواند.',
+  'connection.readOnly.canWrite': 'هشدار: این حساب می‌تواند در دیتابیس بنویسد. یک حساب فقط‌خواندنی امن‌تر است.',
   'connection.aiDisclosure.title': 'داده‌ای که با هوش مصنوعی به اشتراک می‌گذارید',
   'connection.aiDisclosure.intro':
     'هر سؤالی که از دستیار درباره این اتصال بپرسید، بخشی از پاسخ را به ارائه‌دهنده مدل شما می‌فرستد. انتخاب کنید چه مقدار از آن از دیتابیس خارج شود.',

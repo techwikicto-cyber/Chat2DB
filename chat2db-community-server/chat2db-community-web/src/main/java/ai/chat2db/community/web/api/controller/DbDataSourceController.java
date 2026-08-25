@@ -6,6 +6,7 @@ import ai.chat2db.community.domain.api.model.storage.WorkspaceDataSource;
 import ai.chat2db.community.domain.api.service.db.IDbDataSourceImportService;
 import ai.chat2db.community.domain.api.service.db.IDbDataSourceService;
 import ai.chat2db.community.domain.api.service.db.IDbWorkspaceDataSourceService;
+import ai.chat2db.community.domain.api.model.datasource.DataSourceConnect;
 import ai.chat2db.community.tools.wrapper.result.ActionResult;
 import ai.chat2db.community.tools.wrapper.result.DataResult;
 import ai.chat2db.community.tools.wrapper.result.ListResult;
@@ -77,12 +78,13 @@ public class DbDataSourceController {
      * Endpoint: {@code POST /api/connection/datasource/pre_connect}.
      *
      * @param request request payload or query parameters for the operation.
-     * @return operation result for the request.
+     * @return the connection result, carrying whether the account was proved
+     *         unable to write. A failed connection throws instead.
      */
     @PostMapping("/datasource/pre_connect")
-    public ActionResult preConnect(@RequestBody DataSourceTestRequest request) {
-        workspaceDataSourceService.preConnect(dataSourceWebConverter.testRequest2param(request));
-        return ActionResult.isSuccess();
+    public DataResult<DataSourceConnect> preConnect(@RequestBody DataSourceTestRequest request) {
+        return DataResult.of(
+                workspaceDataSourceService.preConnect(dataSourceWebConverter.testRequest2param(request)));
     }
 
     /**

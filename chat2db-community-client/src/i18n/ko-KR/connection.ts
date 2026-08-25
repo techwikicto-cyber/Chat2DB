@@ -11,6 +11,8 @@ export default {
   'connection.label.JDBCDrive': 'JDBC 드라이버',
   'connection.label.port': '포트',
   'connection.button.testConnection': '테스트',
+  'connection.readOnly.confirmed': '이 계정은 쓰기가 거부되었으므로 읽기만 할 수 있습니다.',
+  'connection.readOnly.canWrite': '경고: 이 계정은 데이터베이스에 쓸 수 있습니다. 읽기 전용 계정이 더 안전합니다.',
   'connection.aiDisclosure.title': 'AI와 공유하는 데이터',
   'connection.aiDisclosure.intro':
     '이 연결에 대해 어시스턴트에게 질문하면 결과의 일부가 모델 제공자에게 전송됩니다. 데이터베이스에서 얼마나 나갈지 선택하세요.',

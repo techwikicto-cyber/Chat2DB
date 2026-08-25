@@ -182,6 +182,11 @@ public class JdbcUtils {
                 statement = connection.prepareStatement(REDIS_TEST_CONNECT_COMMAND);
                 statement.execute();
             }
+            // The connection is open and about to be thrown away, which is the
+            // one moment it is free to ask whether this account can write.
+            // Never fails the test: an inconclusive answer is reported as
+            // inconclusive.
+            dataSourceConnect.setReadOnlyVerdict(ReadOnlyProbe.probe(connection, dbType).name());
         } catch (Exception e) {
             log.error("connection fail:", e);
             dataSourceConnect.setSuccess(Boolean.FALSE);

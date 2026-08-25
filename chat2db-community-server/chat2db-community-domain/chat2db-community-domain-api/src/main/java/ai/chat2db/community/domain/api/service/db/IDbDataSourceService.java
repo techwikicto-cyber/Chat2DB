@@ -3,6 +3,7 @@ package ai.chat2db.community.domain.api.service.db;
 import ai.chat2db.community.domain.api.config.DriverConfig;
 import ai.chat2db.community.domain.api.model.datasource.SSHInfo;
 import ai.chat2db.community.domain.api.model.metadata.Database;
+import ai.chat2db.community.domain.api.model.datasource.DataSourceConnect;
 import ai.chat2db.community.domain.api.model.request.datasource.DbDataSourcePreConnectRequest;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface IDbDataSourceService {
      *
      * @param dbDataSourcePreConnectRequest datasource pre-connection parameters.
      */
-    void preConnect(DbDataSourcePreConnectRequest dbDataSourcePreConnectRequest);
+    DataSourceConnect preConnect(DbDataSourcePreConnectRequest dbDataSourcePreConnectRequest);
 
     /**
      * Opens a datasource connection and returns available databases.

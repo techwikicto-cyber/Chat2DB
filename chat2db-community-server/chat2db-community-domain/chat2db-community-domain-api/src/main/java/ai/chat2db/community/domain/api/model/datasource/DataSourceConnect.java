@@ -31,4 +31,13 @@ public class DataSourceConnect {
 
 
     private String errorDetail;
+
+    /**
+     * Whether the account behind this connection was proved unable to write.
+     *
+     * <p>Three states, not two: CONFIRMED_READ_ONLY, CAN_WRITE, and
+     * NOT_VERIFIED for the engines the probe leaves alone and the failures
+     * it cannot read. Absent means the same as NOT_VERIFIED.
+     */
+    private String readOnlyVerdict;
 }

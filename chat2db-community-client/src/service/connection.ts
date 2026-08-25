@@ -49,10 +49,29 @@ const save = createRequest<ICreateConnectionDetails, IConnectionDetails>('/api/c
 
 const close = createRequest<IConnectionDetails, void>('/api/connection/datasource/close', { method: 'post' });
 
-const test = createRequest<IConnectionDetails, boolean>('/api/connection/datasource/pre_connect', {
-  method: 'post',
-  delayTime: true,
-});
+/**
+ * Whether the account behind a connection was proved unable to write.
+ *
+ * Three states rather than two: the probe is only safe on some engines and
+ * some refusals are unreadable, so "not verified" is a real answer and is
+ * reported as one rather than shown as a tick.
+ */
+export type IReadOnlyVerdict = 'CONFIRMED_READ_ONLY' | 'CAN_WRITE' | 'NOT_VERIFIED';
+
+export interface IConnectionTestResult {
+  success?: boolean;
+  message?: string;
+  description?: string;
+  readOnlyVerdict?: IReadOnlyVerdict;
+}
+
+const test = createRequest<IConnectionDetails, IConnectionTestResult>(
+  '/api/connection/datasource/pre_connect',
+  {
+    method: 'post',
+    delayTime: true,
+  },
+);
 
 const testSSH = createRequest<any, boolean>('/api/connection/ssh/pre_connect', {
   method: 'post',
