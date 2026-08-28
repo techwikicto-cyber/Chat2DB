@@ -13,6 +13,13 @@ export default {
   'connection.button.testConnection': '테스트',
   'connection.readOnly.confirmed': '이 계정은 쓰기가 거부되었으므로 읽기만 할 수 있습니다.',
   'connection.readOnly.canWrite': '경고: 이 계정은 데이터베이스에 쓸 수 있습니다. 읽기 전용 계정이 더 안전합니다.',
+  'connection.aiProfile.title': '이 데이터베이스는 무엇인가',
+  'connection.aiProfile.intro':
+    '어시스턴트는 스키마를 읽을 수 있지만 스키마는 의미를 알려주지 않습니다. 새로 합류한 동료에게 알려줘야 할 내용을 여기에 적어 주세요 — 주요 테이블의 한 행이 무엇을 나타내는지, 어떤 열이 중요하고 그 값이 무엇을 뜻하는지, 이 데이터베이스의 관례, 그리고 명시적으로 요청하지 않는 한 세지 말아야 할 행.',
+  'connection.aiProfile.placeholder':
+    'TurnoverRanks: 회사별·처리일별 한 행.\nRank1은 거래액 순위이며 1이 가장 좋습니다.\nDateProccessing이 비어 있는 행은 초안이며 집계하지 않습니다.\n여기서 "지난달"은 직전 역월을 뜻합니다.',
+  'connection.aiProfile.count': '{1} / {2}자',
+  'connection.aiProfile.overBudget': '{1}자를 넘었습니다 — 끝부분은 어시스턴트에 전달되기 전에 잘립니다.',
   'connection.aiDisclosure.title': 'AI와 공유하는 데이터',
   'connection.aiDisclosure.intro':
     '이 연결에 대해 어시스턴트에게 질문하면 결과의 일부가 모델 제공자에게 전송됩니다. 데이터베이스에서 얼마나 나갈지 선택하세요.',

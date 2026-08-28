@@ -13,6 +13,13 @@ export default {
   'connection.button.testConnection': '测试连接',
   'connection.readOnly.confirmed': '该账号的写入被拒绝，因此只能读取。',
   'connection.readOnly.canWrite': '警告：该账号可以写入数据库。使用只读账号更安全。',
+  'connection.aiProfile.title': '这个数据库是什么',
+  'connection.aiProfile.intro':
+    '助手能读取表结构，但表结构不说明含义。请在这里写下新同事需要被告知的内容——每张重要表的一行代表什么、哪些列重要及其取值的含义、本库的约定，以及哪些行在未被明确要求时不应计入。',
+  'connection.aiProfile.placeholder':
+    'TurnoverRanks：每家公司每个处理日期一行。\nRank1 是周转排名，1 为最佳。\nDateProccessing 为空的行是草稿，不计入。\n此处的"上个月"指上一个日历月。',
+  'connection.aiProfile.count': '{1} / {2} 字符',
+  'connection.aiProfile.overBudget': '超过 {1} 字符——末尾会在助手看到之前被截断。',
   'connection.aiDisclosure.title': '与 AI 共享的数据',
   'connection.aiDisclosure.intro':
     '就此连接向助手提问时，部分结果会发送给你的模型提供方。请选择允许多少数据离开数据库。',

@@ -4,6 +4,7 @@ import ai.chat2db.community.domain.api.model.request.ai.AiExecuteSqlRequest;
 import ai.chat2db.community.domain.api.model.request.ai.AiGetTablesSchemaRequest;
 import ai.chat2db.community.domain.api.model.request.ai.AiListTablesRequest;
 import ai.chat2db.community.domain.api.model.request.ai.AiToolContextRequest;
+import ai.chat2db.community.domain.api.model.ai.AiToolFailures;
 import ai.chat2db.community.web.api.converter.ai.AiToolContextConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -126,7 +127,37 @@ public class AiToolAdapter {
         payload.put("name", toolName);
         payload.put("content", StringUtils.defaultString(content));
         AiChatTraceSupport.emit(toolContext, payload);
+        raiseIfDatabaseUnreachable(toolContext, toolName, content);
         return content;
+    }
+
+    /**
+     * Tell the interface the database is down, separately from telling the model.
+     *
+     * <p>The model is also told, and told what to say - but what it says is
+     * prose it composes, and prose about a failure reads as an apology. A user
+     * who has just been told "I'm sorry, I cannot connect to that table and
+     * extract the data" has no way to know whether the assistant fell short or
+     * their database did.
+     *
+     * <p>So the same finding travels a second way: an error event, raised by
+     * the product rather than written by the model, carrying a code the
+     * interface translates itself. It reaches the user whatever the model
+     * decides to say, and it says the one thing the paragraph will not - that
+     * this is the connection, and it is not about the question.
+     */
+    private void raiseIfDatabaseUnreachable(ToolContext toolContext, String toolName, String content) {
+        if (!StringUtils.startsWith(content, AiToolFailures.DATABASE_UNREACHABLE)) {
+            return;
+        }
+        log.warn("ai tool {} reported the database as unreachable", toolName);
+        Map<String, Object> alert = AiChatTraceSupport.payload(AiChatTraceSupport.TYPE_ERROR);
+        alert.put("name", toolName);
+        // A code, not a sentence: the message the user reads is theirs to
+        // translate, and the server does not know which language they picked.
+        alert.put("code", "ai.databaseUnreachable");
+        alert.put("content", StringUtils.substring(content, AiToolFailures.DATABASE_UNREACHABLE.length()).trim());
+        AiChatTraceSupport.emit(toolContext, alert);
     }
 
 }

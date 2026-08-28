@@ -13,6 +13,13 @@ export default {
   'connection.button.testConnection': 'Test',
   'connection.readOnly.confirmed': 'This account was refused a write, so it can only read.',
   'connection.readOnly.canWrite': 'Warning: this account can write to the database. A read-only account is safer.',
+  'connection.aiProfile.title': 'What this database is',
+  'connection.aiProfile.intro':
+    'The assistant can read the schema, but the schema does not say what anything means. Write down here what somebody joining your team would need to be told — what a row in each important table represents, which columns matter and what their values signify, the conventions of this database, and which rows should not be counted unless asked for.',
+  'connection.aiProfile.placeholder':
+    'TurnoverRanks: one row per company per processing date.\nRank1 is the turnover rank; 1 is the best.\nRows with a blank DateProccessing are drafts and are not counted.\n"Last month" here means the previous Persian calendar month.',
+  'connection.aiProfile.count': '{1} of {2} characters',
+  'connection.aiProfile.overBudget': 'Longer than {1} characters — the end will be cut before the assistant sees it.',
   'connection.aiDisclosure.title': 'Data shared with the AI',
   'connection.aiDisclosure.intro':
     'Asking the assistant a question about this connection sends part of the answer to your model provider. Choose how much of it leaves the database.',

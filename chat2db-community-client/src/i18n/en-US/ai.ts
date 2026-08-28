@@ -1,4 +1,7 @@
 export default {
+  'ai.error.databaseUnreachable':
+    'The database could not be reached, so nothing was read from it. This is a connection problem, not a limit of the assistant — check the connection and try again.',
+  'ai.error.stream': 'The assistant stopped unexpectedly.',
   'ai.input.placeholder': 'Ask Database anything, @ to mention table',
 
   'ai.aiType.Text2SQL.title': 'Text to SQL',

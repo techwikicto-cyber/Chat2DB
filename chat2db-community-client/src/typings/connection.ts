@@ -36,6 +36,8 @@ export interface IConnectionDetails {
   storageType: DataSourceStorageType;
   /** How much of this connection's data may reach the model: NONE, SAMPLE or FULL. */
   aiDisclosurePolicy?: string | null;
+  /** Free text describing what this database means; read by the assistant. */
+  aiProfile?: string | null;
   ssh: any;
   driverConfig: {
     jdbcDriver: string;

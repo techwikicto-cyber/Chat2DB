@@ -386,6 +386,11 @@ interface IStreamChunk {
   sessionId?: string;
   ts?: number;
   id?: string;
+  /**
+   * A stable name for a failure the interface should describe in its own
+   * words, rather than showing whatever English the server happened to send.
+   */
+  code?: string;
 }
 
 interface IInProgressSessionSnapshot {
@@ -419,6 +424,27 @@ interface IAIProps {
   onTableClick?: (tableName: string, context: ITableClickContext) => void;
   onPinSql?: (sql: string, context: ITableClickContext) => void;
   onSessionChange?: () => void;
+}
+
+/**
+ * What to show the user when the run reports a failure.
+ *
+ * The assistant is told about a lost database connection too, and told to say
+ * so - but what it says is prose it composes, and prose about a failure reads
+ * as an apology. "I'm sorry, I cannot connect to that table and extract the
+ * data" leaves the reader unable to tell whether the assistant fell short or
+ * their database did.
+ *
+ * So the product says it itself, in the user's own language, from a code the
+ * server sends rather than from a sentence the server guessed the language of.
+ * Anything without a code falls back to the server's text, which is what
+ * happened before.
+ */
+function streamErrorMessage(chunk: IStreamChunk): string {
+  if (chunk.code === 'ai.databaseUnreachable') {
+    return i18n('ai.error.databaseUnreachable');
+  }
+  return chunk.content || i18n('ai.error.stream');
 }
 
 function parseTraceEntries(raw?: string): ITraceEntry[] {
@@ -856,7 +882,7 @@ export default function AI({ variant = 'page', onTableClick, onPinSql, onSession
           });
         }
       }
-      feedback.error(chunk.content || 'AI stream error');
+      feedback.error(streamErrorMessage(chunk));
     }
   }, []);
 

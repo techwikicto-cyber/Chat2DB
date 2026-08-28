@@ -14,6 +14,7 @@ import AiDisclosure, {
   AiDisclosurePolicy,
   DEFAULT_AI_DISCLOSURE_POLICY,
 } from './components/AiDisclosure';
+import AiProfile from './components/AiProfile';
 import Driver from './components/Driver';
 import { dataSourceFormConfigs } from './config/dataSource';
 import { InputType } from './config/enum';
@@ -369,6 +370,7 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
   const [aiDisclosurePolicy, setAiDisclosurePolicy] = useState<AiDisclosurePolicy>(
     () => (connectionData?.aiDisclosurePolicy as AiDisclosurePolicy) || DEFAULT_AI_DISCLOSURE_POLICY,
   );
+  const [aiProfile, setAiProfile] = useState<string>(() => connectionData?.aiProfile || '');
   const [backfillData, setBackfillData] = useState<IConnectionDetails>(() => normalizeConnectionData(connectionData));
   const [loadings, setLoading] = useState({
     confirmButton: false,
@@ -401,6 +403,7 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
     setAiDisclosurePolicy(
       (props.connectionData?.aiDisclosurePolicy as AiDisclosurePolicy) || DEFAULT_AI_DISCLOSURE_POLICY,
     );
+    setAiProfile(props.connectionData?.aiProfile || '');
   }, [props.connectionData]);
 
   function driverFormChange(data: any) {
@@ -436,6 +439,14 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
             </div>
           </div>
         </div>
+      ),
+    },
+    {
+      forceRender: true,
+      key: 'aiProfile',
+      label: i18n('connection.aiProfile.title'),
+      children: (
+        <AiProfile value={aiProfile} onChange={setAiProfile} disabled={backfillData.isAdmin === false} />
       ),
     },
     {
@@ -490,6 +501,7 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
       connectionEnvType: ConnectionEnvType.DAILY,
       type: backfillData.type,
       aiDisclosurePolicy,
+      aiProfile,
     };
 
     if (backfillData.id) {

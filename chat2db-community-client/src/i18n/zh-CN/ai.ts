@@ -1,4 +1,6 @@
 export default {
+  'ai.error.databaseUnreachable': '无法连接到数据库，因此没有读取任何数据。这是连接问题，不是助手的能力限制——请检查连接后重试。',
+  'ai.error.stream': '助手意外中断。',
   'ai.input.placeholder': '数据库问答，@ 选中表',
 
   'ai.aiType.Text2SQL.title': '自然语言转SQL',

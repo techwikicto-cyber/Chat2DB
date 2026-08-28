@@ -1,4 +1,7 @@
 export default {
+  'ai.error.databaseUnreachable':
+    'No se pudo conectar con la base de datos, así que no se leyó nada. Es un problema de conexión, no un límite del asistente: revisa la conexión e inténtalo de nuevo.',
+  'ai.error.stream': 'El asistente se detuvo de forma inesperada.',
   'ai.input.placeholder': 'Pregunte cualquier cosa a la base de datos; use @ para mencionar una tabla',
 
   'ai.aiType.Text2SQL.title': 'Texto a SQL',

@@ -102,4 +102,17 @@ public class DataSource {
      * they did. See {@code AiDisclosurePolicyEnum}.
      */
     private String aiDisclosurePolicy;
+
+    /**
+     * What this database is, written by the person who owns it.
+     *
+     * <p>Free text. The schema says a column is called {@code Rank1} and holds
+     * a float; only somebody who works here can say whether 1 is the best rank
+     * or the worst. This is where they say it, and the assistant reads it
+     * before answering anything about this connection.
+     *
+     * <p>Bounded, because it is sent with every question. See
+     * {@code AiBusinessContextServiceImpl#MAX_PROFILE_CHARS}.
+     */
+    private String aiProfile;
 }

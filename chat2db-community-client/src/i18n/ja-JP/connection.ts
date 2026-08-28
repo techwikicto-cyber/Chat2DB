@@ -13,6 +13,13 @@ export default {
   'connection.button.testConnection': 'テスト',
   'connection.readOnly.confirmed': 'このアカウントは書き込みを拒否されたため、読み取り専用です。',
   'connection.readOnly.canWrite': '警告: このアカウントはデータベースに書き込めます。読み取り専用のアカウントの方が安全です。',
+  'connection.aiProfile.title': 'このデータベースについて',
+  'connection.aiProfile.intro':
+    'アシスタントはスキーマを読めますが、スキーマは意味を語りません。新しく加わった同僚に伝えるべきことをここに書いてください——主要な各テーブルの 1 行が何を表すか、どの列が重要でその値が何を意味するか、このデータベースの慣習、そして明示的に求められない限り数えるべきでない行。',
+  'connection.aiProfile.placeholder':
+    'TurnoverRanks: 会社ごと・処理日ごとに 1 行。\nRank1 は回転率の順位で、1 が最良。\nDateProccessing が空の行は下書きで、集計しない。\nここでの「先月」は前の暦月を指す。',
+  'connection.aiProfile.count': '{1} / {2} 文字',
+  'connection.aiProfile.overBudget': '{1} 文字を超えています——末尾はアシスタントに渡る前に切られます。',
   'connection.aiDisclosure.title': 'AI と共有するデータ',
   'connection.aiDisclosure.intro':
     'この接続についてアシスタントに質問すると、結果の一部がモデルプロバイダーに送信されます。データベースから出る量を選んでください。',

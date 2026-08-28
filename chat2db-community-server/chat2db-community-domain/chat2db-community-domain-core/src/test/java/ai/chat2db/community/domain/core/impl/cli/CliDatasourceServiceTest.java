@@ -1,5 +1,7 @@
 package ai.chat2db.community.domain.core.impl.cli;
 
+import ai.chat2db.community.domain.api.model.datasource.DataSourceConnect;
+
 import ai.chat2db.community.domain.api.config.DriverConfig;
 import ai.chat2db.community.domain.api.model.cli.CliConnectionTestResponse;
 import ai.chat2db.community.domain.api.model.datasource.SSHInfo;
@@ -202,11 +204,12 @@ class CliDatasourceServiceTest {
         private RuntimeException nextPreConnectFailure;
 
         @Override
-        public void preConnect(DbDataSourcePreConnectRequest param) {
+        public DataSourceConnect preConnect(DbDataSourcePreConnectRequest param) {
             this.capturedParam = param;
             if (nextPreConnectFailure != null) {
                 throw nextPreConnectFailure;
             }
+            return DataSourceConnect.builder().success(Boolean.TRUE).build();
         }
 
         @Override

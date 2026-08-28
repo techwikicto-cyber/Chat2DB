@@ -111,7 +111,7 @@ public class AiToolServiceImpl implements IAiToolService {
         }
     }
     public String listAllDataSources(AiToolContextRequest toolContext) {
-        return invokeWithRequestContext(toolContext, () -> doListAllDataSources(toolContext));
+        return runTool(toolContext, "list_all_datasources", () -> doListAllDataSources(toolContext));
     }
 
     private String doListAllDataSources(AiToolContextRequest toolContext) {
@@ -147,7 +147,7 @@ public class AiToolServiceImpl implements IAiToolService {
         AiToolContextRequest requestContext = aiListTablesRequest == null
                 ? null
                 : aiListTablesRequest.getAiToolContextRequest();
-        return invokeWithRequestContext(requestContext, () -> doListAllTables(aiListTablesRequest));
+        return runTool(requestContext, "list_all_tables", () -> doListAllTables(aiListTablesRequest));
     }
 
     private String doListAllTables(AiListTablesRequest aiListTablesRequest) {
@@ -179,7 +179,7 @@ public class AiToolServiceImpl implements IAiToolService {
     }
     public String listAllDatabases(Long dataSourceId,
             AiToolContextRequest toolContext) {
-        return invokeWithRequestContext(toolContext, () -> doListAllDatabases(dataSourceId, toolContext));
+        return runTool(toolContext, "list_all_databases", () -> doListAllDatabases(dataSourceId, toolContext));
     }
 
     private String doListAllDatabases(Long dataSourceId, AiToolContextRequest toolContext) {
@@ -207,7 +207,7 @@ public class AiToolServiceImpl implements IAiToolService {
     }
     public String listAllSchemas(String databaseName,Long dataSourceId,
             AiToolContextRequest toolContext) {
-        return invokeWithRequestContext(toolContext, () -> doListAllSchemas(databaseName, dataSourceId, toolContext));
+        return runTool(toolContext, "list_all_schemas", () -> doListAllSchemas(databaseName, dataSourceId, toolContext));
     }
 
     private String doListAllSchemas(String databaseName, Long dataSourceId, AiToolContextRequest toolContext) {
@@ -242,7 +242,7 @@ public class AiToolServiceImpl implements IAiToolService {
         AiToolContextRequest requestContext = aiExecuteSqlRequest == null
                 ? null
                 : aiExecuteSqlRequest.getAiToolContextRequest();
-        return invokeWithRequestContext(requestContext, () -> doExecuteSql(aiExecuteSqlRequest));
+        return runTool(requestContext, "execute_sql", () -> doExecuteSql(aiExecuteSqlRequest));
     }
 
     private String doExecuteSql(AiExecuteSqlRequest aiExecuteSqlRequest) {
@@ -303,8 +303,18 @@ public class AiToolServiceImpl implements IAiToolService {
             sqlOperationLogRecorder.recordListResultAsync(sqlOperationLogListResultRequest);
             operationLogged = true;
             if (Objects.isNull(executeResult) || !executeResult.success()) {
-                return emitToolResult(toolContext, "execute_sql", "SQL execution failed: "
-                        + (Objects.isNull(executeResult) ? "unknown error" : StringUtils.defaultString(executeResult.getErrorMessage())));
+                String errorMessage = Objects.isNull(executeResult)
+                        ? "unknown error"
+                        : StringUtils.defaultString(executeResult.getErrorMessage());
+                // A driver reports a dropped connection the same way it reports
+                // a bad column: a failed execution carrying a string. Only one
+                // of the two is worth sending somebody to check their network.
+                String unreachable = AiDatabaseReachability.unreachableReport(errorMessage);
+                if (unreachable != null) {
+                    log.warn("ai execute_sql could not reach the database: {}", errorMessage);
+                    return emitToolResult(toolContext, "execute_sql", unreachable);
+                }
+                return emitToolResult(toolContext, "execute_sql", "SQL execution failed: " + errorMessage);
             }
             if (CollectionUtils.isEmpty(executeResult.getData())) {
                 return emitToolResult(toolContext, "execute_sql", "SQL executed successfully with no result.");
@@ -332,7 +342,7 @@ public class AiToolServiceImpl implements IAiToolService {
         AiToolContextRequest requestContext = aiGetTablesSchemaRequest == null
                 ? null
                 : aiGetTablesSchemaRequest.getAiToolContextRequest();
-        return invokeWithRequestContext(requestContext, () -> doGetTablesSchema(aiGetTablesSchemaRequest));
+        return runTool(requestContext, "get_tables_schema", () -> doGetTablesSchema(aiGetTablesSchemaRequest));
     }
 
     private String doGetTablesSchema(AiGetTablesSchemaRequest aiGetTablesSchemaRequest) {
@@ -374,6 +384,37 @@ public class AiToolServiceImpl implements IAiToolService {
 
     private String emitToolResult(AiToolContextRequest toolContext, String toolName, String content) {
         return content;
+    }
+
+    /**
+     * One tool call, run as the right person and reported honestly when the
+     * database is not there.
+     *
+     * <p>A failure to reach the server and a failure to write valid SQL arrive
+     * here as the same thing - an exception carrying a string - and the model
+     * cannot tell them apart from the string alone. Given the first one
+     * unlabelled it writes around the gap: "I'm sorry, I cannot connect to the
+     * table and extract the data; if you could paste the column names I could
+     * prepare a query." Read as a user, that says the assistant is not up to
+     * the question, and leaves out the only fact worth having.
+     *
+     * <p>So the exception is classified before the model ever sees it, and a
+     * connectivity failure comes back named, with instructions to report it as
+     * one. Everything else is rethrown untouched: calling a mistyped column
+     * name a network problem would be the same mistake in the other direction.
+     */
+    private String runTool(AiToolContextRequest toolContext, String toolName,
+            java.util.function.Supplier<String> body) {
+        try {
+            return invokeWithRequestContext(toolContext, body);
+        } catch (RuntimeException failure) {
+            String unreachable = AiDatabaseReachability.unreachableReport(failure);
+            if (unreachable == null) {
+                throw failure;
+            }
+            log.warn("ai tool {} could not reach the database", toolName, failure);
+            return emitToolResult(toolContext, toolName, unreachable);
+        }
     }
 
     /**

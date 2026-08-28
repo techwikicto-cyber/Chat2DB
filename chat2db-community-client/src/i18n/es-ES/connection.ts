@@ -13,6 +13,13 @@ export default {
   'connection.button.testConnection': 'Probar',
   'connection.readOnly.confirmed': 'A esta cuenta se le denegó una escritura, así que solo puede leer.',
   'connection.readOnly.canWrite': 'Aviso: esta cuenta puede escribir en la base de datos. Una cuenta de solo lectura es más segura.',
+  'connection.aiProfile.title': 'Qué es esta base de datos',
+  'connection.aiProfile.intro':
+    'El asistente puede leer el esquema, pero el esquema no dice qué significa nada. Escribe aquí lo que habría que contarle a alguien que se incorpora al equipo: qué representa una fila de cada tabla importante, qué columnas importan y qué significan sus valores, las convenciones de esta base de datos y qué filas no deben contarse salvo que se pidan.',
+  'connection.aiProfile.placeholder':
+    'TurnoverRanks: una fila por empresa y fecha de proceso.\nRank1 es el puesto de facturación; 1 es el mejor.\nLas filas sin DateProccessing son borradores y no se cuentan.\nAquí "el mes pasado" significa el mes natural anterior.',
+  'connection.aiProfile.count': '{1} de {2} caracteres',
+  'connection.aiProfile.overBudget': 'Supera los {1} caracteres: el final se cortará antes de llegar al asistente.',
   'connection.aiDisclosure.title': 'Datos compartidos con la IA',
   'connection.aiDisclosure.intro':
     'Preguntar al asistente sobre esta conexión envía parte de la respuesta a tu proveedor de modelos. Elige cuánto sale de la base de datos.',

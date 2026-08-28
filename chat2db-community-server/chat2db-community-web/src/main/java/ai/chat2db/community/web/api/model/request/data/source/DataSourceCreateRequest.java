@@ -95,4 +95,7 @@ public class DataSourceCreateRequest {
 
     /** How much of this connection's data may reach the model: NONE, SAMPLE or FULL. */
     private String aiDisclosurePolicy;
+
+    /** See {@code DataSource#aiProfile}: the connection's written profile. */
+    private String aiProfile;
 }

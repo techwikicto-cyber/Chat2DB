@@ -1,0 +1,43 @@
+@import '../../../../styles/var.less';
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 0 8px;
+}
+
+.intro {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
+/* Left-to-right whatever the interface language is: a profile names tables and
+   columns, and those are Latin identifiers that reorder unreadably in an RTL
+   textarea. The prose around them is what the writer chose. */
+.editor {
+  direction: ltr;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  min-height: 18px;
+}
+
+.count {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.countOver {
+  .count();
+  color: var(--color-error, #b3325a);
+}

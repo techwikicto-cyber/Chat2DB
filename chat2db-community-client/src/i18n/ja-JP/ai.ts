@@ -1,4 +1,7 @@
 export default {
+  'ai.error.databaseUnreachable':
+    'データベースに接続できなかったため、何も読み取れませんでした。これは接続の問題であり、アシスタントの制限ではありません。接続を確認して再試行してください。',
+  'ai.error.stream': 'アシスタントが予期せず停止しました。',
   'ai.input.placeholder': 'データベースの質問をしてください、@ を使用してテーブルを参照してください',
 
   'ai.aiType.Text2SQL.title': '自然言語からSQLへ',

@@ -1,4 +1,7 @@
 export default {
+  'ai.error.databaseUnreachable':
+    '데이터베이스에 연결할 수 없어 아무것도 읽지 못했습니다. 어시스턴트의 한계가 아니라 연결 문제입니다. 연결을 확인한 뒤 다시 시도하세요.',
+  'ai.error.stream': '어시스턴트가 예기치 않게 중단되었습니다.',
   'ai.input.placeholder': '데이터베이스에 무엇이든 질문하세요. @로 테이블을 지정할 수 있습니다',
 
   'ai.aiType.Text2SQL.title': '텍스트를 SQL로 변환',
