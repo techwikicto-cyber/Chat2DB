@@ -3,9 +3,9 @@
   "algorithm": "sha256",
   "locales": {
     "es-ES": {
-      "ai.ts": "18fc806289eea93dc46ff40fe90a422517a0ee48fd7f0786844f365b64455fc3",
+      "ai.ts": "e524a56da22e108b7babd8fa1c02905faa63aeceb5d4679a01cf0e3ac6ee9c37",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
-      "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
+      "common.ts": "066dc678c870298714d66a54e0bcff8b7d4a89c67db4b298feb18c431ecd4db1",
       "connection.ts": "1a0f99985d0ea32512b9e1fdc4f7be82b87561b13b76cd01e65af0536b3eece8",
       "dashboard.ts": "12143007f6db386aaa16fa97977774962dc16c001bffb48375423777c4f80f39",
       "editTable.ts": "0f7a808f50053cd52b183d156bb4fd46bb125b8058f8774deb61c7f02894a350",
@@ -30,9 +30,9 @@
       "workspace.ts": "543bdd58dea1ec7e2b91c5bd088824ddc2df1ebb884d5fcf3e60316ab962c4b2"
     },
     "ko-KR": {
-      "ai.ts": "18fc806289eea93dc46ff40fe90a422517a0ee48fd7f0786844f365b64455fc3",
+      "ai.ts": "e524a56da22e108b7babd8fa1c02905faa63aeceb5d4679a01cf0e3ac6ee9c37",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
-      "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
+      "common.ts": "066dc678c870298714d66a54e0bcff8b7d4a89c67db4b298feb18c431ecd4db1",
       "connection.ts": "1a0f99985d0ea32512b9e1fdc4f7be82b87561b13b76cd01e65af0536b3eece8",
       "dashboard.ts": "12143007f6db386aaa16fa97977774962dc16c001bffb48375423777c4f80f39",
       "editTable.ts": "0f7a808f50053cd52b183d156bb4fd46bb125b8058f8774deb61c7f02894a350",
@@ -57,9 +57,9 @@
       "workspace.ts": "543bdd58dea1ec7e2b91c5bd088824ddc2df1ebb884d5fcf3e60316ab962c4b2"
     },
     "fa-IR": {
-      "ai.ts": "18fc806289eea93dc46ff40fe90a422517a0ee48fd7f0786844f365b64455fc3",
+      "ai.ts": "e524a56da22e108b7babd8fa1c02905faa63aeceb5d4679a01cf0e3ac6ee9c37",
       "chat.ts": "a9090e69dcd45d40f072d8de2f5c5dd88b8ccd0663efc47284c7e2434ab26e2a",
-      "common.ts": "5c746fd567a1d884e60b9ef027ac5ddecc76fedb9f60232279754d80f7aa04e5",
+      "common.ts": "066dc678c870298714d66a54e0bcff8b7d4a89c67db4b298feb18c431ecd4db1",
       "connection.ts": "1a0f99985d0ea32512b9e1fdc4f7be82b87561b13b76cd01e65af0536b3eece8",
       "dashboard.ts": "12143007f6db386aaa16fa97977774962dc16c001bffb48375423777c4f80f39",
       "editTable.ts": "0f7a808f50053cd52b183d156bb4fd46bb125b8058f8774deb61c7f02894a350",

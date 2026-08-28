@@ -1,10 +1,9 @@
-package ai.chat2db.community.domain.core.impl.ai;
+package ai.chat2db.community.domain.api.model.ai;
 
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Locale;
 
-import ai.chat2db.community.domain.api.model.ai.AiToolFailures;
 import ai.chat2db.community.tools.exception.ConnectionException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -115,7 +114,12 @@ public final class AiDatabaseReachability {
                 + "problem. Say it plainly and stop.";
     }
 
-    static boolean isUnreachable(Throwable failure) {
+    /**
+     * Whether a failure was about reaching the database rather than about the
+     * statement. Public because the web layer classifies a whole failed run
+     * the same way it classifies one failed tool.
+     */
+    public static boolean isUnreachable(Throwable failure) {
         if (failure == null) {
             return false;
         }

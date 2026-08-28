@@ -4,6 +4,7 @@ import ai.chat2db.community.web.api.enums.ai.QuestionTypeEnum;
 import ai.chat2db.community.web.api.converter.ai.ChatConverter;
 import ai.chat2db.community.web.api.model.request.ai.ChatMessage;
 import ai.chat2db.community.web.api.model.request.ai.ChatRequest;
+import ai.chat2db.community.domain.api.model.ai.AiDatabaseReachability;
 import ai.chat2db.community.domain.api.model.ai.AiChatMessage;
 import ai.chat2db.community.domain.api.model.ai.AiChatSession;
 import ai.chat2db.community.domain.api.model.ai.AiRuntimeModel;
@@ -315,6 +316,10 @@ public class AiChatStreamAdapter implements IAiChatStreamService<ChatRequest, Ss
         boolean hasExecutableToolContext = !toolContext.isEmpty();
         toolContext.put(AiChatTraceSupport.TRACE_EMITTER_KEY,
                 buildTraceEmitter(emitter, traceEvents, persistedTraceBuilder));
+        if (haltIfDatabaseUnreachable(emitter, toolContext, request)) {
+            aiChatClient.close();
+            return emitter;
+        }
         logUpstreamRequest(runtimeModel, request, sessionId, effectiveHistory, messages, toolContext,
                 hasExecutableToolContext);
 
@@ -791,8 +796,66 @@ public class AiChatStreamAdapter implements IAiChatStreamService<ChatRequest, Ss
         param.setDataSourceId(dataSourceId);
         param.setDatabaseName(databaseName);
         param.setSchemaName(schemaName);
-        context.put("connectionProfile", connectionContextService.buildProfile(param));
+        // Resolved here, on the request thread, before the model is called at
+        // all - so a database that is down fails here rather than inside a
+        // tool. That is the case the tools' own handling never sees, and left
+        // unguarded it took the whole run down with a raw error code: the user
+        // was shown "connection.error" and no indication of what the
+        // connection was to. The run continues without a bound profile; the
+        // caller checks `connectionProfileFailure` and reports it properly.
+        try {
+            context.put("connectionProfile", connectionContextService.buildProfile(param));
+        } catch (RuntimeException databaseUnreachable) {
+            log.warn("ai chat could not reach datasource {} before starting the run",
+                    dataSourceId, databaseUnreachable);
+            context.put(CONNECTION_PROFILE_FAILURE, databaseUnreachable);
+        }
         return context;
+    }
+
+    /** Set when the connection could not be resolved before the run started. */
+    private static final String CONNECTION_PROFILE_FAILURE = "_chat2db_connection_profile_failure";
+
+    /**
+     * Stop before calling the model when its only subject is unreachable.
+     *
+     * <p>Asking a question about a database that cannot be reached has one
+     * honest answer, and it is not one worth spending a model call to get. So
+     * the run ends here, with an error the interface can name: which
+     * connection, and that it is the database rather than the assistant or the
+     * model provider that is not answering.
+     *
+     * @return true when the run was ended and the caller should stop.
+     */
+    private boolean haltIfDatabaseUnreachable(SseEmitter emitter, Map<String, Object> toolContext,
+            ChatRequest request) {
+        if (!(toolContext.get(CONNECTION_PROFILE_FAILURE) instanceof Throwable failure)) {
+            return false;
+        }
+        Map<String, Object> payload = AiChatTraceSupport.payload(AiChatTraceSupport.TYPE_ERROR);
+        payload.put("code", "ai.databaseUnreachable");
+        payload.put("subject", describeConnection(request));
+        payload.put("content", StringUtils.defaultIfBlank(rootMessage(failure), "connection failed"));
+        sendEvent(emitter, AiChatTraceSupport.TYPE_ERROR, payload);
+        emitter.complete();
+        return true;
+    }
+
+    /** The connection by the name the user gave it, for a message about it. */
+    private String describeConnection(ChatRequest request) {
+        String database = request == null ? null : request.getDatabaseName();
+        return StringUtils.isNotBlank(database) ? database : "";
+    }
+
+    private String rootMessage(Throwable failure) {
+        Throwable deepest = failure;
+        for (Throwable cause = failure; cause != null && cause.getCause() != cause; cause = cause.getCause()) {
+            if (StringUtils.isNotBlank(cause.getMessage())) {
+                deepest = cause;
+            }
+        }
+        String message = StringUtils.trimToEmpty(deepest == null ? null : deepest.getMessage());
+        return message.isEmpty() ? "" : message.split("\\R", 2)[0];
     }
 
     private void putRequestContext(Map<String, Object> toolContext) {
@@ -931,6 +994,33 @@ public class AiChatStreamAdapter implements IAiChatStreamService<ChatRequest, Ss
         }
     }
 
+    /**
+     * Which of the two things a failed run could not reach, when it is knowable.
+     *
+     * <p>A run talks to exactly two remote systems: the customer's database and
+     * the model provider. Their failures read almost identically - both are
+     * refused connections, resets and timeouts - so the transport words alone
+     * cannot separate them. What can is where the failure came from: the model
+     * call goes out through an HTTP client, and its exceptions are that
+     * client's own types.
+     *
+     * <p>So the provider is recognised by the classes on the way up, the
+     * database by the words its drivers use, and anything that matches neither
+     * gets no code at all - reported as the failure it is rather than blamed on
+     * a guess.
+     */
+    private String classifyFailure(Throwable error) {
+        for (Throwable cause = error; cause != null && cause.getCause() != cause; cause = cause.getCause()) {
+            String type = cause.getClass().getName();
+            if (type.contains("WebClientRequest") || type.contains("RestClient")
+                    || type.contains("HttpServerError") || type.contains("HttpClientError")
+                    || type.startsWith("org.springframework.ai")) {
+                return "ai.modelUnreachable";
+            }
+        }
+        return AiDatabaseReachability.isUnreachable(error) ? "ai.databaseUnreachable" : null;
+    }
+
     private Map<String, Object> buildErrorPayload(Throwable error) {
         Map<String, Object> payload = new LinkedHashMap<>();
         payload.put("type", AiChatTraceSupport.TYPE_ERROR);
@@ -938,6 +1028,13 @@ public class AiChatStreamAdapter implements IAiChatStreamService<ChatRequest, Ss
 
         String content = StringUtils.defaultIfBlank(error.getMessage(), "AI stream failed");
         payload.put("content", content);
+        // Name what could not be reached. "Connection failed" is true of a
+        // database that is down and of a model gateway that is not answering,
+        // and a user shown only that has no idea which one to go and check.
+        String subject = classifyFailure(error);
+        if (subject != null) {
+            payload.put("code", subject);
+        }
 
         Map<String, Object> embeddedPayload = extractEmbeddedErrorPayload(content);
         if (embeddedPayload == null) {

@@ -1,4 +1,8 @@
 export default {
+  'ai.error.databaseUnreachableNamed':
+    'The database "{1}" could not be reached, so nothing was read from it. This is a connection problem, not a limit of the assistant — check the database server and try again.',
+  'ai.error.modelUnreachable':
+    'The AI model service could not be reached. Your database is fine; check the model provider settings and your network, then try again.',
   'ai.error.databaseUnreachable':
     'The database could not be reached, so nothing was read from it. This is a connection problem, not a limit of the assistant — check the connection and try again.',
   'ai.error.stream': 'The assistant stopped unexpectedly.',

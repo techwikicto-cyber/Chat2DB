@@ -391,6 +391,8 @@ interface IStreamChunk {
    * words, rather than showing whatever English the server happened to send.
    */
   code?: string;
+  /** What the code is about, when there is one: the database's name. */
+  subject?: string;
 }
 
 interface IInProgressSessionSnapshot {
@@ -441,8 +443,17 @@ interface IAIProps {
  * happened before.
  */
 function streamErrorMessage(chunk: IStreamChunk): string {
+  // Named subjects first. A run reaches exactly two remote systems - the
+  // database and the model provider - and their failures read identically
+  // ("connection failed"), so which one it was is the whole of what the user
+  // needs and the one thing a generic message never says.
   if (chunk.code === 'ai.databaseUnreachable') {
-    return i18n('ai.error.databaseUnreachable');
+    return chunk.subject
+      ? i18n('ai.error.databaseUnreachableNamed', chunk.subject)
+      : i18n('ai.error.databaseUnreachable');
+  }
+  if (chunk.code === 'ai.modelUnreachable') {
+    return i18n('ai.error.modelUnreachable');
   }
   return chunk.content || i18n('ai.error.stream');
 }
@@ -882,7 +893,18 @@ export default function AI({ variant = 'page', onTableClick, onPinSql, onSession
           });
         }
       }
-      feedback.error(streamErrorMessage(chunk));
+      // A notification rather than a toast: this one has to stay until the
+      // user closes it, and only the notification has a close button to close
+      // it with. A failure that disappears on its own while they are reading
+      // the answer above it is a failure they spend the next ten minutes
+      // puzzling over.
+      useGlobalStore?.getState()?.systemErrorMessageApi?.({
+        errorCode: chunk.code || 'ai.error.stream',
+        errorMessage: streamErrorMessage(chunk),
+        errorDetail: chunk.content || '',
+        solutionLink: '',
+        requestUrl: '',
+      });
     }
   }, []);
 

@@ -1,4 +1,8 @@
 export default {
+  'ai.error.databaseUnreachableNamed':
+    'No se pudo conectar con la base de datos «{1}», así que no se leyó nada. Es un problema de conexión, no un límite del asistente: revisa el servidor de base de datos e inténtalo de nuevo.',
+  'ai.error.modelUnreachable':
+    'No se pudo conectar con el servicio del modelo de IA. Tu base de datos está bien; revisa la configuración del proveedor y tu red, e inténtalo de nuevo.',
   'ai.error.databaseUnreachable':
     'No se pudo conectar con la base de datos, así que no se leyó nada. Es un problema de conexión, no un límite del asistente: revisa la conexión e inténtalo de nuevo.',
   'ai.error.stream': 'El asistente se detuvo de forma inesperada.',

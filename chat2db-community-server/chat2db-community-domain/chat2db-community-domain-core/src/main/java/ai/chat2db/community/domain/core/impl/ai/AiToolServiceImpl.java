@@ -27,6 +27,7 @@ import ai.chat2db.community.domain.api.model.request.datasource.DbDataSourcePage
 import ai.chat2db.community.domain.api.model.request.operation.OpsSqlOperationLogListResultRequest;
 import ai.chat2db.community.domain.api.service.storage.IWorkspaceStorageFacade;
 import ai.chat2db.community.domain.api.model.storage.WorkspaceDataSource;
+import ai.chat2db.community.domain.api.model.ai.AiDatabaseReachability;
 import ai.chat2db.community.domain.api.model.request.ai.AiToolContextRequest;
 import ai.chat2db.community.domain.api.model.request.ai.AiExecuteSqlRequest;
 import ai.chat2db.community.domain.api.model.request.ai.AiGetTablesSchemaRequest;

@@ -1,4 +1,4 @@
-package ai.chat2db.community.domain.core.impl.ai;
+package ai.chat2db.community.domain.api.model.ai;
 
 import java.sql.SQLException;
 
