@@ -18,6 +18,10 @@ export default {
     'El asistente puede leer el esquema, pero el esquema no dice qué significa nada. Escribe aquí lo que habría que contarle a alguien que se incorpora al equipo: qué representa una fila de cada tabla importante, qué columnas importan y qué significan sus valores, las convenciones de esta base de datos y qué filas no deben contarse salvo que se pidan.',
   'connection.aiProfile.placeholder':
     'TurnoverRanks: una fila por empresa y fecha de proceso.\nRank1 es el puesto de facturación; 1 es el mejor.\nLas filas sin DateProccessing son borradores y no se cuentan.\nAquí "el mes pasado" significa el mes natural anterior.',
+  'connection.aiProfile.upload': 'Cargar desde un documento',
+  'connection.aiProfile.uploadLoaded': 'Se cargó {1} en el cuadro de abajo: edítalo ahí antes de guardar.',
+  'connection.aiProfile.uploadEmpty': 'No se pudo leer texto de {1}.',
+  'connection.aiProfile.uploadFailed': 'No se pudo leer ese documento.',
   'connection.aiProfile.count': '{1} de {2} caracteres',
   'connection.aiProfile.overBudget': 'Supera los {1} caracteres: el final se cortará antes de llegar al asistente.',
   'connection.aiDisclosure.title': 'Datos compartidos con la IA',

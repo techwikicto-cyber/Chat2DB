@@ -51,3 +51,27 @@
   line-height: 1.6;
   max-width: 58ch;
 }
+
+/* Right-to-left in Persian, and only here.
+
+   The application frame stays left-to-right in every language on purpose - the
+   SQL editor, the result grid and the object tree hold identifiers, which read
+   one way whatever surrounds them. This panel holds none of that. It is a
+   paragraph and three choices, all of them prose, and prose in Persian starts
+   at the right.
+
+   The global rules give every block its own reading order already; what they
+   deliberately do not set is alignment, because text-align inherits and would
+   un-centre things elsewhere. So the two properties inheritance cannot supply
+   are set here, on this panel alone: the base direction, which puts each
+   radio's circle on the right of its label, and the alignment that follows it. */
+:global(html[lang^='fa']) {
+  .box {
+    direction: rtl;
+    text-align: right;
+  }
+
+  .option > span:last-child {
+    padding-inline-start: 8px;
+  }
+}

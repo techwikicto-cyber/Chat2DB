@@ -1,4 +1,3 @@
-import LoadingGracile from '@/components/Loading/LoadingGracile';
 import { ConnectionEnvType, DatabaseTypeCode } from '@/constants';
 import { LangType } from '@/constants/settings';
 import { i18n } from '@/i18n';
@@ -365,7 +364,6 @@ export interface ICreateConnectionFunction {
 const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConnectionFunction>) => {
   const { closeCreateConnection, connectionData, submit } = props;
   const [baseInfoForm] = Form.useForm();
-  const [sshForm] = Form.useForm();
   const [driveData, setDriveData] = useState<any>({});
   const [aiDisclosurePolicy, setAiDisclosurePolicy] = useState<AiDisclosurePolicy>(
     () => (connectionData?.aiDisclosurePolicy as AiDisclosurePolicy) || DEFAULT_AI_DISCLOSURE_POLICY,
@@ -375,7 +373,6 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
   const [loadings, setLoading] = useState({
     confirmButton: false,
     testButton: false,
-    sshTestLoading: false,
   });
   const { curOrg } = useOrgStore((s) => ({ curOrg: s.curOrg }));
 
@@ -420,28 +417,6 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
       ),
     },
     {
-      key: 'ssh',
-      forceRender: true,
-      label: i18n('connection.label.sshConfiguration'),
-      children: (
-        <div className={styles.sshBox}>
-          <RenderForm
-            dataSourceFormConfigProps={dataSourceFormConfigPropsMemo}
-            backfillData={backfillData!}
-            form={sshForm}
-            tab="ssh"
-            disabled={backfillData.isAdmin === false}
-          />
-          <div className={styles.testSSHConnect}>
-            {loadings.sshTestLoading && <LoadingGracile />}
-            <div onClick={testSSH} className={styles.testSSHConnectText}>
-              {i18n('connection.message.testSshConnection')}
-            </div>
-          </div>
-        </div>
-      ),
-    },
-    {
       forceRender: true,
       key: 'aiProfile',
       label: i18n('connection.aiProfile.title'),
@@ -478,7 +453,10 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
   }));
 
   function getData() {
-    const ssh = sshForm.getFieldsValue();
+    // The SSH panel is no longer shown, so there is no form to read. Carry the
+    // stored configuration through untouched rather than sending an empty
+    // object, which would silently switch off SSH on any connection using it.
+    const ssh = backfillData.ssh;
     const baseInfo = baseInfoForm.getFieldsValue();
     if (baseInfo.host) {
       baseInfo.host = normalizeJdbcHostFromUrl(baseInfo.host);
@@ -593,25 +571,6 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
 
   function onCancel() {
     closeCreateConnection();
-  }
-
-  function testSSH() {
-    const p = sshForm.getFieldsValue();
-    setLoading({
-      ...loadings,
-      sshTestLoading: true,
-    });
-    connectionService
-      .testSSH(p)
-      .then(() => {
-        staticMessage.success(i18n('connection.message.testConnectResult', i18n('common.text.successful')));
-      })
-      .finally(() => {
-        setLoading({
-          ...loadings,
-          sshTestLoading: false,
-        });
-      });
   }
 
   return (

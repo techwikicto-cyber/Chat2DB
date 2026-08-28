@@ -18,6 +18,10 @@ export default {
     '어시스턴트는 스키마를 읽을 수 있지만 스키마는 의미를 알려주지 않습니다. 새로 합류한 동료에게 알려줘야 할 내용을 여기에 적어 주세요 — 주요 테이블의 한 행이 무엇을 나타내는지, 어떤 열이 중요하고 그 값이 무엇을 뜻하는지, 이 데이터베이스의 관례, 그리고 명시적으로 요청하지 않는 한 세지 말아야 할 행.',
   'connection.aiProfile.placeholder':
     'TurnoverRanks: 회사별·처리일별 한 행.\nRank1은 거래액 순위이며 1이 가장 좋습니다.\nDateProccessing이 비어 있는 행은 초안이며 집계하지 않습니다.\n여기서 "지난달"은 직전 역월을 뜻합니다.',
+  'connection.aiProfile.upload': '문서에서 불러오기',
+  'connection.aiProfile.uploadLoaded': '{1}을(를) 아래 상자에 불러왔습니다. 저장하기 전에 여기서 편집하세요.',
+  'connection.aiProfile.uploadEmpty': '{1}에서 텍스트를 읽지 못했습니다.',
+  'connection.aiProfile.uploadFailed': '해당 문서를 읽지 못했습니다.',
   'connection.aiProfile.count': '{1} / {2}자',
   'connection.aiProfile.overBudget': '{1}자를 넘었습니다 — 끝부분은 어시스턴트에 전달되기 전에 잘립니다.',
   'connection.aiDisclosure.title': 'AI와 공유하는 데이터',

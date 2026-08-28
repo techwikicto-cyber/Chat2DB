@@ -15,20 +15,17 @@
   max-width: 62ch;
 }
 
-/* Left-to-right whatever the interface language is: a profile names tables and
-   columns, and those are Latin identifiers that reorder unreadably in an RTL
-   textarea. The prose around them is what the writer chose. */
 .editor {
-  direction: ltr;
-  text-align: left;
   font-size: 13px;
   line-height: 1.7;
 }
 
 .footer {
   display: flex;
-  justify-content: flex-end;
-  min-height: 18px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 24px;
 }
 
 .count {
@@ -40,4 +37,32 @@
 .countOver {
   .count();
   color: var(--color-error, #b3325a);
+}
+
+.hiddenInput {
+  display: none;
+}
+
+/* Right-to-left in Persian, and only here — the same reasoning as the panel
+   beside it: the application frame stays left-to-right because it holds
+   identifiers, and this panel holds prose.
+
+   The textarea is included, which is a reversal. It was left-to-right on the
+   grounds that a profile names tables and columns and those are Latin. But a
+   profile is mostly sentences with Latin names inside them, not the other way
+   round, and the global rules already give each line its own reading order
+   through unicode-bidi: plaintext - so a line that opens with `TurnoverRanks:`
+   still lays out left to right inside a box that starts on the right. The base
+   direction only decides where a Persian line begins, and it should begin
+   where the rest of the sentence does. */
+:global(html[lang^='fa']) {
+  .box {
+    direction: rtl;
+    text-align: right;
+  }
+
+  .editor {
+    direction: rtl;
+    text-align: right;
+  }
 }

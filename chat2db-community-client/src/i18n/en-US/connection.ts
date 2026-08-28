@@ -18,6 +18,10 @@ export default {
     'The assistant can read the schema, but the schema does not say what anything means. Write down here what somebody joining your team would need to be told — what a row in each important table represents, which columns matter and what their values signify, the conventions of this database, and which rows should not be counted unless asked for.',
   'connection.aiProfile.placeholder':
     'TurnoverRanks: one row per company per processing date.\nRank1 is the turnover rank; 1 is the best.\nRows with a blank DateProccessing are drafts and are not counted.\n"Last month" here means the previous Persian calendar month.',
+  'connection.aiProfile.upload': 'Load from a document',
+  'connection.aiProfile.uploadLoaded': 'Loaded {1} into the box below — edit it there before saving.',
+  'connection.aiProfile.uploadEmpty': 'No text could be read from {1}.',
+  'connection.aiProfile.uploadFailed': 'That document could not be read.',
   'connection.aiProfile.count': '{1} of {2} characters',
   'connection.aiProfile.overBudget': 'Longer than {1} characters — the end will be cut before the assistant sees it.',
   'connection.aiDisclosure.title': 'Data shared with the AI',
