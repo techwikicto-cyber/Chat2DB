@@ -166,7 +166,12 @@ public class JdbcUtils {
         ResultSet resultSet = null;
         PreparedStatement statement = null;
         try {
-            if (ssh.isUse()) {
+            // No SSH configuration at all is the ordinary case, not an error:
+            // most connections are direct. DefaultDBManager has always read it
+            // this way; this method was the one place that assumed an object
+            // would be there, and threw a null pointer at anyone testing a
+            // plain connection.
+            if (ssh != null && ssh.isUse()) {
                 ssh.setRHost(host);
                 ssh.setRPort(port);
                 session = SSHManager.getSSHSession(ssh);
@@ -208,7 +213,7 @@ public class JdbcUtils {
             }
             if (session != null) {
                 try {
-                    if (StringUtils.isNotBlank(ssh.getLocalPort())) {
+                    if (ssh != null && StringUtils.isNotBlank(ssh.getLocalPort())) {
                         session.delPortForwardingL(Integer.parseInt(ssh.getLocalPort()));
                     }
                     session.disconnect();

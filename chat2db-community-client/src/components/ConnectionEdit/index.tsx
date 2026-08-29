@@ -456,7 +456,12 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
     // The SSH panel is no longer shown, so there is no form to read. Carry the
     // stored configuration through untouched rather than sending an empty
     // object, which would silently switch off SSH on any connection using it.
-    const ssh = backfillData.ssh;
+    //
+    // Falling back to `{ use: false }` rather than to null: a connection that
+    // never had SSH has nothing stored, and the form this replaced always sent
+    // an object. Sending null instead reached a server that read `ssh.isUse()`
+    // without checking, and every plain connection failed to open.
+    const ssh = backfillData.ssh || { use: false };
     const baseInfo = baseInfoForm.getFieldsValue();
     if (baseInfo.host) {
       baseInfo.host = normalizeJdbcHostFromUrl(baseInfo.host);
