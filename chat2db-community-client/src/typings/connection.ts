@@ -38,6 +38,8 @@ export interface IConnectionDetails {
   aiDisclosurePolicy?: string | null;
   /** Free text describing what this database means; read by the assistant. */
   aiProfile?: string | null;
+  /** Which physical view here implements each label in the shared library. */
+  aiBindings?: Record<string, string> | null;
   ssh: any;
   driverConfig: {
     jdbcDriver: string;

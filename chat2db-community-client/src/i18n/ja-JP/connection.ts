@@ -13,6 +13,18 @@ export default {
   'connection.button.testConnection': 'テスト',
   'connection.readOnly.confirmed': 'このアカウントは書き込みを拒否されたため、読み取り専用です。',
   'connection.readOnly.canWrite': '警告: このアカウントはデータベースに書き込めます。読み取り専用のアカウントの方が安全です。',
+  'connection.aiMetrics.title': '合意された指標',
+  'connection.aiMetrics.intro':
+    'これらの指標は共有ライブラリ（バージョン {1}）で一度だけ定義されます。この接続が示すのは、どのビューがそのデータを持つかだけです。定義自体はどこでも同じで、ここでは編集しません。',
+  'connection.aiMetrics.empty': '共有ライブラリにはまだ指標がありません。チームが定義したら、それぞれがこのデータベースのどのビューを読むかをここで指定します。',
+  'connection.aiMetrics.choose': 'ビューを選択',
+  'connection.aiMetrics.bound': '設定済み',
+  'connection.aiMetrics.unbound': '未設定',
+  'connection.aiMetrics.needs': '{1} が必要です',
+  'connection.aiMetrics.test': 'テスト',
+  'connection.aiMetrics.testPassed': '指標を計算しました。{1}',
+  'connection.aiMetrics.testFailed': 'この接続ではこの指標を計算できませんでした。',
+  'connection.aiMetrics.saveFirst': '先に接続を保存してからテストしてください。',
   'connection.aiProfile.title': 'このデータベースについて',
   'connection.aiProfile.intro':
     'アシスタントはスキーマを読めますが、スキーマは意味を語りません。新しく加わった同僚に伝えるべきことをここに書いてください——主要な各テーブルの 1 行が何を表すか、どの列が重要でその値が何を意味するか、このデータベースの慣習、そして明示的に求められない限り数えるべきでない行。',

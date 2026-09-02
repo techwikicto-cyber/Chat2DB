@@ -13,6 +13,18 @@ export default {
   'connection.button.testConnection': '测试连接',
   'connection.readOnly.confirmed': '该账号的写入被拒绝，因此只能读取。',
   'connection.readOnly.canWrite': '警告：该账号可以写入数据库。使用只读账号更安全。',
+  'connection.aiMetrics.title': '约定指标',
+  'connection.aiMetrics.intro':
+    '你的团队在共享库中一次性定义这些指标（版本 {1}）。此连接只需说明由哪个视图提供数据——定义本身各处一致，不在此处编辑。',
+  'connection.aiMetrics.empty': '共享库中尚未定义任何指标。团队定义后，在这里指定每个指标读取本库的哪个视图。',
+  'connection.aiMetrics.choose': '选择视图',
+  'connection.aiMetrics.bound': '已设置',
+  'connection.aiMetrics.unbound': '未设置',
+  'connection.aiMetrics.needs': '需要 {1}',
+  'connection.aiMetrics.test': '测试',
+  'connection.aiMetrics.testPassed': '指标已计算。{1}',
+  'connection.aiMetrics.testFailed': '该指标在此连接上无法计算。',
+  'connection.aiMetrics.saveFirst': '请先保存连接，再进行测试。',
   'connection.aiProfile.title': '这个数据库是什么',
   'connection.aiProfile.intro':
     '助手能读取表结构，但表结构不说明含义。请在这里写下新同事需要被告知的内容——每张重要表的一行代表什么、哪些列重要及其取值的含义、本库的约定，以及哪些行在未被明确要求时不应计入。',

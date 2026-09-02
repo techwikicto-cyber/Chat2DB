@@ -13,6 +13,19 @@ export default {
   'connection.button.testConnection': 'Probar',
   'connection.readOnly.confirmed': 'A esta cuenta se le denegó una escritura, así que solo puede leer.',
   'connection.readOnly.canWrite': 'Aviso: esta cuenta puede escribir en la base de datos. Una cuenta de solo lectura es más segura.',
+  'connection.aiMetrics.title': 'Cifras acordadas',
+  'connection.aiMetrics.intro':
+    'Tu organización define estas cifras una sola vez, en la biblioteca compartida (versión {1}). Esta conexión solo tiene que indicar qué vista aporta los datos: las definiciones son iguales en todas partes y no se editan aquí.',
+  'connection.aiMetrics.empty':
+    'La biblioteca compartida aún no tiene cifras definidas. Cuando tu equipo las defina, aquí indicarás qué vista de esta base de datos lee cada una.',
+  'connection.aiMetrics.choose': 'Elige una vista',
+  'connection.aiMetrics.bound': 'Definida',
+  'connection.aiMetrics.unbound': 'Sin definir',
+  'connection.aiMetrics.needs': 'Necesita {1}',
+  'connection.aiMetrics.test': 'Probar',
+  'connection.aiMetrics.testPassed': 'La cifra se calculó. {1}',
+  'connection.aiMetrics.testFailed': 'No se pudo calcular la cifra en esta conexión.',
+  'connection.aiMetrics.saveFirst': 'Guarda la conexión antes de probar.',
   'connection.aiProfile.title': 'Qué es esta base de datos',
   'connection.aiProfile.intro':
     'El asistente puede leer el esquema, pero el esquema no dice qué significa nada. Escribe aquí lo que habría que contarle a alguien que se incorpora al equipo: qué representa una fila de cada tabla importante, qué columnas importan y qué significan sus valores, las convenciones de esta base de datos y qué filas no deben contarse salvo que se pidan.',
