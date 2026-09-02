@@ -1,0 +1,127 @@
+@import '../../../styles/var.less';
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 40px;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.versionLabel {
+  color: var(--color-text-secondary);
+  font-size: 13px;
+}
+
+.version {
+  width: 90px;
+}
+
+.notes {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.sectionNote {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  line-height: 1.7;
+  max-width: 66ch;
+}
+
+.empty {
+  margin: 12px 0;
+}
+
+.metrics {
+  background: transparent;
+}
+
+.metricLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.metricForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  > span {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+  }
+}
+
+.fieldInline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+/* Identifiers and SQL read left to right whatever language surrounds them,
+   which is the same rule the editor and the result grid already follow. */
+.ltr {
+  direction: ltr;
+  text-align: left;
+  unicode-bidi: normal;
+  font-family: var(--font-family-code, monospace);
+  font-size: 12px;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 2fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+/* Right-to-left in Persian, like the connection panels: this is prose and
+   forms. The SQL fields opt back out above. */
+:global(html[lang^='fa']) {
+  .page {
+    direction: rtl;
+    text-align: right;
+  }
+}
