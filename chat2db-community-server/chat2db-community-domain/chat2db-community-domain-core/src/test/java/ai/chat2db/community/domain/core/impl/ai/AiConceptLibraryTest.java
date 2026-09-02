@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import ai.chat2db.community.domain.api.model.ai.AiConceptLibrary;
+import ai.chat2db.community.domain.api.model.ai.AiConceptLibraryValidator;
 import ai.chat2db.community.domain.api.model.ai.AiMetric;
 import ai.chat2db.community.domain.api.model.request.ai.AiBusinessContextBuildRequest;
 import ai.chat2db.community.domain.api.model.storage.WorkspaceDataSource;
@@ -68,7 +69,7 @@ class AiConceptLibraryTest {
         AiMetric duplicate = monthlySales();
         AiConceptLibrary library = libraryWith(monthlySales(), duplicate);
 
-        List<String> problems = AiConceptLibraryStore.problemsWith(library);
+        List<String> problems = AiConceptLibraryValidator.problemsWith(library);
 
         assertTrue(problems.stream().anyMatch(p -> p.contains("share the id")), problems.toString());
     }
@@ -81,7 +82,7 @@ class AiConceptLibraryTest {
         metric.setRequires(List.of("sales"));
         metric.setFilter("{sales}.IsVoid = 0 AND {branch}.Active = 1");
 
-        List<String> problems = AiConceptLibraryStore.problemsWith(libraryWith(metric));
+        List<String> problems = AiConceptLibraryValidator.problemsWith(libraryWith(metric));
 
         assertTrue(problems.stream().anyMatch(p -> p.contains("{branch}")), problems.toString());
     }
@@ -91,14 +92,14 @@ class AiConceptLibraryTest {
         AiMetric empty = new AiMetric();
         empty.setId("orphan");
 
-        List<String> problems = AiConceptLibraryStore.problemsWith(libraryWith(empty));
+        List<String> problems = AiConceptLibraryValidator.problemsWith(libraryWith(empty));
 
         assertTrue(problems.stream().anyMatch(p -> p.contains("computes nothing")), problems.toString());
     }
 
     @Test
     void aSoundLibraryHasNothingToReport() {
-        assertTrue(AiConceptLibraryStore.problemsWith(libraryWith(monthlySales())).isEmpty());
+        assertTrue(AiConceptLibraryValidator.problemsWith(libraryWith(monthlySales())).isEmpty());
     }
 
     // ── what the assistant is actually told ──────────────────────────────
