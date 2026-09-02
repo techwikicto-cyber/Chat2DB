@@ -87,4 +87,14 @@ public class WorkspaceDataSource {
      * {@code AiBusinessContextServiceImpl#MAX_PROFILE_CHARS}.
      */
     private String aiProfile;
+
+    /**
+     * Which physical table each library label points at, on this connection.
+     *
+     * <p>The library says {@code SUM({sales}.NetAmount)}; this says that
+     * {@code sales} is {@code dbo.vw_Sales} here. Keeping the two apart is what
+     * makes one definition usable at every customer built to the same shape -
+     * the concept travels, the table does not.
+     */
+    private java.util.Map<String, String> aiBindings;
 }

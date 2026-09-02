@@ -98,4 +98,7 @@ public class DataSourceCreateRequest {
 
     /** See {@code DataSource#aiProfile}: the connection's written profile. */
     private String aiProfile;
+
+    /** See {@code DataSource#aiBindings}: library label to physical table. */
+    private java.util.Map<String, String> aiBindings;
 }
