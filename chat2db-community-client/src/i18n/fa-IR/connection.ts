@@ -13,19 +13,6 @@ export default {
   'connection.button.testConnection': 'آزمایش',
   'connection.readOnly.confirmed': 'این حساب اجازه نوشتن نداشت، پس فقط می‌تواند بخواند.',
   'connection.readOnly.canWrite': 'هشدار: این حساب می‌تواند در دیتابیس بنویسد. یک حساب فقط‌خواندنی امن‌تر است.',
-  'connection.aiMetrics.title': 'شاخص‌های مورد توافق',
-  'connection.aiMetrics.intro':
-    'سازمان شما این شاخص‌ها را یک‌بار در کتابخانهٔ مشترک تعریف می‌کند (نسخهٔ {1}). تنها چیزی که این اتصال باید بگوید این است که کدام View آن، داده را دارد — خودِ تعریف‌ها همه‌جا یکسان‌اند و اینجا ویرایش نمی‌شوند.',
-  'connection.aiMetrics.empty':
-    'هنوز هیچ شاخصی در کتابخانهٔ مشترک تعریف نشده. وقتی تیم شما تعریفشان کرد، اینجا مشخص می‌کنید هرکدام از کدام View این دیتابیس خوانده شود.',
-  'connection.aiMetrics.choose': 'یک View انتخاب کنید',
-  'connection.aiMetrics.bound': 'تعیین شد',
-  'connection.aiMetrics.unbound': 'تعیین نشده',
-  'connection.aiMetrics.needs': 'نیاز دارد به {1}',
-  'connection.aiMetrics.test': 'آزمایش',
-  'connection.aiMetrics.testPassed': 'شاخص محاسبه شد. {1}',
-  'connection.aiMetrics.testFailed': 'این شاخص روی این اتصال محاسبه نشد.',
-  'connection.aiMetrics.saveFirst': 'اول اتصال را ذخیره کنید، بعد آزمایش.',
   'connection.aiProfile.title': 'این دیتابیس چیست',
   'connection.aiProfile.intro':
     'دستیار می‌تواند اسکیما را بخواند، ولی اسکیما نمی‌گوید چیزی چه معنایی دارد. اینجا همان چیزی را بنویسید که به یک همکار تازه‌وارد می‌گفتید — یک سطر در هر جدول مهم نمایندهٔ چیست، کدام ستون‌ها مهم‌اند و مقادیرشان چه معنایی دارند، قراردادهای این دیتابیس چیست، و کدام سطرها نباید شمرده شوند مگر اینکه صریحاً خواسته شود.',

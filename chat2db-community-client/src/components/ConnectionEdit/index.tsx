@@ -13,7 +13,6 @@ import AiDisclosure, {
   AiDisclosurePolicy,
   DEFAULT_AI_DISCLOSURE_POLICY,
 } from './components/AiDisclosure';
-import AiMetrics from './components/AiMetrics';
 import AiProfile from './components/AiProfile';
 import Driver from './components/Driver';
 import { dataSourceFormConfigs } from './config/dataSource';
@@ -370,9 +369,6 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
     () => (connectionData?.aiDisclosurePolicy as AiDisclosurePolicy) || DEFAULT_AI_DISCLOSURE_POLICY,
   );
   const [aiProfile, setAiProfile] = useState<string>(() => connectionData?.aiProfile || '');
-  const [aiBindings, setAiBindings] = useState<Record<string, string>>(
-    () => connectionData?.aiBindings || {},
-  );
   const [backfillData, setBackfillData] = useState<IConnectionDetails>(() => normalizeConnectionData(connectionData));
   const [loadings, setLoading] = useState({
     confirmButton: false,
@@ -405,7 +401,6 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
       (props.connectionData?.aiDisclosurePolicy as AiDisclosurePolicy) || DEFAULT_AI_DISCLOSURE_POLICY,
     );
     setAiProfile(props.connectionData?.aiProfile || '');
-    setAiBindings(props.connectionData?.aiBindings || {});
   }, [props.connectionData]);
 
   function driverFormChange(data: any) {
@@ -419,21 +414,6 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
       label: i18n('connection.title.driver'),
       children: (
         <Driver backfillData={backfillData} onChange={driverFormChange} disabled={backfillData.isAdmin === false} />
-      ),
-    },
-    {
-      forceRender: true,
-      key: 'aiMetrics',
-      label: i18n('connection.aiMetrics.title'),
-      children: (
-        <AiMetrics
-          dataSourceId={backfillData.id}
-          databaseName={backfillData.databaseName}
-          schemaName={backfillData.schemaName}
-          value={aiBindings}
-          onChange={setAiBindings}
-          disabled={backfillData.isAdmin === false}
-        />
       ),
     },
     {
@@ -505,7 +485,6 @@ const ConnectionEdit = forwardRef((props: IProps, ref: ForwardedRef<ICreateConne
       type: backfillData.type,
       aiDisclosurePolicy,
       aiProfile,
-      aiBindings,
     };
 
     if (backfillData.id) {

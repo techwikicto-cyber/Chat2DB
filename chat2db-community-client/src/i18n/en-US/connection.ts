@@ -13,19 +13,6 @@ export default {
   'connection.button.testConnection': 'Test',
   'connection.readOnly.confirmed': 'This account was refused a write, so it can only read.',
   'connection.readOnly.canWrite': 'Warning: this account can write to the database. A read-only account is safer.',
-  'connection.aiMetrics.title': 'Agreed figures',
-  'connection.aiMetrics.intro':
-    'Your organisation defines these figures once, in the shared library (version {1}). All this connection has to say is which of its views carries the data — the definitions themselves are the same everywhere and are not edited here.',
-  'connection.aiMetrics.empty':
-    'The shared library has no figures defined yet. Once your team defines them, this is where you say which of this database\u2019s views each one reads.',
-  'connection.aiMetrics.choose': 'Choose a view',
-  'connection.aiMetrics.bound': 'Set',
-  'connection.aiMetrics.unbound': 'Not set',
-  'connection.aiMetrics.needs': 'Needs {1}',
-  'connection.aiMetrics.test': 'Test',
-  'connection.aiMetrics.testPassed': 'The figure computed. {1}',
-  'connection.aiMetrics.testFailed': 'The figure could not be computed on this connection.',
-  'connection.aiMetrics.saveFirst': 'Save the connection first, then test.',
   'connection.aiProfile.title': 'What this database is',
   'connection.aiProfile.intro':
     'The assistant can read the schema, but the schema does not say what anything means. Write down here what somebody joining your team would need to be told — what a row in each important table represents, which columns matter and what their values signify, the conventions of this database, and which rows should not be counted unless asked for.',

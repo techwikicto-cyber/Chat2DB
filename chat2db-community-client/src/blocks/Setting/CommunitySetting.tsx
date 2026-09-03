@@ -4,7 +4,6 @@ import { history } from 'umi';
 import About from './About';
 import AccountSetting from './AccountSetting';
 import BaseSetting from './BaseSetting';
-import ConceptSetting from './ConceptSetting';
 import EditorSetting from './EditorSetting';
 import McpSetting from './McpSetting';
 import NetworkProxySetting from './NetworkProxySetting';
@@ -47,13 +46,6 @@ function CommunitySetting() {
         iconCode: 'icon-user',
         body: <AccountSetting />,
         code: 'account',
-      },
-      {
-        title: i18n('setting.nav.concepts'),
-        describe: i18n('setting.nav.conceptsDescribe'),
-        iconCode: 'icon-biaoge',
-        body: <ConceptSetting />,
-        code: 'concepts',
       },
       {
         title: i18n('setting.nav.editSetting'),

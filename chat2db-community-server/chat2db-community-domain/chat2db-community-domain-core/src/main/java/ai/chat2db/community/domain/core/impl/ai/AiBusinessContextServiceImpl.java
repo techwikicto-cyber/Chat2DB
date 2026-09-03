@@ -1,9 +1,5 @@
 package ai.chat2db.community.domain.core.impl.ai;
 
-import java.util.List;
-
-import ai.chat2db.community.domain.api.model.ai.AiConceptLibrary;
-import ai.chat2db.community.domain.api.model.ai.AiMetricResolver;
 import ai.chat2db.community.domain.api.model.request.ai.AiBusinessContextBuildRequest;
 import ai.chat2db.community.domain.api.model.storage.WorkspaceDataSource;
 import ai.chat2db.community.domain.api.service.ai.IAiBusinessContextService;
@@ -48,111 +44,20 @@ public class AiBusinessContextServiceImpl implements IAiBusinessContextService {
             "\n\n[...the profile is longer than this and was cut here.]";
 
     private final IWorkspaceStorageFacade workspaceStorageFacade;
-    private final AiConceptLibraryStore conceptLibrary;
 
-    public AiBusinessContextServiceImpl(IWorkspaceStorageFacade workspaceStorageFacade,
-            AiConceptLibraryStore conceptLibrary) {
+    public AiBusinessContextServiceImpl(IWorkspaceStorageFacade workspaceStorageFacade) {
         this.workspaceStorageFacade = workspaceStorageFacade;
-        this.conceptLibrary = conceptLibrary;
     }
 
     @Override
     public String buildStructuredContext(AiBusinessContextBuildRequest request) {
-        Long dataSourceId = request == null ? null : request.getDataSourceId();
-        WorkspaceDataSource dataSource = dataSourceOf(dataSourceId);
-
-        // Definitions first, profile second. The library is the organisation's
-        // agreed answer and the profile is one person's note about one
-        // database; where they disagree the reader should meet the agreed one
-        // first.
-        String definitions = renderDefinitions(dataSource);
-        String profile = truncate(dataSource == null ? null : dataSource.getAiProfile());
-
-        if (StringUtils.isBlank(definitions) && StringUtils.isBlank(profile)) {
-            // Neither: the prompt is byte-identical to what it was before any
-            // of this existed, which is what a fresh install will want.
+        String profile = profileOf(request == null ? null : request.getDataSourceId());
+        if (StringUtils.isBlank(profile)) {
+            // No profile: the prompt is byte-identical to what it was before
+            // this existed, which is what most connections will want.
             return null;
         }
-        StringBuilder context = new StringBuilder(4096);
-        if (StringUtils.isNotBlank(definitions)) {
-            context.append(definitions);
-        }
-        if (StringUtils.isNotBlank(profile)) {
-            if (context.length() > 0) {
-                context.append("\n\n");
-            }
-            context.append(render(profile));
-        }
-        return context.toString();
-    }
-
-    /**
-     * The agreed figures this connection can actually compute, written for the
-     * model as instructions rather than as background.
-     *
-     * <p>Only the metrics that resolve. A definition whose source is not bound
-     * on this connection is not offered at all: naming a figure the platform
-     * cannot compute invites the model to compute it its own way, and a number
-     * derived from a table it picked looks exactly like a real one.
-     */
-    String renderDefinitions(WorkspaceDataSource dataSource) {
-        AiConceptLibrary library = conceptLibrary == null ? null : conceptLibrary.current();
-        if (library == null) {
-            return null;
-        }
-        List<AiMetricResolver.Resolved> usable =
-                AiMetricResolver.resolveUsable(library, dataSource == null ? null : dataSource.getAiBindings());
-        boolean hasConventions = library.getConventions() != null && !library.getConventions().isEmpty();
-        boolean hasGlossary = library.getGlossary() != null && !library.getGlossary().isEmpty();
-        if (usable.isEmpty() && !hasConventions && !hasGlossary) {
-            return null;
-        }
-
-        StringBuilder out = new StringBuilder(2048);
-        out.append("## Agreed definitions (library version ").append(library.getVersion()).append(")\n\n");
-        out.append("These are this organisation's standard definitions. They are not suggestions: where a "
-                + "question asks for one of these figures, compute it with the expression given and do not "
-                + "write your own. A figure computed a different way is wrong here even when the SQL is "
-                + "valid.\n");
-
-        if (hasConventions) {
-            out.append("\n### Conventions\n");
-            library.getConventions().forEach((key, value) ->
-                    out.append("- ").append(key).append(": ").append(value).append('\n'));
-        }
-
-        if (!usable.isEmpty()) {
-            out.append("\n### Metrics\n");
-            for (AiMetricResolver.Resolved metric : usable) {
-                out.append("\n**").append(StringUtils.defaultIfBlank(metric.getName(), metric.getMetricId()))
-                        .append("**");
-                if (StringUtils.isNotBlank(metric.getDescription())) {
-                    out.append(" - ").append(metric.getDescription());
-                }
-                out.append('\n');
-                if (StringUtils.isNotBlank(metric.getGrain())) {
-                    out.append("- grain: ").append(metric.getGrain()).append('\n');
-                }
-                out.append("- expression: `").append(metric.getSql()).append("`\n");
-                if (StringUtils.isNotBlank(metric.getFilter())) {
-                    out.append("- always filtered by: `").append(metric.getFilter()).append("`\n");
-                }
-                if (StringUtils.isNotBlank(metric.getTimeColumn())) {
-                    out.append("- apply any date range to: `").append(metric.getTimeColumn()).append("`\n");
-                }
-            }
-        }
-
-        if (hasGlossary) {
-            out.append("\n### Glossary\n");
-            for (AiConceptLibrary.AiGlossaryEntry entry : library.getGlossary()) {
-                if (entry != null && StringUtils.isNotBlank(entry.getTerm())) {
-                    out.append("- ").append(entry.getTerm()).append(": ")
-                            .append(StringUtils.defaultString(entry.getMeaning())).append('\n');
-                }
-            }
-        }
-        return out.toString();
+        return render(profile);
     }
 
     /**
@@ -182,17 +87,18 @@ public class AiBusinessContextServiceImpl implements IAiBusinessContextService {
                 %s""".formatted(profile);
     }
 
-    /** The connection, for its profile and its bindings. */
-    private WorkspaceDataSource dataSourceOf(Long dataSourceId) {
+    /** The stored profile for a connection, trimmed to the budget. */
+    private String profileOf(Long dataSourceId) {
         if (dataSourceId == null) {
             return null;
         }
         try {
-            return workspaceStorageFacade.queryDataSourceById(dataSourceId, false);
+            WorkspaceDataSource dataSource = workspaceStorageFacade.queryDataSourceById(dataSourceId, false);
+            return truncate(dataSource == null ? null : dataSource.getAiProfile());
         } catch (Exception e) {
-            // Context is an improvement to an answer, never a precondition for
-            // one. If it cannot be read, the question is still answerable.
-            log.warn("could not read the context for datasource {}", dataSourceId, e);
+            // A profile is an improvement to an answer, never a precondition
+            // for one. If it cannot be read, the question is still answerable.
+            log.warn("could not read the profile for datasource {}", dataSourceId, e);
             return null;
         }
     }

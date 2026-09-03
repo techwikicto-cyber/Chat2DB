@@ -13,18 +13,6 @@ export default {
   'connection.button.testConnection': '테스트',
   'connection.readOnly.confirmed': '이 계정은 쓰기가 거부되었으므로 읽기만 할 수 있습니다.',
   'connection.readOnly.canWrite': '경고: 이 계정은 데이터베이스에 쓸 수 있습니다. 읽기 전용 계정이 더 안전합니다.',
-  'connection.aiMetrics.title': '합의된 지표',
-  'connection.aiMetrics.intro':
-    '조직에서 이 지표들을 공유 라이브러리(버전 {1})에 한 번 정의합니다. 이 연결이 말해야 할 것은 어떤 뷰가 데이터를 담고 있는지뿐이며, 정의 자체는 어디서나 같고 여기서 편집하지 않습니다.',
-  'connection.aiMetrics.empty': '공유 라이브러리에 아직 정의된 지표가 없습니다. 팀에서 정의하면, 각 지표가 이 데이터베이스의 어떤 뷰를 읽을지 여기서 지정합니다.',
-  'connection.aiMetrics.choose': '뷰 선택',
-  'connection.aiMetrics.bound': '설정됨',
-  'connection.aiMetrics.unbound': '설정되지 않음',
-  'connection.aiMetrics.needs': '{1} 필요',
-  'connection.aiMetrics.test': '테스트',
-  'connection.aiMetrics.testPassed': '지표가 계산되었습니다. {1}',
-  'connection.aiMetrics.testFailed': '이 연결에서는 지표를 계산하지 못했습니다.',
-  'connection.aiMetrics.saveFirst': '연결을 먼저 저장한 뒤 테스트하세요.',
   'connection.aiProfile.title': '이 데이터베이스는 무엇인가',
   'connection.aiProfile.intro':
     '어시스턴트는 스키마를 읽을 수 있지만 스키마는 의미를 알려주지 않습니다. 새로 합류한 동료에게 알려줘야 할 내용을 여기에 적어 주세요 — 주요 테이블의 한 행이 무엇을 나타내는지, 어떤 열이 중요하고 그 값이 무엇을 뜻하는지, 이 데이터베이스의 관례, 그리고 명시적으로 요청하지 않는 한 세지 말아야 할 행.',
